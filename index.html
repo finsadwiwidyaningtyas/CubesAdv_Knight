@@ -1,128 +1,219 @@
-import pygame
-import random
-import sys
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CubesAdv_Knight</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-# 1. Inisialisasi Pygame
-pygame.init()
+        body {
+            background-color: #1e1e2d;
+            color: #ecf0f1;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
 
-# Ukuran Layar
-SCREEN_WIDTH = 800
-SCREEN_HEIGHT = 600
-screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-pygame.display.set_caption("CubesAdv_Knight")
+        h1 {
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
 
-# Warna (RGB)
-COLOR_BG = (30, 30, 45)
-COLOR_KNIGHT = (41, 128, 185)   # Biru
-COLOR_CRYSTAL = (241, 196, 15)  # Kuning
-COLOR_ENEMY = (231, 76, 60)     # Merah
-COLOR_TEXT = (236, 240, 241)   # Putih
+        #gameCanvas {
+            border: 3px solid #34495e;
+            border-radius: 8px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            background-color: #1e1e2d;
+        }
 
-# Clock
-clock = pygame.time.Clock()
-FPS = 60
+        .instructions {
+            margin-top: 15px;
+            text-align: center;
+            color: #bdc3c7;
+        }
+    </style>
+</head>
+<body>
 
-# Fonts
-font_large = pygame.font.SysFont("Arial", 50, bold=True)
-font_small = pygame.font.SysFont("Arial", 25)
+    <h1>CubesAdv_Knight ⚔️</h1>
+    <canvas id="gameCanvas" width="800" height="600"></canvas>
+    
+    <div class="instructions">
+        <p>Gunakan <strong>WASD</strong> atau <strong>Tombol Panah</strong> untuk bergerak.</p>
+        <p>Ambil Kristal Kuning (+10) dan hindari Musuh Merah!</p>
+    </div>
 
-# Game State Variables
-player_size = 40
-player_x = SCREEN_WIDTH // 2
-player_y = SCREEN_HEIGHT // 2
-player_speed = 5
+    <script>
+        const canvas = document.getElementById("gameCanvas");
+        const ctx = canvas.getContext("2d");
 
-crystal_size = 20
-crystal_x = random.randint(0, SCREEN_WIDTH - crystal_size)
-crystal_y = random.randint(0, SCREEN_HEIGHT - crystal_size)
+        // Konfigurasi Game & Warna
+        const COLOR_BG = "#1e1e2d";
+        const COLOR_KNIGHT = "#2980b9";
+        const COLOR_CRYSTAL = "#f1c40f";
+        const COLOR_ENEMY = "#e74c3c";
+        const COLOR_TEXT = "#ecf0f1";
 
-enemy_size = 35
-enemy_x = random.randint(0, SCREEN_WIDTH - enemy_size)
-enemy_y = random.randint(0, SCREEN_HEIGHT - enemy_size)
-enemy_speed = 2.5
+        // Status Tombol
+        const keys = {};
 
-score = 0
-game_over = False
+        // Variabel Game
+        const player = {
+            x: canvas.width / 2 - 20,
+            y: canvas.height / 2 - 20,
+            size: 40,
+            speed: 5
+        };
 
-# 2. Main Game Loop
-running = True
-while running:
-    # --- Event Handling ---
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-        if event.type == pygame.KEYDOWN and game_over:
-            if event.key == pygame.K_r:  # Restart Game
-                player_x = SCREEN_WIDTH // 2
-                player_y = SCREEN_HEIGHT // 2
-                score = 0
-                enemy_x = random.randint(0, SCREEN_WIDTH - enemy_size)
-                enemy_y = random.randint(0, SCREEN_HEIGHT - enemy_size)
-                game_over = False
+        const crystal = {
+            x: 0,
+            y: 0,
+            size: 20
+        };
 
-    if not game_over:
-        # --- Player Movement ---
-        keys = pygame.key.get_pressed()
-        if (keys[pygame.K_LEFT] or keys[pygame.K_a]) and player_x > 0:
-            player_x -= player_speed
-        if (keys[pygame.K_RIGHT] or keys[pygame.K_d]) and player_x < SCREEN_WIDTH - player_size:
-            player_x += player_speed
-        if (keys[pygame.K_UP] or keys[pygame.K_w]) and player_y > 0:
-            player_y -= player_speed
-        if (keys[pygame.K_DOWN] or keys[pygame.K_s]) and player_y < SCREEN_HEIGHT - player_size:
-            player_y += player_speed
+        const enemy = {
+            x: 0,
+            y: 0,
+            size: 35,
+            speed: 2.5
+        };
 
-        # --- Hitbox Objects ---
-        player_rect = pygame.Rect(player_x, player_y, player_size, player_size)
-        crystal_rect = pygame.Rect(crystal_x, crystal_y, crystal_size, crystal_size)
-        enemy_rect = pygame.Rect(enemy_x, enemy_y, enemy_size, enemy_size)
+        let score = 0;
+        let gameOver = false;
 
-        # --- Enemy AI (Mengejar Player) ---
-        if enemy_x < player_x:
-            enemy_x += enemy_speed
-        elif enemy_x > player_x:
-            enemy_x -= enemy_speed
+        // Pasang Posisi Acak Kristal & Musuh
+        function resetPositions() {
+            crystal.x = Math.floor(Math.random() * (canvas.width - crystal.size));
+            crystal.y = Math.floor(Math.random() * (canvas.height - crystal.size));
 
-        if enemy_y < player_y:
-            enemy_y += enemy_speed
-        elif enemy_y > player_y:
-            enemy_y -= enemy_speed
+            enemy.x = Math.floor(Math.random() * (canvas.width - enemy.size));
+            enemy.y = Math.floor(Math.random() * (canvas.height - enemy.size));
+        }
 
-        # --- Collision Detection ---
-        # Ambil Kristal
-        if player_rect.colliderect(crystal_rect):
-            score += 10
-            crystal_x = random.randint(0, SCREEN_WIDTH - crystal_size)
-            crystal_y = random.randint(0, SCREEN_HEIGHT - crystal_size)
+        function restartGame() {
+            player.x = canvas.width / 2 - player.size / 2;
+            player.y = canvas.height / 2 - player.size / 2;
+            score = 0;
+            gameOver = false;
+            resetPositions();
+        }
 
-        # Kena Musuh
-        if player_rect.colliderect(enemy_rect):
-            game_over = True
+        // Event Listener Keyboard
+        window.addEventListener("keydown", (e) => {
+            keys[e.key] = true;
+            if (gameOver && (e.key === 'r' || e.key === 'R')) {
+                restartGame();
+            }
+        });
 
-    # --- Drawing ---
-    screen.fill(COLOR_BG)
+        window.addEventListener("keyup", (e) => {
+            keys[e.key] = false;
+        });
 
-    if not game_over:
-        # Gambar Player, Kristal, & Musuh
-        pygame.draw.rect(screen, COLOR_KNIGHT, player_rect)
-        pygame.draw.rect(screen, COLOR_CRYSTAL, crystal_rect)
-        pygame.draw.rect(screen, COLOR_ENEMY, enemy_rect)
+        // Deteksi Tabrakan (AABB Collision)
+        function checkCollision(rect1, rect2) {
+            return (
+                rect1.x < rect2.x + rect2.size &&
+                rect1.x + rect1.size > rect2.x &&
+                rect1.y < rect2.y + rect2.size &&
+                rect1.y + rect1.size > rect2.y
+            );
+        }
 
-        # Tampilkan Skor
-        score_text = font_small.render(f"Score: {score}", True, COLOR_TEXT)
-        screen.blit(score_text, (10, 10))
-    else:
-        # Tampilan Game Over
-        go_text = font_large.render("GAME OVER", True, COLOR_ENEMY)
-        restart_text = font_small.render("Tekan 'R' untuk Main Lagi", True, COLOR_TEXT)
-        final_score_text = font_small.render(f"Skor Akhir: {score}", True, COLOR_TEXT)
+        // Update Logic
+        function update() {
+            if (gameOver) return;
 
-        screen.blit(go_text, (SCREEN_WIDTH // 2 - go_text.get_width() // 2, 200))
-        screen.blit(final_score_text, (SCREEN_WIDTH // 2 - final_score_text.get_width() // 2, 280))
-        screen.blit(restart_text, (SCREEN_WIDTH // 2 - restart_text.get_width() // 2, 330))
+            // Pergerakan Player
+            if ((keys["ArrowLeft"] || keys["a"] || keys["A"]) && player.x > 0) {
+                player.x -= player.speed;
+            }
+            if ((keys["ArrowRight"] || keys["d"] || keys["D"]) && player.x < canvas.width - player.size) {
+                player.x += player.speed;
+            }
+            if ((keys["ArrowUp"] || keys["w"] || keys["W"]) && player.y > 0) {
+                player.y -= player.speed;
+            }
+            if ((keys["ArrowDown"] || keys["s"] || keys["S"]) && player.y < canvas.height - player.size) {
+                player.y += player.speed;
+            }
 
-    pygame.display.flip()
-    clock.tick(FPS)
+            // Pergerakan AI Musuh (Mengejar Player)
+            if (enemy.x < player.x) enemy.x += enemy.speed;
+            else if (enemy.x > player.x) enemy.x -= enemy.speed;
 
-pygame.quit()
-sys.exit()
+            if (enemy.y < player.y) enemy.y += enemy.speed;
+            else if (enemy.y > player.y) enemy.y -= enemy.speed;
+
+            // Tabrakan dengan Kristal
+            if (checkCollision(player, crystal)) {
+                score += 10;
+                crystal.x = Math.floor(Math.random() * (canvas.width - crystal.size));
+                crystal.y = Math.floor(Math.random() * (canvas.height - crystal.size));
+            }
+
+            // Tabrakan dengan Musuh
+            if (checkCollision(player, enemy)) {
+                gameOver = true;
+            }
+        }
+
+        // Render Graphics
+        function draw() {
+            // Bersihkan Canvas
+            ctx.fillStyle = COLOR_BG;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            if (!gameOver) {
+                // Gambar Kristal
+                ctx.fillStyle = COLOR_CRYSTAL;
+                ctx.fillRect(crystal.x, crystal.y, crystal.size, crystal.size);
+
+                // Gambar Musuh
+                ctx.fillStyle = COLOR_ENEMY;
+                ctx.fillRect(enemy.x, enemy.y, enemy.size, enemy.size);
+
+                // Gambar Player (Knight)
+                ctx.fillStyle = COLOR_KNIGHT;
+                ctx.fillRect(player.x, player.y, player.size, player.size);
+
+                // Tampilkan Skor
+                ctx.fillStyle = COLOR_TEXT;
+                ctx.font = "20px Arial";
+                ctx.fillText(`Score: ${score}`, 15, 30);
+            } else {
+                // Tampilan Game Over
+                ctx.fillStyle = COLOR_ENEMY;
+                ctx.font = "bold 48px Arial";
+                ctx.textAlign = "center";
+                ctx.fillText("GAME OVER", canvas.width / 2, 230);
+
+                ctx.fillStyle = COLOR_TEXT;
+                ctx.font = "22px Arial";
+                ctx.fillText(`Skor Akhir: ${score}`, canvas.width / 2, 290);
+                ctx.fillText("Tekan 'R' untuk Main Lagi", canvas.width / 2, 340);
+                ctx.textAlign = "left"; // Reset alignment
+            }
+        }
+
+        // Game Loop
+        function gameLoop() {
+            update();
+            draw();
+            requestAnimationFrame(gameLoop);
+        }
+
+        // Inisialisasi Game
+        resetPositions();
+        requestAnimationFrame(gameLoop);
+    </script>
+</body>
+</html>
