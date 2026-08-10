@@ -1,0 +1,128 @@
+import pygame
+import random
+import sys
+
+# 1. Inisialisasi Pygame
+pygame.init()
+
+# Ukuran Layar
+SCREEN_WIDTH = 800
+SCREEN_HEIGHT = 600
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+pygame.display.set_caption("CubesAdv_Knight")
+
+# Warna (RGB)
+COLOR_BG = (30, 30, 45)
+COLOR_KNIGHT = (41, 128, 185)   # Biru
+COLOR_CRYSTAL = (241, 196, 15)  # Kuning
+COLOR_ENEMY = (231, 76, 60)     # Merah
+COLOR_TEXT = (236, 240, 241)   # Putih
+
+# Clock
+clock = pygame.time.Clock()
+FPS = 60
+
+# Fonts
+font_large = pygame.font.SysFont("Arial", 50, bold=True)
+font_small = pygame.font.SysFont("Arial", 25)
+
+# Game State Variables
+player_size = 40
+player_x = SCREEN_WIDTH // 2
+player_y = SCREEN_HEIGHT // 2
+player_speed = 5
+
+crystal_size = 20
+crystal_x = random.randint(0, SCREEN_WIDTH - crystal_size)
+crystal_y = random.randint(0, SCREEN_HEIGHT - crystal_size)
+
+enemy_size = 35
+enemy_x = random.randint(0, SCREEN_WIDTH - enemy_size)
+enemy_y = random.randint(0, SCREEN_HEIGHT - enemy_size)
+enemy_speed = 2.5
+
+score = 0
+game_over = False
+
+# 2. Main Game Loop
+running = True
+while running:
+    # --- Event Handling ---
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+        if event.type == pygame.KEYDOWN and game_over:
+            if event.key == pygame.K_r:  # Restart Game
+                player_x = SCREEN_WIDTH // 2
+                player_y = SCREEN_HEIGHT // 2
+                score = 0
+                enemy_x = random.randint(0, SCREEN_WIDTH - enemy_size)
+                enemy_y = random.randint(0, SCREEN_HEIGHT - enemy_size)
+                game_over = False
+
+    if not game_over:
+        # --- Player Movement ---
+        keys = pygame.key.get_pressed()
+        if (keys[pygame.K_LEFT] or keys[pygame.K_a]) and player_x > 0:
+            player_x -= player_speed
+        if (keys[pygame.K_RIGHT] or keys[pygame.K_d]) and player_x < SCREEN_WIDTH - player_size:
+            player_x += player_speed
+        if (keys[pygame.K_UP] or keys[pygame.K_w]) and player_y > 0:
+            player_y -= player_speed
+        if (keys[pygame.K_DOWN] or keys[pygame.K_s]) and player_y < SCREEN_HEIGHT - player_size:
+            player_y += player_speed
+
+        # --- Hitbox Objects ---
+        player_rect = pygame.Rect(player_x, player_y, player_size, player_size)
+        crystal_rect = pygame.Rect(crystal_x, crystal_y, crystal_size, crystal_size)
+        enemy_rect = pygame.Rect(enemy_x, enemy_y, enemy_size, enemy_size)
+
+        # --- Enemy AI (Mengejar Player) ---
+        if enemy_x < player_x:
+            enemy_x += enemy_speed
+        elif enemy_x > player_x:
+            enemy_x -= enemy_speed
+
+        if enemy_y < player_y:
+            enemy_y += enemy_speed
+        elif enemy_y > player_y:
+            enemy_y -= enemy_speed
+
+        # --- Collision Detection ---
+        # Ambil Kristal
+        if player_rect.colliderect(crystal_rect):
+            score += 10
+            crystal_x = random.randint(0, SCREEN_WIDTH - crystal_size)
+            crystal_y = random.randint(0, SCREEN_HEIGHT - crystal_size)
+
+        # Kena Musuh
+        if player_rect.colliderect(enemy_rect):
+            game_over = True
+
+    # --- Drawing ---
+    screen.fill(COLOR_BG)
+
+    if not game_over:
+        # Gambar Player, Kristal, & Musuh
+        pygame.draw.rect(screen, COLOR_KNIGHT, player_rect)
+        pygame.draw.rect(screen, COLOR_CRYSTAL, crystal_rect)
+        pygame.draw.rect(screen, COLOR_ENEMY, enemy_rect)
+
+        # Tampilkan Skor
+        score_text = font_small.render(f"Score: {score}", True, COLOR_TEXT)
+        screen.blit(score_text, (10, 10))
+    else:
+        # Tampilan Game Over
+        go_text = font_large.render("GAME OVER", True, COLOR_ENEMY)
+        restart_text = font_small.render("Tekan 'R' untuk Main Lagi", True, COLOR_TEXT)
+        final_score_text = font_small.render(f"Skor Akhir: {score}", True, COLOR_TEXT)
+
+        screen.blit(go_text, (SCREEN_WIDTH // 2 - go_text.get_width() // 2, 200))
+        screen.blit(final_score_text, (SCREEN_WIDTH // 2 - final_score_text.get_width() // 2, 280))
+        screen.blit(restart_text, (SCREEN_WIDTH // 2 - restart_text.get_width() // 2, 330))
+
+    pygame.display.flip()
+    clock.tick(FPS)
+
+pygame.quit()
+sys.exit()
