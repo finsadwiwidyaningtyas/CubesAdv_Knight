@@ -1,9 +1,8 @@
-```html
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>CubesAdv Knight — SMKN 1 Sanden</title>
 
@@ -14,104 +13,147 @@
 ========================================================= */
 
 *{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
 html,
 body{
-  width:100%;
-  height:100%;
-  overflow:hidden;
+    width:100%;
+    height:100%;
+    overflow:hidden;
 }
 
 body{
-  font-family:"Segoe UI",Arial,sans-serif;
-  background:#020817;
-  color:#eaf8ff;
-}
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
 
-button{
-  font:inherit;
-  color:inherit;
+    color:#ecfaff;
+    background:#020611;
 }
 
 
 /* =========================================================
-   MAIN GAME BACKGROUND
+   GAME BACKGROUND
 ========================================================= */
 
 #game{
-  position:fixed;
-  inset:0;
-  overflow:hidden;
+    position:fixed;
+    inset:0;
+    overflow:hidden;
 
-  background:
-    radial-gradient(
-      circle at 50% 45%,
-      #073b70 0,
-      transparent 34%
-    ),
-    radial-gradient(
-      circle at 82% 20%,
-      #42136b 0,
-      transparent 27%
-    ),
-    radial-gradient(
-      circle at 20% 75%,
-      #06345c 0,
-      transparent 25%
-    ),
-    linear-gradient(
-      #031a35,
-      #020817 72%
-    );
+    background:
+        radial-gradient(
+            circle at 50% 45%,
+            rgba(0,170,255,.20),
+            transparent 34%
+        ),
+        radial-gradient(
+            circle at 82% 15%,
+            rgba(159,52,255,.22),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 15% 80%,
+            rgba(0,255,207,.08),
+            transparent 28%
+        ),
+        linear-gradient(
+            180deg,
+            #041a35 0%,
+            #020b1c 55%,
+            #01040d 100%
+        );
 }
 
 
 /* GRID */
 
-#game:before{
-  content:"";
-  position:absolute;
-  inset:0;
+#game::before{
+    content:"";
+    position:absolute;
+    inset:0;
 
-  background-image:
-    linear-gradient(
-      #1a76a92b 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      90deg,
-      #1a76a92b 1px,
-      transparent 1px
-    );
+    background-image:
+        linear-gradient(
+            rgba(49,202,255,.10) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(49,202,255,.10) 1px,
+            transparent 1px
+        );
 
-  background-size:46px 46px;
+    background-size:48px 48px;
 
-  opacity:.8;
+    mask-image:
+        linear-gradient(
+            to bottom,
+            black,
+            rgba(0,0,0,.25)
+        );
 }
 
 
 /* STARS */
 
-#game:after{
-  content:"";
-  position:absolute;
-  inset:0;
+#game::after{
+    content:"";
+    position:absolute;
+    inset:0;
 
-  background-image:
-    radial-gradient(
-      #ffffff99 1px,
-      transparent 1.5px
-    );
+    background-image:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,.7) 1px,
+            transparent 1.5px
+        );
 
-  background-size:83px 77px;
+    background-size:
+        91px 83px;
 
-  opacity:.28;
+    opacity:.22;
+    pointer-events:none;
+}
 
-  pointer-events:none;
+
+/* =========================================================
+   AMBIENT LIGHT
+========================================================= */
+
+.light{
+    position:absolute;
+    width:420px;
+    height:420px;
+
+    border-radius:50%;
+
+    filter:blur(70px);
+    opacity:.14;
+
+    pointer-events:none;
+}
+
+.light.one{
+    left:20%;
+    top:25%;
+    background:#00cfff;
+}
+
+.light.two{
+    right:8%;
+    top:15%;
+    background:#9c3cff;
+}
+
+.light.three{
+    left:45%;
+    bottom:-180px;
+    background:#00ffc8;
 }
 
 
@@ -120,44 +162,27 @@ button{
 ========================================================= */
 
 .hud{
-  position:absolute;
-  z-index:20;
+    position:absolute;
+    z-index:30;
 
-  background:
-    linear-gradient(
-      145deg,
-      #071d37e8,
-      #031126e8
-    );
+    background:
+        linear-gradient(
+            145deg,
+            rgba(8,31,58,.92),
+            rgba(2,12,28,.88)
+        );
 
-  border:1px solid #3bdfff55;
+    border:
+        1px solid rgba(61,221,255,.35);
 
-  border-radius:20px;
+    border-radius:20px;
 
-  backdrop-filter:blur(14px);
+    box-shadow:
+        0 0 30px rgba(0,179,255,.08),
+        inset 0 1px 0 rgba(255,255,255,.07),
+        inset 0 0 30px rgba(0,183,255,.025);
 
-  box-shadow:
-    0 0 25px #008cff18,
-    0 0 60px #00b7ff08,
-    inset 0 0 25px #00b7ff08;
-
-  overflow:hidden;
-}
-
-.hud:after{
-  content:"";
-  position:absolute;
-  inset:0;
-
-  background:
-    linear-gradient(
-      120deg,
-      transparent 30%,
-      #ffffff05 45%,
-      transparent 60%
-    );
-
-  pointer-events:none;
+    backdrop-filter:blur(14px);
 }
 
 
@@ -166,63 +191,77 @@ button{
 ========================================================= */
 
 .brand{
-  left:18px;
-  top:18px;
+    left:20px;
+    top:20px;
 
-  width:310px;
+    width:320px;
+    min-height:76px;
 
-  padding:12px;
+    padding:15px 18px;
 
-  display:flex;
-  gap:12px;
-  align-items:center;
+    display:flex;
+    align-items:center;
+    gap:14px;
 }
 
-.logo-main{
-  width:58px;
-  height:58px;
 
-  object-fit:contain;
+/* ICON */
 
-  border-radius:15px;
+.brand-icon{
+    width:52px;
+    height:52px;
 
-  padding:5px;
+    flex:none;
 
-  background:
-    radial-gradient(
-      circle,
-      #0c3960,
-      #031326
-    );
+    display:grid;
+    place-items:center;
 
-  border:1px solid #45e6ff88;
+    border-radius:15px;
 
-  box-shadow:
-    0 0 15px #21dfff55,
-    inset 0 0 15px #21dfff18;
+    font-size:27px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #12bfff,
+            #0756d9
+        );
+
+    border:1px solid #68edff;
+
+    box-shadow:
+        0 0 18px rgba(0,190,255,.5),
+        inset 0 2px 7px rgba(255,255,255,.45),
+        inset 0 -7px 15px rgba(0,0,0,.25);
+
+    transform:rotate(-3deg);
 }
+
+
+/* TITLE */
 
 .brand-title{
-  font-size:17px;
-  font-weight:900;
-  letter-spacing:.2px;
+    font-size:19px;
+    font-weight:950;
+    letter-spacing:-.3px;
 }
 
 .brand-title b{
-  color:#49eaff;
+    color:#48eaff;
 
-  text-shadow:
-    0 0 12px #24dfff66;
+    text-shadow:
+        0 0 12px rgba(72,234,255,.4);
 }
 
 .sub{
-  font-size:10px;
+    margin-top:5px;
 
-  color:#80a6bb;
+    font-size:10px;
+    font-weight:700;
 
-  letter-spacing:1.4px;
+    letter-spacing:2px;
 
-  margin-top:4px;
+    color:#83a9c3;
 }
 
 
@@ -231,68 +270,126 @@ button{
 ========================================================= */
 
 .stats{
-  left:18px;
-  top:98px;
+    left:20px;
+    top:110px;
 
-  width:310px;
+    width:320px;
 
-  padding:14px;
+    padding:17px;
 }
 
 .row{
-  display:flex;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 
-  justify-content:space-between;
-
-  font-weight:900;
-
-  font-size:16px;
+    font-size:16px;
+    font-weight:900;
 }
 
+.hp-number{
+    color:#ffffff;
+}
+
+
+/* HP BAR */
+
 .hpbar{
-  height:15px;
+    position:relative;
 
-  background:#12263e;
+    height:17px;
 
-  border-radius:99px;
+    margin-top:11px;
 
-  margin-top:10px;
+    overflow:hidden;
 
-  overflow:hidden;
+    border-radius:999px;
 
-  border:1px solid #1b4764;
+    background:#091d35;
+
+    border:1px solid rgba(90,220,255,.12);
+
+    box-shadow:
+        inset 0 2px 5px rgba(0,0,0,.5);
 }
 
 .fill{
-  height:100%;
-  width:76%;
+    position:relative;
 
-  background:
-    linear-gradient(
-      90deg,
-      #25e7c7,
-      #45dcff,
-      #7cecff
-    );
+    width:76%;
+    height:100%;
 
-  box-shadow:
-    0 0 14px #42e8ff,
-    0 0 25px #42e8ff55;
+    border-radius:999px;
 
-  transition:.2s;
+    background:
+        linear-gradient(
+            90deg,
+            #14e5bf,
+            #26d9ff,
+            #5ee8ff
+        );
+
+    box-shadow:
+        0 0 14px #21dfff,
+        inset 0 2px 5px rgba(255,255,255,.5);
+
+    transition:
+        width .25s ease;
 }
 
-.score{
-  font-size:13px;
+.fill::after{
+    content:"";
 
-  margin-top:9px;
+    position:absolute;
+    inset:0;
+
+    background:
+        linear-gradient(
+            110deg,
+            transparent,
+            rgba(255,255,255,.5),
+            transparent
+        );
+
+    animation:
+        hpshine 2s linear infinite;
+}
+
+@keyframes hpshine{
+
+    from{
+        transform:translateX(-100%);
+    }
+
+    to{
+        transform:translateX(100%);
+    }
+
+}
+
+
+/* SCORE */
+
+.score{
+    display:flex;
+    align-items:center;
+    gap:8px;
+
+    margin-top:11px;
+
+    font-size:13px;
+    font-weight:800;
+
+    color:#9dbbd0;
 }
 
 .score b{
-  color:#ffd447;
+    color:#ffd84d;
+    font-size:15px;
+}
 
-  text-shadow:
-    0 0 8px #ffd44755;
+.gem-score{
+    color:#53eaff !important;
 }
 
 
@@ -301,138 +398,171 @@ button{
 ========================================================= */
 
 .online{
-  right:20px;
-  top:20px;
+    right:20px;
+    top:20px;
 
-  padding:10px 15px;
+    padding:11px 17px;
 
-  font-weight:900;
-
-  box-shadow:
-    0 0 20px #00ffb533,
-    inset 0 0 20px #00ffb50a;
+    font-size:14px;
+    font-weight:950;
 }
 
-.online i{
-  display:inline-block;
+.online-dot{
+    display:inline-block;
 
-  width:10px;
-  height:10px;
+    width:10px;
+    height:10px;
 
-  background:#31f5bf;
+    margin-right:8px;
 
-  border-radius:50%;
+    border-radius:50%;
 
-  box-shadow:
-    0 0 12px #31f5bf,
-    0 0 25px #31f5bf55;
+    background:#36f5bd;
 
-  margin-right:7px;
+    box-shadow:
+        0 0 12px #36f5bd;
+
+    animation:
+        onlinePulse 1.6s infinite;
+}
+
+@keyframes onlinePulse{
+
+    50%{
+        transform:scale(1.35);
+        opacity:.65;
+    }
+
 }
 
 
 /* =========================================================
-   MAP
+   MINIMAP
 ========================================================= */
 
 .map{
-  right:20px;
-  top:76px;
+    right:20px;
+    top:78px;
 
-  width:305px;
-  height:210px;
+    width:310px;
+    height:215px;
 
-  padding:10px;
+    padding:10px;
 }
 
 .mapin{
-  position:absolute;
+    position:absolute;
+    inset:10px;
 
-  inset:10px;
+    overflow:hidden;
 
-  border:1px solid #42dcff55;
+    border:
+        1px solid rgba(60,222,255,.38);
 
-  border-radius:16px;
+    border-radius:17px;
 
-  background:
-    linear-gradient(
-      #38c5ef22 2px,
-      transparent 2px
-    ),
-    linear-gradient(
-      90deg,
-      #38c5ef22 2px,
-      transparent 2px
-    );
+    background:
+        linear-gradient(
+            rgba(30,190,255,.06),
+            rgba(30,190,255,.02)
+        );
 
-  background-size:35px 35px;
-
-  box-shadow:
-    inset 0 0 25px #009dff12;
+    box-shadow:
+        inset 0 0 25px rgba(0,180,255,.08);
 }
+
+.mapin::before{
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    background-image:
+        linear-gradient(
+            rgba(55,209,255,.13) 2px,
+            transparent 2px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(55,209,255,.13) 2px,
+            transparent 2px
+        );
+
+    background-size:35px 35px;
+}
+
+
+/* MAP DOTS */
 
 .dot{
-  position:absolute;
+    position:absolute;
 
-  width:10px;
-  height:10px;
+    width:10px;
+    height:10px;
 
-  border-radius:50%;
+    border-radius:50%;
 
-  box-shadow:
-    0 0 12px currentColor,
-    0 0 22px currentColor;
+    z-index:2;
+
+    box-shadow:
+        0 0 13px currentColor;
 }
 
-.a{
-  left:18%;
-  top:68%;
-
-  background:#31f5bf;
-  color:#31f5bf;
+.dot.a{
+    left:18%;
+    top:68%;
+    background:#36f5bd;
+    color:#36f5bd;
 }
 
-.b{
-  left:72%;
-  top:22%;
-
-  background:#ff3c65;
-  color:#ff3c65;
+.dot.b{
+    left:72%;
+    top:22%;
+    background:#ff3f6c;
+    color:#ff3f6c;
 }
 
-.c{
-  left:66%;
-  top:58%;
-
-  background:#ffd426;
-  color:#ffd426;
+.dot.c{
+    left:66%;
+    top:58%;
+    background:#ffd42f;
+    color:#ffd42f;
 }
 
-.d{
-  left:58%;
-  top:48%;
+.dot.d{
+    left:58%;
+    top:48%;
 
-  width:15px;
-  height:15px;
+    width:16px;
+    height:16px;
 
-  background:#4ce9ff;
-  color:#4ce9ff;
+    background:#4deaff;
+    color:#4deaff;
+
+    animation:
+        mapPulse 1.4s infinite;
 }
 
-.e{
-  left:61%;
-  top:45%;
-
-  background:#ff4f9a;
-  color:#ff4f9a;
+.dot.e{
+    left:61%;
+    top:45%;
+    background:#ff4f9a;
+    color:#ff4f9a;
 }
 
-.f{
-  left:78%;
-  top:76%;
+.dot.f{
+    left:78%;
+    top:76%;
+    background:#a65cff;
+    color:#a65cff;
+}
 
-  background:#9c5cff;
-  color:#9c5cff;
+@keyframes mapPulse{
+
+    50%{
+        transform:scale(1.35);
+    }
+
 }
 
 
@@ -441,50 +571,66 @@ button{
 ========================================================= */
 
 .nav{
-  position:absolute;
+    position:absolute;
 
-  right:20px;
-  top:305px;
+    right:20px;
+    top:310px;
 
-  z-index:25;
+    z-index:35;
 
-  display:flex;
+    display:flex;
+    gap:9px;
 
-  gap:8px;
+    flex-wrap:wrap;
+    justify-content:flex-end;
+
+    max-width:900px;
 }
 
 .nav button{
-  background:
-    linear-gradient(
-      145deg,
-      #061c34ee,
-      #031124ee
-    );
+    min-width:102px;
 
-  border:1px solid #38d8ff55;
+    padding:11px 15px;
 
-  border-radius:14px;
+    border-radius:15px;
 
-  padding:11px 16px;
+    border:
+        1px solid rgba(55,218,255,.38);
 
-  font-weight:900;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(7,35,61,.95),
+            rgba(2,15,32,.94)
+        );
 
-  cursor:pointer;
+    color:#e9f8ff;
 
-  transition:.2s;
+    font-weight:950;
 
-  box-shadow:
-    inset 0 0 15px #00b7ff08;
+    cursor:pointer;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.06);
+
+    transition:
+        .18s ease;
 }
 
 .nav button:hover{
-  transform:translateY(-3px);
+    transform:translateY(-3px);
 
-  border-color:#43eaff;
+    border-color:#4eeaff;
 
-  box-shadow:
-    0 0 15px #18cfff55,
-    inset 0 0 15px #18cfff12;
+    box-shadow:
+        0 0 20px rgba(23,207,255,.25),
+        inset 0 0 15px rgba(23,207,255,.08);
+}
+
+.nav button:active{
+    transform:
+        translateY(1px)
+        scale(.97);
 }
 
 
@@ -493,114 +639,181 @@ button{
 ========================================================= */
 
 .arena{
-  position:absolute;
-  inset:0;
+    position:absolute;
+    inset:0;
 }
 
 
 /* =========================================================
-   PLAYER — 3D CUBE KNIGHT
+   PLAYER
 ========================================================= */
 
 .player{
-  position:absolute;
+    position:absolute;
 
-  left:48%;
-  top:54%;
+    left:48%;
+    top:54%;
 
-  width:62px;
-  height:62px;
+    width:66px;
+    height:66px;
 
-  transform:
-    translate(-50%,-50%);
+    transform:
+        translate(-50%,-50%);
 
-  border-radius:16px;
+    border-radius:18px;
 
-  background:
-    linear-gradient(
-      145deg,
-      #5bd5ff 0%,
-      #229cff 35%,
-      #1264d9 70%,
-      #073c9e 100%
-    );
+    background:
+        linear-gradient(
+            145deg,
+            #38c5ff 0%,
+            #1488ff 45%,
+            #0754cf 100%
+        );
 
-  border:2px solid #50e5ff;
+    border:
+        2px solid #68edff;
 
-  box-shadow:
-    0 0 15px #198fff,
-    0 0 40px #ff3f9155,
-    inset 7px 7px 14px #ffffff25,
-    inset -8px -8px 16px #001c6844;
+    box-shadow:
+        0 0 18px #139fff,
+        0 0 55px rgba(0,167,255,.35),
+        inset 0 4px 10px rgba(255,255,255,.35),
+        inset 0 -12px 18px rgba(0,0,80,.25);
 
-  z-index:8;
+    z-index:10;
 
-  transition:.07s;
-
-  transform-style:preserve-3d;
+    transition:
+        left .06s linear,
+        top .06s linear;
 }
 
-.player:before{
-  content:"◆";
 
-  position:absolute;
-  inset:0;
+/* PLAYER 3D SHINE */
 
-  display:grid;
-  place-items:center;
+.player::after{
+    content:"";
 
-  color:#eaffff;
+    position:absolute;
 
-  font-size:30px;
+    left:7px;
+    top:6px;
 
-  text-shadow:
-    0 0 12px #ffffff,
-    0 0 25px #42e8ff;
+    width:25px;
+    height:13px;
+
+    border-radius:50%;
+
+    background:
+        rgba(255,255,255,.38);
+
+    filter:blur(2px);
+
+    transform:rotate(-25deg);
 }
+
+
+/* PLAYER SYMBOL */
+
+.player::before{
+    content:"◆";
+
+    position:absolute;
+    inset:0;
+
+    display:grid;
+    place-items:center;
+
+    color:#efffff;
+
+    font-size:31px;
+
+    text-shadow:
+        0 2px 4px rgba(0,50,100,.6);
+}
+
+
+/* VISOR */
 
 .visor{
-  position:absolute;
+    position:absolute;
 
-  top:14px;
-  left:16px;
+    z-index:3;
 
-  width:28px;
-  height:10px;
+    left:17px;
+    top:14px;
 
-  background:
-    linear-gradient(
-      #eaffff,
-      #72eaff
-    );
+    width:31px;
+    height:10px;
 
-  border:2px solid #0876a2;
+    border-radius:4px;
 
-  border-radius:3px;
+    background:
+        linear-gradient(
+            90deg,
+            #d9ffff,
+            #6defff
+        );
 
-  box-shadow:
-    0 0 8px #69eaff;
+    border:
+        2px solid #086994;
+
+    box-shadow:
+        0 0 8px rgba(107,242,255,.6);
 }
 
+
+/* PLAYER BEAM */
+
 .beam{
-  position:absolute;
+    position:absolute;
 
-  bottom:100%;
-  left:50%;
+    bottom:100%;
+    left:50%;
 
-  width:18px;
-  height:130px;
+    width:24px;
+    height:150px;
 
-  transform:translateX(-50%);
+    transform:
+        translateX(-50%);
 
-  background:
-    linear-gradient(
-      transparent,
-      #2fbfff66
-    );
+    background:
+        linear-gradient(
+            transparent,
+            rgba(38,192,255,.22)
+        );
 
-  filter:blur(3px);
+    filter:blur(5px);
 
-  opacity:.8;
+    pointer-events:none;
+}
+
+
+/* =========================================================
+   PLAYER SHADOW
+========================================================= */
+
+.player-shadow{
+    position:absolute;
+
+    left:48%;
+    top:calc(54% + 36px);
+
+    width:70px;
+    height:18px;
+
+    transform:
+        translateX(-50%);
+
+    border-radius:50%;
+
+    background:rgba(0,0,0,.55);
+
+    filter:blur(8px);
+
+    z-index:4;
+
+    transition:
+        left .06s linear,
+        top .06s linear;
 }
 
 
@@ -609,273 +822,218 @@ button{
 ========================================================= */
 
 .enemy{
-  position:absolute;
+    position:absolute;
 
-  width:48px;
-  height:48px;
+    width:54px;
+    height:54px;
 
-  transform:
-    translate(-50%,-50%);
+    transform:
+        translate(-50%,-50%);
 
-  border-radius:13px;
+    border-radius:16px;
 
-  background:
-    linear-gradient(
-      145deg,
-      #d27aff,
-      #9b4cff 40%,
-      #5722c7 100%
-    );
+    background:
+        linear-gradient(
+            145deg,
+            #d36cff,
+            #883cff 50%,
+            #5620c7
+        );
 
-  border:2px solid #d9a0ff;
+    border:
+        2px solid #e2b1ff;
 
-  box-shadow:
-    0 0 20px #9b5cff,
-    inset 6px 6px 10px #ffffff22,
-    inset -7px -7px 12px #2c087766;
+    box-shadow:
+        0 0 20px #9d5cff,
+        0 0 45px rgba(154,74,255,.32),
+        inset 0 4px 10px rgba(255,255,255,.25),
+        inset 0 -10px 15px rgba(40,0,90,.25);
 
-  z-index:7;
+    z-index:7;
 
-  transform-style:preserve-3d;
+    animation:
+        enemyFloat 2.4s ease-in-out infinite;
+}
+
+.enemy:nth-child(2){
+    animation-delay:.7s;
 }
 
 .enemy span{
-  position:absolute;
+    position:absolute;
 
-  bottom:100%;
-  left:50%;
+    bottom:100%;
+    left:50%;
 
-  transform:translateX(-50%);
+    transform:
+        translateX(-50%);
 
-  white-space:nowrap;
+    white-space:nowrap;
 
-  font-weight:900;
+    margin-bottom:9px;
 
-  font-size:13px;
+    font-size:12px;
+    font-weight:950;
 
-  margin-bottom:7px;
+    color:#f6eaff;
 
-  text-shadow:
-    0 2px 8px #000,
-    0 0 10px #ffffff33;
+    text-shadow:
+        0 2px 8px #000;
 }
 
-.enemy:after{
-  content:"";
+.enemy::after{
+    content:"";
 
-  position:absolute;
+    position:absolute;
+    inset:11px;
 
-  inset:10px;
+    border:
+        2px solid rgba(255,255,255,.55);
 
-  border:2px solid #fff8;
+    border-radius:8px;
 
-  border-radius:7px;
+    box-shadow:
+        inset 0 0 8px rgba(255,255,255,.12);
+}
 
-  box-shadow:
-    inset 0 0 8px #fff4;
+@keyframes enemyFloat{
+
+    50%{
+        transform:
+            translate(-50%,-55%);
+    }
+
 }
 
 
 /* =========================================================
-   3D GEM
+   3D GEMS
 ========================================================= */
 
 .gem{
-  position:absolute;
+    position:absolute;
 
-  width:30px;
-  height:30px;
+    width:42px;
+    height:42px;
 
-  transform:
-    translate(-50%,-50%)
-    rotate(45deg);
+    transform:
+        translate(-50%,-50%)
+        rotate(45deg);
 
-  border-radius:7px;
+    border-radius:11px;
 
-  background:
-    linear-gradient(
-      145deg,
-      #bfffff 0%,
-      #4cefff 18%,
-      #21d8ff 45%,
-      #218cff 70%,
-      #164bc9 100%
-    );
+    background:
+        linear-gradient(
+            135deg,
+            #b9ffff 0%,
+            #35efff 18%,
+            #1da5ff 48%,
+            #1757dd 100%
+        );
 
-  border:1px solid #d9ffff;
+    border:
+        2px solid rgba(205,255,255,.95);
 
-  box-shadow:
-    0 0 20px #25e4ff,
-    0 0 45px #218cff66,
-    inset 5px 5px 8px #ffffff55,
-    inset -6px -6px 10px #0644b966;
+    box-shadow:
+        0 0 12px #21eaff,
+        0 0 30px rgba(25,215,255,.75),
+        0 0 65px rgba(31,119,255,.38),
+        inset 4px 4px 7px rgba(255,255,255,.65),
+        inset -7px -8px 12px rgba(0,45,180,.45);
 
-  animation:
-    gemFloat 1.5s infinite ease-in-out,
-    gemGlow 2s infinite ease-in-out;
+    z-index:6;
 
-  z-index:6;
-
-  overflow:hidden;
+    animation:
+        gemFloat 1.8s ease-in-out infinite;
 }
 
 
-/* CRYSTAL INNER */
+/* GEM INNER */
 
-.gem:before{
-  content:"";
+.gem::before{
+    content:"";
 
-  position:absolute;
+    position:absolute;
 
-  left:5px;
-  top:5px;
+    inset:7px;
 
-  width:17px;
-  height:17px;
+    border-radius:7px;
 
-  border:
+    border:
+        2px solid rgba(230,255,255,.82);
 
-    1px solid #ffffffcc;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.35),
+            rgba(0,100,255,.08)
+        );
 
-  background:
-    linear-gradient(
-      135deg,
-      #ffffff66,
-      transparent 35%,
-      #21bfff44 70%
-    );
-
-  box-shadow:
-    inset 2px 2px 5px #ffffff55;
-
-  transform:
-    rotate(0deg);
+    box-shadow:
+        inset 0 0 8px rgba(255,255,255,.3);
 }
 
 
 /* GEM HIGHLIGHT */
 
-.gem:after{
-  content:"";
+.gem::after{
+    content:"";
 
-  position:absolute;
+    position:absolute;
 
-  width:8px;
-  height:22px;
+    width:12px;
+    height:7px;
 
-  left:4px;
-  top:-2px;
+    left:6px;
+    top:6px;
 
-  background:
-    linear-gradient(
-      transparent,
-      #ffffffaa,
-      transparent
-    );
+    border-radius:50%;
 
-  transform:
-    rotate(25deg);
+    background:
+        rgba(255,255,255,.85);
 
-  opacity:.75;
+    filter:blur(1px);
+
+    transform:
+        rotate(-20deg);
 }
 
+
+/* SECOND GEM STYLE */
+
+.gem.pink{
+    background:
+        linear-gradient(
+            135deg,
+            #fff0ff,
+            #ff65d9 22%,
+            #bd37ff 55%,
+            #6324d9
+        );
+
+    border-color:#ffd8ff;
+
+    box-shadow:
+        0 0 14px #ff53db,
+        0 0 34px rgba(255,55,210,.65),
+        0 0 65px rgba(150,35,255,.35),
+        inset 4px 4px 7px rgba(255,255,255,.65),
+        inset -7px -8px 12px rgba(82,0,150,.45);
+}
 
 @keyframes gemFloat{
 
-  0%{
-    margin-top:0;
-    filter:brightness(1);
-  }
+    0%,
+    100%{
+        margin-top:0;
+        filter:brightness(1);
+    }
 
-  50%{
-    margin-top:-9px;
-    filter:brightness(1.25);
-  }
+    50%{
+        margin-top:-9px;
+        filter:brightness(1.25);
+    }
 
-  100%{
-    margin-top:0;
-    filter:brightness(1);
-  }
-
-}
-
-@keyframes gemGlow{
-
-  0%,
-  100%{
-    box-shadow:
-      0 0 20px #25e4ff,
-      0 0 45px #218cff66,
-      inset 5px 5px 8px #ffffff55,
-      inset -6px -6px 10px #0644b966;
-  }
-
-  50%{
-    box-shadow:
-      0 0 28px #25e4ff,
-      0 0 65px #218cff99,
-      inset 5px 5px 12px #ffffff77,
-      inset -6px -6px 10px #0644b966;
-  }
-
-}
-
-
-/* =========================================================
-   SCHOOL LOGOS
-========================================================= */
-
-.logos{
-  position:absolute;
-
-  right:350px;
-  bottom:25px;
-
-  display:flex;
-
-  gap:10px;
-
-  z-index:15;
-
-  align-items:center;
-}
-
-.school-logo{
-  width:62px;
-  height:62px;
-
-  object-fit:contain;
-
-  padding:6px;
-
-  border-radius:17px;
-
-  background:
-    linear-gradient(
-      145deg,
-      #071f38ee,
-      #031326ee
-    );
-
-  border:1px solid #46dcff66;
-
-  box-shadow:
-    0 0 18px #17cfff22,
-    inset 0 0 15px #17cfff0d;
-
-  transition:.25s;
-}
-
-.school-logo:hover{
-  transform:
-    translateY(-5px)
-    scale(1.08);
-
-  border-color:#56eaff;
-
-  box-shadow:
-    0 0 25px #20dfff66,
-    inset 0 0 20px #20dfff15;
 }
 
 
@@ -884,136 +1042,177 @@ button{
 ========================================================= */
 
 .controls{
-  position:absolute;
+    position:absolute;
 
-  left:22px;
-  bottom:22px;
+    left:28px;
+    bottom:27px;
 
-  z-index:30;
+    z-index:40;
 
-  display:grid;
+    display:grid;
 
-  grid-template:
-    74px 74px /
-    74px 74px 74px;
+    grid-template:
+        70px
+        70px
+        /
+        70px 70px 70px;
 
-  gap:9px;
+    gap:8px;
 }
 
 .ctrl{
-  border-radius:18px;
+    border-radius:18px;
 
-  background:
-    linear-gradient(
-      145deg,
-      #08233fdc,
-      #031326e8
-    );
+    background:
+        linear-gradient(
+            145deg,
+            rgba(8,39,68,.96),
+            rgba(2,17,34,.96)
+        );
 
-  border:1px solid #26d7ff80;
+    border:
+        1px solid rgba(50,218,255,.55);
 
-  box-shadow:
-    inset 0 0 20px #00aaff0f,
-    0 8px 20px #0005;
+    color:#effcff;
 
-  display:grid;
+    display:grid;
+    place-items:center;
 
-  place-items:center;
+    font-size:30px;
+    font-weight:950;
 
-  font-size:34px;
+    cursor:pointer;
 
-  font-weight:900;
+    box-shadow:
+        inset 0 2px 7px rgba(255,255,255,.06),
+        0 0 15px rgba(0,160,255,.08);
 
-  cursor:pointer;
+    touch-action:none;
 
-  touch-action:none;
-
-  transition:.12s;
+    transition:
+        .12s ease;
 }
 
 .ctrl:hover{
-  background:#08365bd0;
+    transform:
+        translateY(-2px);
 
-  box-shadow:
-    0 0 20px #17cfff33,
-    inset 0 0 20px #17cfff12;
+    border-color:#65eaff;
+
+    box-shadow:
+        0 0 22px rgba(28,215,255,.25);
 }
 
 .ctrl:active{
-  transform:scale(.92);
+    transform:
+        scale(.91);
 }
 
 .up{
-  grid-column:2;
+    grid-column:2;
 }
 
 .left{
-  grid-row:2;
+    grid-column:1;
+    grid-row:2;
 }
 
 .down{
-  grid-row:2;
-  grid-column:2;
+    grid-column:2;
+    grid-row:2;
 }
 
 .right{
-  grid-row:2;
-  grid-column:3;
+    grid-column:3;
+    grid-row:2;
 }
 
 
 /* =========================================================
-   ATTACK
+   ATTACK BUTTON
 ========================================================= */
 
 .attack{
-  position:absolute;
+    position:absolute;
 
-  right:38px;
-  bottom:28px;
+    right:30px;
+    bottom:27px;
 
-  width:300px;
-  height:86px;
+    width:315px;
+    height:82px;
 
-  border:0;
+    border:0;
+    border-radius:24px;
 
-  border-radius:25px;
+    z-index:40;
 
-  background:
-    linear-gradient(
-      105deg,
-      #ed2d83,
-      #c12bc7,
-      #8d35d8
-    );
+    color:#fff;
 
-  box-shadow:
-    0 0 35px #eb289155,
-    0 0 70px #c52bd633,
-    inset 0 0 20px #fff2;
+    font-size:20px;
+    font-weight:950;
 
-  z-index:30;
+    cursor:pointer;
 
-  font-weight:950;
+    background:
+        linear-gradient(
+            110deg,
+            #e92778,
+            #bc28c7,
+            #7f35ed
+        );
 
-  font-size:21px;
+    box-shadow:
+        0 0 28px rgba(235,40,145,.42),
+        0 0 60px rgba(160,50,230,.15),
+        inset 0 2px 10px rgba(255,255,255,.28),
+        inset 0 -9px 16px rgba(80,0,100,.22);
 
-  cursor:pointer;
+    transition:
+        .16s ease;
 
-  transition:.15s;
+    overflow:hidden;
+}
+
+.attack::before{
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+        linear-gradient(
+            110deg,
+            transparent 20%,
+            rgba(255,255,255,.22) 50%,
+            transparent 80%
+        );
+
+    transform:
+        translateX(-100%);
+
+    transition:
+        .5s ease;
+}
+
+.attack:hover::before{
+    transform:
+        translateX(100%);
 }
 
 .attack:hover{
-  transform:translateY(-3px);
+    transform:
+        translateY(-4px);
 
-  box-shadow:
-    0 0 50px #eb289177,
-    0 0 90px #c52bd644,
-    inset 0 0 25px #fff3;
+    box-shadow:
+        0 0 40px rgba(235,40,145,.6),
+        0 0 80px rgba(160,50,230,.2),
+        inset 0 2px 12px rgba(255,255,255,.3);
 }
 
 .attack:active{
-  transform:scale(.96);
+    transform:
+        scale(.95);
 }
 
 
@@ -1022,119 +1221,205 @@ button{
 ========================================================= */
 
 .toast{
-  position:absolute;
+    position:absolute;
 
-  left:50%;
-  top:50%;
+    left:50%;
+    top:48%;
 
-  transform:
-    translate(-50%,-50%)
-    scale(.8);
+    transform:
+        translate(-50%,-50%)
+        scale(.8);
 
-  opacity:0;
+    opacity:0;
 
-  z-index:100;
+    z-index:100;
 
-  background:
-    linear-gradient(
-      145deg,
-      #071b35f5,
-      #030c1df5
-    );
+    padding:15px 24px;
 
-  border:1px solid #4de8ff;
+    border-radius:17px;
 
-  border-radius:16px;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(7,28,52,.98),
+            rgba(2,10,24,.98)
+        );
 
-  padding:15px 22px;
+    border:
+        1px solid #55eaff;
 
-  font-weight:950;
+    font-weight:950;
 
-  transition:.2s;
+    box-shadow:
+        0 0 35px rgba(0,210,255,.22);
 
-  pointer-events:none;
+    pointer-events:none;
 
-  box-shadow:
-    0 0 30px #00cfff22,
-    inset 0 0 15px #00cfff0a;
+    transition:
+        .2s ease;
 }
 
-.show{
-  opacity:1;
+.toast.show{
+    opacity:1;
 
-  transform:
-    translate(-50%,-50%)
-    scale(1);
+    transform:
+        translate(-50%,-50%)
+        scale(1);
 }
 
 
 /* =========================================================
-   MODAL
+   MODAL PAUSE
 ========================================================= */
 
 .modal{
-  display:none;
+    display:none;
 
-  place-items:center;
+    place-items:center;
 
-  position:absolute;
+    position:absolute;
+    inset:0;
 
-  inset:0;
+    z-index:90;
 
-  z-index:90;
+    background:
+        rgba(0,3,12,.72);
 
-  background:#0009;
-
-  backdrop-filter:blur(9px);
+    backdrop-filter:
+        blur(12px);
 }
 
 .card{
-  width:min(450px,90vw);
+    width:min(460px,90vw);
 
-  padding:28px;
+    padding:32px;
 
-  text-align:center;
+    text-align:center;
 
-  border-radius:24px;
+    border-radius:26px;
 
-  background:
-    linear-gradient(
-      145deg,
-      #071b35f5,
-      #030b1cf5
-    );
+    background:
+        linear-gradient(
+            145deg,
+            rgba(8,31,58,.98),
+            rgba(2,12,27,.98)
+        );
 
-  border:1px solid #43e2ff66;
+    border:
+        1px solid rgba(69,228,255,.5);
 
-  box-shadow:
-    0 0 40px #00cfff22,
-    inset 0 0 25px #00cfff0a;
+    box-shadow:
+        0 0 60px rgba(0,200,255,.15),
+        inset 0 1px 0 rgba(255,255,255,.08);
+}
+
+.card-icon{
+    font-size:48px;
+
+    margin-bottom:12px;
+
+    filter:
+        drop-shadow(0 0 15px #36ddff);
 }
 
 .card h2{
-  margin-bottom:10px;
+    font-size:27px;
+
+    margin-bottom:10px;
 }
 
 .card p{
-  color:#91afc4;
+    color:#91aec2;
 
-  line-height:1.6;
+    line-height:1.7;
+
+    font-size:14px;
 }
 
 .card button{
-  margin-top:18px;
+    margin-top:20px;
 
-  padding:12px 24px;
+    padding:13px 27px;
 
-  border-radius:13px;
+    border-radius:14px;
 
-  background:#0b7cff;
+    border:
+        1px solid #69eaff;
 
-  border:1px solid #6eeaff;
+    background:
+        linear-gradient(
+            145deg,
+            #119bff,
+            #1465e9
+        );
 
-  font-weight:900;
+    color:white;
 
-  cursor:pointer;
+    font-weight:950;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 0 20px rgba(0,180,255,.25);
+}
+
+
+/* =========================================================
+   DAMAGE FLASH
+========================================================= */
+
+.damage{
+    animation:
+        damageFlash .3s;
+}
+
+@keyframes damageFlash{
+
+    25%{
+        filter:
+            brightness(1.8)
+            saturate(2);
+    }
+
+    100%{
+        filter:none;
+    }
+
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+========================================================= */
+
+.accessibility{
+    position:absolute;
+
+    left:50%;
+    top:20px;
+
+    transform:
+        translateX(-50%);
+
+    z-index:35;
+
+    padding:8px 12px;
+
+    border-radius:12px;
+
+    background:
+        rgba(3,20,40,.72);
+
+    border:
+        1px solid rgba(75,220,255,.2);
+
+    color:#7fa7bd;
+
+    font-size:10px;
+
+    letter-spacing:1px;
+
+    pointer-events:none;
 }
 
 
@@ -1142,153 +1427,173 @@ button{
    RESPONSIVE
 ========================================================= */
 
-@media(max-width:900px){
+@media(max-width:1000px){
 
-  .brand,
-  .stats{
-    width:220px;
-  }
+    .brand,
+    .stats{
+        width:250px;
+    }
 
-  .map{
-    width:220px;
-    height:155px;
-  }
+    .map{
+        width:250px;
+        height:170px;
+    }
 
-  .nav{
-    top:auto;
-    bottom:120px;
+    .nav{
+        top:auto;
+        bottom:120px;
+        max-width:55vw;
+    }
 
-    max-width:58vw;
+    .nav button{
+        min-width:auto;
+        padding:9px 11px;
+        font-size:12px;
+    }
 
-    flex-wrap:wrap;
-
-    justify-content:flex-end;
-  }
-
-  .nav button{
-    padding:8px 10px;
-
-    font-size:12px;
-  }
-
-  .attack{
-    right:18px;
-    bottom:20px;
-
-    width:235px;
-    height:72px;
-
-    font-size:17px;
-  }
-
-  .logos{
-    display:none;
-  }
+    .attack{
+        width:250px;
+        height:72px;
+        font-size:17px;
+    }
 
 }
 
 
-@media(max-width:650px){
+@media(max-width:700px){
 
-  .brand{
-    left:10px;
-    top:10px;
+    .brand{
+        left:10px;
+        top:10px;
 
-    width:auto;
+        width:auto;
 
-    padding:7px;
-  }
+        padding:8px 10px;
+    }
 
-  .logo-main{
-    width:43px;
-    height:43px;
-  }
+    .brand-icon{
+        width:43px;
+        height:43px;
 
-  .sub{
-    display:none;
-  }
+        font-size:22px;
+    }
 
-  .stats{
-    left:10px;
-    top:70px;
+    .brand-title{
+        font-size:15px;
+    }
 
-    width:190px;
+    .sub{
+        display:none;
+    }
 
-    padding:9px;
-  }
 
-  .map{
-    right:10px;
-    top:54px;
+    .stats{
+        left:10px;
+        top:70px;
 
-    width:150px;
-    height:105px;
-  }
+        width:205px;
 
-  .online{
-    right:10px;
-    top:10px;
+        padding:11px;
+    }
 
-    font-size:11px;
+    .row{
+        font-size:13px;
+    }
 
-    padding:8px;
-  }
+    .score{
+        font-size:11px;
+    }
 
-  .nav{
-    display:none;
-  }
 
-  .controls{
-    left:10px;
-    bottom:12px;
+    .online{
+        right:10px;
+        top:10px;
 
-    grid-template:
-      58px 58px /
-      58px 58px 58px;
+        font-size:11px;
+        padding:8px 11px;
+    }
 
-    gap:6px;
-  }
 
-  .ctrl{
-    font-size:26px;
-  }
+    .map{
+        right:10px;
+        top:55px;
 
-  .attack{
-    right:10px;
-    bottom:14px;
+        width:155px;
+        height:110px;
+    }
 
-    width:190px;
-    height:62px;
+    .mapin{
+        inset:7px;
+    }
 
-    font-size:14px;
-  }
 
-  .player{
-    width:52px;
-    height:52px;
-  }
+    .nav{
+        display:none;
+    }
+
+    .accessibility{
+        display:none;
+    }
+
+
+    .controls{
+        left:10px;
+        bottom:12px;
+
+        grid-template:
+            58px
+            58px
+            /
+            58px 58px 58px;
+
+        gap:6px;
+    }
+
+    .ctrl{
+        font-size:25px;
+        border-radius:15px;
+    }
+
+
+    .attack{
+        right:10px;
+        bottom:14px;
+
+        width:190px;
+        height:62px;
+
+        font-size:14px;
+
+        border-radius:19px;
+    }
+
+
+    .player{
+        width:55px;
+        height:55px;
+    }
+
+    .gem{
+        width:35px;
+        height:35px;
+    }
 
 }
 
 
 /* =========================================================
-   EXTRA SMALL SCREEN
+   REDUCED MOTION
 ========================================================= */
 
-@media(max-width:430px){
+@media(prefers-reduced-motion:reduce){
 
-  .stats{
-    width:175px;
-  }
-
-  .map{
-    width:135px;
-    height:95px;
-  }
-
-  .attack{
-    width:175px;
-  }
+    *,
+    *::before,
+    *::after{
+        animation-duration:.01ms !important;
+        animation-iteration-count:1 !important;
+        transition:none !important;
+    }
 
 }
 
@@ -1300,343 +1605,394 @@ button{
 
 <div id="game">
 
+    <!-- AMBIENT LIGHT -->
 
-<!-- =======================================================
-     BRAND / LOGO UTAMA
-======================================================= -->
+    <div class="light one"></div>
+    <div class="light two"></div>
+    <div class="light three"></div>
 
-<div class="hud brand">
 
-  <img
-    class="logo-main"
-    src="logo-sekolah.jpeg"
-    alt="Logo SMKN 1 Sanden"
-  >
+    <!-- =====================================================
+         BRAND
+    ====================================================== -->
 
-  <div>
+    <div class="hud brand">
 
-    <div class="brand-title">
-      ⚔️ <b>CubesAdv</b> Knight
+        <div class="brand-icon">
+            ⚔️
+        </div>
+
+        <div>
+
+            <div class="brand-title">
+                <b>CubesAdv</b> Knight
+            </div>
+
+            <div class="sub">
+                SMKN 1 SANDEN • BANTUL
+            </div>
+
+        </div>
+
     </div>
 
-    <div class="sub">
-      SMKN 1 SANDEN • BANTUL
+
+    <!-- =====================================================
+         STATS
+    ====================================================== -->
+
+    <div class="hud stats">
+
+        <div class="row">
+
+            <span>
+                💗 HP
+            </span>
+
+            <span
+                id="hp"
+                class="hp-number"
+            >
+                76/100
+            </span>
+
+        </div>
+
+
+        <div class="hpbar">
+
+            <div
+                id="fill"
+                class="fill"
+            ></div>
+
+        </div>
+
+
+        <div class="score">
+
+            <span>
+                🏆 SCORE
+            </span>
+
+            <b id="score">
+                0
+            </b>
+
+            <span>
+                •
+            </span>
+
+            <span>
+                💎
+            </span>
+
+            <b
+                id="gems"
+                class="gem-score"
+            >
+                0
+            </b>
+
+        </div>
+
     </div>
 
-  </div>
 
-</div>
+    <!-- =====================================================
+         ONLINE
+    ====================================================== -->
 
+    <div class="hud online">
 
-<!-- =======================================================
-     STATS
-======================================================= -->
+        <span class="online-dot"></span>
 
-<div class="hud stats">
+        ONLINE
 
-  <div class="row">
+        <span id="online">
+            4
+        </span>
 
-    <span>
-      💗 HP
-    </span>
+    </div>
 
-    <span id="hp">
-      76/100
-    </span>
 
-  </div>
+    <!-- =====================================================
+         MINIMAP
+    ====================================================== -->
 
+    <div class="hud map">
 
-  <div class="hpbar">
+        <div class="mapin">
 
-    <div
-      id="fill"
-      class="fill"
-    ></div>
+            <i class="dot a"></i>
+            <i class="dot b"></i>
+            <i class="dot c"></i>
+            <i class="dot d"></i>
+            <i class="dot e"></i>
+            <i class="dot f"></i>
 
-  </div>
+        </div>
 
+    </div>
 
-  <div class="score">
 
-    🏆 SCORE:
+    <!-- =====================================================
+         ACCESSIBILITY
+    ====================================================== -->
 
-    <b id="score">
-      0
-    </b>
+    <div class="accessibility">
 
-    &nbsp;•&nbsp;
+        KEYBOARD • WASD / ARROW • SPACE • P
 
-    💎
+    </div>
 
-    <b id="gems">
-      0
-    </b>
 
-  </div>
+    <!-- =====================================================
+         NAVIGATION
+    ====================================================== -->
 
-</div>
+    <div class="nav">
 
+        <button
+            onclick="toast('🏠 Lobby siap')"
+        >
+            🏠 Lobby
+        </button>
 
-<!-- =======================================================
-     ONLINE
-======================================================= -->
 
-<div class="hud online">
+        <button
+            onclick="showPlayers()"
+        >
+            👥 Players
+        </button>
 
-  <i></i>
 
-  ONLINE
+        <button
+            onclick="toast('💬 Chat siap digunakan')"
+        >
+            💬 Chat
+        </button>
 
-  <span id="online">
-    4
-  </span>
 
-</div>
+        <button
+            onclick="toast('🏆 Rank kamu: KNIGHT')"
+        >
+            🏆 Rank
+        </button>
 
 
-<!-- =======================================================
-     MAP
-======================================================= -->
+        <button
+            onclick="toast('🎯 Match ditemukan!')"
+        >
+            🎯 Match
+        </button>
 
-<div class="hud map">
 
-  <div class="mapin"></div>
+        <button
+            onclick="pause()"
+        >
+            Ⅱ Pause
+        </button>
 
-  <i class="dot a"></i>
-  <i class="dot b"></i>
-  <i class="dot c"></i>
-  <i class="dot d"></i>
-  <i class="dot e"></i>
-  <i class="dot f"></i>
+    </div>
 
-</div>
 
+    <!-- =====================================================
+         ARENA
+    ====================================================== -->
 
-<!-- =======================================================
-     NAVIGATION
-======================================================= -->
+    <div class="arena">
 
-<div class="nav">
 
-  <button onclick="toast('🏠 Lobby')">
-    🏠 Lobby
-  </button>
+        <!-- PLAYER SHADOW -->
 
-  <button onclick="toast('👥 Players: '+online.textContent)">
-    👥 Players
-  </button>
+        <div
+            id="playerShadow"
+            class="player-shadow"
+        ></div>
 
-  <button onclick="toast('💬 Chat siap')">
-    💬 Chat
-  </button>
 
-  <button onclick="toast('🏆 Rank: Knight')">
-    🏆 Rank
-  </button>
+        <!-- PLAYER -->
 
-  <button onclick="toast('🎯 Match ditemukan')">
-    🎯 Match
-  </button>
+        <div
+            id="player"
+            class="player"
+        >
 
-  <button onclick="pause()">
-    Ⅱ Pause
-  </button>
+            <span class="beam"></span>
 
-</div>
+            <span class="visor"></span>
 
+        </div>
 
-<!-- =======================================================
-     ARENA
-======================================================= -->
 
-<div class="arena">
+        <!-- ENEMY 1 -->
 
+        <div
+            class="enemy"
+            style="
+                left:39%;
+                top:81%;
+            "
+        >
 
-  <!-- PLAYER -->
+            <span>
+                ShadowFox
+            </span>
 
-  <div
-    id="player"
-    class="player"
-  >
+        </div>
 
-    <span class="beam"></span>
 
-    <span class="visor"></span>
+        <!-- ENEMY 2 -->
 
-  </div>
+        <div
+            class="enemy"
+            style="
+                left:74%;
+                top:66%;
+                transform:
+                    translate(-50%,-50%)
+                    scale(.82);
+            "
+        >
 
+            <span>
+                CrystalFox
+            </span>
 
-  <!-- ENEMY 1 -->
+        </div>
 
-  <div
-    class="enemy"
-    style="left:39%;top:81%"
-  >
 
-    <span>
-      ShadowFox
-    </span>
+        <!-- =================================================
+             GEM 1
+        ================================================== -->
 
-  </div>
+        <div
+            class="gem"
+            style="
+                left:63%;
+                top:28%;
+            "
+            onclick="collectGem(this)"
+        ></div>
 
 
-  <!-- ENEMY 2 -->
+        <!-- =================================================
+             GEM 2
+        ================================================== -->
 
-  <div
-    class="enemy"
-    style="
-      left:74%;
-      top:66%;
-      transform:
-        translate(-50%,-50%)
-        scale(.82)
-    "
-  >
+        <div
+            class="gem pink"
+            style="
+                left:27%;
+                top:38%;
+            "
+            onclick="collectGem(this)"
+        ></div>
 
-    <span>
-      CrystalFox
-    </span>
 
-  </div>
+    </div>
 
 
-  <!-- =====================================================
-       GEM 1
-  ====================================================== -->
+    <!-- =====================================================
+         CONTROLS
+    ====================================================== -->
 
-  <div
-    class="gem"
-    style="left:63%;top:28%"
-  ></div>
+    <div class="controls">
 
+        <button
+            class="ctrl up"
+            data-k="ArrowUp"
+            aria-label="Gerak atas"
+        >
+            ▲
+        </button>
 
-  <!-- =====================================================
-       GEM 2
-  ====================================================== -->
 
-  <div
-    class="gem"
-    style="left:27%;top:38%"
-  ></div>
+        <button
+            class="ctrl left"
+            data-k="ArrowLeft"
+            aria-label="Gerak kiri"
+        >
+            ◀
+        </button>
 
 
-</div>
+        <button
+            class="ctrl down"
+            data-k="ArrowDown"
+            aria-label="Gerak bawah"
+        >
+            ▼
+        </button>
 
 
-<!-- =======================================================
-     LOGO SEKOLAH BAGIAN BAWAH
-======================================================= -->
+        <button
+            class="ctrl right"
+            data-k="ArrowRight"
+            aria-label="Gerak kanan"
+        >
+            ▶
+        </button>
 
-<div class="logos">
+    </div>
 
-  <img
-    class="school-logo"
-    src="logo-moko.jpeg"
-    alt="Logo MOKO"
-  >
 
-  <img
-    class="school-logo"
-    src="logo-rpl.jpeg"
-    alt="Logo RPL"
-  >
+    <!-- =====================================================
+         ATTACK
+    ====================================================== -->
 
-  <img
-    class="school-logo"
-    src="logo-sekolah.jpeg"
-    alt="Logo Sekolah"
-  >
-
-</div>
-
-
-<!-- =======================================================
-     CONTROLS
-======================================================= -->
-
-<div class="controls">
-
-  <button
-    class="ctrl up"
-    data-k="ArrowUp"
-  >
-    ▲
-  </button>
-
-  <button
-    class="ctrl left"
-    data-k="ArrowLeft"
-  >
-    ◀
-  </button>
-
-  <button
-    class="ctrl down"
-    data-k="ArrowDown"
-  >
-    ▼
-  </button>
-
-  <button
-    class="ctrl right"
-    data-k="ArrowRight"
-  >
-    ▶
-  </button>
-
-</div>
-
-
-<!-- =======================================================
-     ATTACK
-======================================================= -->
-
-<button
-  class="attack"
-  onclick="attack()"
->
-  ⚔️ SERANG [ SPACE ]
-</button>
-
-
-<!-- =======================================================
-     TOAST
-======================================================= -->
-
-<div
-  id="toast"
-  class="toast"
-></div>
-
-
-<!-- =======================================================
-     PAUSE MODAL
-======================================================= -->
-
-<div
-  id="modal"
-  class="modal"
->
-
-  <div class="card">
-
-    <h2>
-      ⏸ GAME PAUSED
-    </h2>
-
-    <p>
-      Istirahat sebentar, Knight.
-      Klik tombol untuk kembali ke arena.
-    </p>
-
-    <button onclick="pause()">
-      ▶ LANJUTKAN
+    <button
+        class="attack"
+        onclick="attack()"
+    >
+        ⚔️ SERANG [ SPACE ]
     </button>
 
-  </div>
 
-</div>
+    <!-- =====================================================
+         TOAST
+    ====================================================== -->
+
+    <div
+        id="toast"
+        class="toast"
+    ></div>
+
+
+    <!-- =====================================================
+         PAUSE MODAL
+    ====================================================== -->
+
+    <div
+        id="modal"
+        class="modal"
+    >
+
+        <div class="card">
+
+            <div class="card-icon">
+                ⏸️
+            </div>
+
+            <h2>
+                GAME PAUSED
+            </h2>
+
+            <p>
+                Istirahat sebentar, Knight.
+                Arena akan tetap menunggumu.
+            </p>
+
+            <button
+                onclick="pause()"
+            >
+                ▶ LANJUTKAN
+            </button>
+
+        </div>
+
+    </div>
 
 
 </div>
@@ -1645,38 +2001,46 @@ button{
 <script>
 
 /* =========================================================
-   GAME VARIABLES
+   ELEMENTS
 ========================================================= */
 
-const p =
-  document.getElementById("player");
+const player =
+    document.getElementById("player");
+
+const playerShadow =
+    document.getElementById("playerShadow");
 
 const hpEl =
-  document.getElementById("hp");
+    document.getElementById("hp");
 
 const fill =
-  document.getElementById("fill");
+    document.getElementById("fill");
 
-const sc =
-  document.getElementById("score");
+const scoreEl =
+    document.getElementById("score");
 
-const gm =
-  document.getElementById("gems");
+const gemsEl =
+    document.getElementById("gems");
 
-const t =
-  document.getElementById("toast");
+const toastEl =
+    document.getElementById("toast");
 
 const modal =
-  document.getElementById("modal");
+    document.getElementById("modal");
+
+const game =
+    document.getElementById("game");
+
+
+/* =========================================================
+   VARIABLES
+========================================================= */
 
 let x = 48;
-
 let y = 54;
 
 let hp = 76;
-
 let score = 0;
-
 let gems = 0;
 
 let paused = false;
@@ -1688,12 +2052,14 @@ let keys = {};
    CLAMP
 ========================================================= */
 
-const clamp =
-(v,a,b) =>
-Math.max(
-  a,
-  Math.min(b,v)
-);
+function clamp(value,min,max){
+
+    return Math.max(
+        min,
+        Math.min(max,value)
+    );
+
+}
 
 
 /* =========================================================
@@ -1702,27 +2068,34 @@ Math.max(
 
 function render(){
 
-  p.style.left =
-    x + "%";
+    player.style.left =
+        x + "%";
 
-  p.style.top =
-    y + "%";
-
-
-  hpEl.textContent =
-    hp + "/100";
+    player.style.top =
+        y + "%";
 
 
-  fill.style.width =
-    hp + "%";
+    playerShadow.style.left =
+        x + "%";
+
+    playerShadow.style.top =
+        `calc(${y}% + 36px)`;
 
 
-  sc.textContent =
-    score;
+    hpEl.textContent =
+        hp + "/100";
 
 
-  gm.textContent =
-    gems;
+    fill.style.width =
+        hp + "%";
+
+
+    scoreEl.textContent =
+        score;
+
+
+    gemsEl.textContent =
+        gems;
 
 }
 
@@ -1733,27 +2106,30 @@ function render(){
 
 function move(dx,dy){
 
-  if(paused)
-    return;
+    if(paused || hp <= 0){
+
+        return;
+
+    }
 
 
-  x =
-    clamp(
-      x + dx,
-      5,
-      95
-    );
+    x =
+        clamp(
+            x + dx,
+            5,
+            95
+        );
 
 
-  y =
-    clamp(
-      y + dy,
-      16,
-      90
-    );
+    y =
+        clamp(
+            y + dy,
+            16,
+            90
+        );
 
 
-  render();
+    render();
 
 }
 
@@ -1762,30 +2138,87 @@ function move(dx,dy){
    TOAST
 ========================================================= */
 
-function toast(s){
+function toast(message){
 
-  t.textContent =
-    s;
-
-
-  t.classList.add(
-    "show"
-  );
+    toastEl.textContent =
+        message;
 
 
-  clearTimeout(
-    window.tt
-  );
-
-
-  window.tt =
-    setTimeout(
-      () =>
-        t.classList.remove(
-          "show"
-        ),
-      850
+    toastEl.classList.add(
+        "show"
     );
+
+
+    clearTimeout(
+        window.toastTimer
+    );
+
+
+    window.toastTimer =
+        setTimeout(
+            function(){
+
+                toastEl.classList.remove(
+                    "show"
+                );
+
+            },
+            1000
+        );
+
+}
+
+
+/* =========================================================
+   COLLECT GEM
+========================================================= */
+
+function collectGem(element){
+
+    if(paused || hp <= 0){
+
+        return;
+
+    }
+
+
+    gems++;
+
+    score += 25;
+
+
+    element.style.pointerEvents =
+        "none";
+
+
+    element.style.transition =
+        ".35s ease";
+
+
+    element.style.transform =
+        "translate(-50%,-50%) rotate(45deg) scale(1.7)";
+
+
+    element.style.opacity =
+        "0";
+
+
+    toast(
+        "💎 +1 GEM! +25 SCORE"
+    );
+
+
+    setTimeout(
+        function(){
+
+            element.remove();
+
+        },
+        400
+    );
+
+
+    render();
 
 }
 
@@ -1796,66 +2229,99 @@ function toast(s){
 
 function attack(){
 
-  if(
-    paused ||
-    hp <= 0
-  )
-    return;
+    if(
+        paused ||
+        hp <= 0
+    ){
+
+        return;
+
+    }
 
 
-  score += 10;
+    score += 10;
 
 
-  if(
-    Math.random() < .35
-  ){
-
-    gems++;
-
-
-    toast(
-      "💎 +1 GEM!"
+    player.classList.add(
+        "damage"
     );
 
-  }
 
-  else{
+    setTimeout(
+        function(){
 
-    toast(
-      "⚔️ SERANG! +10 SCORE"
+            player.classList.remove(
+                "damage"
+            );
+
+        },
+        300
     );
 
-  }
+
+    if(
+        Math.random() < .35
+    ){
+
+        gems++;
+
+        toast(
+            "⚔️ SERANG! +10 SCORE • 💎 +1 GEM"
+        );
+
+    }
+    else{
+
+        toast(
+            "⚔️ SERANG! +10 SCORE"
+        );
+
+    }
 
 
-  if(
-    Math.random() < .22
-  ){
+    /* DAMAGE CHANCE */
 
-    hp =
-      Math.max(
-        0,
-        hp - 3
-      );
+    if(
+        Math.random() < .22
+    ){
 
+        hp =
+            Math.max(
+                0,
+                hp - 3
+            );
+
+
+        toast(
+            "💥 -3 HP"
+        );
+
+    }
+
+
+    render();
+
+
+    if(hp <= 0){
+
+        toast(
+            "☠️ KALAH — tekan R untuk reset"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   PLAYERS
+========================================================= */
+
+function showPlayers(){
 
     toast(
-      "💥 -3 HP"
+        "👥 4 PLAYERS ONLINE"
     );
-
-  }
-
-
-  render();
-
-
-  if(hp <= 0){
-
-    toast(
-      "☠️ Kalah — tekan R"
-    );
-
-  }
 
 }
 
@@ -1866,55 +2332,249 @@ function attack(){
 
 function pause(){
 
-  paused =
-    !paused;
+    paused =
+        !paused;
 
 
-  modal.style.display =
-    paused
-      ? "grid"
-      : "none";
+    modal.style.display =
+        paused
+            ? "grid"
+            : "none";
 
 }
 
 
 /* =========================================================
-   KEYBOARD
+   KEY DOWN
 ========================================================= */
 
-window.onkeydown =
-function(e){
+window.addEventListener(
+    "keydown",
+    function(event){
 
-  keys[e.key] =
-    1;
-
-
-  if(
-    e.code === "Space"
-  ){
-
-    e.preventDefault();
-
-    attack();
-
-  }
+        keys[event.key] =
+            true;
 
 
-  if(
-    e.key.toLowerCase()
-    === "p"
-  ){
+        if(
+            event.code === "Space"
+        ){
 
-    pause();
+            event.preventDefault();
 
-  }
+            attack();
+
+        }
 
 
-  if(
-    e.key.toLowerCase()
-    === "r" &&
-    hp <= 0
-  ){
+        if(
+            event.key.toLowerCase()
+            === "p"
+        ){
+
+            pause();
+
+        }
+
+
+        if(
+            event.key.toLowerCase()
+            === "r" &&
+            hp <= 0
+        ){
+
+            resetGame();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   KEY UP
+========================================================= */
+
+window.addEventListener(
+    "keyup",
+    function(event){
+
+        keys[event.key] =
+            false;
+
+    }
+);
+
+
+/* =========================================================
+   MOVEMENT LOOP
+========================================================= */
+
+setInterval(
+    function(){
+
+        if(
+            paused ||
+            hp <= 0
+        ){
+
+            return;
+
+        }
+
+
+        let dx = 0;
+        let dy = 0;
+
+
+        if(
+            keys.ArrowLeft ||
+            keys.a ||
+            keys.A
+        ){
+
+            dx -= .75;
+
+        }
+
+
+        if(
+            keys.ArrowRight ||
+            keys.d ||
+            keys.D
+        ){
+
+            dx += .75;
+
+        }
+
+
+        if(
+            keys.ArrowUp ||
+            keys.w ||
+            keys.W
+        ){
+
+            dy -= .75;
+
+        }
+
+
+        if(
+            keys.ArrowDown ||
+            keys.s ||
+            keys.S
+        ){
+
+            dy += .75;
+
+        }
+
+
+        if(
+            dx !== 0 ||
+            dy !== 0
+        ){
+
+            move(dx,dy);
+
+        }
+
+    },
+    30
+);
+
+
+/* =========================================================
+   MOBILE CONTROLS
+========================================================= */
+
+document
+    .querySelectorAll(".ctrl")
+    .forEach(
+        function(button){
+
+            button.addEventListener(
+                "pointerdown",
+                function(event){
+
+                    event.preventDefault();
+
+
+                    const key =
+                        button.dataset.k;
+
+
+                    if(
+                        key === "ArrowLeft"
+                    ){
+
+                        move(-2.2,0);
+
+                    }
+
+
+                    if(
+                        key === "ArrowRight"
+                    ){
+
+                        move(2.2,0);
+
+                    }
+
+
+                    if(
+                        key === "ArrowUp"
+                    ){
+
+                        move(0,-2.2);
+
+                    }
+
+
+                    if(
+                        key === "ArrowDown"
+                    ){
+
+                        move(0,2.2);
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
+
+/* =========================================================
+   SCORE TIMER
+========================================================= */
+
+setInterval(
+    function(){
+
+        if(
+            !paused &&
+            hp > 0
+        ){
+
+            score++;
+
+            render();
+
+        }
+
+    },
+    1500
+);
+
+
+/* =========================================================
+   RESET GAME
+========================================================= */
+
+function resetGame(){
 
     hp = 76;
 
@@ -1926,166 +2586,24 @@ function(e){
 
     y = 54;
 
+    paused = false;
+
+    modal.style.display =
+        "none";
+
+
     render();
+
 
     toast(
-      "🔄 RESET"
+        "🔄 GAME RESET!"
     );
 
-  }
-
-};
+}
 
 
 /* =========================================================
-   KEY UP
-========================================================= */
-
-window.onkeyup =
-function(e){
-
-  keys[e.key] =
-    0;
-
-};
-
-
-/* =========================================================
-   MOVEMENT LOOP
-========================================================= */
-
-setInterval(
-function(){
-
-  if(paused)
-    return;
-
-
-  let dx = 0;
-
-  let dy = 0;
-
-
-  if(
-    keys.ArrowLeft ||
-    keys.a
-  ){
-
-    dx -= .7;
-
-  }
-
-
-  if(
-    keys.ArrowRight ||
-    keys.d
-  ){
-
-    dx += .7;
-
-  }
-
-
-  if(
-    keys.ArrowUp ||
-    keys.w
-  ){
-
-    dy -= .7;
-
-  }
-
-
-  if(
-    keys.ArrowDown ||
-    keys.s
-  ){
-
-    dy += .7;
-
-  }
-
-
-  if(
-    dx ||
-    dy
-  ){
-
-    move(
-      dx,
-      dy
-    );
-
-  }
-
-},
-30
-);
-
-
-/* =========================================================
-   MOBILE CONTROLS
-========================================================= */
-
-document
-  .querySelectorAll(".ctrl")
-  .forEach(
-    function(b){
-
-      b.onpointerdown =
-      function(e){
-
-        e.preventDefault();
-
-
-        let k =
-          b.dataset.k;
-
-
-        move(
-
-          k === "ArrowLeft"
-            ? -2.2
-            : k === "ArrowRight"
-              ? 2.2
-              : 0,
-
-          k === "ArrowUp"
-            ? -2.2
-            : k === "ArrowDown"
-              ? 2.2
-              : 0
-
-        );
-
-      };
-
-    }
-  );
-
-
-/* =========================================================
-   SCORE TIMER
-========================================================= */
-
-setInterval(
-function(){
-
-  if(!paused){
-
-    score++;
-
-    render();
-
-  }
-
-},
-1500
-);
-
-
-/* =========================================================
-   START GAME
+   INITIALIZE
 ========================================================= */
 
 render();
@@ -2094,4 +2612,3 @@ render();
 
 </body>
 </html>
-```
