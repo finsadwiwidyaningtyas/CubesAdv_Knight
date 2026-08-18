@@ -1,4 +1,3 @@
-```html
 <!doctype html>
 <html lang="id">
 <head>
@@ -7,7 +6,6 @@
 <title>CubesAdv Knight — SMKN 1 Sanden</title>
 
 <style>
-
 *{
   box-sizing:border-box;
   margin:0;
@@ -30,33 +28,16 @@ button{
   color:inherit;
 }
 
-
-/* =========================================================
-   BACKGROUND
-========================================================= */
+/* ================= BACKGROUND ================= */
 
 #game{
   position:fixed;
   inset:0;
   overflow:hidden;
-
   background:
-    radial-gradient(
-      circle at 50% 45%,
-      #07305c 0,
-      transparent 35%
-    ),
-
-    radial-gradient(
-      circle at 80% 20%,
-      #3b1260 0,
-      transparent 25%
-    ),
-
-    linear-gradient(
-      #031a35,
-      #020817 72%
-    );
+    radial-gradient(circle at 50% 45%,#07305c 0,transparent 35%),
+    radial-gradient(circle at 80% 20%,#3b1260 0,transparent 25%),
+    linear-gradient(#031a35,#020817 72%);
 }
 
 #game:before{
@@ -64,19 +45,9 @@ button{
   position:absolute;
   inset:0;
   opacity:.45;
-
   background-image:
-    linear-gradient(
-      #1a76a92b 1px,
-      transparent 1px
-    ),
-
-    linear-gradient(
-      90deg,
-      #1a76a92b 1px,
-      transparent 1px
-    );
-
+    linear-gradient(#1a76a92b 1px,transparent 1px),
+    linear-gradient(90deg,#1a76a92b 1px,transparent 1px);
   background-size:46px 46px;
 }
 
@@ -84,78 +55,48 @@ button{
   content:"";
   position:absolute;
   inset:0;
-
   background-image:
-    radial-gradient(
-      #fff9 1px,
-      transparent 1.5px
-    );
-
+    radial-gradient(#fff9 1px,transparent 1.5px);
   background-size:83px 77px;
   opacity:.28;
-
   pointer-events:none;
 }
 
-
-/* =========================================================
-   HUD
-========================================================= */
+/* ================= HUD ================= */
 
 .hud{
   position:absolute;
   z-index:20;
-
   background:#03142ae0;
-
   border:1px solid #3bdfff55;
   border-radius:18px;
-
   backdrop-filter:blur(12px);
-
   box-shadow:
     0 0 25px #008cff18,
     inset 0 0 20px #00b7ff08;
 }
 
-
-/* =========================================================
-   BRAND
-========================================================= */
+/* ================= BRAND ================= */
 
 .brand{
   left:18px;
   top:18px;
-
   width:310px;
-
   padding:12px;
-
   display:flex;
   gap:12px;
-
   align-items:center;
 }
 
 .logo-main{
   width:58px;
   height:58px;
-
   object-fit:contain;
-
   border-radius:15px;
-
   padding:5px;
-
   background:
-    radial-gradient(
-      circle,
-      #0c3960,
-      #031326
-    );
-
+    radial-gradient(circle,#0c3960,#031326);
   border:1px solid #45e6ff88;
-
   box-shadow:
     0 0 15px #21dfff55,
     inset 0 0 15px #21dfff18;
@@ -173,60 +114,38 @@ button{
 .sub{
   font-size:10px;
   color:#80a6bb;
-
   letter-spacing:1.4px;
-
   margin-top:4px;
 }
 
-
-/* =========================================================
-   STATS
-========================================================= */
+/* ================= STATS ================= */
 
 .stats{
   left:18px;
   top:98px;
-
   width:310px;
-
   padding:14px;
 }
 
 .row{
   display:flex;
   justify-content:space-between;
-
   font-weight:900;
 }
 
 .hpbar{
   height:15px;
-
   background:#12263e;
-
   border-radius:99px;
-
   margin-top:10px;
-
   overflow:hidden;
 }
 
 .fill{
   height:100%;
-
   width:76%;
-
-  background:
-    linear-gradient(
-      90deg,
-      #25e7c7,
-      #45dcff
-    );
-
-  box-shadow:
-    0 0 14px #42e8ff;
-
+  background:linear-gradient(90deg,#25e7c7,#45dcff);
+  box-shadow:0 0 14px #42e8ff;
   transition:.2s;
 }
 
@@ -239,90 +158,57 @@ button{
   color:#ffd447;
 }
 
-
-/* =========================================================
-   ONLINE
-========================================================= */
+/* ================= ONLINE ================= */
 
 .online{
   right:20px;
   top:20px;
-
   padding:10px 15px;
-
   font-weight:900;
 }
 
 .online i{
   display:inline-block;
-
   width:10px;
   height:10px;
-
   background:#31f5bf;
-
   border-radius:50%;
-
-  box-shadow:
-    0 0 12px #31f5bf;
-
+  box-shadow:0 0 12px #31f5bf;
   margin-right:7px;
 }
 
-
-/* =========================================================
-   MAP
-========================================================= */
+/* ================= MAP ================= */
 
 .map{
   right:20px;
   top:76px;
-
   width:305px;
   height:210px;
-
   padding:10px;
 }
 
 .mapin{
   position:absolute;
   inset:10px;
-
   border:1px solid #42dcff55;
-
   border-radius:16px;
-
   background-image:
-    linear-gradient(
-      #38c5ef22 2px,
-      transparent 2px
-    ),
-
-    linear-gradient(
-      90deg,
-      #38c5ef22 2px,
-      transparent 2px
-    );
-
+    linear-gradient(#38c5ef22 2px,transparent 2px),
+    linear-gradient(90deg,#38c5ef22 2px,transparent 2px);
   background-size:35px 35px;
 }
 
 .dot{
   position:absolute;
-
   width:10px;
   height:10px;
-
   border-radius:50%;
-
-  box-shadow:
-    0 0 12px currentColor;
+  box-shadow:0 0 12px currentColor;
 }
 
 .a{
   left:18%;
   top:68%;
-
   background:#31f5bf;
   color:#31f5bf;
 }
@@ -330,7 +216,6 @@ button{
 .b{
   left:72%;
   top:22%;
-
   background:#ff3c65;
   color:#ff3c65;
 }
@@ -338,7 +223,6 @@ button{
 .c{
   left:66%;
   top:58%;
-
   background:#ffd426;
   color:#ffd426;
 }
@@ -346,10 +230,8 @@ button{
 .d{
   left:58%;
   top:48%;
-
   width:15px;
   height:15px;
-
   background:#4ce9ff;
   color:#4ce9ff;
 }
@@ -357,7 +239,6 @@ button{
 .e{
   left:61%;
   top:45%;
-
   background:#ff4f9a;
   color:#ff4f9a;
 }
@@ -365,464 +246,228 @@ button{
 .f{
   left:78%;
   top:76%;
-
   background:#9c5cff;
   color:#9c5cff;
 }
 
-
-/* =========================================================
-   NAV
-========================================================= */
+/* ================= NAV ================= */
 
 .nav{
   position:absolute;
-
   right:20px;
-  top:305px;
+
+  /* DIPINDAH LEBIH KE ATAS
+     supaya tidak menutupi player */
+  top:300px;
 
   z-index:25;
-
   display:flex;
   gap:8px;
 }
 
 .nav button{
   background:#03162ce8;
-
   border:1px solid #38d8ff55;
-
   border-radius:14px;
-
   padding:11px 16px;
-
   font-weight:900;
-
   cursor:pointer;
-
   transition:.2s;
 }
 
 .nav button:hover{
   transform:translateY(-2px);
-
   border-color:#43eaff;
-
-  box-shadow:
-    0 0 15px #18cfff55;
+  box-shadow:0 0 15px #18cfff55;
 }
 
-
-/* =========================================================
-   ARENA
-========================================================= */
+/* ================= ARENA ================= */
 
 .arena{
   position:absolute;
   inset:0;
 }
 
-
-/* =========================================================
-   PLAYER
-========================================================= */
+/* ================= PLAYER ================= */
 
 .player{
   position:absolute;
-
   left:48%;
   top:54%;
-
   width:62px;
   height:62px;
-
-  transform:
-    translate(-50%,-50%);
-
+  transform:translate(-50%,-50%);
   border-radius:16px;
-
-  background:
-    linear-gradient(
-      145deg,
-      #32abff,
-      #1686ff
-    );
-
+  background:linear-gradient(145deg,#32abff,#1686ff);
   border:2px solid #50e5ff;
-
   box-shadow:
     0 0 15px #198fff,
     0 0 40px #ff3f9155;
-
   z-index:8;
-
   transition:.07s;
 }
 
 .player:before{
   content:"◆";
-
   position:absolute;
   inset:0;
-
   display:grid;
   place-items:center;
-
   color:#eaffff;
-
   font-size:30px;
 }
 
 .visor{
   position:absolute;
-
   top:14px;
   left:16px;
-
   width:28px;
   height:10px;
-
   background:#b8fbff;
-
   border:2px solid #0876a2;
-
   border-radius:3px;
 }
 
 .beam{
   position:absolute;
-
   bottom:100%;
   left:50%;
-
   width:18px;
   height:130px;
-
-  transform:
-    translateX(-50%);
-
-  background:
-    linear-gradient(
-      transparent,
-      #2fbfff66
-    );
-
+  transform:translateX(-50%);
+  background:linear-gradient(transparent,#2fbfff66);
   filter:blur(3px);
 }
 
-
-/* =========================================================
-   ENEMY
-========================================================= */
+/* ================= ENEMY ================= */
 
 .enemy{
   position:absolute;
-
   width:48px;
   height:48px;
-
-  transform:
-    translate(-50%,-50%);
-
+  transform:translate(-50%,-50%);
   border-radius:13px;
-
-  background:
-    linear-gradient(
-      145deg,
-      #b55cff,
-      #763aff
-    );
-
+  background:linear-gradient(145deg,#b55cff,#763aff);
   border:2px solid #d9a0ff;
-
-  box-shadow:
-    0 0 20px #9b5cff;
-
+  box-shadow:0 0 20px #9b5cff;
   z-index:7;
 }
 
 .enemy span{
   position:absolute;
-
   bottom:100%;
   left:50%;
-
-  transform:
-    translateX(-50%);
-
+  transform:translateX(-50%);
   white-space:nowrap;
-
   font-weight:900;
   font-size:13px;
-
   margin-bottom:7px;
-
-  text-shadow:
-    0 2px 8px #000;
+  text-shadow:0 2px 8px #000;
 }
 
 .enemy:after{
   content:"";
-
   position:absolute;
   inset:10px;
-
   border:2px solid #fff8;
-
   border-radius:7px;
 }
 
+/* ================= GEM ================= */
 
-/* =========================================================
-   GEM 3D AESTHETIC
-========================================================= */
+/* INI GEM MODEL AWAL.
+   JANGAN DIUBAH. */
 
 .gem{
   position:absolute;
-
-  width:32px;
-  height:32px;
-
-  transform:
-    translate(-50%,-50%)
-    rotate(45deg);
-
-  border-radius:8px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #cfffff 0%,
-      #54f4ff 18%,
-      #21e8d0 42%,
-      #218cff 72%,
-      #693dff 100%
-    );
-
-  border:1px solid #d9ffff;
-
+  width:28px;
+  height:28px;
+  transform:translate(-50%,-50%) rotate(45deg);
+  border-radius:7px;
+  background:linear-gradient(145deg,#21f0cf,#218cff);
+  border:1px solid #b9ffff;
   box-shadow:
-    0 0 12px #25e4ff,
-    0 0 25px #218cff,
-    0 0 50px #218cff55,
-    inset 4px 4px 8px #ffffffaa,
-    inset -5px -5px 10px #0738a088;
-
-  animation:
-    gemFloat 1.5s infinite ease-in-out,
-    gemGlow 1.8s infinite ease-in-out;
-
-  z-index:10;
+    0 0 20px #25e4ff,
+    0 0 45px #218cff66;
+  animation:float 1.3s infinite ease-in-out;
 }
-
-
-/* bagian dalam gem */
-
-.gem:before{
-  content:"";
-
-  position:absolute;
-
-  inset:6px;
-
-  border-radius:5px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #ffffffdd,
-      #52efff99 30%,
-      #1679ff55 70%,
-      #733cff99
-    );
-
-  border:1px solid #ffffffaa;
-
-  box-shadow:
-    inset 2px 2px 5px #fff,
-    inset -3px -3px 5px #0846a0aa;
-}
-
-
-/* kilau gem */
 
 .gem:after{
   content:"";
-
   position:absolute;
-
-  width:8px;
-  height:8px;
-
-  left:5px;
-  top:5px;
-
-  border-radius:50%;
-
-  background:#ffffff;
-
-  box-shadow:
-    0 0 8px #fff,
-    0 0 15px #9fffff;
-
-  opacity:.9;
+  inset:5px;
+  border:1px solid #fff9;
 }
 
-
-/* animasi naik turun */
-
-@keyframes gemFloat{
-
-  0%{
-    margin-top:0;
-    transform:
-      translate(-50%,-50%)
-      rotate(45deg)
-      scale(1);
-  }
-
+@keyframes float{
   50%{
-    margin-top:-9px;
-    transform:
-      translate(-50%,-50%)
-      rotate(135deg)
-      scale(1.08);
+    margin-top:-8px;
   }
-
-  100%{
-    margin-top:0;
-    transform:
-      translate(-50%,-50%)
-      rotate(225deg)
-      scale(1);
-  }
-
 }
 
-
-/* animasi cahaya */
-
-@keyframes gemGlow{
-
-  0%,100%{
-    filter:
-      brightness(1)
-      saturate(1);
-  }
-
-  50%{
-    filter:
-      brightness(1.35)
-      saturate(1.3);
-  }
-
-}
-
-
-/* =========================================================
-   SCHOOL LOGOS
-========================================================= */
+/* ================= SCHOOL LOGOS ================= */
 
 .logos{
   position:absolute;
-
   right:350px;
   bottom:25px;
-
   display:flex;
-
   gap:10px;
-
   z-index:15;
-
   align-items:center;
 }
 
 .school-logo{
   width:62px;
   height:62px;
-
   object-fit:contain;
-
   padding:6px;
-
   border-radius:17px;
-
   background:#031326dd;
-
   border:1px solid #46dcff66;
-
   box-shadow:
     0 0 18px #17cfff22,
     inset 0 0 15px #17cfff0d;
-
   transition:.25s;
 }
 
 .school-logo:hover{
-  transform:
-    translateY(-5px)
-    scale(1.08);
-
+  transform:translateY(-5px) scale(1.08);
   border-color:#56eaff;
-
   box-shadow:
     0 0 25px #20dfff66,
     inset 0 0 20px #20dfff15;
 }
 
-
-/* =========================================================
-   CONTROLS
-========================================================= */
+/* ================= CONTROLS ================= */
 
 .controls{
   position:absolute;
-
   left:22px;
   bottom:22px;
-
   z-index:30;
-
   display:grid;
-
-  grid-template:
-    74px 74px /
-    74px 74px 74px;
-
+  grid-template:74px 74px/74px 74px 74px;
   gap:9px;
 }
 
 .ctrl{
   border-radius:18px;
-
   background:#041930d0;
-
   border:1px solid #26d7ff80;
-
-  box-shadow:
-    inset 0 0 20px #00aaff0f;
-
+  box-shadow:inset 0 0 20px #00aaff0f;
   display:grid;
-
   place-items:center;
-
   font-size:34px;
-
   font-weight:900;
-
   cursor:pointer;
-
   touch-action:none;
-
   transition:.12s;
 }
 
 .ctrl:hover{
   background:#08365bd0;
-
-  box-shadow:
-    0 0 20px #17cfff33;
+  box-shadow:0 0 20px #17cfff33;
 }
 
 .ctrl:active{
@@ -847,49 +492,29 @@ button{
   grid-column:3;
 }
 
-
-/* =========================================================
-   ATTACK
-========================================================= */
+/* ================= ATTACK ================= */
 
 .attack{
   position:absolute;
-
   right:38px;
   bottom:28px;
-
   width:300px;
   height:86px;
-
   border:0;
-
   border-radius:25px;
-
-  background:
-    linear-gradient(
-      105deg,
-      #e12d7d,
-      #a72cc4
-    );
-
+  background:linear-gradient(105deg,#e12d7d,#a72cc4);
   box-shadow:
     0 0 35px #eb289155,
     inset 0 0 20px #fff2;
-
   z-index:30;
-
   font-weight:950;
-
   font-size:21px;
-
   cursor:pointer;
-
   transition:.15s;
 }
 
 .attack:hover{
   transform:translateY(-3px);
-
   box-shadow:
     0 0 50px #eb289177,
     inset 0 0 25px #fff3;
@@ -899,86 +524,50 @@ button{
   transform:scale(.96);
 }
 
-
-/* =========================================================
-   TOAST
-========================================================= */
+/* ================= TOAST ================= */
 
 .toast{
   position:absolute;
-
   left:50%;
   top:50%;
-
-  transform:
-    translate(-50%,-50%)
-    scale(.8);
-
+  transform:translate(-50%,-50%) scale(.8);
   opacity:0;
-
   z-index:100;
-
   background:#041126f2;
-
   border:1px solid #4de8ff;
-
   border-radius:16px;
-
   padding:15px 22px;
-
   font-weight:950;
-
   transition:.2s;
-
   pointer-events:none;
-
-  box-shadow:
-    0 0 30px #00cfff22;
+  box-shadow:0 0 30px #00cfff22;
 }
 
 .show{
   opacity:1;
-
-  transform:
-    translate(-50%,-50%)
-    scale(1);
+  transform:translate(-50%,-50%) scale(1);
 }
 
-
-/* =========================================================
-   MODAL
-========================================================= */
+/* ================= MODAL ================= */
 
 .modal{
   display:none;
-
   place-items:center;
-
   position:absolute;
   inset:0;
-
   z-index:90;
-
   background:#0009;
-
   backdrop-filter:blur(9px);
 }
 
 .card{
   width:min(450px,90vw);
-
   padding:28px;
-
   text-align:center;
-
   border-radius:24px;
-
   background:#05122af5;
-
   border:1px solid #43e2ff66;
-
-  box-shadow:
-    0 0 40px #00cfff22;
+  box-shadow:0 0 40px #00cfff22;
 }
 
 .card h2{
@@ -987,30 +576,20 @@ button{
 
 .card p{
   color:#91afc4;
-
   line-height:1.6;
 }
 
 .card button{
   margin-top:18px;
-
   padding:12px 24px;
-
   border-radius:13px;
-
   background:#0b7cff;
-
   border:1px solid #6eeaff;
-
   font-weight:900;
-
   cursor:pointer;
 }
 
-
-/* =========================================================
-   RESPONSIVE
-========================================================= */
+/* ================= RESPONSIVE ================= */
 
 @media(max-width:900px){
 
@@ -1026,31 +605,22 @@ button{
 
   .nav{
     top:auto;
-
     bottom:120px;
-
     max-width:58vw;
-
     flex-wrap:wrap;
-
     justify-content:flex-end;
   }
 
   .nav button{
     padding:8px 10px;
-
     font-size:12px;
   }
 
   .attack{
     right:18px;
-
     bottom:20px;
-
     width:235px;
-
     height:72px;
-
     font-size:17px;
   }
 
@@ -1059,15 +629,12 @@ button{
   }
 }
 
-
 @media(max-width:650px){
 
   .brand{
     left:10px;
     top:10px;
-
     width:auto;
-
     padding:7px;
   }
 
@@ -1083,16 +650,13 @@ button{
   .stats{
     left:10px;
     top:70px;
-
     width:190px;
-
     padding:9px;
   }
 
   .map{
     right:10px;
     top:54px;
-
     width:150px;
     height:105px;
   }
@@ -1100,9 +664,7 @@ button{
   .online{
     right:10px;
     top:10px;
-
     font-size:11px;
-
     padding:8px;
   }
 
@@ -1113,11 +675,7 @@ button{
   .controls{
     left:10px;
     bottom:12px;
-
-    grid-template:
-      58px 58px /
-      58px 58px 58px;
-
+    grid-template:58px 58px/58px 58px 58px;
     gap:6px;
   }
 
@@ -1128,10 +686,8 @@ button{
   .attack{
     right:10px;
     bottom:14px;
-
     width:190px;
     height:62px;
-
     font-size:14px;
   }
 
@@ -1139,26 +695,15 @@ button{
     width:52px;
     height:52px;
   }
-
-  .gem{
-    width:27px;
-    height:27px;
-  }
-
 }
-
 </style>
 </head>
-
 
 <body>
 
 <div id="game">
 
-
-<!-- =======================================================
-     HEADER + LOGO SEKOLAH
-======================================================= -->
+<!-- ================= HEADER + LOGO SEKOLAH ================= -->
 
 <div class="hud brand">
 
@@ -1183,152 +728,89 @@ button{
 </div>
 
 
-<!-- =======================================================
-     STATS
-======================================================= -->
+<!-- ================= STATS ================= -->
 
 <div class="hud stats">
 
   <div class="row">
-
-    <span>
-      💗 HP
-    </span>
-
-    <span id="hp">
-      76/100
-    </span>
-
+    <span>💗 HP</span>
+    <span id="hp">76/100</span>
   </div>
-
 
   <div class="hpbar">
-
-    <div
-      id="fill"
-      class="fill"
-    ></div>
-
+    <div id="fill" class="fill"></div>
   </div>
-
 
   <div class="score">
-
     🏆 SCORE:
-
-    <b id="score">
-      0
-    </b>
-
+    <b id="score">0</b>
     &nbsp;•&nbsp;
-
     💎
-
-    <b id="gems">
-      0
-    </b>
-
+    <b id="gems">0</b>
   </div>
 
 </div>
 
 
-<!-- =======================================================
-     ONLINE
-======================================================= -->
+<!-- ================= ONLINE ================= -->
 
 <div class="hud online">
-
   <i></i>
-
   ONLINE
-
-  <span id="online">
-    4
-  </span>
-
+  <span id="online">4</span>
 </div>
 
 
-<!-- =======================================================
-     MAP
-======================================================= -->
+<!-- ================= MAP ================= -->
 
 <div class="hud map">
 
   <div class="mapin"></div>
 
   <i class="dot a"></i>
-
   <i class="dot b"></i>
-
   <i class="dot c"></i>
-
   <i class="dot d"></i>
-
   <i class="dot e"></i>
-
   <i class="dot f"></i>
 
 </div>
 
 
-<!-- =======================================================
-     NAVIGATION
-======================================================= -->
+<!-- ================= NAVIGATION ================= -->
 
 <div class="nav">
 
-  <button
-    onclick="toast('🏠 Lobby')"
-  >
+  <button onclick="toast('🏠 Lobby')">
     🏠 Lobby
   </button>
 
-
-  <button
-    onclick="toast('👥 Players: '+online.textContent)"
-  >
+  <button onclick="toast('👥 Players: '+online.textContent)">
     👥 Players
   </button>
 
-
-  <button
-    onclick="toast('💬 Chat siap')"
-  >
+  <button onclick="toast('💬 Chat siap')">
     💬 Chat
   </button>
 
-
-  <button
-    onclick="toast('🏆 Rank: Knight')"
-  >
+  <button onclick="toast('🏆 Rank: Knight')">
     🏆 Rank
   </button>
 
-
-  <button
-    onclick="toast('🎯 Match ditemukan')"
-  >
+  <button onclick="toast('🎯 Match ditemukan')">
     🎯 Match
   </button>
 
-
-  <button
-    onclick="pause()"
-  >
+  <button onclick="pause()">
     Ⅱ Pause
   </button>
 
 </div>
 
 
-<!-- =======================================================
-     ARENA
-======================================================= -->
+<!-- ================= ARENA ================= -->
 
 <div class="arena">
-
 
   <!-- PLAYER -->
 
@@ -1338,7 +820,6 @@ button{
   >
 
     <span class="beam"></span>
-
     <span class="visor"></span>
 
   </div>
@@ -1351,9 +832,7 @@ button{
     style="left:39%;top:81%"
   >
 
-    <span>
-      ShadowFox
-    </span>
+    <span>ShadowFox</span>
 
   </div>
 
@@ -1362,25 +841,15 @@ button{
 
   <div
     class="enemy"
-    style="
-      left:74%;
-      top:66%;
-      transform:
-        translate(-50%,-50%)
-        scale(.82)
-    "
+    style="left:74%;top:66%;transform:translate(-50%,-50%) scale(.82)"
   >
 
-    <span>
-      CrystalFox
-    </span>
+    <span>CrystalFox</span>
 
   </div>
 
 
-  <!-- =====================================================
-       GEMS
-  ====================================================== -->
+  <!-- ================= GEM 1 ================= -->
 
   <div
     class="gem"
@@ -1388,21 +857,19 @@ button{
   ></div>
 
 
+  <!-- ================= GEM 2 ================= -->
+
   <div
     class="gem"
     style="left:27%;top:38%"
   ></div>
 
-
 </div>
 
 
-<!-- =======================================================
-     LOGO SEKOLAH BAGIAN BAWAH
-======================================================= -->
+<!-- ================= LOGO SEKOLAH BAGIAN BAWAH ================= -->
 
 <div class="logos">
-
 
   <!-- LOGO MOKO -->
 
@@ -1427,19 +894,15 @@ button{
   <img
     class="school-logo"
     src="logo-sekolah.jpeg"
-    alt="Logo SMKN 1 Sanden"
+    alt="Logo Sekolah"
   >
-
 
 </div>
 
 
-<!-- =======================================================
-     CONTROLS
-======================================================= -->
+<!-- ================= CONTROLS ================= -->
 
 <div class="controls">
-
 
   <button
     class="ctrl up"
@@ -1448,14 +911,12 @@ button{
     ▲
   </button>
 
-
   <button
     class="ctrl left"
     data-k="ArrowLeft"
   >
     ◀
   </button>
-
 
   <button
     class="ctrl down"
@@ -1464,7 +925,6 @@ button{
     ▼
   </button>
 
-
   <button
     class="ctrl right"
     data-k="ArrowRight"
@@ -1472,13 +932,10 @@ button{
     ▶
   </button>
 
-
 </div>
 
 
-<!-- =======================================================
-     ATTACK
-======================================================= -->
+<!-- ================= ATTACK ================= -->
 
 <button
   class="attack"
@@ -1488,9 +945,7 @@ button{
 </button>
 
 
-<!-- =======================================================
-     TOAST
-======================================================= -->
+<!-- ================= TOAST ================= -->
 
 <div
   id="toast"
@@ -1498,9 +953,7 @@ button{
 ></div>
 
 
-<!-- =======================================================
-     PAUSE
-======================================================= -->
+<!-- ================= PAUSE ================= -->
 
 <div
   id="modal"
@@ -1513,16 +966,12 @@ button{
       ⏸ GAME PAUSED
     </h2>
 
-
     <p>
       Istirahat sebentar, Knight.
       Klik tombol untuk kembali ke arena.
     </p>
 
-
-    <button
-      onclick="pause()"
-    >
+    <button onclick="pause()">
       ▶ LANJUTKAN
     </button>
 
@@ -1530,12 +979,10 @@ button{
 
 </div>
 
-
 </div>
 
 
 <script>
-
 
 /* =========================================================
    GAME VARIABLES
@@ -1562,15 +1009,11 @@ const t =
 const modal =
   document.getElementById('modal');
 
-
 let x = 48;
-
 let y = 54;
 
 let hp = 76;
-
 let score = 0;
-
 let gems = 0;
 
 let paused = false;
@@ -1584,13 +1027,7 @@ let keys = {};
 
 const clamp =
 (v,a,b) =>
-Math.max(
-  a,
-  Math.min(
-    b,
-    v
-  )
-);
+Math.max(a,Math.min(b,v));
 
 
 /* =========================================================
@@ -1602,26 +1039,20 @@ function render(){
   p.style.left =
     x + '%';
 
-
   p.style.top =
     y + '%';
-
 
   hpEl.textContent =
     hp + '/100';
 
-
   fill.style.width =
     hp + '%';
-
 
   sc.textContent =
     score;
 
-
   gm.textContent =
     gems;
-
 }
 
 
@@ -1634,14 +1065,12 @@ function move(dx,dy){
   if(paused)
     return;
 
-
   x =
     clamp(
       x + dx,
       5,
       95
     );
-
 
   y =
     clamp(
@@ -1650,9 +1079,7 @@ function move(dx,dy){
       90
     );
 
-
   render();
-
 }
 
 
@@ -1665,26 +1092,18 @@ function toast(s){
   t.textContent =
     s;
 
-
-  t.classList.add(
-    'show'
-  );
-
+  t.classList.add('show');
 
   clearTimeout(
     window.tt
   );
 
-
   window.tt =
     setTimeout(
       () =>
-        t.classList.remove(
-          'show'
-        ),
+        t.classList.remove('show'),
       850
     );
-
 }
 
 
@@ -1700,9 +1119,7 @@ function attack(){
   )
     return;
 
-
   score += 10;
-
 
   if(
     Math.random() < .35
@@ -1710,21 +1127,17 @@ function attack(){
 
     gems++;
 
-
     toast(
       '💎 +1 GEM!'
     );
 
-  }
-
-  else{
+  }else{
 
     toast(
       '⚔️ SERANG! +10 SCORE'
     );
 
   }
-
 
   if(
     Math.random() < .22
@@ -1736,20 +1149,15 @@ function attack(){
         hp - 3
       );
 
-
     toast(
       '💥 -3 HP'
     );
 
   }
 
-
   render();
 
-
-  if(
-    hp <= 0
-  ){
+  if(hp <= 0){
 
     toast(
       '☠️ Kalah — tekan R'
@@ -1769,12 +1177,10 @@ function pause(){
   paused =
     !paused;
 
-
   modal.style.display =
     paused
       ? 'grid'
       : 'none';
-
 }
 
 
@@ -1787,7 +1193,6 @@ function(e){
 
   keys[e.key] = 1;
 
-
   if(
     e.code === 'Space'
   ){
@@ -1798,7 +1203,6 @@ function(e){
 
   }
 
-
   if(
     e.key.toLowerCase()
     === 'p'
@@ -1807,7 +1211,6 @@ function(e){
     pause();
 
   }
-
 
   if(
     e.key.toLowerCase()
@@ -1858,11 +1261,8 @@ function(){
   if(paused)
     return;
 
-
   let dx = 0;
-
   let dy = 0;
-
 
   if(
     keys.ArrowLeft ||
@@ -1870,13 +1270,11 @@ function(){
   )
     dx -= .7;
 
-
   if(
     keys.ArrowRight ||
     keys.d
   )
     dx += .7;
-
 
   if(
     keys.ArrowUp ||
@@ -1884,23 +1282,17 @@ function(){
   )
     dy -= .7;
 
-
   if(
     keys.ArrowDown ||
     keys.s
   )
     dy += .7;
 
-
   if(
     dx ||
     dy
   )
-    move(
-      dx,
-      dy
-    );
-
+    move(dx,dy);
 
 },
 30
@@ -1921,10 +1313,8 @@ function(b){
 
     e.preventDefault();
 
-
     let k =
       b.dataset.k;
-
 
     move(
 
@@ -1933,7 +1323,6 @@ function(b){
         : k === 'ArrowRight'
           ? 2.2
           : 0,
-
 
       k === 'ArrowUp'
         ? -2.2
@@ -1978,4 +1367,3 @@ render();
 
 </body>
 </html>
-```
