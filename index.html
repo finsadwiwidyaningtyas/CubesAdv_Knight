@@ -1,219 +1,2059 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CubesAdv_Knight</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-        body {
-            background-color: #1e1e2d;
-            color: #ecf0f1;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-        }
+<title>CubesAdv_Knight</title>
 
-        h1 {
-            margin-bottom: 10px;
-            font-size: 2.5rem;
-        }
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-        #gameCanvas {
-            border: 3px solid #34495e;
-            border-radius: 8px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-            background-color: #1e1e2d;
-        }
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
 
-        .instructions {
-            margin-top: 15px;
-            text-align: center;
-            color: #bdc3c7;
-        }
-    </style>
+body {
+    background:
+        radial-gradient(circle at 50% 20%, #172b4d 0%, #090d18 45%, #03050b 100%);
+    color: #ecf0f1;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+    padding: 15px;
+}
+
+/* =========================
+   TITLE
+========================= */
+
+.game-title {
+    font-size: clamp(1.7rem, 5vw, 2.7rem);
+    margin-bottom: 10px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-align: center;
+    color: #ffffff;
+    text-shadow:
+        0 0 8px rgba(70, 180, 255, 0.8),
+        0 0 20px rgba(70, 180, 255, 0.35);
+}
+
+.game-title span {
+    color: #55d9ff;
+}
+
+/* =========================
+   GAME WRAPPER
+========================= */
+
+.game-wrapper {
+    position: relative;
+    width: min(900px, 96vw);
+}
+
+#gameCanvas {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+
+    background: #050914;
+
+    border: 2px solid rgba(70, 190, 255, 0.65);
+    border-radius: 16px;
+
+    box-shadow:
+        0 0 10px rgba(40, 180, 255, 0.35),
+        0 0 35px rgba(20, 110, 255, 0.15),
+        inset 0 0 50px rgba(0, 0, 0, 0.7);
+
+    touch-action: none;
+}
+
+/* =========================
+   HUD
+========================= */
+
+.hud {
+    position: absolute;
+    left: 15px;
+    top: 15px;
+
+    min-width: 170px;
+
+    padding: 10px 15px;
+
+    border: 1px solid rgba(100, 210, 255, 0.4);
+    border-radius: 12px;
+
+    background: rgba(5, 12, 28, 0.78);
+    backdrop-filter: blur(6px);
+
+    box-shadow:
+        0 0 15px rgba(0, 150, 255, 0.15);
+
+    pointer-events: none;
+}
+
+.hud-title {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #7edcff;
+    margin-bottom: 3px;
+}
+
+.score {
+    font-size: 23px;
+    font-weight: 800;
+    color: #ffffff;
+}
+
+.health-container {
+    margin-top: 7px;
+}
+
+.health-label {
+    font-size: 10px;
+    color: #a9c5d8;
+    margin-bottom: 3px;
+}
+
+.health-bar {
+    width: 135px;
+    height: 7px;
+
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.health-fill {
+    width: 100%;
+    height: 100%;
+
+    background: linear-gradient(90deg, #39ff88, #baff54);
+    box-shadow: 0 0 10px rgba(80,255,120,0.8);
+
+    transition: width 0.15s ease;
+}
+
+/* =========================
+   PAUSE BUTTON
+========================= */
+
+.pause-btn {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+
+    border: 1px solid rgba(120,220,255,0.5);
+    background: rgba(5,12,28,0.8);
+    color: #fff;
+
+    border-radius: 10px;
+    padding: 8px 13px;
+
+    cursor: pointer;
+    font-weight: 700;
+
+    transition: 0.2s;
+}
+
+.pause-btn:hover {
+    background: rgba(35,100,160,0.8);
+    box-shadow: 0 0 15px rgba(60,200,255,0.5);
+}
+
+/* =========================
+   INSTRUCTIONS
+========================= */
+
+.instructions {
+    width: min(900px, 96vw);
+
+    margin-top: 12px;
+
+    padding: 10px 15px;
+
+    text-align: center;
+
+    color: #aebdca;
+    font-size: 14px;
+
+    border-radius: 12px;
+
+    background: rgba(7,12,25,0.65);
+    border: 1px solid rgba(100,180,255,0.15);
+}
+
+.instructions strong {
+    color: #65d8ff;
+}
+
+/* =========================
+   MOBILE CONTROLS
+========================= */
+
+.mobile-controls {
+    display: none;
+
+    position: relative;
+
+    width: min(320px, 90vw);
+    height: 170px;
+
+    margin-top: 12px;
+
+    user-select: none;
+    touch-action: none;
+}
+
+.touch-btn {
+    position: absolute;
+
+    width: 55px;
+    height: 55px;
+
+    border-radius: 16px;
+
+    border: 1px solid rgba(100,220,255,0.45);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(40,120,180,0.55),
+            rgba(5,25,55,0.75)
+        );
+
+    color: white;
+
+    font-size: 24px;
+    font-weight: bold;
+
+    box-shadow:
+        0 0 12px rgba(40,180,255,0.18);
+
+    -webkit-tap-highlight-color: transparent;
+}
+
+.touch-btn:active {
+    transform: scale(0.9);
+    background: rgba(40,160,220,0.8);
+}
+
+.up {
+    left: 132px;
+    top: 0;
+}
+
+.left {
+    left: 65px;
+    top: 58px;
+}
+
+.down {
+    left: 132px;
+    top: 58px;
+}
+
+.right {
+    left: 199px;
+    top: 58px;
+}
+
+/* =========================
+   GAME OVER / PAUSE
+========================= */
+
+.overlay {
+    position: absolute;
+    inset: 0;
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(2,5,14,0.72);
+
+    border-radius: 14px;
+
+    backdrop-filter: blur(5px);
+}
+
+.overlay.active {
+    display: flex;
+}
+
+.overlay-box {
+    width: min(390px, 85%);
+
+    padding: 28px;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(12,27,55,0.97),
+            rgba(5,10,25,0.97)
+        );
+
+    border: 1px solid rgba(80,200,255,0.45);
+    border-radius: 18px;
+
+    box-shadow:
+        0 0 35px rgba(0,130,255,0.25);
+}
+
+.overlay-box h2 {
+    font-size: 36px;
+    margin-bottom: 10px;
+    color: #ff6677;
+
+    text-shadow:
+        0 0 15px rgba(255,60,90,0.55);
+}
+
+.overlay-box p {
+    color: #b9c9d6;
+    margin-bottom: 20px;
+}
+
+.game-btn {
+    border: 0;
+
+    border-radius: 10px;
+
+    padding: 11px 20px;
+
+    color: white;
+
+    background:
+        linear-gradient(135deg, #147cc1, #5a43d6);
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 0 15px rgba(50,140,255,0.3);
+
+    transition: 0.2s;
+}
+
+.game-btn:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        0 0 25px rgba(60,170,255,0.55);
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 700px) {
+
+    body {
+        padding: 8px;
+    }
+
+    .instructions {
+        font-size: 12px;
+    }
+
+    .mobile-controls {
+        display: block;
+    }
+
+    .hud {
+        left: 8px;
+        top: 8px;
+        transform: scale(0.85);
+        transform-origin: top left;
+    }
+
+    .pause-btn {
+        right: 8px;
+        top: 8px;
+        transform: scale(0.85);
+        transform-origin: top right;
+    }
+}
+</style>
 </head>
+
 <body>
 
-    <h1>CubesAdv_Knight ⚔️</h1>
-    <canvas id="gameCanvas" width="800" height="600"></canvas>
-    
-    <div class="instructions">
-        <p>Gunakan <strong>WASD</strong> atau <strong>Tombol Panah</strong> untuk bergerak.</p>
-        <p>Ambil Kristal Kuning (+10) dan hindari Musuh Merah!</p>
+<h1 class="game-title">
+    CubesAdv_<span>Knight</span> ⚔️
+</h1>
+
+<div class="game-wrapper">
+
+    <canvas
+        id="gameCanvas"
+        width="900"
+        height="675">
+    </canvas>
+
+    <!-- HUD -->
+    <div class="hud">
+
+        <div class="hud-title">
+            Knight Status
+        </div>
+
+        <div class="score">
+            Score: <span id="scoreText">0</span>
+        </div>
+
+        <div class="health-container">
+
+            <div class="health-label">
+                HP
+            </div>
+
+            <div class="health-bar">
+                <div
+                    id="healthFill"
+                    class="health-fill">
+                </div>
+            </div>
+
+        </div>
+
     </div>
 
-    <script>
-        const canvas = document.getElementById("gameCanvas");
-        const ctx = canvas.getContext("2d");
+    <!-- PAUSE -->
+    <button
+        id="pauseButton"
+        class="pause-btn">
+        ⏸ Pause
+    </button>
 
-        // Konfigurasi Game & Warna
-        const COLOR_BG = "#1e1e2d";
-        const COLOR_KNIGHT = "#2980b9";
-        const COLOR_CRYSTAL = "#f1c40f";
-        const COLOR_ENEMY = "#e74c3c";
-        const COLOR_TEXT = "#ecf0f1";
+    <!-- OVERLAY -->
+    <div
+        id="overlay"
+        class="overlay">
 
-        // Status Tombol
-        const keys = {};
+        <div class="overlay-box">
 
-        // Variabel Game
-        const player = {
-            x: canvas.width / 2 - 20,
-            y: canvas.height / 2 - 20,
-            size: 40,
-            speed: 5
-        };
+            <h2 id="overlayTitle">
+                GAME OVER
+            </h2>
 
-        const crystal = {
-            x: 0,
-            y: 0,
-            size: 20
-        };
+            <p id="overlayText">
+                Musuh berhasil menangkap Knight.
+            </p>
 
-        const enemy = {
-            x: 0,
-            y: 0,
-            size: 35,
-            speed: 2.5
-        };
+            <button
+                id="restartButton"
+                class="game-btn">
+                🔄 Main Lagi
+            </button>
 
-        let score = 0;
-        let gameOver = false;
+        </div>
 
-        // Pasang Posisi Acak Kristal & Musuh
-        function resetPositions() {
-            crystal.x = Math.floor(Math.random() * (canvas.width - crystal.size));
-            crystal.y = Math.floor(Math.random() * (canvas.height - crystal.size));
+    </div>
 
-            enemy.x = Math.floor(Math.random() * (canvas.width - enemy.size));
-            enemy.y = Math.floor(Math.random() * (canvas.height - enemy.size));
-        }
+</div>
 
-        function restartGame() {
-            player.x = canvas.width / 2 - player.size / 2;
-            player.y = canvas.height / 2 - player.size / 2;
-            score = 0;
-            gameOver = false;
-            resetPositions();
-        }
+<div class="instructions">
 
-        // Event Listener Keyboard
-        window.addEventListener("keydown", (e) => {
-            keys[e.key] = true;
-            if (gameOver && (e.key === 'r' || e.key === 'R')) {
-                restartGame();
-            }
+    <p>
+        🎮 Gunakan
+        <strong>WASD</strong>
+        atau
+        <strong>Tombol Panah</strong>
+        untuk bergerak.
+    </p>
+
+    <p>
+        💎 Ambil Kristal Kuning
+        <strong>+10</strong>
+        dan hindari Musuh Merah!
+    </p>
+
+</div>
+
+<!-- MOBILE TOUCH CONTROLS -->
+
+<div class="mobile-controls">
+
+    <button class="touch-btn up" data-key="ArrowUp">
+        ▲
+    </button>
+
+    <button class="touch-btn left" data-key="ArrowLeft">
+        ◀
+    </button>
+
+    <button class="touch-btn down" data-key="ArrowDown">
+        ▼
+    </button>
+
+    <button class="touch-btn right" data-key="ArrowRight">
+        ▶
+    </button>
+
+</div>
+
+<script>
+
+/* =========================================================
+   CANVAS
+========================================================= */
+
+const canvas = document.getElementById("gameCanvas");
+const ctx = canvas.getContext("2d");
+
+const scoreText = document.getElementById("scoreText");
+const healthFill = document.getElementById("healthFill");
+
+const overlay = document.getElementById("overlay");
+const overlayTitle = document.getElementById("overlayTitle");
+const overlayText = document.getElementById("overlayText");
+
+const pauseButton = document.getElementById("pauseButton");
+const restartButton = document.getElementById("restartButton");
+
+
+/* =========================================================
+   GAME CONFIG
+========================================================= */
+
+const COLOR_KNIGHT = "#29a9ff";
+const COLOR_CRYSTAL = "#ffe600";
+const COLOR_ENEMY = "#ff4f5e";
+
+const keys = {};
+
+let score = 0;
+let gameOver = false;
+let paused = false;
+
+let health = 100;
+
+let lastTime = performance.now();
+
+let screenShake = 0;
+
+
+/* =========================================================
+   PLAYER
+========================================================= */
+
+const player = {
+
+    x: canvas.width / 2 - 20,
+    y: canvas.height / 2 - 20,
+
+    size: 40,
+
+    speed: 5,
+
+    tail: []
+
+};
+
+
+/* =========================================================
+   CRYSTAL
+========================================================= */
+
+const crystal = {
+
+    x: 0,
+    y: 0,
+
+    size: 22,
+
+    pulse: 0
+
+};
+
+
+/* =========================================================
+   ENEMY
+========================================================= */
+
+const enemy = {
+
+    x: 0,
+    y: 0,
+
+    size: 38,
+
+    speed: 1.65,
+
+    hitFlash: 0
+
+};
+
+
+/* =========================================================
+   PARTICLES
+========================================================= */
+
+const particles = [];
+
+
+/* =========================================================
+   STARS
+========================================================= */
+
+const stars = [];
+
+for (let i = 0; i < 100; i++) {
+
+    stars.push({
+
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+
+        size: Math.random() * 2 + 0.4,
+
+        alpha: Math.random() * 0.7 + 0.2,
+
+        speed: Math.random() * 0.3 + 0.05
+
+    });
+
+}
+
+
+/* =========================================================
+   RESET POSITIONS
+========================================================= */
+
+function resetPositions() {
+
+    crystal.x =
+        Math.floor(
+            Math.random() *
+            (canvas.width - crystal.size - 40)
+        ) + 20;
+
+    crystal.y =
+        Math.floor(
+            Math.random() *
+            (canvas.height - crystal.size - 40)
+        ) + 20;
+
+
+    enemy.x =
+        Math.floor(
+            Math.random() *
+            (canvas.width - enemy.size - 40)
+        ) + 20;
+
+    enemy.y =
+        Math.floor(
+            Math.random() *
+            (canvas.height - enemy.size - 40)
+        ) + 20;
+
+}
+
+
+/* =========================================================
+   RESTART
+========================================================= */
+
+function restartGame() {
+
+    player.x =
+        canvas.width / 2 -
+        player.size / 2;
+
+    player.y =
+        canvas.height / 2 -
+        player.size / 2;
+
+    player.tail = [];
+
+    score = 0;
+
+    health = 100;
+
+    gameOver = false;
+
+    paused = false;
+
+    particles.length = 0;
+
+    screenShake = 0;
+
+    resetPositions();
+
+    overlay.classList.remove("active");
+
+    pauseButton.textContent = "⏸ Pause";
+
+    updateHUD();
+
+}
+
+
+/* =========================================================
+   KEYBOARD
+========================================================= */
+
+window.addEventListener("keydown", (e) => {
+
+    keys[e.key] = true;
+
+    if (
+        [
+            "ArrowUp",
+            "ArrowDown",
+            "ArrowLeft",
+            "ArrowRight",
+            " "
+        ].includes(e.key)
+    ) {
+        e.preventDefault();
+    }
+
+    if (
+        gameOver &&
+        (
+            e.key === "r" ||
+            e.key === "R"
+        )
+    ) {
+        restartGame();
+    }
+
+    if (
+        e.key === "Escape" &&
+        !gameOver
+    ) {
+        togglePause();
+    }
+
+});
+
+
+window.addEventListener("keyup", (e) => {
+
+    keys[e.key] = false;
+
+});
+
+
+/* =========================================================
+   TOUCH CONTROL
+========================================================= */
+
+document.querySelectorAll(".touch-btn").forEach(button => {
+
+    const key = button.dataset.key;
+
+
+    function press(e) {
+
+        e.preventDefault();
+
+        keys[key] = true;
+
+    }
+
+
+    function release(e) {
+
+        e.preventDefault();
+
+        keys[key] = false;
+
+    }
+
+
+    button.addEventListener(
+        "touchstart",
+        press,
+        { passive: false }
+    );
+
+    button.addEventListener(
+        "touchend",
+        release,
+        { passive: false }
+    );
+
+    button.addEventListener(
+        "touchcancel",
+        release,
+        { passive: false }
+    );
+
+});
+
+
+/* =========================================================
+   COLLISION
+========================================================= */
+
+function checkCollision(rect1, rect2) {
+
+    return (
+
+        rect1.x <
+        rect2.x + rect2.size &&
+
+        rect1.x + rect1.size >
+        rect2.x &&
+
+        rect1.y <
+        rect2.y + rect2.size &&
+
+        rect1.y + rect1.size >
+        rect2.y
+
+    );
+
+}
+
+
+/* =========================================================
+   PARTICLE CREATOR
+========================================================= */
+
+function createParticles(
+    x,
+    y,
+    amount,
+    type = "crystal"
+) {
+
+    for (let i = 0; i < amount; i++) {
+
+        let angle =
+            Math.random() *
+            Math.PI *
+            2;
+
+        let speed =
+            Math.random() * 4 + 1;
+
+        particles.push({
+
+            x,
+            y,
+
+            vx:
+                Math.cos(angle) *
+                speed,
+
+            vy:
+                Math.sin(angle) *
+                speed,
+
+            life: 1,
+
+            size:
+                Math.random() * 4 + 2,
+
+            type
+
         });
 
-        window.addEventListener("keyup", (e) => {
-            keys[e.key] = false;
-        });
+    }
 
-        // Deteksi Tabrakan (AABB Collision)
-        function checkCollision(rect1, rect2) {
-            return (
-                rect1.x < rect2.x + rect2.size &&
-                rect1.x + rect1.size > rect2.x &&
-                rect1.y < rect2.y + rect2.size &&
-                rect1.y + rect1.size > rect2.y
+}
+
+
+/* =========================================================
+   UPDATE PARTICLES
+========================================================= */
+
+function updateParticles() {
+
+    for (
+        let i = particles.length - 1;
+        i >= 0;
+        i--
+    ) {
+
+        const p = particles[i];
+
+        p.x += p.vx;
+        p.y += p.vy;
+
+        p.vx *= 0.96;
+        p.vy *= 0.96;
+
+        p.life -= 0.025;
+
+        if (p.life <= 0) {
+
+            particles.splice(i, 1);
+
+        }
+
+    }
+
+}
+
+
+/* =========================================================
+   DRAW PARTICLES
+========================================================= */
+
+function drawParticles() {
+
+    particles.forEach(p => {
+
+        ctx.save();
+
+        ctx.globalAlpha = p.life;
+
+        if (p.type === "damage") {
+
+            ctx.fillStyle = "#ff4055";
+
+        } else {
+
+            ctx.fillStyle = "#ffe600";
+
+        }
+
+        ctx.shadowBlur = 15;
+        ctx.shadowColor = ctx.fillStyle;
+
+        ctx.beginPath();
+
+        ctx.arc(
+            p.x,
+            p.y,
+            p.size,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fill();
+
+        ctx.restore();
+
+    });
+
+}
+
+
+/* =========================================================
+   BACKGROUND
+========================================================= */
+
+function drawBackground(time) {
+
+    const gradient =
+        ctx.createRadialGradient(
+            canvas.width / 2,
+            canvas.height / 2,
+            50,
+            canvas.width / 2,
+            canvas.height / 2,
+            canvas.width
+        );
+
+    gradient.addColorStop(
+        0,
+        "#10264b"
+    );
+
+    gradient.addColorStop(
+        0.55,
+        "#071225"
+    );
+
+    gradient.addColorStop(
+        1,
+        "#02050d"
+    );
+
+    ctx.fillStyle = gradient;
+
+    ctx.fillRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+
+    /* GRID */
+
+    ctx.save();
+
+    ctx.globalAlpha = 0.16;
+
+    ctx.strokeStyle = "#42bfff";
+
+    ctx.lineWidth = 1;
+
+    const gridSize = 45;
+
+    for (
+        let x = 0;
+        x < canvas.width;
+        x += gridSize
+    ) {
+
+        ctx.beginPath();
+
+        ctx.moveTo(x, 0);
+
+        ctx.lineTo(
+            x,
+            canvas.height
+        );
+
+        ctx.stroke();
+
+    }
+
+
+    for (
+        let y = 0;
+        y < canvas.height;
+        y += gridSize
+    ) {
+
+        ctx.beginPath();
+
+        ctx.moveTo(0, y);
+
+        ctx.lineTo(
+            canvas.width,
+            y
+        );
+
+        ctx.stroke();
+
+    }
+
+    ctx.restore();
+
+
+    /* STARS */
+
+    stars.forEach(star => {
+
+        star.y += star.speed;
+
+        if (star.y > canvas.height) {
+
+            star.y = 0;
+
+        }
+
+        const twinkle =
+            0.5 +
+            Math.sin(
+                time * 0.002 +
+                star.x
+            ) *
+            0.3;
+
+        ctx.save();
+
+        ctx.globalAlpha =
+            star.alpha *
+            twinkle;
+
+        ctx.fillStyle = "#bfeeff";
+
+        ctx.beginPath();
+
+        ctx.arc(
+            star.x,
+            star.y,
+            star.size,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fill();
+
+        ctx.restore();
+
+    });
+
+
+    /* ARENA BORDER */
+
+    ctx.save();
+
+    ctx.strokeStyle =
+        "rgba(70,210,255,0.28)";
+
+    ctx.lineWidth = 2;
+
+    ctx.strokeRect(
+        8,
+        8,
+        canvas.width - 16,
+        canvas.height - 16
+    );
+
+    ctx.restore();
+
+}
+
+
+/* =========================================================
+   DRAW CRYSTAL
+========================================================= */
+
+function drawCrystal(time) {
+
+    const pulse =
+        Math.sin(time * 0.005) * 3;
+
+    const size =
+        crystal.size +
+        pulse;
+
+
+    const cx =
+        crystal.x +
+        crystal.size / 2;
+
+    const cy =
+        crystal.y +
+        crystal.size / 2;
+
+
+    ctx.save();
+
+    /* Glow */
+
+    ctx.shadowBlur = 25;
+
+    ctx.shadowColor =
+        COLOR_CRYSTAL;
+
+
+    /* Diamond */
+
+    ctx.fillStyle =
+        COLOR_CRYSTAL;
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        cx,
+        cy - size
+    );
+
+    ctx.lineTo(
+        cx + size * 0.65,
+        cy
+    );
+
+    ctx.lineTo(
+        cx,
+        cy + size
+    );
+
+    ctx.lineTo(
+        cx - size * 0.65,
+        cy
+    );
+
+    ctx.closePath();
+
+    ctx.fill();
+
+
+    /* Inner shine */
+
+    ctx.shadowBlur = 0;
+
+    ctx.fillStyle =
+        "rgba(255,255,255,0.8)";
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        cx,
+        cy - size * 0.65
+    );
+
+    ctx.lineTo(
+        cx + size * 0.25,
+        cy
+    );
+
+    ctx.lineTo(
+        cx,
+        cy + size * 0.15
+    );
+
+    ctx.lineTo(
+        cx - size * 0.25,
+        cy
+    );
+
+    ctx.closePath();
+
+    ctx.fill();
+
+    ctx.restore();
+
+}
+
+
+/* =========================================================
+   DRAW PLAYER
+========================================================= */
+
+function drawPlayer(time) {
+
+    const cx =
+        player.x +
+        player.size / 2;
+
+    const cy =
+        player.y +
+        player.size / 2;
+
+
+    /* TAIL */
+
+    ctx.save();
+
+    for (
+        let i = player.tail.length - 1;
+        i >= 0;
+        i--
+    ) {
+
+        const segment =
+            player.tail[i];
+
+        const alpha =
+            1 -
+            i /
+            Math.max(
+                player.tail.length,
+                1
             );
+
+        const size =
+            7 +
+            alpha * 9;
+
+        ctx.globalAlpha =
+            alpha * 0.65;
+
+        ctx.fillStyle =
+            "#249cff";
+
+        ctx.shadowBlur = 15;
+
+        ctx.shadowColor =
+            "#249cff";
+
+        ctx.beginPath();
+
+        ctx.arc(
+            segment.x,
+            segment.y,
+            size,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fill();
+
+    }
+
+    ctx.restore();
+
+
+    /* PLAYER AURA */
+
+    ctx.save();
+
+    ctx.shadowBlur = 30;
+
+    ctx.shadowColor =
+        COLOR_KNIGHT;
+
+    ctx.fillStyle =
+        COLOR_KNIGHT;
+
+    /* Body */
+
+    ctx.beginPath();
+
+    ctx.roundRect(
+        player.x,
+        player.y,
+        player.size,
+        player.size,
+        9
+    );
+
+    ctx.fill();
+
+
+    /* Shield */
+
+    ctx.shadowBlur = 0;
+
+    ctx.fillStyle =
+        "#bcecff";
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        cx,
+        player.y + 7
+    );
+
+    ctx.lineTo(
+        player.x + player.size - 8,
+        cy - 3
+    );
+
+    ctx.lineTo(
+        cx,
+        player.y + player.size - 6
+    );
+
+    ctx.lineTo(
+        player.x + 8,
+        cy - 3
+    );
+
+    ctx.closePath();
+
+    ctx.fill();
+
+
+    /* Helmet */
+
+    ctx.fillStyle =
+        "#d9f5ff";
+
+    ctx.fillRect(
+        player.x + 9,
+        player.y + 5,
+        player.size - 18,
+        12
+    );
+
+
+    /* Visor */
+
+    ctx.fillStyle =
+        "#18334b";
+
+    ctx.fillRect(
+        player.x + 11,
+        player.y + 10,
+        player.size - 22,
+        5
+    );
+
+
+    /* Eye */
+
+    ctx.fillStyle =
+        "#5ff2ff";
+
+    ctx.shadowBlur = 8;
+
+    ctx.shadowColor =
+        "#5ff2ff";
+
+    ctx.fillRect(
+        player.x + 13,
+        player.y + 11,
+        4,
+        3
+    );
+
+    ctx.fillRect(
+        player.x + 23,
+        player.y + 11,
+        4,
+        3
+    );
+
+
+    ctx.restore();
+
+}
+
+
+/* =========================================================
+   DRAW ENEMY
+========================================================= */
+
+function drawEnemy(time) {
+
+    const cx =
+        enemy.x +
+        enemy.size / 2;
+
+    const cy =
+        enemy.y +
+        enemy.size / 2;
+
+
+    const pulse =
+        Math.sin(time * 0.006) * 2;
+
+
+    ctx.save();
+
+    ctx.shadowBlur = 25;
+
+    ctx.shadowColor =
+        COLOR_ENEMY;
+
+    ctx.fillStyle =
+        enemy.hitFlash > 0
+            ? "#ffffff"
+            : COLOR_ENEMY;
+
+
+    ctx.beginPath();
+
+    ctx.roundRect(
+        enemy.x - pulse / 2,
+        enemy.y - pulse / 2,
+        enemy.size + pulse,
+        enemy.size + pulse,
+        9
+    );
+
+    ctx.fill();
+
+
+    /* Horns */
+
+    ctx.shadowBlur = 0;
+
+    ctx.fillStyle =
+        "#ff8c96";
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        enemy.x + 7,
+        enemy.y + 8
+    );
+
+    ctx.lineTo(
+        enemy.x + 2,
+        enemy.y - 3
+    );
+
+    ctx.lineTo(
+        enemy.x + 16,
+        enemy.y + 7
+    );
+
+    ctx.fill();
+
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        enemy.x + enemy.size - 7,
+        enemy.y + 8
+    );
+
+    ctx.lineTo(
+        enemy.x + enemy.size - 2,
+        enemy.y - 3
+    );
+
+    ctx.lineTo(
+        enemy.x + enemy.size - 16,
+        enemy.y + 7
+    );
+
+    ctx.fill();
+
+
+    /* Eyes */
+
+    ctx.fillStyle =
+        "#fff";
+
+    ctx.fillRect(
+        cx - 11,
+        cy - 5,
+        7,
+        5
+    );
+
+    ctx.fillRect(
+        cx + 4,
+        cy - 5,
+        7,
+        5
+    );
+
+
+    ctx.fillStyle =
+        "#18060a";
+
+    ctx.fillRect(
+        cx - 8,
+        cy - 4,
+        3,
+        4
+    );
+
+    ctx.fillRect(
+        cx + 7,
+        cy - 4,
+        3,
+        4
+    );
+
+
+    /* Mouth */
+
+    ctx.fillStyle =
+        "#26060a";
+
+    ctx.fillRect(
+        cx - 10,
+        cy + 8,
+        20,
+        5
+    );
+
+
+    ctx.restore();
+
+}
+
+
+/* =========================================================
+   PLAYER TRAIL UPDATE
+========================================================= */
+
+function updateTail() {
+
+    player.tail.unshift({
+
+        x:
+            player.x +
+            player.size / 2,
+
+        y:
+            player.y +
+            player.size / 2
+
+    });
+
+
+    const maxTail = 18;
+
+    if (
+        player.tail.length >
+        maxTail
+    ) {
+
+        player.tail.pop();
+
+    }
+
+}
+
+
+/* =========================================================
+   UPDATE GAME
+========================================================= */
+
+function update() {
+
+    if (
+        gameOver ||
+        paused
+    ) {
+        return;
+    }
+
+
+    /* PLAYER MOVEMENT */
+
+    let moving = false;
+
+
+    if (
+        keys["ArrowLeft"] ||
+        keys["a"] ||
+        keys["A"]
+    ) {
+
+        player.x -= player.speed;
+
+        moving = true;
+
+    }
+
+
+    if (
+        keys["ArrowRight"] ||
+        keys["d"] ||
+        keys["D"]
+    ) {
+
+        player.x += player.speed;
+
+        moving = true;
+
+    }
+
+
+    if (
+        keys["ArrowUp"] ||
+        keys["w"] ||
+        keys["W"]
+    ) {
+
+        player.y -= player.speed;
+
+        moving = true;
+
+    }
+
+
+    if (
+        keys["ArrowDown"] ||
+        keys["s"] ||
+        keys["S"]
+    ) {
+
+        player.y += player.speed;
+
+        moving = true;
+
+    }
+
+
+    /* LIMIT PLAYER */
+
+    player.x = Math.max(
+        12,
+        Math.min(
+            canvas.width -
+            player.size -
+            12,
+            player.x
+        )
+    );
+
+    player.y = Math.max(
+        12,
+        Math.min(
+            canvas.height -
+            player.size -
+            12,
+            player.y
+        )
+    );
+
+
+    if (moving) {
+
+        updateTail();
+
+    } else if (
+        player.tail.length > 0
+    ) {
+
+        player.tail.pop();
+
+    }
+
+
+    /* ENEMY AI */
+
+    if (enemy.x < player.x) {
+
+        enemy.x += enemy.speed;
+
+    } else if (
+        enemy.x > player.x
+    ) {
+
+        enemy.x -= enemy.speed;
+
+    }
+
+
+    if (enemy.y < player.y) {
+
+        enemy.y += enemy.speed;
+
+    } else if (
+        enemy.y > player.y
+    ) {
+
+        enemy.y -= enemy.speed;
+
+    }
+
+
+    /* CRYSTAL COLLISION */
+
+    if (
+        checkCollision(
+            player,
+            crystal
+        )
+    ) {
+
+        score += 10;
+
+        createParticles(
+            crystal.x +
+            crystal.size / 2,
+
+            crystal.y +
+            crystal.size / 2,
+
+            25,
+
+            "crystal"
+        );
+
+        crystal.x =
+            Math.floor(
+                Math.random() *
+                (
+                    canvas.width -
+                    crystal.size -
+                    40
+                )
+            ) + 20;
+
+        crystal.y =
+            Math.floor(
+                Math.random() *
+                (
+                    canvas.height -
+                    crystal.size -
+                    40
+                )
+            ) + 20;
+
+        updateHUD();
+
+    }
+
+
+    /* ENEMY COLLISION */
+
+    if (
+        checkCollision(
+            player,
+            enemy
+        )
+    ) {
+
+        health -= 1.8;
+
+        enemy.hitFlash = 6;
+
+        screenShake = 8;
+
+        createParticles(
+            player.x +
+            player.size / 2,
+
+            player.y +
+            player.size / 2,
+
+            3,
+
+            "damage"
+        );
+
+        if (health <= 0) {
+
+            health = 0;
+
+            gameOver = true;
+
+            createParticles(
+                player.x +
+                player.size / 2,
+
+                player.y +
+                player.size / 2,
+
+                40,
+
+                "damage"
+            );
+
+            showGameOver();
+
         }
 
-        // Update Logic
-        function update() {
-            if (gameOver) return;
+        updateHUD();
 
-            // Pergerakan Player
-            if ((keys["ArrowLeft"] || keys["a"] || keys["A"]) && player.x > 0) {
-                player.x -= player.speed;
-            }
-            if ((keys["ArrowRight"] || keys["d"] || keys["D"]) && player.x < canvas.width - player.size) {
-                player.x += player.speed;
-            }
-            if ((keys["ArrowUp"] || keys["w"] || keys["W"]) && player.y > 0) {
-                player.y -= player.speed;
-            }
-            if ((keys["ArrowDown"] || keys["s"] || keys["S"]) && player.y < canvas.height - player.size) {
-                player.y += player.speed;
-            }
+    }
 
-            // Pergerakan AI Musuh (Mengejar Player)
-            if (enemy.x < player.x) enemy.x += enemy.speed;
-            else if (enemy.x > player.x) enemy.x -= enemy.speed;
 
-            if (enemy.y < player.y) enemy.y += enemy.speed;
-            else if (enemy.y > player.y) enemy.y -= enemy.speed;
+    if (
+        enemy.hitFlash > 0
+    ) {
 
-            // Tabrakan dengan Kristal
-            if (checkCollision(player, crystal)) {
-                score += 10;
-                crystal.x = Math.floor(Math.random() * (canvas.width - crystal.size));
-                crystal.y = Math.floor(Math.random() * (canvas.height - crystal.size));
-            }
+        enemy.hitFlash--;
 
-            // Tabrakan dengan Musuh
-            if (checkCollision(player, enemy)) {
-                gameOver = true;
-            }
+    }
+
+}
+
+
+/* =========================================================
+   HUD
+========================================================= */
+
+function updateHUD() {
+
+    scoreText.textContent =
+        score;
+
+    healthFill.style.width =
+        Math.max(
+            0,
+            health
+        ) + "%";
+
+}
+
+
+/* =========================================================
+   GAME OVER
+========================================================= */
+
+function showGameOver() {
+
+    overlayTitle.textContent =
+        "GAME OVER";
+
+    overlayText.textContent =
+        `Skor Akhir: ${score} • Tekan R untuk bermain lagi`;
+
+    overlay.classList.add(
+        "active"
+    );
+
+}
+
+
+/* =========================================================
+   PAUSE
+========================================================= */
+
+function togglePause() {
+
+    if (gameOver) {
+        return;
+    }
+
+    paused = !paused;
+
+    if (paused) {
+
+        pauseButton.textContent =
+            "▶ Resume";
+
+        overlayTitle.textContent =
+            "GAME PAUSED";
+
+        overlayText.textContent =
+            "Game sedang dijeda.";
+
+        overlay.classList.add(
+            "active"
+        );
+
+    } else {
+
+        pauseButton.textContent =
+            "⏸ Pause";
+
+        overlay.classList.remove(
+            "active"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   PAUSE BUTTON
+========================================================= */
+
+pauseButton.addEventListener(
+    "click",
+    togglePause
+);
+
+
+/* =========================================================
+   RESTART BUTTON
+========================================================= */
+
+restartButton.addEventListener(
+    "click",
+    restartGame
+);
+
+
+/* =========================================================
+   DRAW
+========================================================= */
+
+function draw(time) {
+
+    ctx.save();
+
+
+    /* SCREEN SHAKE */
+
+    if (screenShake > 0) {
+
+        const sx =
+            (Math.random() - 0.5) *
+            screenShake;
+
+        const sy =
+            (Math.random() - 0.5) *
+            screenShake;
+
+        ctx.translate(
+            sx,
+            sy
+        );
+
+        screenShake *= 0.88;
+
+        if (screenShake < 0.2) {
+
+            screenShake = 0;
+
         }
 
-        // Render Graphics
-        function draw() {
-            // Bersihkan Canvas
-            ctx.fillStyle = COLOR_BG;
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
 
-            if (!gameOver) {
-                // Gambar Kristal
-                ctx.fillStyle = COLOR_CRYSTAL;
-                ctx.fillRect(crystal.x, crystal.y, crystal.size, crystal.size);
 
-                // Gambar Musuh
-                ctx.fillStyle = COLOR_ENEMY;
-                ctx.fillRect(enemy.x, enemy.y, enemy.size, enemy.size);
+    drawBackground(time);
 
-                // Gambar Player (Knight)
-                ctx.fillStyle = COLOR_KNIGHT;
-                ctx.fillRect(player.x, player.y, player.size, player.size);
+    drawCrystal(time);
 
-                // Tampilkan Skor
-                ctx.fillStyle = COLOR_TEXT;
-                ctx.font = "20px Arial";
-                ctx.fillText(`Score: ${score}`, 15, 30);
-            } else {
-                // Tampilan Game Over
-                ctx.fillStyle = COLOR_ENEMY;
-                ctx.font = "bold 48px Arial";
-                ctx.textAlign = "center";
-                ctx.fillText("GAME OVER", canvas.width / 2, 230);
+    drawPlayer(time);
 
-                ctx.fillStyle = COLOR_TEXT;
-                ctx.font = "22px Arial";
-                ctx.fillText(`Skor Akhir: ${score}`, canvas.width / 2, 290);
-                ctx.fillText("Tekan 'R' untuk Main Lagi", canvas.width / 2, 340);
-                ctx.textAlign = "left"; // Reset alignment
-            }
-        }
+    drawEnemy(time);
 
-        // Game Loop
-        function gameLoop() {
-            update();
-            draw();
-            requestAnimationFrame(gameLoop);
-        }
+    drawParticles();
 
-        // Inisialisasi Game
-        resetPositions();
-        requestAnimationFrame(gameLoop);
-    </script>
+
+    /* VIGNETTE */
+
+    const vignette =
+        ctx.createRadialGradient(
+            canvas.width / 2,
+            canvas.height / 2,
+            canvas.height * 0.25,
+            canvas.width / 2,
+            canvas.height / 2,
+            canvas.height * 0.75
+        );
+
+    vignette.addColorStop(
+        0,
+        "rgba(0,0,0,0)"
+    );
+
+    vignette.addColorStop(
+        1,
+        "rgba(0,0,0,0.55)"
+    );
+
+    ctx.fillStyle =
+        vignette;
+
+    ctx.fillRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+
+    ctx.restore();
+
+}
+
+
+/* =========================================================
+   GAME LOOP
+========================================================= */
+
+function gameLoop(time) {
+
+    const delta =
+        time -
+        lastTime;
+
+    lastTime = time;
+
+
+    updateParticles();
+
+    update();
+
+    draw(time);
+
+
+    requestAnimationFrame(
+        gameLoop
+    );
+
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
+resetPositions();
+
+updateHUD();
+
+requestAnimationFrame(
+    gameLoop
+);
+
+</script>
+
 </body>
 </html>
