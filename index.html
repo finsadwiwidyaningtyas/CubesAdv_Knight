@@ -32,10 +32,6 @@ body {
     padding: 15px;
 }
 
-/* =========================
-   TITLE
-========================= */
-
 .game-title {
     font-size: clamp(1.7rem, 5vw, 2.7rem);
     margin-bottom: 10px;
@@ -52,10 +48,6 @@ body {
     color: #55d9ff;
 }
 
-/* =========================
-   GAME WRAPPER
-========================= */
-
 .game-wrapper {
     position: relative;
     width: min(900px, 96vw);
@@ -66,42 +58,27 @@ body {
     width: 100%;
     height: auto;
     aspect-ratio: 4 / 3;
-
     background: #050914;
-
     border: 2px solid rgba(70, 190, 255, 0.65);
     border-radius: 16px;
-
     box-shadow:
         0 0 10px rgba(40, 180, 255, 0.35),
         0 0 35px rgba(20, 110, 255, 0.15),
         inset 0 0 50px rgba(0, 0, 0, 0.7);
-
     touch-action: none;
 }
-
-/* =========================
-   HUD
-========================= */
 
 .hud {
     position: absolute;
     left: 15px;
     top: 15px;
-
     min-width: 170px;
-
     padding: 10px 15px;
-
     border: 1px solid rgba(100, 210, 255, 0.4);
     border-radius: 12px;
-
     background: rgba(5, 12, 28, 0.78);
     backdrop-filter: blur(6px);
-
-    box-shadow:
-        0 0 15px rgba(0, 150, 255, 0.15);
-
+    box-shadow: 0 0 15px rgba(0, 150, 255, 0.15);
     pointer-events: none;
 }
 
@@ -132,7 +109,6 @@ body {
 .health-bar {
     width: 135px;
     height: 7px;
-
     background: rgba(255,255,255,0.1);
     border-radius: 10px;
     overflow: hidden;
@@ -141,32 +117,22 @@ body {
 .health-fill {
     width: 100%;
     height: 100%;
-
     background: linear-gradient(90deg, #39ff88, #baff54);
     box-shadow: 0 0 10px rgba(80,255,120,0.8);
-
     transition: width 0.15s ease;
 }
-
-/* =========================
-   PAUSE BUTTON
-========================= */
 
 .pause-btn {
     position: absolute;
     right: 15px;
     top: 15px;
-
     border: 1px solid rgba(120,220,255,0.5);
     background: rgba(5,12,28,0.8);
     color: #fff;
-
     border-radius: 10px;
     padding: 8px 13px;
-
     cursor: pointer;
     font-weight: 700;
-
     transition: 0.2s;
 }
 
@@ -175,24 +141,14 @@ body {
     box-shadow: 0 0 15px rgba(60,200,255,0.5);
 }
 
-/* =========================
-   INSTRUCTIONS
-========================= */
-
 .instructions {
     width: min(900px, 96vw);
-
     margin-top: 12px;
-
     padding: 10px 15px;
-
     text-align: center;
-
     color: #aebdca;
     font-size: 14px;
-
     border-radius: 12px;
-
     background: rgba(7,12,25,0.65);
     border: 1px solid rgba(100,180,255,0.15);
 }
@@ -201,49 +157,32 @@ body {
     color: #65d8ff;
 }
 
-/* =========================
-   MOBILE CONTROLS
-========================= */
-
 .mobile-controls {
     display: none;
-
     position: relative;
-
     width: min(320px, 90vw);
     height: 170px;
-
     margin-top: 12px;
-
     user-select: none;
     touch-action: none;
 }
 
 .touch-btn {
     position: absolute;
-
     width: 55px;
     height: 55px;
-
     border-radius: 16px;
-
     border: 1px solid rgba(100,220,255,0.45);
-
     background:
         linear-gradient(
             145deg,
             rgba(40,120,180,0.55),
             rgba(5,25,55,0.75)
         );
-
     color: white;
-
     font-size: 24px;
     font-weight: bold;
-
-    box-shadow:
-        0 0 12px rgba(40,180,255,0.18);
-
+    box-shadow: 0 0 12px rgba(40,180,255,0.18);
     -webkit-tap-highlight-color: transparent;
 }
 
@@ -272,23 +211,14 @@ body {
     top: 58px;
 }
 
-/* =========================
-   GAME OVER / PAUSE
-========================= */
-
 .overlay {
     position: absolute;
     inset: 0;
-
     display: none;
-
     align-items: center;
     justify-content: center;
-
     background: rgba(2,5,14,0.72);
-
     border-radius: 14px;
-
     backdrop-filter: blur(5px);
 }
 
@@ -298,32 +228,24 @@ body {
 
 .overlay-box {
     width: min(390px, 85%);
-
     padding: 28px;
-
     text-align: center;
-
     background:
         linear-gradient(
             145deg,
             rgba(12,27,55,0.97),
             rgba(5,10,25,0.97)
         );
-
     border: 1px solid rgba(80,200,255,0.45);
     border-radius: 18px;
-
-    box-shadow:
-        0 0 35px rgba(0,130,255,0.25);
+    box-shadow: 0 0 35px rgba(0,130,255,0.25);
 }
 
 .overlay-box h2 {
     font-size: 36px;
     margin-bottom: 10px;
     color: #ff6677;
-
-    text-shadow:
-        0 0 15px rgba(255,60,90,0.55);
+    text-shadow: 0 0 15px rgba(255,60,90,0.55);
 }
 
 .overlay-box p {
@@ -333,38 +255,22 @@ body {
 
 .game-btn {
     border: 0;
-
     border-radius: 10px;
-
     padding: 11px 20px;
-
     color: white;
-
-    background:
-        linear-gradient(135deg, #147cc1, #5a43d6);
-
+    background: linear-gradient(135deg, #147cc1, #5a43d6);
     font-weight: 800;
-
     cursor: pointer;
-
-    box-shadow:
-        0 0 15px rgba(50,140,255,0.3);
-
+    box-shadow: 0 0 15px rgba(50,140,255,0.3);
     transition: 0.2s;
 }
 
 .game-btn:hover {
     transform: translateY(-2px);
-    box-shadow:
-        0 0 25px rgba(60,170,255,0.55);
+    box-shadow: 0 0 25px rgba(60,170,255,0.55);
 }
 
-/* =========================
-   MOBILE
-========================= */
-
 @media (max-width: 700px) {
-
     body {
         padding: 8px;
     }
@@ -391,7 +297,8 @@ body {
         transform-origin: top right;
     }
 }
-    /* ===== AESTHETIC UPGRADE - STEP 1A ===== */
+
+/* AESTHETIC UPGRADE */
 
 body {
     background:
@@ -401,7 +308,6 @@ body {
     overflow-x: hidden;
 }
 
-/* Cahaya lembut di belakang game */
 body::before {
     content: "";
     position: fixed;
@@ -419,13 +325,13 @@ body::before {
         opacity: 0.55;
         transform: scale(1);
     }
+
     to {
         opacity: 1;
         transform: scale(1.08);
     }
 }
 
-/* Judul game */
 .game-title {
     text-shadow:
         0 0 8px rgba(80, 210, 255, 0.8),
@@ -433,13 +339,11 @@ body::before {
     letter-spacing: 2px;
 }
 
-/* Arena game */
 .game-wrapper {
     position: relative;
     filter: drop-shadow(0 0 25px rgba(0, 180, 255, 0.12));
 }
 
-/* Canvas lebih seperti arena game */
 #gameCanvas {
     border-color: #27627f !important;
     box-shadow:
@@ -449,12 +353,319 @@ body::before {
     transition: box-shadow 0.3s ease, transform 0.2s ease;
 }
 
-/* Efek saat mouse diarahkan ke arena */
 #gameCanvas:hover {
     box-shadow:
         0 0 18px rgba(0, 210, 255, 0.28),
         0 0 55px rgba(20, 120, 220, 0.22),
         inset 0 0 30px rgba(0, 0, 0, 0.6) !important;
+}
+
+/* ULTIMATE UPGRADE */
+
+:root {
+    --cyan: #55e8ff;
+    --blue: #2b8cff;
+    --purple: #8b5cff;
+    --pink: #ff4d8d;
+    --panel: rgba(4,10,27,.88);
+}
+
+body {
+    background:
+        radial-gradient(circle at 50% 0%, #12365b 0, #070d1d 45%, #02040b 100%) !important;
+}
+
+.game-title {
+    font-size: clamp(1.8rem,5vw,3rem) !important;
+    text-transform: uppercase;
+    text-shadow:
+        0 0 8px #5de9ff,
+        0 0 25px #247cff,
+        0 0 55px #8b5cff44 !important;
+}
+
+.game-wrapper {
+    filter: drop-shadow(0 0 30px #00c8ff22) !important;
+}
+
+#gameCanvas {
+    border: 2px solid #55ddff88 !important;
+    box-shadow:
+        0 0 18px #00c8ff44,
+        0 0 65px #6a35ff22,
+        inset 0 0 55px #000b !important;
+}
+
+.neon-actions {
+    position: absolute;
+    right: 15px;
+    top: 58px;
+    display: flex;
+    gap: 6px;
+    z-index: 3;
+}
+
+.neon-btn {
+    border: 1px solid #55e8ff66;
+    background: #06162bdd;
+    color: #eaffff;
+    border-radius: 10px;
+    padding: 7px 10px;
+    cursor: pointer;
+    font-weight: 800;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 0 12px #00cfff18;
+}
+
+.neon-btn:hover {
+    box-shadow: 0 0 20px #00cfff55;
+    transform: translateY(-1px);
+}
+
+.ultimate-overlay {
+    position: absolute;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: #01040dcc;
+    backdrop-filter: blur(9px);
+    z-index: 20;
+    border-radius: 16px;
+}
+
+.ultimate-overlay.show {
+    display: flex;
+}
+
+.ultimate-panel {
+    width: min(560px,92%);
+    max-height: 90%;
+    overflow: auto;
+    padding: 26px;
+    border: 1px solid #55e8ff66;
+    border-radius: 22px;
+    background:
+        linear-gradient(
+            145deg,
+            #0b1d38f7,
+            #070b1af7
+        );
+    box-shadow:
+        0 0 55px #008cff33,
+        0 0 100px #7c38ff14;
+    text-align: center;
+}
+
+.ultimate-panel h2 {
+    font-size: 32px;
+    margin-bottom: 8px;
+    text-shadow: 0 0 18px #55e8ff;
+}
+
+.ultimate-panel p {
+    color: #a9bfd0;
+    line-height: 1.6;
+}
+
+.menu-grid {
+    display: grid;
+    gap: 9px;
+    margin-top: 17px;
+}
+
+.menu-grid button {
+    width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid #55e8ff55;
+    background: linear-gradient(135deg,#0a2a49,#15153a);
+    color: white;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.menu-grid button:hover {
+    box-shadow: 0 0 22px #00cfff33;
+    transform: translateY(-1px);
+}
+
+.menu-grid .primary {
+    background: linear-gradient(135deg,#087fbd,#7047d5);
+    box-shadow: 0 0 25px #168dff33;
+}
+
+.mini-map {
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+    width: 150px;
+    height: 105px;
+    border: 1px solid #55e8ff55;
+    border-radius: 12px;
+    background: #041021dd;
+    box-shadow: 0 0 20px #00bfff22;
+    z-index: 4;
+    display: none;
+}
+
+.mini-map.show {
+    display: block;
+}
+
+#mapCanvas {
+    width: 100%;
+    height: 100%;
+    border-radius: 11px;
+}
+
+.toast {
+    position: absolute;
+    left: 50%;
+    bottom: 18px;
+    transform: translateX(-50%) translateY(15px);
+    background: #06162bef;
+    border: 1px solid #55e8ff66;
+    color: #eaffff;
+    padding: 9px 15px;
+    border-radius: 12px;
+    opacity: 0;
+    pointer-events: none;
+    transition: .25s;
+    z-index: 50;
+    box-shadow: 0 0 22px #00cfff22;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.player-list {
+    display: grid;
+    gap: 7px;
+    text-align: left;
+    margin: 12px 0;
+}
+
+.player-list div {
+    padding: 9px 11px;
+    border: 1px solid #55e8ff22;
+    background: #ffffff08;
+    border-radius: 9px;
+}
+
+.chatbox {
+    height: 140px;
+    overflow-y: auto;
+    text-align: left;
+    padding: 9px;
+    background: #020817;
+    border: 1px solid #55e8ff22;
+    border-radius: 10px;
+    margin: 10px 0;
+}
+
+.chatbox p {
+    margin: 5px 0;
+}
+
+.chatbox b {
+    color: #55e8ff;
+}
+
+.chat-row {
+    display: flex;
+    gap: 7px;
+}
+
+.chat-row input {
+    flex: 1;
+    background: #030a18;
+    color: white;
+    border: 1px solid #55e8ff44;
+    border-radius: 9px;
+    padding: 9px;
+    outline: none;
+}
+
+.setting-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin: 7px 0;
+    border-radius: 10px;
+    background: #ffffff08;
+    border: 1px solid #55e8ff18;
+}
+
+.setting-row select,
+.setting-row input {
+    accent-color: #55e8ff;
+}
+
+.lb {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+}
+
+.lb th,
+.lb td {
+    padding: 9px;
+    border-bottom: 1px solid #55e8ff22;
+}
+
+.lb th {
+    color: #55e8ff;
+}
+
+.attack-button {
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+    z-index: 5;
+    border: 1px solid #ff6d8d88;
+    background:
+        linear-gradient(
+            135deg,
+            #5e1429dd,
+            #28103bdd
+        );
+    color: #fff;
+    border-radius: 12px;
+    padding: 10px 14px;
+    font-weight: 900;
+    cursor: pointer;
+    box-shadow: 0 0 18px #ff3c6822;
+}
+
+.attack-button:hover {
+    box-shadow: 0 0 25px #ff3c6855;
+}
+
+@media (max-width:700px) {
+    .neon-actions {
+        top: 48px;
+        right: 8px;
+        transform: scale(.82);
+        transform-origin: top right;
+    }
+
+    .mini-map {
+        width: 120px;
+        height: 85px;
+        right: 8px;
+        bottom: 8px;
+    }
+
+    .attack-button {
+        right: 8px;
+        bottom: 8px;
+        transform: scale(.85);
+        transform-origin: bottom right;
+    }
 }
 </style>
 </head>
@@ -473,15 +684,16 @@ body::before {
         height="675">
     </canvas>
 
-    <!-- HUD -->
     <div class="hud">
 
         <div class="hud-title">
-            Knight Status
+            SCORE
         </div>
 
-        <div class="score">
-            Score: <span id="scoreText">0</span>
+        <div
+            class="score"
+            id="scoreDisplay">
+            0
         </div>
 
         <div class="health-container">
@@ -492,8 +704,8 @@ body::before {
 
             <div class="health-bar">
                 <div
-                    id="healthFill"
-                    class="health-fill">
+                    class="health-fill"
+                    id="healthFill">
                 </div>
             </div>
 
@@ -501,33 +713,198 @@ body::before {
 
     </div>
 
-    <!-- PAUSE -->
     <button
-        id="pauseButton"
-        class="pause-btn">
+        class="pause-btn"
+        id="pauseButton">
         ⏸ Pause
     </button>
 
-    <!-- OVERLAY -->
+    <div class="neon-actions">
+
+        <button
+            class="neon-btn"
+            id="mapBtn">
+            🗺 MAP
+        </button>
+
+        <button
+            class="neon-btn"
+            id="menuBtn">
+            ☰ MENU
+        </button>
+
+    </div>
+
+    <button
+        class="attack-button"
+        id="attackBtn">
+        ⚔ SERANG [SPACE]
+    </button>
+
     <div
-        id="overlay"
-        class="overlay">
+        class="mini-map"
+        id="miniMap">
 
-        <div class="overlay-box">
+        <canvas
+            id="mapCanvas"
+            width="150"
+            height="105">
+        </canvas>
 
-            <h2 id="overlayTitle">
+    </div>
+
+    <div
+        class="toast"
+        id="toast">
+    </div>
+
+    <!-- MAIN MENU -->
+
+    <div
+        class="ultimate-overlay show"
+        id="mainMenu">
+
+        <div class="ultimate-panel">
+
+            <h2>
+                CUBES ADV
+                <span style="color:#55e8ff">
+                    KNIGHT
+                </span>
+            </h2>
+
+            <p>
+                ⚔️ Neon Cube Adventure
+            </p>
+
+            <div class="menu-grid">
+
+                <button
+                    class="primary"
+                    id="playBtn">
+                    ▶ PLAY
+                </button>
+
+                <button
+                    id="lobbyBtn">
+                    👥 LOBBY / ONLINE
+                </button>
+
+                <button
+                    id="leaderBtn">
+                    🏆 LEADERBOARD
+                </button>
+
+                <button
+                    id="tutorialBtn">
+                    ❔ TUTORIAL
+                </button>
+
+                <button
+                    id="settingsBtn">
+                    ⚙ SETTINGS
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- PAUSE MENU -->
+
+    <div
+        class="ultimate-overlay"
+        id="pauseMenu">
+
+        <div class="ultimate-panel">
+
+            <h2>
+                ⏸ PAUSED
+            </h2>
+
+            <div class="menu-grid">
+
+                <button
+                    class="primary"
+                    id="resumeBtn">
+                    ▶ RESUME
+                </button>
+
+                <button
+                    id="saveBtn">
+                    💾 SAVE
+                </button>
+
+                <button
+                    id="loadBtn">
+                    📂 LOAD
+                </button>
+
+                <button
+                    id="restartBtn2">
+                    🔄 RESTART
+                </button>
+
+                <button
+                    id="settingsBtn2">
+                    ⚙ SETTINGS
+                </button>
+
+                <button
+                    id="exitBtn">
+                    🚪 EXIT
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- FEATURE MENU -->
+
+    <div
+        class="ultimate-overlay"
+        id="featureMenu">
+
+        <div
+            class="ultimate-panel"
+            id="featureContent">
+        </div>
+
+    </div>
+
+    <!-- GAME OVER -->
+
+    <div
+        class="ultimate-overlay"
+        id="gameOverMenu">
+
+        <div class="ultimate-panel">
+
+            <h2 style="color:#ff6378">
                 GAME OVER
             </h2>
 
-            <p id="overlayText">
-                Musuh berhasil menangkap Knight.
+            <p id="finalScore">
+                Skor akhir: 0
             </p>
 
-            <button
-                id="restartButton"
-                class="game-btn">
-                🔄 Main Lagi
-            </button>
+            <div class="menu-grid">
+
+                <button
+                    class="primary"
+                    id="restartGameBtn">
+                    🔄 MAIN LAGI
+                </button>
+
+                <button
+                    id="exitGameBtn">
+                    🏠 MENU UTAMA
+                </button>
+
+            </div>
 
         </div>
 
@@ -537,39 +914,50 @@ body::before {
 
 <div class="instructions">
 
-    <p>
-        🎮 Gunakan
-        <strong>WASD</strong>
-        atau
-        <strong>Tombol Panah</strong>
-        untuk bergerak.
-    </p>
+    🎮
+    <strong>WASD</strong>
+    /
+    <strong>Arrow</strong>
+    =
+    Gerak
+    &nbsp; • &nbsp;
 
-    <p>
-        💎 Ambil Kristal Kuning
-        <strong>+10</strong>
-        dan hindari Musuh Merah!
-    </p>
+    ⚔️
+    <strong>SPACE</strong>
+    =
+    Serang
+    &nbsp; • &nbsp;
+
+    ⏸
+    ESC
+    =
+    Pause
 
 </div>
 
-<!-- MOBILE TOUCH CONTROLS -->
-
 <div class="mobile-controls">
 
-    <button class="touch-btn up" data-key="ArrowUp">
+    <button
+        class="touch-btn up"
+        data-key="ArrowUp">
         ▲
     </button>
 
-    <button class="touch-btn left" data-key="ArrowLeft">
+    <button
+        class="touch-btn left"
+        data-key="ArrowLeft">
         ◀
     </button>
 
-    <button class="touch-btn down" data-key="ArrowDown">
+    <button
+        class="touch-btn down"
+        data-key="ArrowDown">
         ▼
     </button>
 
-    <button class="touch-btn right" data-key="ArrowRight">
+    <button
+        class="touch-btn right"
+        data-key="ArrowRight">
         ▶
     </button>
 
@@ -581,39 +969,40 @@ body::before {
    CANVAS
 ========================================================= */
 
-const canvas = document.getElementById("gameCanvas");
-const ctx = canvas.getContext("2d");
+const canvas =
+    document.getElementById(
+        "gameCanvas"
+    );
 
-const scoreText = document.getElementById("scoreText");
-const healthFill = document.getElementById("healthFill");
-
-const overlay = document.getElementById("overlay");
-const overlayTitle = document.getElementById("overlayTitle");
-const overlayText = document.getElementById("overlayText");
-
-const pauseButton = document.getElementById("pauseButton");
-const restartButton = document.getElementById("restartButton");
+const ctx =
+    canvas.getContext("2d");
 
 
 /* =========================================================
-   GAME CONFIG
+   COLORS
 ========================================================= */
 
-const COLOR_KNIGHT = "#29a9ff";
-const COLOR_CRYSTAL = "#ffe600";
-const COLOR_ENEMY = "#ff4f5e";
+const COLOR_BG =
+    "#050914";
+
+const COLOR_KNIGHT =
+    "#249cff";
+
+const COLOR_CRYSTAL =
+    "#ffe033";
+
+const COLOR_ENEMY =
+    "#ff4055";
+
+const COLOR_TEXT =
+    "#ecf0f1";
+
+
+/* =========================================================
+   KEYS
+========================================================= */
 
 const keys = {};
-
-let score = 0;
-let gameOver = false;
-let paused = false;
-
-let health = 100;
-
-let lastTime = performance.now();
-
-let screenShake = 0;
 
 
 /* =========================================================
@@ -622,14 +1011,22 @@ let screenShake = 0;
 
 const player = {
 
-    x: canvas.width / 2 - 20,
-    y: canvas.height / 2 - 20,
+    x:
+        canvas.width / 2 - 20,
 
-    size: 40,
+    y:
+        canvas.height / 2 - 20,
 
-    speed: 5,
+    size:
+        40,
 
-    tail: []
+    speed:
+        5,
+
+    tail: [],
+
+    color:
+        COLOR_KNIGHT
 
 };
 
@@ -641,11 +1038,10 @@ const player = {
 const crystal = {
 
     x: 0,
+
     y: 0,
 
-    size: 22,
-
-    pulse: 0
+    size: 22
 
 };
 
@@ -657,15 +1053,39 @@ const crystal = {
 const enemy = {
 
     x: 0,
+
     y: 0,
 
     size: 38,
 
-    speed: 1.65,
+    speed: 1.6,
+
+    hp: 100,
+
+    maxHp: 100,
 
     hitFlash: 0
 
 };
+
+
+/* =========================================================
+   GAME STATE
+========================================================= */
+
+let score = 0;
+
+let health = 100;
+
+let gameOver = false;
+
+let paused = false;
+
+let lastTime = 0;
+
+let screenShake = 0;
+
+let playing = false;
 
 
 /* =========================================================
@@ -681,18 +1101,30 @@ const particles = [];
 
 const stars = [];
 
-for (let i = 0; i < 100; i++) {
+for (
+    let i = 0;
+    i < 120;
+    i++
+) {
 
     stars.push({
 
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
+        x:
+            Math.random() *
+            canvas.width,
 
-        size: Math.random() * 2 + 0.4,
+        y:
+            Math.random() *
+            canvas.height,
 
-        alpha: Math.random() * 0.7 + 0.2,
+        size:
+            Math.random() * 2 + 0.5,
 
-        speed: Math.random() * 0.3 + 0.05
+        speed:
+            Math.random() * 0.5 + 0.1,
+
+        alpha:
+            Math.random() * 0.7 + 0.2
 
     });
 
@@ -700,35 +1132,66 @@ for (let i = 0; i < 100; i++) {
 
 
 /* =========================================================
-   RESET POSITIONS
+   RANDOM POSITION
+========================================================= */
+
+function randomPosition(
+    size
+) {
+
+    return {
+
+        x:
+            20 +
+            Math.random() *
+            (
+                canvas.width -
+                size -
+                40
+            ),
+
+        y:
+            20 +
+            Math.random() *
+            (
+                canvas.height -
+                size -
+                40
+            )
+
+    };
+
+}
+
+
+/* =========================================================
+   RESET
 ========================================================= */
 
 function resetPositions() {
 
+    let c =
+        randomPosition(
+            crystal.size
+        );
+
     crystal.x =
-        Math.floor(
-            Math.random() *
-            (canvas.width - crystal.size - 40)
-        ) + 20;
+        c.x;
 
     crystal.y =
-        Math.floor(
-            Math.random() *
-            (canvas.height - crystal.size - 40)
-        ) + 20;
+        c.y;
 
+
+    let e =
+        randomPosition(
+            enemy.size
+        );
 
     enemy.x =
-        Math.floor(
-            Math.random() *
-            (canvas.width - enemy.size - 40)
-        ) + 20;
+        e.x;
 
     enemy.y =
-        Math.floor(
-            Math.random() *
-            (canvas.height - enemy.size - 40)
-        ) + 20;
+        e.y;
 
 }
 
@@ -753,19 +1216,15 @@ function restartGame() {
 
     health = 100;
 
+    enemy.hp =
+        enemy.maxHp;
+
+    enemy.hitFlash =
+        0;
+
     gameOver = false;
 
-    paused = false;
-
-    particles.length = 0;
-
-    screenShake = 0;
-
     resetPositions();
-
-    overlay.classList.remove("active");
-
-    pauseButton.textContent = "⏸ Pause";
 
     updateHUD();
 
@@ -773,119 +1232,27 @@ function restartGame() {
 
 
 /* =========================================================
-   KEYBOARD
-========================================================= */
-
-window.addEventListener("keydown", (e) => {
-
-    keys[e.key] = true;
-
-    if (
-        [
-            "ArrowUp",
-            "ArrowDown",
-            "ArrowLeft",
-            "ArrowRight",
-            " "
-        ].includes(e.key)
-    ) {
-        e.preventDefault();
-    }
-
-    if (
-        gameOver &&
-        (
-            e.key === "r" ||
-            e.key === "R"
-        )
-    ) {
-        restartGame();
-    }
-
-    if (
-        e.key === "Escape" &&
-        !gameOver
-    ) {
-        togglePause();
-    }
-
-});
-
-
-window.addEventListener("keyup", (e) => {
-
-    keys[e.key] = false;
-
-});
-
-
-/* =========================================================
-   TOUCH CONTROL
-========================================================= */
-
-document.querySelectorAll(".touch-btn").forEach(button => {
-
-    const key = button.dataset.key;
-
-
-    function press(e) {
-
-        e.preventDefault();
-
-        keys[key] = true;
-
-    }
-
-
-    function release(e) {
-
-        e.preventDefault();
-
-        keys[key] = false;
-
-    }
-
-
-    button.addEventListener(
-        "touchstart",
-        press,
-        { passive: false }
-    );
-
-    button.addEventListener(
-        "touchend",
-        release,
-        { passive: false }
-    );
-
-    button.addEventListener(
-        "touchcancel",
-        release,
-        { passive: false }
-    );
-
-});
-
-
-/* =========================================================
    COLLISION
 ========================================================= */
 
-function checkCollision(rect1, rect2) {
+function checkCollision(
+    a,
+    b
+) {
 
     return (
 
-        rect1.x <
-        rect2.x + rect2.size &&
+        a.x <
+        b.x + b.size &&
 
-        rect1.x + rect1.size >
-        rect2.x &&
+        a.x + a.size >
+        b.x &&
 
-        rect1.y <
-        rect2.y + rect2.size &&
+        a.y <
+        b.y + b.size &&
 
-        rect1.y + rect1.size >
-        rect2.y
+        a.y + a.size >
+        b.y
 
     );
 
@@ -893,30 +1260,36 @@ function checkCollision(rect1, rect2) {
 
 
 /* =========================================================
-   PARTICLE CREATOR
+   PARTICLES
 ========================================================= */
 
 function createParticles(
     x,
     y,
     amount,
-    type = "crystal"
+    type = "normal"
 ) {
 
-    for (let i = 0; i < amount; i++) {
+    for (
+        let i = 0;
+        i < amount;
+        i++
+    ) {
 
-        let angle =
+        const angle =
             Math.random() *
             Math.PI *
             2;
 
-        let speed =
-            Math.random() * 4 + 1;
+        const speed =
+            Math.random() * 4 +
+            1;
 
         particles.push({
 
-            x,
-            y,
+            x: x,
+
+            y: y,
 
             vx:
                 Math.cos(angle) *
@@ -929,9 +1302,11 @@ function createParticles(
             life: 1,
 
             size:
-                Math.random() * 4 + 2,
+                Math.random() * 4 +
+                2,
 
-            type
+            type:
+                type
 
         });
 
@@ -947,24 +1322,38 @@ function createParticles(
 function updateParticles() {
 
     for (
-        let i = particles.length - 1;
+        let i =
+            particles.length - 1;
         i >= 0;
         i--
     ) {
 
-        const p = particles[i];
+        const p =
+            particles[i];
 
-        p.x += p.vx;
-        p.y += p.vy;
+        p.x +=
+            p.vx;
 
-        p.vx *= 0.96;
-        p.vy *= 0.96;
+        p.y +=
+            p.vy;
 
-        p.life -= 0.025;
+        p.vx *=
+            0.96;
 
-        if (p.life <= 0) {
+        p.vy *=
+            0.96;
 
-            particles.splice(i, 1);
+        p.life -=
+            0.025;
+
+        if (
+            p.life <= 0
+        ) {
+
+            particles.splice(
+                i,
+                1
+            );
 
         }
 
@@ -974,45 +1363,397 @@ function updateParticles() {
 
 
 /* =========================================================
-   DRAW PARTICLES
+   UPDATE HUD
 ========================================================= */
 
-function drawParticles() {
+function updateHUD() {
 
-    particles.forEach(p => {
+    document.getElementById(
+        "scoreDisplay"
+    ).textContent =
+        score;
 
-        ctx.save();
+    document.getElementById(
+        "healthFill"
+    ).style.width =
+        Math.max(
+            0,
+            health
+        ) + "%";
 
-        ctx.globalAlpha = p.life;
+}
 
-        if (p.type === "damage") {
 
-            ctx.fillStyle = "#ff4055";
+/* =========================================================
+   DAMAGE
+========================================================= */
 
-        } else {
+function takeDamage() {
 
-            ctx.fillStyle = "#ffe600";
+    health -= 20;
+
+    player.color =
+        "#ff4055";
+
+    screenShake =
+        12;
+
+    createParticles(
+        player.x + 20,
+        player.y + 20,
+        20,
+        "damage"
+    );
+
+    setTimeout(
+        () => {
+
+            player.color =
+                COLOR_KNIGHT;
+
+        },
+        200
+    );
+
+    updateHUD();
+
+    if (
+        health <= 0
+    ) {
+
+        health = 0;
+
+        gameOver = true;
+
+        document.getElementById(
+            "finalScore"
+        ).textContent =
+            "Skor akhir: " +
+            score;
+
+        document.getElementById(
+            "gameOverMenu"
+        ).classList.add(
+            "show"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   ENEMY DAMAGE
+========================================================= */
+
+function damageEnemy() {
+
+    enemy.hp -= 25;
+
+    enemy.hitFlash = 10;
+
+    screenShake = 8;
+
+    createParticles(
+        enemy.x + 19,
+        enemy.y + 19,
+        18,
+        "damage"
+    );
+
+    if (
+        enemy.hp <= 0
+    ) {
+
+        enemy.hp = 0;
+
+        score += 25;
+
+        createParticles(
+            enemy.x + 19,
+            enemy.y + 19,
+            35,
+            "damage"
+        );
+
+        setTimeout(
+            () => {
+
+                const e =
+                    randomPosition(
+                        enemy.size
+                    );
+
+                enemy.x =
+                    e.x;
+
+                enemy.y =
+                    e.y;
+
+                enemy.hp =
+                    enemy.maxHp;
+
+            },
+            1000
+        );
+
+    }
+
+    updateHUD();
+
+}
+
+
+/* =========================================================
+   UPDATE GAME
+========================================================= */
+
+function update() {
+
+    if (
+        paused ||
+        gameOver ||
+        !playing
+    ) {
+
+        return;
+
+    }
+
+
+    let dx = 0;
+
+    let dy = 0;
+
+
+    if (
+        keys["ArrowLeft"] ||
+        keys["a"] ||
+        keys["A"]
+    ) {
+
+        dx--;
+
+    }
+
+
+    if (
+        keys["ArrowRight"] ||
+        keys["d"] ||
+        keys["D"]
+    ) {
+
+        dx++;
+
+    }
+
+
+    if (
+        keys["ArrowUp"] ||
+        keys["w"] ||
+        keys["W"]
+    ) {
+
+        dy--;
+
+    }
+
+
+    if (
+        keys["ArrowDown"] ||
+        keys["s"] ||
+        keys["S"]
+    ) {
+
+        dy++;
+
+    }
+
+
+    if (
+        dx !== 0 ||
+        dy !== 0
+    ) {
+
+        const length =
+            Math.hypot(
+                dx,
+                dy
+            );
+
+        dx /= length;
+
+        dy /= length;
+
+        player.x +=
+            dx *
+            player.speed;
+
+        player.y +=
+            dy *
+            player.speed;
+
+
+        player.tail.unshift({
+
+            x:
+                player.x +
+                player.size / 2,
+
+            y:
+                player.y +
+                player.size / 2
+
+        });
+
+
+        if (
+            player.tail.length >
+            22
+        ) {
+
+            player.tail.pop();
 
         }
 
-        ctx.shadowBlur = 15;
-        ctx.shadowColor = ctx.fillStyle;
+    } else {
 
-        ctx.beginPath();
+        if (
+            player.tail.length >
+            0
+        ) {
 
-        ctx.arc(
-            p.x,
-            p.y,
-            p.size,
-            0,
-            Math.PI * 2
+            player.tail.pop();
+
+        }
+
+    }
+
+
+    player.x =
+        Math.max(
+            10,
+            Math.min(
+                canvas.width -
+                player.size -
+                10,
+                player.x
+            )
         );
 
-        ctx.fill();
 
-        ctx.restore();
+    player.y =
+        Math.max(
+            10,
+            Math.min(
+                canvas.height -
+                player.size -
+                10,
+                player.y
+            )
+        );
 
-    });
+
+    /* ENEMY AI */
+
+    const ex =
+        player.x -
+        enemy.x;
+
+    const ey =
+        player.y -
+        enemy.y;
+
+    const distance =
+        Math.hypot(
+            ex,
+            ey
+        );
+
+
+    if (
+        distance > 1
+    ) {
+
+        enemy.x +=
+            (ex / distance) *
+            enemy.speed;
+
+        enemy.y +=
+            (ey / distance) *
+            enemy.speed;
+
+    }
+
+
+    if (
+        checkCollision(
+            player,
+            crystal
+        )
+    ) {
+
+        score += 10;
+
+        createParticles(
+            crystal.x + 11,
+            crystal.y + 11,
+            25,
+            "crystal"
+        );
+
+        const c =
+            randomPosition(
+                crystal.size
+            );
+
+        crystal.x =
+            c.x;
+
+        crystal.y =
+            c.y;
+
+        updateHUD();
+
+    }
+
+
+    if (
+        checkCollision(
+            player,
+            enemy
+        )
+    ) {
+
+        takeDamage();
+
+    }
+
+
+    if (
+        enemy.hitFlash > 0
+    ) {
+
+        enemy.hitFlash--;
+
+    }
+
+
+    if (
+        screenShake > 0
+    ) {
+
+        screenShake *= 0.85;
+
+        if (
+            screenShake < 0.3
+        ) {
+
+            screenShake = 0;
+
+        }
+
+    }
 
 }
 
@@ -1021,26 +1762,47 @@ function drawParticles() {
    BACKGROUND
 ========================================================= */
 
-function drawBackground(time) {
+function drawBackground(
+    time
+) {
+
+    ctx.save();
+
+
+    if (
+        screenShake > 0
+    ) {
+
+        ctx.translate(
+            (Math.random() - .5) *
+            screenShake,
+
+            (Math.random() - .5) *
+            screenShake
+        );
+
+    }
+
 
     const gradient =
         ctx.createRadialGradient(
             canvas.width / 2,
             canvas.height / 2,
-            50,
+            20,
+
             canvas.width / 2,
             canvas.height / 2,
-            canvas.width
+            canvas.height
         );
 
     gradient.addColorStop(
         0,
-        "#10264b"
+        "#102d50"
     );
 
     gradient.addColorStop(
         0.55,
-        "#071225"
+        "#071326"
     );
 
     gradient.addColorStop(
@@ -1048,7 +1810,9 @@ function drawBackground(time) {
         "#02050d"
     );
 
-    ctx.fillStyle = gradient;
+
+    ctx.fillStyle =
+        gradient;
 
     ctx.fillRect(
         0,
@@ -1060,25 +1824,28 @@ function drawBackground(time) {
 
     /* GRID */
 
-    ctx.save();
+    ctx.globalAlpha =
+        0.13;
 
-    ctx.globalAlpha = 0.16;
+    ctx.strokeStyle =
+        "#45cfff";
 
-    ctx.strokeStyle = "#42bfff";
+    ctx.lineWidth =
+        1;
 
-    ctx.lineWidth = 1;
-
-    const gridSize = 45;
 
     for (
         let x = 0;
         x < canvas.width;
-        x += gridSize
+        x += 45
     ) {
 
         ctx.beginPath();
 
-        ctx.moveTo(x, 0);
+        ctx.moveTo(
+            x,
+            0
+        );
 
         ctx.lineTo(
             x,
@@ -1093,12 +1860,15 @@ function drawBackground(time) {
     for (
         let y = 0;
         y < canvas.height;
-        y += gridSize
+        y += 45
     ) {
 
         ctx.beginPath();
 
-        ctx.moveTo(0, y);
+        ctx.moveTo(
+            0,
+            y
+        );
 
         ctx.lineTo(
             canvas.width,
@@ -1109,62 +1879,67 @@ function drawBackground(time) {
 
     }
 
-    ctx.restore();
+
+    ctx.globalAlpha =
+        1;
 
 
     /* STARS */
 
-    stars.forEach(star => {
+    stars.forEach(
+        star => {
 
-        star.y += star.speed;
+            star.y +=
+                star.speed;
 
-        if (star.y > canvas.height) {
+            if (
+                star.y >
+                canvas.height
+            ) {
 
-            star.y = 0;
+                star.y = 0;
+
+            }
+
+
+            ctx.globalAlpha =
+                star.alpha *
+                (
+                    0.65 +
+                    Math.sin(
+                        time * 0.002 +
+                        star.x
+                    ) *
+                    0.35
+                );
+
+            ctx.fillStyle =
+                "#d8f7ff";
+
+            ctx.beginPath();
+
+            ctx.arc(
+                star.x,
+                star.y,
+                star.size,
+                0,
+                Math.PI * 2
+            );
+
+            ctx.fill();
 
         }
+    );
 
-        const twinkle =
-            0.5 +
-            Math.sin(
-                time * 0.002 +
-                star.x
-            ) *
-            0.3;
 
-        ctx.save();
-
-        ctx.globalAlpha =
-            star.alpha *
-            twinkle;
-
-        ctx.fillStyle = "#bfeeff";
-
-        ctx.beginPath();
-
-        ctx.arc(
-            star.x,
-            star.y,
-            star.size,
-            0,
-            Math.PI * 2
-        );
-
-        ctx.fill();
-
-        ctx.restore();
-
-    });
+    ctx.globalAlpha =
+        1;
 
 
     /* ARENA BORDER */
 
-    ctx.save();
-
     ctx.strokeStyle =
-        "rgba(70,210,255,0.28)";
-
-    ctx.lineWidth = 2;
+        "#50dfff55";
 
     ctx.strokeRect(
         8,
@@ -1173,24 +1948,19 @@ function drawBackground(time) {
         canvas.height - 16
     );
 
+
     ctx.restore();
 
 }
 
 
 /* =========================================================
-   DRAW CRYSTAL
+   CRYSTAL
 ========================================================= */
 
-function drawCrystal(time) {
-
-    const pulse =
-        Math.sin(time * 0.005) * 3;
-
-    const size =
-        crystal.size +
-        pulse;
-
+function drawCrystal(
+    time
+) {
 
     const cx =
         crystal.x +
@@ -1201,40 +1971,44 @@ function drawCrystal(time) {
         crystal.size / 2;
 
 
+    const pulse =
+        Math.sin(
+            time * 0.006
+        ) *
+        4;
+
+
     ctx.save();
 
-    /* Glow */
-
-    ctx.shadowBlur = 25;
+    ctx.shadowBlur =
+        30;
 
     ctx.shadowColor =
-        COLOR_CRYSTAL;
-
-
-    /* Diamond */
+        "#ffe600";
 
     ctx.fillStyle =
-        COLOR_CRYSTAL;
+        "#ffe033";
+
 
     ctx.beginPath();
 
     ctx.moveTo(
         cx,
-        cy - size
+        cy - 18 - pulse
     );
 
     ctx.lineTo(
-        cx + size * 0.65,
+        cx + 13,
         cy
     );
 
     ctx.lineTo(
         cx,
-        cy + size
+        cy + 18 + pulse
     );
 
     ctx.lineTo(
-        cx - size * 0.65,
+        cx - 13,
         cy
     );
 
@@ -1243,38 +2017,38 @@ function drawCrystal(time) {
     ctx.fill();
 
 
-    /* Inner shine */
-
-    ctx.shadowBlur = 0;
-
     ctx.fillStyle =
-        "rgba(255,255,255,0.8)";
+        "#fff5a0";
+
+    ctx.globalAlpha =
+        0.8;
 
     ctx.beginPath();
 
     ctx.moveTo(
         cx,
-        cy - size * 0.65
+        cy - 12
     );
 
     ctx.lineTo(
-        cx + size * 0.25,
+        cx + 6,
         cy
     );
 
     ctx.lineTo(
         cx,
-        cy + size * 0.15
+        cy + 4
     );
 
     ctx.lineTo(
-        cx - size * 0.25,
+        cx - 6,
         cy
     );
 
     ctx.closePath();
 
     ctx.fill();
+
 
     ctx.restore();
 
@@ -1282,10 +2056,12 @@ function drawCrystal(time) {
 
 
 /* =========================================================
-   DRAW PLAYER
+   PLAYER
 ========================================================= */
 
-function drawPlayer(time) {
+function drawPlayer(
+    time
+) {
 
     const cx =
         player.x +
@@ -1301,7 +2077,8 @@ function drawPlayer(time) {
     ctx.save();
 
     for (
-        let i = player.tail.length - 1;
+        let i =
+            player.tail.length - 1;
         i >= 0;
         i--
     ) {
@@ -1327,7 +2104,8 @@ function drawPlayer(time) {
         ctx.fillStyle =
             "#249cff";
 
-        ctx.shadowBlur = 15;
+        ctx.shadowBlur =
+            15;
 
         ctx.shadowColor =
             "#249cff";
@@ -1353,13 +2131,22 @@ function drawPlayer(time) {
 
     ctx.save();
 
-    ctx.shadowBlur = 30;
+    const pulse =
+        Math.sin(
+            time * 0.006
+        );
+
+
+    ctx.shadowBlur =
+        30 +
+        pulse * 8;
 
     ctx.shadowColor =
-        COLOR_KNIGHT;
+        player.color;
 
     ctx.fillStyle =
-        COLOR_KNIGHT;
+        player.color;
+
 
     /* Body */
 
@@ -1378,7 +2165,8 @@ function drawPlayer(time) {
 
     /* Shield */
 
-    ctx.shadowBlur = 0;
+    ctx.shadowBlur =
+        0;
 
     ctx.fillStyle =
         "#bcecff";
@@ -1391,13 +2179,15 @@ function drawPlayer(time) {
     );
 
     ctx.lineTo(
-        player.x + player.size - 8,
+        player.x +
+        player.size - 8,
         cy - 3
     );
 
     ctx.lineTo(
         cx,
-        player.y + player.size - 6
+        player.y +
+        player.size - 6
     );
 
     ctx.lineTo(
@@ -1436,12 +2226,13 @@ function drawPlayer(time) {
     );
 
 
-    /* Eye */
+    /* Eyes */
 
     ctx.fillStyle =
         "#5ff2ff";
 
-    ctx.shadowBlur = 8;
+    ctx.shadowBlur =
+        8;
 
     ctx.shadowColor =
         "#5ff2ff";
@@ -1463,14 +2254,45 @@ function drawPlayer(time) {
 
     ctx.restore();
 
+
+    /* PLAYER RING */
+
+    ctx.save();
+
+    ctx.globalAlpha =
+        0.35;
+
+    ctx.strokeStyle =
+        "#5de9ff";
+
+    ctx.lineWidth =
+        1.5;
+
+    ctx.beginPath();
+
+    ctx.arc(
+        cx,
+        cy,
+        28 +
+        pulse * 3,
+        0,
+        Math.PI * 2
+    );
+
+    ctx.stroke();
+
+    ctx.restore();
+
 }
 
 
 /* =========================================================
-   DRAW ENEMY
+   ENEMY
 ========================================================= */
 
-function drawEnemy(time) {
+function drawEnemy(
+    time
+) {
 
     const cx =
         enemy.x +
@@ -1481,13 +2303,10 @@ function drawEnemy(time) {
         enemy.size / 2;
 
 
-    const pulse =
-        Math.sin(time * 0.006) * 2;
-
-
     ctx.save();
 
-    ctx.shadowBlur = 25;
+    ctx.shadowBlur =
+        28;
 
     ctx.shadowColor =
         COLOR_ENEMY;
@@ -1501,112 +2320,107 @@ function drawEnemy(time) {
     ctx.beginPath();
 
     ctx.roundRect(
-        enemy.x - pulse / 2,
-        enemy.y - pulse / 2,
-        enemy.size + pulse,
-        enemy.size + pulse,
+        enemy.x,
+        enemy.y,
+        enemy.size,
+        enemy.size,
         9
     );
 
     ctx.fill();
 
 
-    /* Horns */
+    /* EYES */
 
-    ctx.shadowBlur = 0;
-
-    ctx.fillStyle =
-        "#ff8c96";
-
-    ctx.beginPath();
-
-    ctx.moveTo(
-        enemy.x + 7,
-        enemy.y + 8
-    );
-
-    ctx.lineTo(
-        enemy.x + 2,
-        enemy.y - 3
-    );
-
-    ctx.lineTo(
-        enemy.x + 16,
-        enemy.y + 7
-    );
-
-    ctx.fill();
-
-
-    ctx.beginPath();
-
-    ctx.moveTo(
-        enemy.x + enemy.size - 7,
-        enemy.y + 8
-    );
-
-    ctx.lineTo(
-        enemy.x + enemy.size - 2,
-        enemy.y - 3
-    );
-
-    ctx.lineTo(
-        enemy.x + enemy.size - 16,
-        enemy.y + 7
-    );
-
-    ctx.fill();
-
-
-    /* Eyes */
+    ctx.shadowBlur =
+        0;
 
     ctx.fillStyle =
-        "#fff";
+        "#ffffff";
 
     ctx.fillRect(
-        cx - 11,
-        cy - 5,
+        enemy.x + 8,
+        enemy.y + 12,
         7,
         5
     );
 
     ctx.fillRect(
-        cx + 4,
-        cy - 5,
+        enemy.x + 23,
+        enemy.y + 12,
         7,
         5
     );
 
 
     ctx.fillStyle =
-        "#18060a";
+        "#25070b";
 
     ctx.fillRect(
-        cx - 8,
-        cy - 4,
+        enemy.x + 11,
+        enemy.y + 13,
         3,
         4
     );
 
     ctx.fillRect(
-        cx + 7,
-        cy - 4,
+        enemy.x + 26,
+        enemy.y + 13,
         3,
         4
     );
 
 
-    /* Mouth */
+    /* HP BAR */
 
     ctx.fillStyle =
-        "#26060a";
+        "#25070b";
 
     ctx.fillRect(
-        cx - 10,
-        cy + 8,
-        20,
+        enemy.x,
+        enemy.y - 10,
+        enemy.size,
         5
     );
+
+    ctx.fillStyle =
+        "#ff7080";
+
+    ctx.fillRect(
+        enemy.x,
+        enemy.y - 10,
+        enemy.size *
+        (
+            enemy.hp /
+            enemy.maxHp
+        ),
+        5
+    );
+
+
+    /* AURA */
+
+    ctx.globalAlpha =
+        0.25;
+
+    ctx.strokeStyle =
+        "#ff4055";
+
+    ctx.beginPath();
+
+    ctx.arc(
+        cx,
+        cy,
+        29 +
+        Math.sin(
+            time * 0.005
+        ) *
+        3,
+        0,
+        Math.PI * 2
+    );
+
+    ctx.stroke();
 
 
     ctx.restore();
@@ -1615,466 +2429,102 @@ function drawEnemy(time) {
 
 
 /* =========================================================
-   PLAYER TRAIL UPDATE
+   PARTICLES
 ========================================================= */
 
-function updateTail() {
+function drawParticles() {
 
-    player.tail.unshift({
+    particles.forEach(
+        particle => {
 
-        x:
-            player.x +
-            player.size / 2,
+            ctx.save();
 
-        y:
-            player.y +
-            player.size / 2
+            ctx.globalAlpha =
+                particle.life;
 
-    });
 
-
-    const maxTail = 18;
-
-    if (
-        player.tail.length >
-        maxTail
-    ) {
-
-        player.tail.pop();
-
-    }
-
-}
-
-
-/* =========================================================
-   UPDATE GAME
-========================================================= */
-
-function update() {
-
-    if (
-        gameOver ||
-        paused
-    ) {
-        return;
-    }
-
-
-    /* PLAYER MOVEMENT */
-
-    let moving = false;
-
-
-    if (
-        keys["ArrowLeft"] ||
-        keys["a"] ||
-        keys["A"]
-    ) {
-
-        player.x -= player.speed;
-
-        moving = true;
-
-    }
-
-
-    if (
-        keys["ArrowRight"] ||
-        keys["d"] ||
-        keys["D"]
-    ) {
-
-        player.x += player.speed;
-
-        moving = true;
-
-    }
-
-
-    if (
-        keys["ArrowUp"] ||
-        keys["w"] ||
-        keys["W"]
-    ) {
-
-        player.y -= player.speed;
-
-        moving = true;
-
-    }
-
-
-    if (
-        keys["ArrowDown"] ||
-        keys["s"] ||
-        keys["S"]
-    ) {
-
-        player.y += player.speed;
-
-        moving = true;
-
-    }
-
-
-    /* LIMIT PLAYER */
-
-    player.x = Math.max(
-        12,
-        Math.min(
-            canvas.width -
-            player.size -
-            12,
-            player.x
-        )
-    );
-
-    player.y = Math.max(
-        12,
-        Math.min(
-            canvas.height -
-            player.size -
-            12,
-            player.y
-        )
-    );
-
-
-    if (moving) {
-
-        updateTail();
-
-    } else if (
-        player.tail.length > 0
-    ) {
-
-        player.tail.pop();
-
-    }
-
-
-    /* ENEMY AI */
-
-    if (enemy.x < player.x) {
-
-        enemy.x += enemy.speed;
-
-    } else if (
-        enemy.x > player.x
-    ) {
-
-        enemy.x -= enemy.speed;
-
-    }
-
-
-    if (enemy.y < player.y) {
-
-        enemy.y += enemy.speed;
-
-    } else if (
-        enemy.y > player.y
-    ) {
-
-        enemy.y -= enemy.speed;
-
-    }
-
-
-    /* CRYSTAL COLLISION */
-
-    if (
-        checkCollision(
-            player,
-            crystal
-        )
-    ) {
-
-        score += 10;
-
-        createParticles(
-            crystal.x +
-            crystal.size / 2,
-
-            crystal.y +
-            crystal.size / 2,
-
-            25,
-
-            "crystal"
-        );
-
-        crystal.x =
-            Math.floor(
-                Math.random() *
-                (
-                    canvas.width -
-                    crystal.size -
-                    40
-                )
-            ) + 20;
-
-        crystal.y =
-            Math.floor(
-                Math.random() *
-                (
-                    canvas.height -
-                    crystal.size -
-                    40
-                )
-            ) + 20;
-
-        updateHUD();
-
-    }
-
-
-    /* ENEMY COLLISION */
-
-    if (
-        checkCollision(
-            player,
-            enemy
-        )
-    ) {
-
-        health -= 1.8;
-
-        enemy.hitFlash = 6;
-
-        screenShake = 8;
-
-        createParticles(
-            player.x +
-            player.size / 2,
-
-            player.y +
-            player.size / 2,
-
-            3,
-
-            "damage"
-        );
-
-        if (health <= 0) {
-
-            health = 0;
-
-            gameOver = true;
-
-            createParticles(
-                player.x +
-                player.size / 2,
-
-                player.y +
-                player.size / 2,
-
-                40,
-
+            if (
+                particle.type ===
                 "damage"
+            ) {
+
+                ctx.fillStyle =
+                    "#ff4055";
+
+                ctx.shadowColor =
+                    "#ff4055";
+
+            } else if (
+                particle.type ===
+                "crystal"
+            ) {
+
+                ctx.fillStyle =
+                    "#ffe600";
+
+                ctx.shadowColor =
+                    "#ffe600";
+
+            } else {
+
+                ctx.fillStyle =
+                    "#55e8ff";
+
+                ctx.shadowColor =
+                    "#55e8ff";
+
+            }
+
+
+            ctx.shadowBlur =
+                15;
+
+
+            ctx.beginPath();
+
+            ctx.arc(
+                particle.x,
+                particle.y,
+                particle.size,
+                0,
+                Math.PI * 2
             );
 
-            showGameOver();
+            ctx.fill();
+
+            ctx.restore();
 
         }
-
-        updateHUD();
-
-    }
-
-
-    if (
-        enemy.hitFlash > 0
-    ) {
-
-        enemy.hitFlash--;
-
-    }
-
-}
-
-
-/* =========================================================
-   HUD
-========================================================= */
-
-function updateHUD() {
-
-    scoreText.textContent =
-        score;
-
-    healthFill.style.width =
-        Math.max(
-            0,
-            health
-        ) + "%";
-
-}
-
-
-/* =========================================================
-   GAME OVER
-========================================================= */
-
-function showGameOver() {
-
-    overlayTitle.textContent =
-        "GAME OVER";
-
-    overlayText.textContent =
-        `Skor Akhir: ${score} • Tekan R untuk bermain lagi`;
-
-    overlay.classList.add(
-        "active"
     );
 
 }
-
-
-/* =========================================================
-   PAUSE
-========================================================= */
-
-function togglePause() {
-
-    if (gameOver) {
-        return;
-    }
-
-    paused = !paused;
-
-    if (paused) {
-
-        pauseButton.textContent =
-            "▶ Resume";
-
-        overlayTitle.textContent =
-            "GAME PAUSED";
-
-        overlayText.textContent =
-            "Game sedang dijeda.";
-
-        overlay.classList.add(
-            "active"
-        );
-
-    } else {
-
-        pauseButton.textContent =
-            "⏸ Pause";
-
-        overlay.classList.remove(
-            "active"
-        );
-
-    }
-
-}
-
-
-/* =========================================================
-   PAUSE BUTTON
-========================================================= */
-
-pauseButton.addEventListener(
-    "click",
-    togglePause
-);
-
-
-/* =========================================================
-   RESTART BUTTON
-========================================================= */
-
-restartButton.addEventListener(
-    "click",
-    restartGame
-);
 
 
 /* =========================================================
    DRAW
 ========================================================= */
 
-function draw(time) {
+function draw(
+    time
+) {
 
-    ctx.save();
+    drawBackground(
+        time
+    );
 
+    drawCrystal(
+        time
+    );
 
-    /* SCREEN SHAKE */
+    drawPlayer(
+        time
+    );
 
-    if (screenShake > 0) {
-
-        const sx =
-            (Math.random() - 0.5) *
-            screenShake;
-
-        const sy =
-            (Math.random() - 0.5) *
-            screenShake;
-
-        ctx.translate(
-            sx,
-            sy
-        );
-
-        screenShake *= 0.88;
-
-        if (screenShake < 0.2) {
-
-            screenShake = 0;
-
-        }
-
-    }
-
-
-    drawBackground(time);
-
-    drawCrystal(time);
-
-    drawPlayer(time);
-
-    drawEnemy(time);
+    drawEnemy(
+        time
+    );
 
     drawParticles();
-
-
-    /* VIGNETTE */
-
-    const vignette =
-        ctx.createRadialGradient(
-            canvas.width / 2,
-            canvas.height / 2,
-            canvas.height * 0.25,
-            canvas.width / 2,
-            canvas.height / 2,
-            canvas.height * 0.75
-        );
-
-    vignette.addColorStop(
-        0,
-        "rgba(0,0,0,0)"
-    );
-
-    vignette.addColorStop(
-        1,
-        "rgba(0,0,0,0.55)"
-    );
-
-    ctx.fillStyle =
-        vignette;
-
-    ctx.fillRect(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-    );
-
-
-    ctx.restore();
 
 }
 
@@ -2083,27 +2533,2063 @@ function draw(time) {
    GAME LOOP
 ========================================================= */
 
-function gameLoop(time) {
+function gameLoop(
+    time
+) {
 
     const delta =
         time -
         lastTime;
 
-    lastTime = time;
-
+    lastTime =
+        time;
 
     updateParticles();
 
     update();
 
-    draw(time);
-
+    draw(
+        time
+    );
 
     requestAnimationFrame(
         gameLoop
     );
 
 }
+
+
+/* =========================================================
+   ULTIMATE GAME SYSTEM
+========================================================= */
+
+const U = {
+
+    paused: false,
+
+    menu: true,
+
+    attacking: false,
+
+    energy: 100,
+
+    ammo: 12,
+
+    map: false,
+
+    music: false,
+
+    audio: null,
+
+    diff: "Normal"
+
+};
+
+
+const projectiles = [];
+
+
+const onlinePlayers = [
+
+    {
+        name: "Shadow_02",
+        x: 150,
+        y: 500,
+        color: "#9b6cff",
+        score: 420
+    },
+
+    {
+        name: "CubeMage",
+        x: 720,
+        y: 120,
+        color: "#ffb43b",
+        score: 310
+    },
+
+    {
+        name: "CrystalFox",
+        x: 650,
+        y: 520,
+        color: "#48ffb0",
+        score: 270
+    }
+
+];
+
+
+const mapCanvas =
+    document.getElementById(
+        "mapCanvas"
+    );
+
+const mctx =
+    mapCanvas.getContext(
+        "2d"
+    );
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+function toast(
+    text
+) {
+
+    const element =
+        document.getElementById(
+            "toast"
+        );
+
+    element.textContent =
+        text;
+
+    element.classList.add(
+        "show"
+    );
+
+    clearTimeout(
+        toast.timer
+    );
+
+    toast.timer =
+        setTimeout(
+            () => {
+
+                element.classList.remove(
+                    "show"
+                );
+
+            },
+            1800
+        );
+
+}
+
+
+/* =========================================================
+   OPEN MENU
+========================================================= */
+
+function openUltimate(
+    id
+) {
+
+    document
+        .querySelectorAll(
+            ".ultimate-overlay"
+        )
+        .forEach(
+            element =>
+                element.classList.remove(
+                    "show"
+                )
+        );
+
+    document
+        .getElementById(
+            id
+        )
+        .classList.add(
+            "show"
+        );
+
+}
+
+
+/* =========================================================
+   CLOSE MENU
+========================================================= */
+
+function closeUltimate(
+    id
+) {
+
+    document
+        .getElementById(
+            id
+        )
+        .classList.remove(
+            "show"
+        );
+
+}
+
+
+/* =========================================================
+   PAUSE
+========================================================= */
+
+function setPaused(
+    value
+) {
+
+    paused =
+        value;
+
+    U.paused =
+        value;
+
+    document.getElementById(
+        "pauseButton"
+    ).textContent =
+        value
+            ? "▶ Resume"
+            : "⏸ Pause";
+
+
+    if (
+        value
+    ) {
+
+        openUltimate(
+            "pauseMenu"
+        );
+
+    } else {
+
+        closeUltimate(
+            "pauseMenu"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   BEGIN GAME
+========================================================= */
+
+function beginGame() {
+
+    restartGame();
+
+    gameOver =
+        false;
+
+    playing =
+        true;
+
+    setPaused(
+        false
+    );
+
+    closeUltimate(
+        "mainMenu"
+    );
+
+    U.menu =
+        false;
+
+    toast(
+        "⚔ Arena dimulai!"
+    );
+
+}
+
+
+/* =========================================================
+   SAVE
+========================================================= */
+
+function saveGame() {
+
+    localStorage.setItem(
+        "cubesAdvKnightSave",
+
+        JSON.stringify({
+
+            score:
+                score,
+
+            health:
+                health,
+
+            px:
+                player.x,
+
+            py:
+                player.y,
+
+            energy:
+                U.energy,
+
+            diff:
+                U.diff
+
+        })
+    );
+
+    toast(
+        "💾 Game tersimpan"
+    );
+
+}
+
+
+/* =========================================================
+   LOAD
+========================================================= */
+
+function loadGame() {
+
+    const data =
+        JSON.parse(
+            localStorage.getItem(
+                "cubesAdvKnightSave"
+            ) ||
+            "null"
+        );
+
+
+    if (
+        !data
+    ) {
+
+        toast(
+            "Belum ada save"
+        );
+
+        return;
+
+    }
+
+
+    score =
+        data.score ||
+        0;
+
+    health =
+        data.health ??
+        100;
+
+    player.x =
+        data.px ??
+        player.x;
+
+    player.y =
+        data.py ??
+        player.y;
+
+    U.energy =
+        data.energy ??
+        100;
+
+    U.diff =
+        data.diff ||
+        "Normal";
+
+
+    gameOver =
+        false;
+
+    updateHUD();
+
+    toast(
+        "📂 Save dimuat"
+    );
+
+}
+
+
+/* =========================================================
+   ATTACK
+========================================================= */
+
+function attack() {
+
+    if (
+        gameOver ||
+        paused ||
+        U.energy < 10 ||
+        U.attacking
+    ) {
+
+        return;
+
+    }
+
+
+    U.energy -=
+        10;
+
+    U.attacking =
+        true;
+
+
+    setTimeout(
+        () => {
+
+            U.attacking =
+                false;
+
+        },
+        180
+    );
+
+
+    const cx =
+        player.x + 20;
+
+    const cy =
+        player.y + 20;
+
+
+    let vx = 0;
+
+    let vy = -8;
+
+
+    if (
+        keys["ArrowRight"] ||
+        keys["d"] ||
+        keys["D"]
+    ) {
+
+        vx = 8;
+        vy = 0;
+
+    }
+
+    else if (
+        keys["ArrowLeft"] ||
+        keys["a"] ||
+        keys["A"]
+    ) {
+
+        vx = -8;
+        vy = 0;
+
+    }
+
+    else if (
+        keys["ArrowDown"] ||
+        keys["s"] ||
+        keys["S"]
+    ) {
+
+        vx = 0;
+        vy = 8;
+
+    }
+
+
+    projectiles.push({
+
+        x:
+            cx,
+
+        y:
+            cy,
+
+        vx:
+            vx,
+
+        vy:
+            vy,
+
+        life:
+            50
+
+    });
+
+
+    createParticles(
+        cx,
+        cy,
+        12,
+        "damage"
+    );
+
+
+    toast(
+        "⚔ SERANG!"
+    );
+
+
+    playTone(
+        720,
+        .07
+    );
+
+}
+
+
+/* =========================================================
+   SOUND
+========================================================= */
+
+function playTone(
+    frequency,
+    duration
+) {
+
+    if (
+        !U.music &&
+        frequency < 400
+    ) {
+
+        return;
+
+    }
+
+
+    try {
+
+        U.audio ??=
+            new (
+                window.AudioContext ||
+                window.webkitAudioContext
+            )();
+
+
+        const oscillator =
+            U.audio.createOscillator();
+
+        const gain =
+            U.audio.createGain();
+
+
+        oscillator.frequency.value =
+            frequency;
+
+        gain.gain.value =
+            0.025;
+
+
+        oscillator.connect(
+            gain
+        );
+
+        gain.connect(
+            U.audio.destination
+        );
+
+
+        oscillator.start();
+
+        oscillator.stop(
+            U.audio.currentTime +
+            duration
+        );
+
+    }
+
+    catch (
+        error
+    ) {}
+
+}
+
+
+/* =========================================================
+   MUSIC
+========================================================= */
+
+function musicStart() {
+
+    if (
+        !U.music
+    ) {
+
+        return;
+
+    }
+
+
+    try {
+
+        U.audio ??=
+            new (
+                window.AudioContext ||
+                window.webkitAudioContext
+            )();
+
+
+        const notes = [
+            220,
+            277,
+            330,
+            277
+        ];
+
+        let index =
+            0;
+
+
+        clearInterval(
+            U.musicTimer
+        );
+
+
+        U.musicTimer =
+            setInterval(
+                () => {
+
+                    if (
+                        !U.music
+                    ) {
+
+                        return;
+
+                    }
+
+                    playTone(
+                        notes[
+                            index++ %
+                            notes.length
+                        ],
+                        .12
+                    );
+
+                },
+                520
+            );
+
+    }
+
+    catch (
+        error
+    ) {}
+
+}
+
+
+/* =========================================================
+   MINI MAP
+========================================================= */
+
+function drawMiniMap() {
+
+    if (
+        !U.map
+    ) {
+
+        return;
+
+    }
+
+
+    const width =
+        150;
+
+    const height =
+        105;
+
+
+    mctx.clearRect(
+        0,
+        0,
+        width,
+        height
+    );
+
+
+    mctx.fillStyle =
+        "#061225";
+
+    mctx.fillRect(
+        0,
+        0,
+        width,
+        height
+    );
+
+
+    mctx.strokeStyle =
+        "#2b8cff55";
+
+    mctx.strokeRect(
+        1,
+        1,
+        width - 2,
+        height - 2
+    );
+
+
+    function dot(
+        x,
+        y,
+        color
+    ) {
+
+        mctx.fillStyle =
+            color;
+
+        mctx.shadowBlur =
+            8;
+
+        mctx.shadowColor =
+            color;
+
+        mctx.fillRect(
+
+            x /
+                canvas.width *
+                width -
+                2,
+
+            y /
+                canvas.height *
+                height -
+                2,
+
+            5,
+
+            5
+
+        );
+
+        mctx.shadowBlur =
+            0;
+
+    }
+
+
+    dot(
+        player.x,
+        player.y,
+        "#55e8ff"
+    );
+
+
+    dot(
+        crystal.x,
+        crystal.y,
+        "#ffe600"
+    );
+
+
+    dot(
+        enemy.x,
+        enemy.y,
+        "#ff4f5e"
+    );
+
+
+    onlinePlayers.forEach(
+        playerData => {
+
+            dot(
+                playerData.x,
+                playerData.y,
+                playerData.color
+            );
+
+        }
+    );
+
+
+    mctx.fillStyle =
+        "#9fc3d5";
+
+    mctx.font =
+        "9px Arial";
+
+    mctx.fillText(
+        "MINI MAP",
+        7,
+        12
+    );
+
+}
+
+
+/* =========================================================
+   FEATURE MENU
+========================================================= */
+
+function feature(
+    type
+) {
+
+    const box =
+        document.getElementById(
+            "featureContent"
+        );
+
+
+    let html = "";
+
+
+    /* TUTORIAL */
+
+    if (
+        type ===
+        "tutorial"
+    ) {
+
+        html = `
+
+            <h2>
+                ❔ TUTORIAL
+            </h2>
+
+            <p>
+
+                🎮 WASD /
+                Arrow /
+                Touch untuk bergerak.
+                <br>
+
+                💎 Ambil crystal
+                = +10.
+                <br>
+
+                ⚔ SPACE atau tombol
+                SERANG untuk menyerang.
+                <br>
+
+                ❤️ Hindari musuh merah.
+                <br>
+
+                🗺 Map menampilkan
+                semua pemain.
+
+            </p>
+
+            <div class="menu-grid">
+
+                <button
+                    id="backFeature">
+                    KEMBALI
+                </button>
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* LEADERBOARD */
+
+    if (
+        type ===
+        "leader"
+    ) {
+
+        html = `
+
+            <h2>
+                🏆 LEADERBOARD
+            </h2>
+
+            <table class="lb">
+
+                <tr>
+                    <th>#</th>
+                    <th>Pemain</th>
+                    <th>Score</th>
+                </tr>
+
+                <tr>
+                    <td>🥇</td>
+                    <td>Knight</td>
+                    <td>
+                        ${Math.max(
+                            score,
+                            1250
+                        )}
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>🥈</td>
+                    <td>Shadow_02</td>
+                    <td>980</td>
+                </tr>
+
+                <tr>
+                    <td>🥉</td>
+                    <td>CubeMage</td>
+                    <td>760</td>
+                </tr>
+
+                <tr>
+                    <td>4</td>
+                    <td>CrystalFox</td>
+                    <td>540</td>
+                </tr>
+
+            </table>
+
+            <div class="menu-grid">
+
+                <button
+                    id="backFeature">
+                    KEMBALI
+                </button>
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* SETTINGS */
+
+    if (
+        type ===
+        "settings"
+    ) {
+
+        html = `
+
+            <h2>
+                ⚙ SETTINGS
+            </h2>
+
+            <div class="setting-row">
+
+                🎵 Music
+
+                <input
+                    id="musicSet"
+                    type="checkbox"
+                    ${
+                        U.music
+                            ? "checked"
+                            : ""
+                    }>
+
+            </div>
+
+
+            <div class="setting-row">
+
+                ⚔ Difficulty
+
+                <select
+                    id="diffSet">
+
+                    <option>
+                        Easy
+                    </option>
+
+                    <option
+                        ${
+                            U.diff ===
+                            "Normal"
+                                ? "selected"
+                                : ""
+                        }>
+                        Normal
+                    </option>
+
+                    <option
+                        ${
+                            U.diff ===
+                            "Hard"
+                                ? "selected"
+                                : ""
+                        }>
+                        Hard
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="setting-row">
+
+                ✨ Particles
+
+                <input
+                    type="checkbox"
+                    checked>
+
+            </div>
+
+
+            <div class="menu-grid">
+
+                <button
+                    id="applySet"
+                    class="primary">
+
+                    ✓ APPLY
+
+                </button>
+
+                <button
+                    id="backFeature">
+
+                    KEMBALI
+
+                </button>
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* LOBBY */
+
+    if (
+        type ===
+        "lobby"
+    ) {
+
+        html = `
+
+            <h2>
+                👥 LOBBY / ONLINE
+            </h2>
+
+            <div
+                class="player-list">
+
+                <div>
+                    🟦 You —
+                    Knight
+                </div>
+
+                <div>
+                    🟣 Shadow_02 —
+                    READY
+                </div>
+
+                <div>
+                    🟠 CubeMage —
+                    READY
+                </div>
+
+                <div>
+                    🟢 CrystalFox —
+                    READY
+                </div>
+
+            </div>
+
+
+            <div
+                class="chatbox"
+                id="chatbox">
+
+                <p>
+                    <b>
+                        Shadow_02:
+                    </b>
+                    Ready!
+                </p>
+
+                <p>
+                    <b>
+                        CubeMage:
+                    </b>
+                    Lets go!
+                </p>
+
+            </div>
+
+
+            <div class="chat-row">
+
+                <input
+                    id="chatInput"
+                    placeholder="Tulis chat...">
+
+                <button
+                    class="neon-btn"
+                    id="sendChat">
+
+                    SEND
+
+                </button>
+
+            </div>
+
+
+            <div class="menu-grid">
+
+                <button
+                    class="primary"
+                    id="matchBtn">
+
+                    🎯 MATCHMAKING
+
+                </button>
+
+                <button
+                    id="backFeature">
+
+                    KEMBALI
+
+                </button>
+
+            </div>
+
+        `;
+
+    }
+
+
+    box.innerHTML =
+        html;
+
+
+    openUltimate(
+        "featureMenu"
+    );
+
+
+    document
+        .getElementById(
+            "backFeature"
+        )
+        .onclick =
+        () => {
+
+            closeUltimate(
+                "featureMenu"
+            );
+
+
+            if (
+                U.paused
+            ) {
+
+                openUltimate(
+                    "pauseMenu"
+                );
+
+            }
+
+            else if (
+                U.menu
+            ) {
+
+                openUltimate(
+                    "mainMenu"
+                );
+
+            }
+
+        };
+
+
+    /* SETTINGS */
+
+    if (
+        type ===
+        "settings"
+    ) {
+
+        document
+            .getElementById(
+                "applySet"
+            )
+            .onclick =
+            () => {
+
+                U.music =
+                    document
+                        .getElementById(
+                            "musicSet"
+                        )
+                        .checked;
+
+
+                U.diff =
+                    document
+                        .getElementById(
+                            "diffSet"
+                        )
+                        .value;
+
+
+                localStorage.setItem(
+
+                    "cubesAdvSettings",
+
+                    JSON.stringify({
+
+                        music:
+                            U.music,
+
+                        diff:
+                            U.diff
+
+                    })
+
+                );
+
+
+                musicStart();
+
+                toast(
+                    "⚙ Settings diterapkan"
+                );
+
+
+                closeUltimate(
+                    "featureMenu"
+                );
+
+
+                if (
+                    U.paused
+                ) {
+
+                    openUltimate(
+                        "pauseMenu"
+                    );
+
+                }
+
+                else {
+
+                    openUltimate(
+                        "mainMenu"
+                    );
+
+                }
+
+            };
+
+    }
+
+
+    /* CHAT + MATCH */
+
+    if (
+        type ===
+        "lobby"
+    ) {
+
+        document
+            .getElementById(
+                "sendChat"
+            )
+            .onclick =
+            () => {
+
+                const input =
+                    document
+                        .getElementById(
+                            "chatInput"
+                        );
+
+
+                if (
+                    input.value.trim()
+                ) {
+
+                    document
+                        .getElementById(
+                            "chatbox"
+                        )
+                        .innerHTML +=
+                        `
+
+                            <p>
+                                <b>
+                                    You:
+                                </b>
+
+                                ${
+                                    input.value
+                                        .replace(
+                                            /[<>]/g,
+                                            ""
+                                        )
+                                }
+
+                            </p>
+
+                        `;
+
+
+                    input.value =
+                        "";
+
+                }
+
+            };
+
+
+        document
+            .getElementById(
+                "matchBtn"
+            )
+            .onclick =
+            () => {
+
+                toast(
+                    "🎯 Mencari match..."
+                );
+
+
+                setTimeout(
+                    () => {
+
+                        toast(
+                            "✅ Match found! Room KNIGHT-" +
+                            (
+                                100 +
+                                Math.floor(
+                                    Math.random() *
+                                    900
+                                )
+                            )
+                        );
+
+
+                        beginGame();
+
+                    },
+                    900
+                );
+
+            };
+
+    }
+
+}
+
+
+/* =========================================================
+   SETTINGS LOAD
+========================================================= */
+
+try {
+
+    Object.assign(
+        U,
+
+        JSON.parse(
+            localStorage.getItem(
+                "cubesAdvSettings"
+            ) ||
+            "{}"
+        )
+
+    );
+
+}
+
+catch (
+    error
+) {}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+document
+    .getElementById(
+        "playBtn"
+    )
+    .onclick =
+    beginGame;
+
+
+document
+    .getElementById(
+        "attackBtn"
+    )
+    .onclick =
+    attack;
+
+
+document
+    .getElementById(
+        "mapBtn"
+    )
+    .onclick =
+    () => {
+
+        U.map =
+            !U.map;
+
+
+        document
+            .getElementById(
+                "miniMap"
+            )
+            .classList
+            .toggle(
+                "show",
+                U.map
+            );
+
+    };
+
+
+document
+    .getElementById(
+        "menuBtn"
+    )
+    .onclick =
+    () => {
+
+        if (
+            !gameOver
+        ) {
+
+            setPaused(
+                true
+            );
+
+            openUltimate(
+                "pauseMenu"
+            );
+
+        }
+
+    };
+
+
+document
+    .getElementById(
+        "resumeBtn"
+    )
+    .onclick =
+    () => {
+
+        setPaused(
+            false
+        );
+
+    };
+
+
+document
+    .getElementById(
+        "saveBtn"
+    )
+    .onclick =
+    saveGame;
+
+
+document
+    .getElementById(
+        "loadBtn"
+    )
+    .onclick =
+    loadGame;
+
+
+document
+    .getElementById(
+        "restartBtn2"
+    )
+    .onclick =
+    () => {
+
+        restartGame();
+
+        setPaused(
+            false
+        );
+
+        toast(
+            "🔄 Restarted"
+        );
+
+    };
+
+
+document
+    .getElementById(
+        "settingsBtn"
+    )
+    .onclick =
+    () =>
+        feature(
+            "settings"
+        );
+
+
+document
+    .getElementById(
+        "settingsBtn2"
+    )
+    .onclick =
+    () =>
+        feature(
+            "settings"
+        );
+
+
+document
+    .getElementById(
+        "tutorialBtn"
+    )
+    .onclick =
+    () =>
+        feature(
+            "tutorial"
+        );
+
+
+document
+    .getElementById(
+        "leaderBtn"
+    )
+    .onclick =
+    () =>
+        feature(
+            "leader"
+        );
+
+
+document
+    .getElementById(
+        "lobbyBtn"
+    )
+    .onclick =
+    () =>
+        feature(
+            "lobby"
+        );
+
+
+document
+    .getElementById(
+        "exitBtn"
+    )
+    .onclick =
+    () => {
+
+        playing =
+            false;
+
+        paused =
+            true;
+
+        U.menu =
+            true;
+
+        openUltimate(
+            "mainMenu"
+        );
+
+    };
+
+
+document
+    .getElementById(
+        "restartGameBtn"
+    )
+    .onclick =
+    () => {
+
+        restartGame();
+
+        playing =
+            true;
+
+        paused =
+            false;
+
+        closeUltimate(
+            "gameOverMenu"
+        );
+
+    };
+
+
+document
+    .getElementById(
+        "exitGameBtn"
+    )
+    .onclick =
+    () => {
+
+        playing =
+            false;
+
+        paused =
+            true;
+
+        U.menu =
+            true;
+
+        closeUltimate(
+            "gameOverMenu"
+        );
+
+        openUltimate(
+            "mainMenu"
+        );
+
+    };
+
+
+/* =========================================================
+   KEYBOARD
+========================================================= */
+
+window.addEventListener(
+    "keydown",
+    event => {
+
+        keys[
+            event.key
+        ] =
+            true;
+
+
+        if (
+            [
+                " ",
+                "ArrowUp",
+                "ArrowDown",
+                "ArrowLeft",
+                "ArrowRight"
+            ].includes(
+                event.key
+            )
+        ) {
+
+            event.preventDefault();
+
+        }
+
+
+        if (
+            event.key ===
+            " " &&
+            !event.repeat
+        ) {
+
+            attack();
+
+        }
+
+
+        if (
+            event.key ===
+            "Escape" &&
+            playing &&
+            !gameOver
+        ) {
+
+            setPaused(
+                !paused
+            );
+
+        }
+
+    }
+);
+
+
+window.addEventListener(
+    "keyup",
+    event => {
+
+        keys[
+            event.key
+        ] =
+            false;
+
+    }
+);
+
+
+/* =========================================================
+   TOUCH CONTROLS
+========================================================= */
+
+document
+    .querySelectorAll(
+        ".touch-btn"
+    )
+    .forEach(
+        button => {
+
+            const key =
+                button.dataset.key;
+
+
+            button.addEventListener(
+                "pointerdown",
+                event => {
+
+                    event.preventDefault();
+
+                    keys[key] =
+                        true;
+
+                }
+            );
+
+
+            button.addEventListener(
+                "pointerup",
+                () => {
+
+                    keys[key] =
+                        false;
+
+                }
+            );
+
+
+            button.addEventListener(
+                "pointercancel",
+                () => {
+
+                    keys[key] =
+                        false;
+
+                }
+            );
+
+
+            button.addEventListener(
+                "pointerleave",
+                () => {
+
+                    keys[key] =
+                        false;
+
+                }
+            );
+
+        }
+    );
+
+
+/* =========================================================
+   ONLINE PLAYER DRAW
+========================================================= */
+
+function drawOnlinePlayers() {
+
+    onlinePlayers.forEach(
+        onlinePlayer => {
+
+            ctx.save();
+
+            ctx.shadowBlur =
+                20;
+
+            ctx.shadowColor =
+                onlinePlayer.color;
+
+            ctx.fillStyle =
+                onlinePlayer.color;
+
+            ctx.beginPath();
+
+            ctx.roundRect(
+                onlinePlayer.x,
+                onlinePlayer.y,
+                34,
+                34,
+                8
+            );
+
+            ctx.fill();
+
+
+            ctx.shadowBlur =
+                0;
+
+            ctx.fillStyle =
+                "#ffffff";
+
+            ctx.font =
+                "10px Arial";
+
+            ctx.textAlign =
+                "center";
+
+            ctx.fillText(
+                onlinePlayer.name,
+                onlinePlayer.x + 17,
+                onlinePlayer.y - 7
+            );
+
+
+            ctx.restore();
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   ORIGINAL DRAW EXTENSION
+========================================================= */
+
+const originalDraw =
+    draw;
+
+
+draw =
+    function(
+        time
+    ) {
+
+        originalDraw(
+            time
+        );
+
+        drawOnlinePlayers();
+
+        drawMiniMap();
+
+
+        /* PROJECTILES */
+
+        projectiles.forEach(
+            projectile => {
+
+                ctx.save();
+
+                ctx.fillStyle =
+                    "#a9f8ff";
+
+                ctx.shadowBlur =
+                    18;
+
+                ctx.shadowColor =
+                    "#42eaff";
+
+                ctx.beginPath();
+
+                ctx.arc(
+                    projectile.x,
+                    projectile.y,
+                    5,
+                    0,
+                    Math.PI * 2
+                );
+
+                ctx.fill();
+
+                ctx.restore();
+
+            }
+        );
+
+
+        /* ATTACK ARC */
+
+        if (
+            U.attacking
+        ) {
+
+            const cx =
+                player.x + 20;
+
+            const cy =
+                player.y + 20;
+
+
+            let angle =
+                -Math.PI / 2;
+
+
+            if (
+                keys["ArrowRight"] ||
+                keys["d"] ||
+                keys["D"]
+            ) {
+
+                angle =
+                    0;
+
+            }
+
+            else if (
+                keys["ArrowLeft"] ||
+                keys["a"] ||
+                keys["A"]
+            ) {
+
+                angle =
+                    Math.PI;
+
+            }
+
+            else if (
+                keys["ArrowDown"] ||
+                keys["s"] ||
+                keys["S"]
+            ) {
+
+                angle =
+                    Math.PI / 2;
+
+            }
+
+
+            ctx.save();
+
+            ctx.strokeStyle =
+                "#d7fbff";
+
+            ctx.shadowBlur =
+                22;
+
+            ctx.shadowColor =
+                "#5de9ff";
+
+            ctx.lineWidth =
+                6;
+
+            ctx.beginPath();
+
+            ctx.arc(
+                cx,
+                cy,
+                40,
+                angle - 0.7,
+                angle + 0.7
+            );
+
+            ctx.stroke();
+
+            ctx.restore();
+
+        }
+
+    };
+
+
+/* =========================================================
+   PROJECTILE UPDATE
+========================================================= */
+
+const originalUpdate =
+    update;
+
+
+update =
+    function() {
+
+        originalUpdate();
+
+
+        if (
+            !paused &&
+            !gameOver &&
+            playing
+        ) {
+
+            U.energy =
+                Math.min(
+                    100,
+                    U.energy +
+                    0.18
+                );
+
+
+            projectiles.forEach(
+                (
+                    projectile,
+                    index
+                ) => {
+
+                    projectile.x +=
+                        projectile.vx;
+
+                    projectile.y +=
+                        projectile.vy;
+
+                    projectile.life--;
+
+
+                    if (
+                        projectile.x >
+                            enemy.x &&
+                        projectile.x <
+                            enemy.x +
+                            enemy.size &&
+                        projectile.y >
+                            enemy.y &&
+                        projectile.y <
+                            enemy.y +
+                            enemy.size
+                    ) {
+
+                        damageEnemy();
+
+                        projectiles.splice(
+                            index,
+                            1
+                        );
+
+                    }
+
+                    else if (
+                        projectile.life <=
+                        0
+                    ) {
+
+                        projectiles.splice(
+                            index,
+                            1
+                        );
+
+                    }
+
+                }
+            );
+
+
+            /* BOT MOVEMENT */
+
+            onlinePlayers.forEach(
+                onlinePlayer => {
+
+                    onlinePlayer.x +=
+                        Math.sin(
+                            performance.now() /
+                            900 +
+                            onlinePlayer.y
+                        ) *
+                        0.45;
+
+
+                    onlinePlayer.y +=
+                        Math.cos(
+                            performance.now() /
+                            1000 +
+                            onlinePlayer.x
+                        ) *
+                        0.35;
+
+
+                    onlinePlayer.x =
+                        Math.max(
+                            20,
+                            Math.min(
+                                850,
+                                onlinePlayer.x
+                            )
+                        );
+
+
+                    onlinePlayer.y =
+                        Math.max(
+                            20,
+                            Math.min(
+                                620,
+                                onlinePlayer.y
+                            )
+                        );
+
+                }
+            );
+
+        }
+
+    };
 
 
 /* =========================================================
