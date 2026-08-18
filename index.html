@@ -1,4 +1,3 @@
-```html
 <!doctype html>
 <html lang="id">
 <head>
@@ -24,6 +23,11 @@ body{
   color:#eaf8ff;
 }
 
+button{
+  font:inherit;
+  color:inherit;
+}
+
 /* ================= BACKGROUND ================= */
 
 #game{
@@ -31,21 +35,20 @@ body{
   inset:0;
   overflow:hidden;
   background:
-    radial-gradient(circle at 50% 45%,#073b70 0,transparent 34%),
-    radial-gradient(circle at 82% 18%,#43156d 0,transparent 27%),
-    radial-gradient(circle at 20% 80%,#06385a 0,transparent 25%),
-    linear-gradient(145deg,#031a35 0%,#020817 65%,#030719 100%);
+    radial-gradient(circle at 50% 45%,#07305c 0,transparent 35%),
+    radial-gradient(circle at 80% 20%,#3b1260 0,transparent 25%),
+    linear-gradient(#031a35,#020817 72%);
 }
 
 #game:before{
   content:"";
   position:absolute;
   inset:0;
+  opacity:.45;
   background-image:
     linear-gradient(#1a76a92b 1px,transparent 1px),
     linear-gradient(90deg,#1a76a92b 1px,transparent 1px);
   background-size:46px 46px;
-  mask-image:linear-gradient(to bottom,#fff,transparent 92%);
 }
 
 #game:after{
@@ -64,14 +67,10 @@ body{
 .hud{
   position:absolute;
   z-index:20;
-  background:linear-gradient(
-    145deg,
-    rgba(5,28,55,.94),
-    rgba(2,14,31,.88)
-  );
+  background:#03142ae0;
   border:1px solid #3bdfff55;
   border-radius:18px;
-  backdrop-filter:blur(14px);
+  backdrop-filter:blur(12px);
   box-shadow:
     0 0 25px #008cff18,
     inset 0 0 20px #00b7ff08;
@@ -83,25 +82,40 @@ body{
   left:18px;
   top:18px;
   width:310px;
-  padding:17px 18px;
+  padding:12px;
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+
+.logo-main{
+  width:58px;
+  height:58px;
+  object-fit:contain;
+  border-radius:15px;
+  padding:5px;
+  background:
+    radial-gradient(circle,#0c3960,#031326);
+  border:1px solid #45e6ff88;
+  box-shadow:
+    0 0 15px #21dfff55,
+    inset 0 0 15px #21dfff18;
 }
 
 .brand-title{
-  font-size:20px;
-  font-weight:950;
-  letter-spacing:.2px;
+  font-size:17px;
+  font-weight:900;
 }
 
 .brand-title b{
   color:#49eaff;
-  text-shadow:0 0 14px #16dfff66;
 }
 
 .sub{
   font-size:10px;
   color:#80a6bb;
-  letter-spacing:1.8px;
-  margin-top:6px;
+  letter-spacing:1.4px;
+  margin-top:4px;
 }
 
 /* ================= STATS ================= */
@@ -110,13 +124,13 @@ body{
   left:18px;
   top:98px;
   width:310px;
-  padding:15px;
+  padding:14px;
 }
 
 .row{
   display:flex;
   justify-content:space-between;
-  font-weight:950;
+  font-weight:900;
 }
 
 .hpbar{
@@ -125,16 +139,13 @@ body{
   border-radius:99px;
   margin-top:10px;
   overflow:hidden;
-  box-shadow:inset 0 2px 5px #0008;
 }
 
 .fill{
   height:100%;
   width:76%;
-  background:linear-gradient(90deg,#20e0bd,#37ddff,#68ecff);
-  box-shadow:
-    0 0 10px #42e8ff,
-    0 0 22px #20dfff55;
+  background:linear-gradient(90deg,#25e7c7,#45dcff);
+  box-shadow:0 0 14px #42e8ff;
   transition:.2s;
 }
 
@@ -145,7 +156,6 @@ body{
 
 .score b{
   color:#ffd447;
-  text-shadow:0 0 10px #ffd44755;
 }
 
 /* ================= ONLINE ================= */
@@ -154,7 +164,7 @@ body{
   right:20px;
   top:20px;
   padding:10px 15px;
-  font-weight:950;
+  font-weight:900;
 }
 
 .online i{
@@ -182,16 +192,11 @@ body{
   inset:10px;
   border:1px solid #42dcff55;
   border-radius:16px;
-  background:
+  background-image:
     linear-gradient(#38c5ef22 2px,transparent 2px),
     linear-gradient(90deg,#38c5ef22 2px,transparent 2px);
   background-size:35px 35px;
-  box-shadow:
-    inset 0 0 30px #008cff10,
-    0 0 20px #00cfff08;
 }
-
-/* ================= MAP DOTS ================= */
 
 .dot{
   position:absolute;
@@ -199,13 +204,6 @@ body{
   height:10px;
   border-radius:50%;
   box-shadow:0 0 12px currentColor;
-  animation:pulse 1.8s infinite ease-in-out;
-}
-
-@keyframes pulse{
-  50%{
-    transform:scale(1.35);
-  }
 }
 
 .a{
@@ -264,28 +262,19 @@ body{
 }
 
 .nav button{
-  background:linear-gradient(
-    145deg,
-    rgba(6,31,57,.96),
-    rgba(2,17,34,.95)
-  );
+  background:#03162ce8;
   border:1px solid #38d8ff55;
   border-radius:14px;
   padding:11px 16px;
-  font-weight:950;
+  font-weight:900;
   cursor:pointer;
   transition:.2s;
-  box-shadow:
-    inset 0 0 14px #00aaff08,
-    0 5px 18px #0005;
 }
 
 .nav button:hover{
   transform:translateY(-2px);
   border-color:#43eaff;
-  box-shadow:
-    0 0 15px #18cfff55,
-    inset 0 0 15px #18cfff0d;
+  box-shadow:0 0 15px #18cfff55;
 }
 
 /* ================= ARENA ================= */
@@ -295,34 +284,19 @@ body{
   inset:0;
 }
 
-/* ================= PLAYER ================= */
-
 .player{
   position:absolute;
   left:48%;
   top:54%;
-  width:64px;
-  height:64px;
+  width:62px;
+  height:62px;
   transform:translate(-50%,-50%);
-  border-radius:17px;
-
-  background:
-    linear-gradient(
-      145deg,
-      #52c7ff 0%,
-      #269cff 35%,
-      #0875e8 70%,
-      #064db5 100%
-    );
-
-  border:2px solid #67eaff;
-
+  border-radius:16px;
+  background:linear-gradient(145deg,#32abff,#1686ff);
+  border:2px solid #50e5ff;
   box-shadow:
     0 0 15px #198fff,
-    0 0 35px #198fff88,
-    inset 8px 8px 12px #ffffff35,
-    inset -9px -10px 15px #001b4c77;
-
+    0 0 40px #ff3f9155;
   z-index:8;
   transition:.07s;
 }
@@ -333,78 +307,44 @@ body{
   inset:0;
   display:grid;
   place-items:center;
-  color:#f4ffff;
+  color:#eaffff;
   font-size:30px;
-  text-shadow:
-    0 2px 5px #00528a,
-    0 0 12px #fff;
 }
 
 .visor{
   position:absolute;
   top:14px;
   left:16px;
-  width:29px;
+  width:28px;
   height:10px;
-  background:#c4fcff;
+  background:#b8fbff;
   border:2px solid #0876a2;
   border-radius:3px;
-  box-shadow:0 0 8px #a9faff;
 }
 
 .beam{
   position:absolute;
   bottom:100%;
   left:50%;
-  width:20px;
-  height:135px;
+  width:18px;
+  height:130px;
   transform:translateX(-50%);
-  background:
-    linear-gradient(
-      transparent,
-      #2fbfff44,
-      #2fbfff66
-    );
-  filter:blur(4px);
-  opacity:.8;
+  background:linear-gradient(transparent,#2fbfff66);
+  filter:blur(3px);
 }
 
 /* ================= ENEMY ================= */
 
 .enemy{
   position:absolute;
-  width:50px;
-  height:50px;
+  width:48px;
+  height:48px;
   transform:translate(-50%,-50%);
-
-  border-radius:14px;
-
-  background:
-    linear-gradient(
-      145deg,
-      #cf83ff 0%,
-      #9d52ff 35%,
-      #7131e8 70%,
-      #4818ad 100%
-    );
-
-  border:2px solid #dda8ff;
-
-  box-shadow:
-    0 0 16px #9b5cff,
-    0 0 35px #9b5cff66,
-    inset 7px 7px 10px #fff3,
-    inset -8px -9px 13px #29007888;
-
+  border-radius:13px;
+  background:linear-gradient(145deg,#b55cff,#763aff);
+  border:2px solid #d9a0ff;
+  box-shadow:0 0 20px #9b5cff;
   z-index:7;
-
-  animation:enemyFloat 2.2s infinite ease-in-out;
-}
-
-@keyframes enemyFloat{
-  50%{
-    margin-top:-5px;
-  }
 }
 
 .enemy span{
@@ -413,12 +353,10 @@ body{
   left:50%;
   transform:translateX(-50%);
   white-space:nowrap;
-  font-weight:950;
+  font-weight:900;
   font-size:13px;
-  margin-bottom:8px;
-  text-shadow:
-    0 2px 8px #000,
-    0 0 8px #fff4;
+  margin-bottom:7px;
+  text-shadow:0 2px 8px #000;
 }
 
 .enemy:after{
@@ -427,99 +365,34 @@ body{
   inset:10px;
   border:2px solid #fff8;
   border-radius:7px;
-  box-shadow:
-    inset 0 0 7px #fff4,
-    0 0 7px #fff2;
 }
 
-/* ================= GEM 3D ================= */
+/* ================= GEM AWAL ================= */
 
 .gem{
   position:absolute;
-  width:34px;
-  height:34px;
-
-  transform:
-    translate(-50%,-50%)
-    rotate(45deg);
-
-  border-radius:8px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #bfffff 0%,
-      #4df5ef 16%,
-      #20d8ff 42%,
-      #218cff 72%,
-      #1151ce 100%
-    );
-
-  border:2px solid #b9ffff;
-
+  width:28px;
+  height:28px;
+  transform:translate(-50%,-50%) rotate(45deg);
+  border-radius:7px;
+  background:linear-gradient(145deg,#21f0cf,#218cff);
+  border:1px solid #b9ffff;
   box-shadow:
-    0 0 12px #25e4ff,
-    0 0 25px #25e4ff,
-    0 0 55px #218cff66,
-    inset 5px 5px 8px #ffffff88,
-    inset -7px -7px 10px #0751b988;
-
-  animation:
-    floatGem 1.6s infinite ease-in-out,
-    gemGlow 2s infinite ease-in-out;
-
-  z-index:6;
-}
-
-.gem:before{
-  content:"";
-  position:absolute;
-  inset:5px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #ffffffcc,
-      #5cf5ff55 45%,
-      transparent 46%
-    );
-
-  border:1px solid #ffffffbb;
-  border-radius:5px;
+    0 0 20px #25e4ff,
+    0 0 45px #218cff66;
+  animation:float 1.3s infinite ease-in-out;
 }
 
 .gem:after{
   content:"";
   position:absolute;
-  inset:9px;
-
-  border:1px solid #ffffffaa;
-  border-radius:3px;
-
-  box-shadow:
-    inset 0 0 6px #fff8;
+  inset:5px;
+  border:1px solid #fff9;
 }
 
-@keyframes floatGem{
-  0%,100%{
-    margin-top:0;
-    filter:brightness(1);
-  }
-
+@keyframes float{
   50%{
-    margin-top:-10px;
-    filter:brightness(1.3);
-  }
-}
-
-@keyframes gemGlow{
-  50%{
-    box-shadow:
-      0 0 18px #25e4ff,
-      0 0 35px #25e4ff,
-      0 0 70px #218cff88,
-      inset 5px 5px 8px #ffffff99,
-      inset -7px -7px 10px #0751b988;
+    margin-top:-8px;
   }
 }
 
@@ -537,24 +410,11 @@ body{
 
 .ctrl{
   border-radius:18px;
-
-  background:
-    linear-gradient(
-      145deg,
-      #082a49e8,
-      #031527e8
-    );
-
+  background:#041930d0;
   border:1px solid #26d7ff80;
-
-  box-shadow:
-    inset 5px 5px 12px #ffffff08,
-    inset -7px -7px 13px #0008,
-    0 7px 20px #0006;
-
+  box-shadow:inset 0 0 20px #00aaff0f;
   display:grid;
   place-items:center;
-
   font-size:34px;
   font-weight:900;
   cursor:pointer;
@@ -563,16 +423,8 @@ body{
 }
 
 .ctrl:hover{
-  background:
-    linear-gradient(
-      145deg,
-      #0b416bd0,
-      #06233bd0
-    );
-
-  box-shadow:
-    0 0 20px #17cfff33,
-    inset 5px 5px 12px #ffffff0d;
+  background:#08365bd0;
+  box-shadow:0 0 20px #17cfff33;
 }
 
 .ctrl:active{
@@ -605,24 +457,12 @@ body{
   bottom:28px;
   width:300px;
   height:86px;
-
-  border:1px solid #ff9ce5aa;
+  border:0;
   border-radius:25px;
-
-  background:
-    linear-gradient(
-      105deg,
-      #e12d7d,
-      #c72caf,
-      #8e35d5
-    );
-
+  background:linear-gradient(105deg,#e12d7d,#a72cc4);
   box-shadow:
-    0 0 25px #eb289155,
-    0 0 55px #bd27cf33,
-    inset 0 0 20px #fff2,
-    inset -8px -8px 15px #6b137588;
-
+    0 0 35px #eb289155,
+    inset 0 0 20px #fff2;
   z-index:30;
   font-weight:950;
   font-size:21px;
@@ -633,8 +473,7 @@ body{
 .attack:hover{
   transform:translateY(-3px);
   box-shadow:
-    0 0 40px #eb289177,
-    0 0 70px #bd27cf44,
+    0 0 50px #eb289177,
     inset 0 0 25px #fff3;
 }
 
@@ -648,45 +487,22 @@ body{
   position:absolute;
   left:50%;
   top:50%;
-
-  transform:
-    translate(-50%,-50%)
-    scale(.8);
-
+  transform:translate(-50%,-50%) scale(.8);
   opacity:0;
-
   z-index:100;
-
-  background:
-    linear-gradient(
-      145deg,
-      #071d39f5,
-      #030c1df5
-    );
-
+  background:#041126f2;
   border:1px solid #4de8ff;
-
   border-radius:16px;
-
   padding:15px 22px;
-
   font-weight:950;
-
   transition:.2s;
-
   pointer-events:none;
-
-  box-shadow:
-    0 0 30px #00cfff33,
-    inset 0 0 15px #00cfff0b;
+  box-shadow:0 0 30px #00cfff22;
 }
 
 .show{
   opacity:1;
-
-  transform:
-    translate(-50%,-50%)
-    scale(1);
+  transform:translate(-50%,-50%) scale(1);
 }
 
 /* ================= MODAL ================= */
@@ -694,38 +510,21 @@ body{
 .modal{
   display:none;
   place-items:center;
-
   position:absolute;
   inset:0;
-
   z-index:90;
-
   background:#0009;
-
   backdrop-filter:blur(9px);
 }
 
 .card{
   width:min(450px,90vw);
-
   padding:28px;
-
   text-align:center;
-
   border-radius:24px;
-
-  background:
-    linear-gradient(
-      145deg,
-      #071b38f5,
-      #030d20f5
-    );
-
+  background:#05122af5;
   border:1px solid #43e2ff66;
-
-  box-shadow:
-    0 0 40px #00cfff22,
-    inset 0 0 25px #00b7ff08;
+  box-shadow:0 0 40px #00cfff22;
 }
 
 .card h2{
@@ -789,11 +588,12 @@ body{
     left:10px;
     top:10px;
     width:auto;
-    padding:10px 12px;
+    padding:7px;
   }
 
-  .brand-title{
-    font-size:16px;
+  .logo-main{
+    width:43px;
+    height:43px;
   }
 
   .sub{
@@ -848,16 +648,6 @@ body{
     width:52px;
     height:52px;
   }
-
-  .gem{
-    width:29px;
-    height:29px;
-  }
-
-  .enemy{
-    width:43px;
-    height:43px;
-  }
 }
 </style>
 </head>
@@ -866,16 +656,28 @@ body{
 
 <div id="game">
 
-<!-- ================= BRAND ================= -->
+<!-- ================= HEADER ================= -->
 
 <div class="hud brand">
 
-  <div class="brand-title">
-    ⚔️ <b>CubesAdv</b> Knight
+  <div class="logo-main">
+    <span style="
+      display:grid;
+      place-items:center;
+      width:100%;
+      height:100%;
+      font-size:30px;
+    ">⚔️</span>
   </div>
 
-  <div class="sub">
-    SMKN 1 SANDEN • BANTUL
+  <div>
+    <div class="brand-title">
+      ⚔️ <b>CubesAdv</b> Knight
+    </div>
+
+    <div class="sub">
+      SMKN 1 SANDEN • BANTUL
+    </div>
   </div>
 
 </div>
@@ -965,8 +767,6 @@ body{
 
 <div class="arena">
 
-  <!-- PLAYER -->
-
   <div
     id="player"
     class="player"
@@ -978,8 +778,6 @@ body{
   </div>
 
 
-  <!-- ENEMY 1 -->
-
   <div
     class="enemy"
     style="left:39%;top:81%"
@@ -988,30 +786,21 @@ body{
   </div>
 
 
-  <!-- ENEMY 2 -->
-
   <div
     class="enemy"
-    style="
-      left:74%;
-      top:66%;
-      transform:translate(-50%,-50%) scale(.82)
-    "
+    style="left:74%;top:66%;transform:translate(-50%,-50%) scale(.82)"
   >
     <span>CrystalFox</span>
   </div>
 
 
   <!-- GEM 1 -->
-
   <div
     class="gem"
     style="left:63%;top:28%"
   ></div>
 
-
   <!-- GEM 2 -->
-
   <div
     class="gem"
     style="left:27%;top:38%"
@@ -1104,10 +893,6 @@ body{
 
 <script>
 
-/* =========================================================
-   GAME VARIABLES
-========================================================= */
-
 const p =
   document.getElementById('player');
 
@@ -1129,9 +914,6 @@ const t =
 const modal =
   document.getElementById('modal');
 
-const online =
-  document.getElementById('online');
-
 let x = 48;
 let y = 54;
 
@@ -1144,18 +926,14 @@ let paused = false;
 let keys = {};
 
 
-/* =========================================================
-   CLAMP
-========================================================= */
+/* ================= CLAMP ================= */
 
 const clamp =
 (v,a,b) =>
 Math.max(a,Math.min(b,v));
 
 
-/* =========================================================
-   RENDER
-========================================================= */
+/* ================= RENDER ================= */
 
 function render(){
 
@@ -1179,9 +957,7 @@ function render(){
 }
 
 
-/* =========================================================
-   MOVE
-========================================================= */
+/* ================= MOVE ================= */
 
 function move(dx,dy){
 
@@ -1206,9 +982,7 @@ function move(dx,dy){
 }
 
 
-/* =========================================================
-   TOAST
-========================================================= */
+/* ================= TOAST ================= */
 
 function toast(s){
 
@@ -1230,9 +1004,7 @@ function toast(s){
 }
 
 
-/* =========================================================
-   ATTACK
-========================================================= */
+/* ================= ATTACK ================= */
 
 function attack(){
 
@@ -1291,9 +1063,7 @@ function attack(){
 }
 
 
-/* =========================================================
-   PAUSE
-========================================================= */
+/* ================= PAUSE ================= */
 
 function pause(){
 
@@ -1307,9 +1077,7 @@ function pause(){
 }
 
 
-/* =========================================================
-   KEYBOARD
-========================================================= */
+/* ================= KEYBOARD ================= */
 
 window.onkeydown =
 function(e){
@@ -1362,9 +1130,7 @@ function(e){
 };
 
 
-/* =========================================================
-   KEY UP
-========================================================= */
+/* ================= KEY UP ================= */
 
 window.onkeyup =
 function(e){
@@ -1374,9 +1140,7 @@ function(e){
 };
 
 
-/* =========================================================
-   MOVEMENT LOOP
-========================================================= */
+/* ================= MOVEMENT LOOP ================= */
 
 setInterval(
 function(){
@@ -1422,9 +1186,7 @@ function(){
 );
 
 
-/* =========================================================
-   MOBILE CONTROLS
-========================================================= */
+/* ================= MOBILE CONTROLS ================= */
 
 document
 .querySelectorAll('.ctrl')
@@ -1458,9 +1220,7 @@ function(b){
 });
 
 
-/* =========================================================
-   SCORE TIMER
-========================================================= */
+/* ================= SCORE TIMER ================= */
 
 setInterval(
 function(){
@@ -1478,9 +1238,7 @@ function(){
 );
 
 
-/* =========================================================
-   START
-========================================================= */
+/* ================= START ================= */
 
 render();
 
@@ -1488,4 +1246,3 @@ render();
 
 </body>
 </html>
-```
