@@ -1,734 +1,816 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
-
-<title>CubesAdv_Knight ⚔️ Neon Arena</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CubesAdv Knight — SMKN 1 Sanden</title>
 
 <style>
 *{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-    -webkit-tap-highlight-color:transparent;
-}
-
-:root{
-    --bg:#020b18;
-    --panel:rgba(3,18,38,.86);
-    --cyan:#35e8ff;
-    --blue:#2699ff;
-    --purple:#a55cff;
-    --pink:#ff3186;
-    --red:#ff4168;
-    --green:#35ffbd;
-    --yellow:#ffd52a;
-    --white:#eafaff;
-    --line:rgba(53,232,255,.32);
+  box-sizing:border-box;
+  margin:0;
 }
 
 html,body{
-    width:100%;
-    height:100%;
-    overflow:hidden;
+  width:100%;
+  height:100%;
+  overflow:hidden;
 }
 
 body{
-    background:#020b18;
-    color:var(--white);
-    font-family:
-        Inter,
-        "Segoe UI",
-        Arial,
-        sans-serif;
-}
-
-button,
-input{
-    font-family:inherit;
+  font-family:Segoe UI,Arial,sans-serif;
+  background:#020817;
+  color:#eaf8ff;
 }
 
 button{
-    cursor:pointer;
+  font:inherit;
+  color:inherit;
 }
 
-/* =========================
-   GAME
-========================= */
+/* ================= BACKGROUND ================= */
 
 #game{
-    position:fixed;
-    inset:0;
-    background:#020b18;
-    overflow:hidden;
+  position:fixed;
+  inset:0;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 50% 45%,#07305c 0,transparent 35%),
+    radial-gradient(circle at 80% 20%,#3b1260 0,transparent 25%),
+    linear-gradient(#031a35,#020817 72%);
 }
 
-#canvas{
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-    display:block;
+#game:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  opacity:.45;
+  background-image:
+    linear-gradient(#1a76a92b 1px,transparent 1px),
+    linear-gradient(90deg,#1a76a92b 1px,transparent 1px);
+  background-size:46px 46px;
 }
 
-/* =========================
-   TOP UI
-========================= */
-
-.top-ui{
-    position:absolute;
-    top:20px;
-    left:20px;
-    right:20px;
-    z-index:20;
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-start;
-    pointer-events:none;
+#game:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image:
+    radial-gradient(#fff9 1px,transparent 1.5px);
+  background-size:83px 77px;
+  opacity:.28;
+  pointer-events:none;
 }
 
-.left-ui{
-    display:flex;
-    flex-direction:column;
-    gap:10px;
+/* ================= HUD ================= */
+
+.hud{
+  position:absolute;
+  z-index:20;
+  background:#03142ae0;
+  border:1px solid #3bdfff55;
+  border-radius:18px;
+  backdrop-filter:blur(12px);
+  box-shadow:
+    0 0 25px #008cff18,
+    inset 0 0 20px #00b7ff08;
 }
 
-.hp-card{
-    width:285px;
-    padding:13px 18px 15px;
-    border:1px solid rgba(53,232,255,.38);
-    border-radius:16px;
-    background:rgba(3,18,38,.84);
-    backdrop-filter:blur(12px);
-    box-shadow:
-        0 0 25px rgba(0,160,255,.08),
-        inset 0 0 25px rgba(40,150,255,.04);
+/* ================= BRAND ================= */
+
+.brand{
+  left:18px;
+  top:18px;
+  width:310px;
+  padding:12px;
+  display:flex;
+  gap:12px;
+  align-items:center;
 }
 
-.hp-head{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    font-weight:900;
-    font-size:18px;
+.logo-main{
+  width:58px;
+  height:58px;
+  object-fit:contain;
+  border-radius:15px;
+  padding:5px;
+  background:
+    radial-gradient(circle,#0c3960,#031326);
+  border:1px solid #45e6ff88;
+  box-shadow:
+    0 0 15px #21dfff55,
+    inset 0 0 15px #21dfff18;
 }
 
-.hp-number{
-    font-size:16px;
-    color:#fff;
+.brand-title{
+  font-size:17px;
+  font-weight:900;
 }
 
-.hp-bar{
-    height:14px;
-    margin-top:10px;
-    background:#182b43;
-    border:1px solid #294663;
-    border-radius:30px;
-    overflow:hidden;
+.brand-title b{
+  color:#49eaff;
 }
 
-#hpFill{
-    width:100%;
-    height:100%;
-    background:
-        linear-gradient(
-            90deg,
-            #23e5c2,
-            #3ce9ff
-        );
-    box-shadow:0 0 15px #35e8ff;
-    transition:.2s;
+.sub{
+  font-size:10px;
+  color:#80a6bb;
+  letter-spacing:1.4px;
+  margin-top:4px;
 }
 
-.score-card{
-    width:max-content;
-    padding:9px 15px;
-    border-radius:12px;
-    background:rgba(3,18,38,.78);
-    border:1px solid rgba(53,232,255,.25);
-    font-weight:900;
-    font-size:14px;
+/* ================= STATS ================= */
+
+.stats{
+  left:18px;
+  top:98px;
+  width:310px;
+  padding:14px;
 }
 
-#score{
-    color:var(--yellow);
+.row{
+  display:flex;
+  justify-content:space-between;
+  font-weight:900;
 }
 
-.right-ui{
-    display:flex;
-    flex-direction:column;
-    align-items:flex-end;
-    gap:9px;
-    pointer-events:auto;
+.hpbar{
+  height:15px;
+  background:#12263e;
+  border-radius:99px;
+  margin-top:10px;
+  overflow:hidden;
 }
+
+.fill{
+  height:100%;
+  width:76%;
+  background:linear-gradient(90deg,#25e7c7,#45dcff);
+  box-shadow:0 0 14px #42e8ff;
+  transition:.2s;
+}
+
+.score{
+  font-size:13px;
+  margin-top:9px;
+}
+
+.score b{
+  color:#ffd447;
+}
+
+/* ================= ONLINE ================= */
 
 .online{
-    padding:8px 13px;
-    border-radius:12px;
-    background:rgba(3,18,38,.82);
-    border:1px solid rgba(53,232,255,.28);
-    font-size:13px;
-    font-weight:900;
+  right:20px;
+  top:20px;
+  padding:10px 15px;
+  font-weight:900;
 }
 
-.online-dot{
-    display:inline-block;
-    width:8px;
-    height:8px;
-    border-radius:50%;
-    background:#36ffb7;
-    box-shadow:0 0 10px #36ffb7;
-    margin-right:5px;
+.online i{
+  display:inline-block;
+  width:10px;
+  height:10px;
+  background:#31f5bf;
+  border-radius:50%;
+  box-shadow:0 0 12px #31f5bf;
+  margin-right:7px;
 }
 
-#minimap{
-    width:220px;
-    height:158px;
-    border-radius:17px;
-    border:1px solid rgba(53,232,255,.48);
-    background:rgba(2,12,27,.86);
-    box-shadow:
-        0 0 25px rgba(0,170,255,.12),
-        inset 0 0 20px rgba(0,180,255,.06);
+/* ================= MAP ================= */
+
+.map{
+  right:20px;
+  top:76px;
+  width:305px;
+  height:210px;
+  padding:10px;
 }
 
-/* =========================
-   TOP BUTTONS
-========================= */
-
-.menu-buttons{
-    display:flex;
-    gap:7px;
-    flex-wrap:wrap;
-    justify-content:flex-end;
-}
-
-.menu-btn{
-    border:1px solid rgba(53,232,255,.28);
-    background:rgba(4,23,45,.82);
-    color:white;
-    padding:8px 12px;
-    border-radius:10px;
-    font-weight:800;
-    font-size:12px;
-    transition:.18s;
-}
-
-.menu-btn:hover{
-    transform:translateY(-2px);
-    border-color:var(--cyan);
-    box-shadow:0 0 15px rgba(53,232,255,.2);
-}
-
-/* =========================
-   ATTACK
-========================= */
-
-#attack{
-    position:absolute;
-    right:30px;
-    bottom:32px;
-    z-index:30;
-
-    min-width:285px;
-    padding:19px 28px;
-
-    border:1px solid rgba(255,255,255,.12);
-    border-radius:18px;
-
-    color:#fff;
-    font-size:20px;
-    font-weight:1000;
-    letter-spacing:.8px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #d92770,
-            #8b2ac3
-        );
-
-    box-shadow:
-        0 0 28px rgba(255,40,130,.38),
-        inset 0 0 22px rgba(255,255,255,.08);
-
-    transition:.12s;
-    user-select:none;
-}
-
-#attack:hover{
-    transform:scale(1.04);
-}
-
-#attack:active{
-    transform:scale(.95);
-}
-
-/* =========================
-   JOYSTICK
-========================= */
-
-.joystick{
-    position:absolute;
-    left:24px;
-    bottom:27px;
-    z-index:30;
-    width:240px;
-    height:190px;
-}
-
-.joy{
-    position:absolute;
-    width:74px;
-    height:74px;
-
-    border-radius:18px;
-    border:1px solid rgba(53,232,255,.48);
-
-    background:
-        rgba(4,28,52,.82);
-
-    color:#fff;
-    font-size:30px;
-    font-weight:900;
-
-    box-shadow:
-        inset 0 0 15px rgba(0,180,255,.05),
-        0 0 12px rgba(0,170,255,.05);
-
-    touch-action:none;
-    user-select:none;
-}
-
-.joy:active{
-    background:rgba(18,67,92,.9);
-    box-shadow:
-        0 0 20px rgba(53,232,255,.25),
-        inset 0 0 15px rgba(53,232,255,.12);
-}
-
-.joy.up{
-    top:0;
-    left:83px;
-}
-
-.joy.left{
-    top:84px;
-    left:0;
-}
-
-.joy.down{
-    top:84px;
-    left:83px;
-}
-
-.joy.right{
-    top:84px;
-    left:166px;
-}
-
-/* =========================
-   BOTTOM INFO
-========================= */
-
-.help{
-    position:absolute;
-    left:50%;
-    bottom:12px;
-    transform:translateX(-50%);
-    z-index:15;
-
-    padding:7px 15px;
-    border-radius:10px;
-
-    background:rgba(2,13,28,.7);
-    border:1px solid rgba(53,232,255,.14);
-
-    color:#91afc2;
-    font-size:11px;
-    font-weight:700;
-    pointer-events:none;
-}
-
-.help b{
-    color:var(--cyan);
-}
-
-/* =========================
-   DAMAGE VIGNETTE
-========================= */
-
-#damageFlash{
-    position:absolute;
-    inset:0;
-    z-index:10;
-    pointer-events:none;
-    opacity:0;
-
-    background:
-        radial-gradient(
-            circle,
-            transparent 35%,
-            rgba(255,0,50,.34)
-        );
-}
-
-/* =========================
-   TOAST
-========================= */
-
-#toast{
-    position:absolute;
-    left:50%;
-    top:25px;
-    z-index:100;
-    transform:translate(-50%,-80px);
-    opacity:0;
-
-    padding:11px 19px;
-
-    border:1px solid rgba(53,232,255,.45);
-    border-radius:12px;
-
-    background:rgba(4,21,42,.95);
-
-    box-shadow:
-        0 0 25px rgba(53,232,255,.18);
-
-    font-weight:900;
-    transition:.25s;
-    pointer-events:none;
-}
-
-#toast.show{
-    transform:translate(-50%,0);
-    opacity:1;
-}
-
-/* =========================
-   OVERLAY
-========================= */
-
-.overlay{
-    position:fixed;
-    inset:0;
-    z-index:200;
-
-    display:none;
-    align-items:center;
-    justify-content:center;
-
-    padding:20px;
-
-    background:rgba(0,4,14,.72);
-    backdrop-filter:blur(9px);
-}
-
-.overlay.show{
-    display:flex;
-}
-
-.modal{
-    width:min(610px,94vw);
-    max-height:88vh;
-    overflow:auto;
-
-    padding:28px;
-
-    border:1px solid rgba(53,232,255,.4);
-    border-radius:24px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(7,30,58,.98),
-            rgba(8,8,32,.98)
-        );
-
-    box-shadow:
-        0 0 70px rgba(25,160,255,.2),
-        inset 0 0 40px rgba(100,50,255,.05);
-}
-
-.modal h1,
-.modal h2{
-    margin-bottom:18px;
-    font-weight:1000;
-    text-shadow:0 0 18px rgba(53,232,255,.35);
-}
-
-.modal h2{
-    font-size:29px;
-}
-
-.modal p{
-    color:#adc5d5;
-    line-height:1.65;
-    margin-bottom:14px;
-}
-
-.big-btn{
-    width:100%;
-    padding:14px;
-    margin-top:10px;
-
-    border:1px solid rgba(53,232,255,.35);
-    border-radius:13px;
-
-    color:white;
-    font-size:16px;
-    font-weight:900;
-
-    background:
-        linear-gradient(
-            90deg,
-            #087fb9,
-            #7043dc
-        );
-}
-
-.big-btn:hover{
-    filter:brightness(1.15);
-}
-
-.big-btn.secondary{
-    background:#0b2946;
-}
-
-.big-btn.danger{
-    background:
-        linear-gradient(
-            90deg,
-            #b32058,
-            #631a43
-        );
-}
-
-/* =========================
-   PLAYER LIST
-========================= */
-
-.players{
-    display:flex;
-    flex-direction:column;
-    gap:8px;
-    margin:15px 0;
-}
-
-.player{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-
-    padding:12px 14px;
-
-    border:1px solid rgba(53,232,255,.14);
-    border-radius:11px;
-
-    background:rgba(255,255,255,.035);
-}
-
-.player .name{
-    display:flex;
-    align-items:center;
-    gap:8px;
+.mapin{
+  position:absolute;
+  inset:10px;
+  border:1px solid #42dcff55;
+  border-radius:16px;
+  background-image:
+    linear-gradient(#38c5ef22 2px,transparent 2px),
+    linear-gradient(90deg,#38c5ef22 2px,transparent 2px);
+  background-size:35px 35px;
 }
 
 .dot{
-    width:9px;
-    height:9px;
-    border-radius:50%;
-    display:inline-block;
-    box-shadow:0 0 10px currentColor;
+  position:absolute;
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  box-shadow:0 0 12px currentColor;
 }
 
-/* =========================
-   SETTINGS
-========================= */
-
-.setting{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:20px;
-
-    padding:14px 0;
-    border-bottom:1px solid rgba(255,255,255,.07);
+.a{
+  left:18%;
+  top:68%;
+  background:#31f5bf;
+  color:#31f5bf;
 }
 
-.toggle{
-    width:50px;
-    height:27px;
-    border-radius:30px;
-    background:#26394d;
-    position:relative;
+.b{
+  left:72%;
+  top:22%;
+  background:#ff3c65;
+  color:#ff3c65;
 }
 
-.toggle::after{
-    content:"";
-    position:absolute;
-    top:4px;
-    left:4px;
-
-    width:19px;
-    height:19px;
-    border-radius:50%;
-    background:white;
-
-    transition:.2s;
+.c{
+  left:66%;
+  top:58%;
+  background:#ffd426;
+  color:#ffd426;
 }
 
-.toggle.on{
-    background:#128dc3;
+.d{
+  left:58%;
+  top:48%;
+  width:15px;
+  height:15px;
+  background:#4ce9ff;
+  color:#4ce9ff;
 }
 
-.toggle.on::after{
-    left:27px;
+.e{
+  left:61%;
+  top:45%;
+  background:#ff4f9a;
+  color:#ff4f9a;
 }
 
-input[type="range"]{
-    width:170px;
+.f{
+  left:78%;
+  top:76%;
+  background:#9c5cff;
+  color:#9c5cff;
 }
 
-/* =========================
-   CHAT
-========================= */
+/* ================= NAV ================= */
 
-.chat-box{
-    height:250px;
-    overflow:auto;
-
-    padding:13px;
-
-    border:1px solid rgba(53,232,255,.15);
-    border-radius:13px;
-
-    background:rgba(0,0,0,.25);
+.nav{
+  position:absolute;
+  right:20px;
+  top:305px;
+  z-index:25;
+  display:flex;
+  gap:8px;
 }
 
-.chat-msg{
-    margin:9px 0;
-    color:#bdd1de;
+.nav button{
+  background:#03162ce8;
+  border:1px solid #38d8ff55;
+  border-radius:14px;
+  padding:11px 16px;
+  font-weight:900;
+  cursor:pointer;
+  transition:.2s;
 }
 
-.chat-msg b{
-    color:var(--cyan);
+.nav button:hover{
+  transform:translateY(-2px);
+  border-color:#43eaff;
+  box-shadow:0 0 15px #18cfff55;
 }
 
-.chat-input{
-    display:flex;
-    gap:8px;
-    margin-top:10px;
+/* ================= ARENA ================= */
+
+.arena{
+  position:absolute;
+  inset:0;
 }
 
-.chat-input input{
-    flex:1;
-    min-width:0;
+/* ================= PLAYER 3D ================= */
 
-    padding:12px;
+.player{
+  position:absolute;
+  left:48%;
+  top:54%;
+  width:62px;
+  height:62px;
+  transform:translate(-50%,-50%);
+  border-radius:16px;
 
-    border:1px solid #28516a;
-    border-radius:10px;
+  background:
+    linear-gradient(
+      145deg,
+      #54c9ff 0%,
+      #218fff 42%,
+      #0b5ed7 100%
+    );
 
-    outline:none;
+  border:2px solid #50e5ff;
 
-    color:white;
-    background:#061526;
+  box-shadow:
+    0 0 15px #198fff,
+    0 0 40px #ff3f9155,
+    inset 8px 8px 15px #ffffff35,
+    inset -8px -8px 15px #003b9d66;
+
+  z-index:8;
+  transition:.07s;
 }
 
-.chat-input button{
-    padding:0 18px;
+.player:before{
+  content:"◆";
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-items:center;
+  color:#eaffff;
+  font-size:30px;
+  text-shadow:
+    0 0 10px #fff,
+    0 3px 8px #0051a8;
 }
 
-/* =========================
-   TABLE
-========================= */
-
-table{
-    width:100%;
-    border-collapse:collapse;
+.player:after{
+  content:"";
+  position:absolute;
+  left:7px;
+  right:7px;
+  bottom:5px;
+  height:9px;
+  border-radius:50%;
+  background:#001d4c66;
+  filter:blur(3px);
 }
 
-th,
-td{
-    padding:11px;
-    text-align:left;
-    border-bottom:1px solid rgba(255,255,255,.08);
+.visor{
+  position:absolute;
+  top:14px;
+  left:16px;
+  width:28px;
+  height:10px;
+  background:#b8fbff;
+  border:2px solid #0876a2;
+  border-radius:3px;
+  box-shadow:
+    0 0 8px #72f4ff,
+    inset 0 0 5px #fff;
+  z-index:2;
 }
 
-th{
-    color:var(--cyan);
+.beam{
+  position:absolute;
+  bottom:100%;
+  left:50%;
+  width:18px;
+  height:130px;
+  transform:translateX(-50%);
+  background:linear-gradient(
+    transparent,
+    #2fbfff66
+  );
+  filter:blur(3px);
+  pointer-events:none;
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
+/* ================= ENEMY 3D ================= */
 
-@media(max-width:800px){
+.enemy{
+  position:absolute;
+  width:48px;
+  height:48px;
+  transform:translate(-50%,-50%);
+  border-radius:13px;
 
-    .top-ui{
-        top:10px;
-        left:10px;
-        right:10px;
-    }
+  background:
+    linear-gradient(
+      145deg,
+      #d084ff 0%,
+      #a14dff 40%,
+      #6629d6 100%
+    );
 
-    .hp-card{
-        width:205px;
-        padding:10px 12px;
-    }
+  border:2px solid #d9a0ff;
 
-    .hp-head{
-        font-size:15px;
-    }
+  box-shadow:
+    0 0 20px #9b5cff,
+    inset 7px 7px 12px #ffffff30,
+    inset -7px -7px 12px #3a0b9166;
 
-    .score-card{
-        font-size:12px;
-    }
-
-    #minimap{
-        width:145px;
-        height:105px;
-    }
-
-    .menu-buttons{
-        display:none;
-    }
-
-    #attack{
-        right:13px;
-        bottom:20px;
-        min-width:175px;
-        padding:16px 18px;
-        font-size:15px;
-    }
-
-    .joystick{
-        left:12px;
-        bottom:15px;
-        transform:scale(.78);
-        transform-origin:bottom left;
-    }
-
-    .help{
-        display:none;
-    }
+  z-index:7;
 }
 
-@media(max-width:500px){
+.enemy span{
+  position:absolute;
+  bottom:100%;
+  left:50%;
+  transform:translateX(-50%);
+  white-space:nowrap;
+  font-weight:900;
+  font-size:13px;
+  margin-bottom:7px;
+  text-shadow:
+    0 2px 8px #000,
+    0 0 5px #fff;
+}
 
-    .hp-card{
-        width:190px;
-    }
+.enemy:after{
+  content:"";
+  position:absolute;
+  inset:10px;
+  border:2px solid #fff8;
+  border-radius:7px;
+  box-shadow:
+    inset 0 0 8px #fff4;
+}
 
-    #minimap{
-        width:130px;
-        height:95px;
-    }
+/* ================= GEM ================= */
+/* GEM DIKEMBALIKAN KE BENTUK AWAL */
 
-    #attack{
-        min-width:150px;
-    }
+.gem{
+  position:absolute;
+  width:28px;
+  height:28px;
+  transform:translate(-50%,-50%) rotate(45deg);
+  border-radius:7px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #21f0cf 0%,
+      #21cfff 45%,
+      #218cff 100%
+    );
+
+  border:1px solid #b9ffff;
+
+  box-shadow:
+    0 0 20px #25e4ff,
+    0 0 45px #218cff66,
+    inset 4px 4px 8px #ffffff55,
+    inset -4px -4px 8px #0068c766;
+
+  animation:float 1.3s infinite ease-in-out;
+}
+
+.gem:after{
+  content:"";
+  position:absolute;
+  inset:5px;
+  border:1px solid #fff9;
+  box-shadow:inset 0 0 6px #fff6;
+}
+
+@keyframes float{
+  50%{
+    margin-top:-8px;
+  }
+}
+
+/* ================= SCHOOL LOGOS ================= */
+
+.logos{
+  position:absolute;
+  right:350px;
+  bottom:25px;
+  display:flex;
+  gap:10px;
+  z-index:15;
+  align-items:center;
+}
+
+.school-logo{
+  width:62px;
+  height:62px;
+  object-fit:contain;
+  padding:6px;
+  border-radius:17px;
+
+  background:#031326dd;
+
+  border:1px solid #46dcff66;
+
+  box-shadow:
+    0 0 18px #17cfff22,
+    inset 0 0 15px #17cfff0d;
+
+  transition:.25s;
+}
+
+.school-logo:hover{
+  transform:translateY(-5px) scale(1.08);
+  border-color:#56eaff;
+  box-shadow:
+    0 0 25px #20dfff66,
+    inset 0 0 20px #20dfff15;
+}
+
+/* ================= CONTROLS ================= */
+
+.controls{
+  position:absolute;
+  left:22px;
+  bottom:22px;
+  z-index:30;
+
+  display:grid;
+  grid-template:74px 74px/74px 74px 74px;
+  gap:9px;
+}
+
+.ctrl{
+  border-radius:18px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #0a3150d0,
+      #041326e8
+    );
+
+  border:1px solid #26d7ff80;
+
+  box-shadow:
+    inset 0 0 20px #00aaff0f,
+    inset 5px 5px 10px #ffffff08,
+    0 8px 20px #0005;
+
+  display:grid;
+  place-items:center;
+
+  font-size:34px;
+  font-weight:900;
+
+  cursor:pointer;
+  touch-action:none;
+  transition:.12s;
+}
+
+.ctrl:hover{
+  background:#08365bd0;
+  box-shadow:0 0 20px #17cfff33;
+}
+
+.ctrl:active{
+  transform:scale(.92);
+}
+
+.up{
+  grid-column:2;
+}
+
+.left{
+  grid-row:2;
+}
+
+.down{
+  grid-row:2;
+  grid-column:2;
+}
+
+.right{
+  grid-row:2;
+  grid-column:3;
+}
+
+/* ================= ATTACK ================= */
+
+.attack{
+  position:absolute;
+  right:38px;
+  bottom:28px;
+  width:300px;
+  height:86px;
+
+  border:0;
+  border-radius:25px;
+
+  background:
+    linear-gradient(
+      105deg,
+      #e12d7d,
+      #a72cc4
+    );
+
+  box-shadow:
+    0 0 35px #eb289155,
+    inset 0 0 20px #fff2,
+    inset 5px 5px 15px #ffffff12,
+    0 10px 25px #0006;
+
+  z-index:30;
+
+  font-weight:950;
+  font-size:21px;
+  cursor:pointer;
+  transition:.15s;
+}
+
+.attack:hover{
+  transform:translateY(-3px);
+  box-shadow:
+    0 0 50px #eb289177,
+    inset 0 0 25px #fff3;
+}
+
+.attack:active{
+  transform:scale(.96);
+}
+
+/* ================= TOAST ================= */
+
+.toast{
+  position:absolute;
+  left:50%;
+  top:50%;
+
+  transform:
+    translate(-50%,-50%)
+    scale(.8);
+
+  opacity:0;
+  z-index:100;
+
+  background:#041126f2;
+  border:1px solid #4de8ff;
+  border-radius:16px;
+  padding:15px 22px;
+
+  font-weight:950;
+
+  transition:.2s;
+  pointer-events:none;
+
+  box-shadow:
+    0 0 30px #00cfff22;
+}
+
+.show{
+  opacity:1;
+  transform:
+    translate(-50%,-50%)
+    scale(1);
+}
+
+/* ================= MODAL ================= */
+
+.modal{
+  display:none;
+  place-items:center;
+
+  position:absolute;
+  inset:0;
+  z-index:90;
+
+  background:#0009;
+  backdrop-filter:blur(9px);
+}
+
+.card{
+  width:min(450px,90vw);
+  padding:28px;
+  text-align:center;
+
+  border-radius:24px;
+
+  background:#05122af5;
+
+  border:1px solid #43e2ff66;
+
+  box-shadow:
+    0 0 40px #00cfff22;
+}
+
+.card h2{
+  margin-bottom:10px;
+}
+
+.card p{
+  color:#91afc4;
+  line-height:1.6;
+}
+
+.card button{
+  margin-top:18px;
+  padding:12px 24px;
+
+  border-radius:13px;
+
+  background:#0b7cff;
+
+  border:1px solid #6eeaff;
+
+  font-weight:900;
+  cursor:pointer;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:900px){
+
+  .brand,
+  .stats{
+    width:220px;
+  }
+
+  .map{
+    width:220px;
+    height:155px;
+  }
+
+  .nav{
+    top:auto;
+    bottom:120px;
+    max-width:58vw;
+    flex-wrap:wrap;
+    justify-content:flex-end;
+  }
+
+  .nav button{
+    padding:8px 10px;
+    font-size:12px;
+  }
+
+  .attack{
+    right:18px;
+    bottom:20px;
+    width:235px;
+    height:72px;
+    font-size:17px;
+  }
+
+  .logos{
+    display:none;
+  }
+}
+
+@media(max-width:650px){
+
+  .brand{
+    left:10px;
+    top:10px;
+    width:auto;
+    padding:7px;
+  }
+
+  .logo-main{
+    width:43px;
+    height:43px;
+  }
+
+  .sub{
+    display:none;
+  }
+
+  .stats{
+    left:10px;
+    top:70px;
+    width:190px;
+    padding:9px;
+  }
+
+  .map{
+    right:10px;
+    top:54px;
+    width:150px;
+    height:105px;
+  }
+
+  .online{
+    right:10px;
+    top:10px;
+    font-size:11px;
+    padding:8px;
+  }
+
+  .nav{
+    display:none;
+  }
+
+  .controls{
+    left:10px;
+    bottom:12px;
+
+    grid-template:
+      58px 58px/
+      58px 58px 58px;
+
+    gap:6px;
+  }
+
+  .ctrl{
+    font-size:26px;
+  }
+
+  .attack{
+    right:10px;
+    bottom:14px;
+    width:190px;
+    height:62px;
+    font-size:14px;
+  }
+
+  .player{
+    width:52px;
+    height:52px;
+  }
 }
 </style>
 </head>
@@ -737,653 +819,269 @@ th{
 
 <div id="game">
 
-<canvas id="canvas"></canvas>
+<!-- ================= HEADER + LOGO ================= -->
 
-<div id="damageFlash"></div>
+<div class="hud brand">
 
-<!-- =========================
-     TOP UI
-========================= -->
+  <img
+    class="logo-main"
+    src="logo-sekolah.jpeg"
+    alt="Logo SMKN 1 Sanden"
+  >
 
-<div class="top-ui">
-
-    <div class="left-ui">
-
-        <div class="hp-card">
-
-            <div class="hp-head">
-                <span>💗 HP</span>
-                <span class="hp-number">
-                    <span id="hpText">100</span>/100
-                </span>
-            </div>
-
-            <div class="hp-bar">
-                <div id="hpFill"></div>
-            </div>
-
-        </div>
-
-        <div class="score-card">
-            ⭐ SCORE:
-            <span id="score">0</span>
-            &nbsp; • &nbsp;
-            💎 <span id="crystals">0</span>
-        </div>
-
+  <div>
+    <div class="brand-title">
+      ⚔️ <b>CubesAdv</b> Knight
     </div>
 
-
-    <div class="right-ui">
-
-        <div class="online">
-            <span class="online-dot"></span>
-            ONLINE <span id="onlineCount">4</span>
-        </div>
-
-        <canvas
-            id="minimap"
-            width="220"
-            height="158">
-        </canvas>
-
-        <div class="menu-buttons">
-
-            <button class="menu-btn" onclick="openModal('lobby')">
-                🏠 Lobby
-            </button>
-
-            <button class="menu-btn" onclick="openModal('players')">
-                👥 Players
-            </button>
-
-            <button class="menu-btn" onclick="openModal('chat')">
-                💬 Chat
-            </button>
-
-            <button class="menu-btn" onclick="openBoard()">
-                🏆 Rank
-            </button>
-
-            <button class="menu-btn" onclick="findMatch()">
-                🎯 Match
-            </button>
-
-            <button class="menu-btn" onclick="togglePause()">
-                Ⅱ Pause
-            </button>
-
-        </div>
-
+    <div class="sub">
+      SMKN 1 SANDEN • BANTUL
     </div>
+  </div>
 
 </div>
 
 
-<!-- =========================
-     JOYSTICK
-========================= -->
+<!-- ================= STATS ================= -->
 
-<div class="joystick">
+<div class="hud stats">
 
-    <button class="joy up" data-key="ArrowUp">
-        ▲
-    </button>
+  <div class="row">
+    <span>💗 HP</span>
+    <span id="hp">76/100</span>
+  </div>
 
-    <button class="joy left" data-key="ArrowLeft">
-        ◀
-    </button>
+  <div class="hpbar">
+    <div id="fill" class="fill"></div>
+  </div>
 
-    <button class="joy down" data-key="ArrowDown">
-        ▼
-    </button>
-
-    <button class="joy right" data-key="ArrowRight">
-        ▶
-    </button>
+  <div class="score">
+    🏆 SCORE:
+    <b id="score">0</b>
+    &nbsp;•&nbsp;
+    💎
+    <b id="gems">0</b>
+  </div>
 
 </div>
 
 
-<!-- =========================
-     ATTACK
-========================= -->
+<!-- ================= ONLINE ================= -->
 
-<button id="attack">
-    ⚔️ SERANG
-    <small>[ SPACE ]</small>
-</button>
-
-
-<div class="help">
-    <b>WASD / ARROW</b> Gerak
-    &nbsp; • &nbsp;
-    <b>SPACE</b> Serang
-    &nbsp; • &nbsp;
-    <b>ESC</b> Pause
+<div class="hud online">
+  <i></i>
+  ONLINE
+  <span id="online">4</span>
 </div>
 
 
-<div id="toast"></div>
+<!-- ================= MAP ================= -->
+
+<div class="hud map">
+
+  <div class="mapin"></div>
+
+  <i class="dot a"></i>
+  <i class="dot b"></i>
+  <i class="dot c"></i>
+  <i class="dot d"></i>
+  <i class="dot e"></i>
+  <i class="dot f"></i>
+
+</div>
 
 
-<!-- =========================
-     TUTORIAL
-========================= -->
+<!-- ================= NAVIGATION ================= -->
 
-<div class="overlay" id="tutorial">
+<div class="nav">
 
-<div class="modal">
+  <button onclick="toast('🏠 Lobby')">
+    🏠 Lobby
+  </button>
 
-<h2>⚔️ CUBESADV_KNIGHT</h2>
+  <button onclick="toast('👥 Players: '+online.textContent)">
+    👥 Players
+  </button>
 
-<p>
-    Selamat datang, Knight! 🌌
-</p>
+  <button onclick="toast('💬 Chat siap')">
+    💬 Chat
+  </button>
 
-<p>
-    Jelajahi <b>Neon Crystal Arena</b>,
-    kumpulkan crystal, kalahkan monster,
-    dan dapatkan skor setinggi mungkin.
-</p>
+  <button onclick="toast('🏆 Rank: Knight')">
+    🏆 Rank
+  </button>
 
-<p>
-    🎮 <b>Gerak:</b> WASD / Arrow<br>
-    ⚔️ <b>Serang:</b> SPACE / tombol SERANG<br>
-    💎 <b>Crystal:</b> +10 Score<br>
-    👾 <b>Enemy:</b> +50 Score<br>
-    ❤️ Hindari serangan musuh!
-</p>
+  <button onclick="toast('🎯 Match ditemukan')">
+    🎯 Match
+  </button>
+
+  <button onclick="pause()">
+    Ⅱ Pause
+  </button>
+
+</div>
+
+
+<!-- ================= ARENA ================= -->
+
+<div class="arena">
+
+  <!-- PLAYER -->
+
+  <div
+    id="player"
+    class="player"
+  >
+
+    <span class="beam"></span>
+    <span class="visor"></span>
+
+  </div>
+
+
+  <!-- ENEMY 1 -->
+
+  <div
+    class="enemy"
+    style="left:39%;top:81%"
+  >
+    <span>ShadowFox</span>
+  </div>
+
+
+  <!-- ENEMY 2 -->
+
+  <div
+    class="enemy"
+    style="
+      left:74%;
+      top:66%;
+      transform:
+        translate(-50%,-50%)
+        scale(.82)
+    "
+  >
+    <span>CrystalFox</span>
+  </div>
+
+
+  <!-- ================= GEMS ================= -->
+
+  <div
+    class="gem"
+    style="left:63%;top:28%"
+  ></div>
+
+  <div
+    class="gem"
+    style="left:27%;top:38%"
+  ></div>
+
+</div>
+
+
+<!-- ================= LOGO SEKOLAH BAGIAN BAWAH ================= -->
+
+<div class="logos">
+
+  <img
+    class="school-logo"
+    src="logo-moko.jpeg"
+    alt="Logo MOKO"
+  >
+
+  <img
+    class="school-logo"
+    src="logo-rpl.jpeg"
+    alt="Logo RPL"
+  >
+
+  <img
+    class="school-logo"
+    src="logo-sekolah.jpeg"
+    alt="Logo Sekolah"
+  >
+
+</div>
+
+
+<!-- ================= CONTROLS ================= -->
+
+<div class="controls">
+
+  <button
+    class="ctrl up"
+    data-k="ArrowUp"
+  >
+    ▲
+  </button>
+
+  <button
+    class="ctrl left"
+    data-k="ArrowLeft"
+  >
+    ◀
+  </button>
+
+  <button
+    class="ctrl down"
+    data-k="ArrowDown"
+  >
+    ▼
+  </button>
+
+  <button
+    class="ctrl right"
+    data-k="ArrowRight"
+  >
+    ▶
+  </button>
+
+</div>
+
+
+<!-- ================= ATTACK ================= -->
 
 <button
-    class="big-btn"
-    onclick="closeModal('tutorial');startGame()">
-
-    🚀 MULAI PETUALANGAN
-
+  class="attack"
+  onclick="attack()"
+>
+  ⚔️ SERANG [ SPACE ]
 </button>
 
-</div>
-</div>
 
-
-<!-- =========================
-     PAUSE
-========================= -->
-
-<div class="overlay" id="pause">
-
-<div class="modal">
-
-<h2>Ⅱ GAME PAUSED</h2>
-
-<p>
-    Arena sedang dihentikan sementara.
-</p>
-
-<button
-    class="big-btn"
-    onclick="togglePause()">
-    ▶ RESUME
-</button>
-
-<button
-    class="big-btn secondary"
-    onclick="saveGame()">
-    💾 SAVE GAME
-</button>
-
-<button
-    class="big-btn secondary"
-    onclick="loadGame()">
-    📂 LOAD GAME
-</button>
-
-<button
-    class="big-btn secondary"
-    onclick="restartGame()">
-    🔄 RESTART
-</button>
-
-<button
-    class="big-btn secondary"
-    onclick="openModal('settings')">
-    ⚙ SETTINGS
-</button>
-
-<button
-    class="big-btn danger"
-    onclick="closeModal('pause');showToast('🚪 Kembali ke arena')">
-    🚪 EXIT
-
-</button>
-
-</div>
-</div>
-
-
-<!-- =========================
-     SETTINGS
-========================= -->
-
-<div class="overlay" id="settings">
-
-<div class="modal">
-
-<h2>⚙ SETTINGS</h2>
-
-<div class="setting">
-
-    <b>🔊 Sound Effect</b>
-
-    <div
-        class="toggle on"
-        id="soundToggle"
-        onclick="toggleSound()">
-    </div>
-
-</div>
-
-<div class="setting">
-
-    <b>🎵 Music</b>
-
-    <div
-        class="toggle on"
-        id="musicToggle"
-        onclick="toggleMusic()">
-    </div>
-
-</div>
-
-<div class="setting">
-
-    <b>🌈 Colorblind Mode</b>
-
-    <div
-        class="toggle"
-        id="colorToggle"
-        onclick="toggleColorblind()">
-    </div>
-
-</div>
-
-<div class="setting">
-
-    <b>⚡ Difficulty</b>
-
-    <input
-        type="range"
-        min="1"
-        max="3"
-        value="2"
-        id="difficulty">
-
-</div>
-
-<div class="setting">
-
-    <b>🔊 Volume</b>
-
-    <input
-        type="range"
-        min="0"
-        max="1"
-        step=".05"
-        value=".5"
-        id="volume">
-
-</div>
-
-<button
-    class="big-btn"
-    onclick="closeModal('settings')">
-
-    ✓ SELESAI
-
-</button>
-
-</div>
-</div>
-
-
-<!-- =========================
-     LOBBY
-========================= -->
-
-<div class="overlay" id="lobby">
-
-<div class="modal">
-
-<h2>🏠 GAME LOBBY</h2>
-
-<p>
-    Arena:
-    <b>Neon Crystal Realm</b>
-</p>
-
-<div class="players">
-
-<div class="player">
-    <span class="name">
-        <i
-            class="dot"
-            style="color:#35e8ff">
-        </i>
-        You
-    </span>
-    <b>READY</b>
-</div>
-
-<div class="player">
-    <span class="name">
-        <i
-            class="dot"
-            style="color:#a55cff">
-        </i>
-        ShadowFox
-    </span>
-    <b>READY</b>
-</div>
-
-<div class="player">
-    <span class="name">
-        <i
-            class="dot"
-            style="color:#35ffbd">
-        </i>
-        CrystalFox
-    </span>
-    <b>READY</b>
-</div>
-
-<div class="player">
-    <span class="name">
-        <i
-            class="dot"
-            style="color:#ff4168">
-        </i>
-        RedKnight
-    </span>
-    <b>READY</b>
-</div>
-
-</div>
-
-<button
-    class="big-btn"
-    onclick="closeModal('lobby');restartGame()">
-
-    🚀 START MATCH
-
-</button>
-
-<button
-    class="big-btn secondary"
-    onclick="closeModal('lobby')">
-
-    ✕ CLOSE
-
-</button>
-
-</div>
-</div>
-
-
-<!-- =========================
-     PLAYERS
-========================= -->
-
-<div class="overlay" id="players">
-
-<div class="modal">
-
-<h2>👥 PLAYERS ONLINE</h2>
-
-<div class="players">
-
-<div class="player">
-    <span class="name">
-        <i
-            class="dot"
-            style="color:#35e8ff">
-        </i>
-        CubesAdv_Knight
-    </span>
-    <b id="myScore">0</b>
-</div>
-
-<div class="player">
-    <span class="name">
-        <i
-            class="dot"
-            style="color:#a55cff">
-        </i>
-        ShadowFox
-    </span>
-    <b>120</b>
-</div>
-
-<div class="player">
-    <span class="name">
-        <i
-            class="dot"
-            style="color:#35ffbd">
-        </i>
-        CrystalFox
-    </span>
-    <b>90</b>
-</div>
-
-<div class="player">
-    <span class="name">
-        <i
-            class="dot"
-            style="color:#ff4168">
-        </i>
-        RedKnight
-    </span>
-    <b>70</b>
-</div>
-
-</div>
-
-<button
-    class="big-btn secondary"
-    onclick="closeModal('players')">
-
-    ✕ CLOSE
-
-</button>
-
-</div>
-</div>
-
-
-<!-- =========================
-     CHAT
-========================= -->
-
-<div class="overlay" id="chat">
-
-<div class="modal">
-
-<h2>💬 CHAT</h2>
+<!-- ================= TOAST ================= -->
 
 <div
-    class="chat-box"
-    id="chatBox">
-
-<div class="chat-msg">
-    <b>System:</b>
-    Welcome to Neon Crystal Realm!
-</div>
-
-<div class="chat-msg">
-    <b>ShadowFox:</b>
-    Good luck everyone ⚔️
-</div>
-
-<div class="chat-msg">
-    <b>CrystalFox:</b>
-    Let's collect crystals!
-</div>
-
-</div>
-
-<div class="chat-input">
-
-<input
-    id="chatInput"
-    placeholder="Ketik pesan...">
-
-<button
-    class="menu-btn"
-    onclick="sendChat()">
-
-    SEND
-
-</button>
-
-</div>
-
-<button
-    class="big-btn secondary"
-    onclick="closeModal('chat')">
-
-    ✕ CLOSE
-
-</button>
-
-</div>
-</div>
+  id="toast"
+  class="toast"
+></div>
 
 
-<!-- =========================
-     LEADERBOARD
-========================= -->
+<!-- ================= PAUSE ================= -->
 
-<div class="overlay" id="board">
+<div
+  id="modal"
+  class="modal"
+>
 
-<div class="modal">
+  <div class="card">
 
-<h2>🏆 LEADERBOARD</h2>
+    <h2>
+      ⏸ GAME PAUSED
+    </h2>
 
-<table>
+    <p>
+      Istirahat sebentar, Knight.
+      Klik tombol untuk kembali ke arena.
+    </p>
 
-<thead>
-<tr>
-    <th>#</th>
-    <th>PLAYER</th>
-    <th>SCORE</th>
-</tr>
-</thead>
+    <button onclick="pause()">
+      ▶ LANJUTKAN
+    </button>
 
-<tbody id="boardBody"></tbody>
+  </div>
 
-</table>
-
-<button
-    class="big-btn secondary"
-    onclick="closeModal('board')">
-
-    ✕ CLOSE
-
-</button>
-
-</div>
-</div>
-
-
-<!-- =========================
-     MATCH
-========================= -->
-
-<div class="overlay" id="match">
-
-<div class="modal">
-
-<h2>🎯 MATCHMAKING</h2>
-
-<p id="matchStatus">
-    Mencari pemain...
-</p>
-
-<div class="players">
-
-<div class="player">
-    <span>🌐 Region</span>
-    <b>Asia</b>
-</div>
-
-<div class="player">
-    <span>👥 Players Found</span>
-    <b id="foundPlayers">1</b>
-</div>
-
-<div class="player">
-    <span>📶 Ping</span>
-    <b>42 ms</b>
-</div>
-
-</div>
-
-<button
-    class="big-btn"
-    onclick="findMatch()">
-
-    🔎 FIND MATCH
-
-</button>
-
-<button
-    class="big-btn secondary"
-    onclick="closeModal('match')">
-
-    CANCEL
-
-</button>
-
-</div>
-</div>
-
-
-<!-- =========================
-     GAME OVER
-========================= -->
-
-<div class="overlay" id="gameover">
-
-<div class="modal">
-
-<h2>💀 GAME OVER</h2>
-
-<p>
-    Knight telah tumbang di Neon Arena.
-</p>
-
-<p>
-    Final Score:
-    <b id="finalScore">0</b>
-</p>
-
-<button
-    class="big-btn"
-    onclick="restartGame()">
-
-    🔄 MAIN LAGI
-
-</button>
-
-<button
-    class="big-btn secondary"
-    onclick="closeModal('gameover');openBoard()">
-
-    🏆 LEADERBOARD
-
-</button>
-
-</div>
 </div>
 
 </div>
@@ -1392,686 +1090,125 @@ th{
 <script>
 
 /* =========================================================
-   CANVAS
+   GAME VARIABLES
 ========================================================= */
 
-const canvas =
-    document.getElementById("canvas");
+const p =
+  document.getElementById('player');
 
-const ctx =
-    canvas.getContext("2d");
+const hpEl =
+  document.getElementById('hp');
 
-const minimap =
-    document.getElementById("minimap");
+const fill =
+  document.getElementById('fill');
 
-const mctx =
-    minimap.getContext("2d");
+const sc =
+  document.getElementById('score');
 
+const gm =
+  document.getElementById('gems');
 
-let W = 0;
-let H = 0;
+const t =
+  document.getElementById('toast');
 
-function resize(){
+const modal =
+  document.getElementById('modal');
 
-    W = canvas.width =
-        window.innerWidth *
-        devicePixelRatio;
+let x = 48;
+let y = 54;
 
-    H = canvas.height =
-        window.innerHeight *
-        devicePixelRatio;
-
-    canvas.style.width =
-        window.innerWidth+"px";
-
-    canvas.style.height =
-        window.innerHeight+"px";
-
-    ctx.setTransform(
-        devicePixelRatio,
-        0,
-        0,
-        devicePixelRatio,
-        0,
-        0
-    );
-
-    W = window.innerWidth;
-    H = window.innerHeight;
-
-}
-
-window.addEventListener(
-    "resize",
-    resize
-);
-
-resize();
-
-
-/* =========================================================
-   GAME STATE
-========================================================= */
-
+let hp = 76;
 let score = 0;
-let crystals = 0;
+let gems = 0;
 
 let paused = false;
-let gameOver = false;
-
-let difficulty = 2;
-
-let soundEnabled = true;
-let musicEnabled = true;
-let volume = .5;
 
 let keys = {};
 
-let particles = [];
-let texts = [];
-let projectiles = [];
-let stars = [];
 
-let shake = 0;
+/* =========================================================
+   CLAMP
+========================================================= */
 
-let last = 0;
-
-let audio = null;
+const clamp =
+(v,a,b) =>
+Math.max(a,Math.min(b,v));
 
 
 /* =========================================================
-   PLAYER
+   RENDER
 ========================================================= */
 
-const player = {
+function render(){
 
-    x:450,
-    y:350,
+  p.style.left =
+    x + '%';
 
-    size:42,
+  p.style.top =
+    y + '%';
 
-    speed:4.8,
+  hpEl.textContent =
+    hp + '/100';
 
-    hp:100,
+  fill.style.width =
+    hp + '%';
 
-    maxHp:100,
+  sc.textContent =
+    score;
 
-    invincible:0,
-
-    attackCooldown:0,
-
-    tail:[]
-
-};
-
-
-/* =========================================================
-   CRYSTAL
-========================================================= */
-
-const crystal = {
-
-    x:700,
-    y:300,
-
-    size:24,
-
-    pulse:0
-
-};
-
-
-/* =========================================================
-   ENEMY
-========================================================= */
-
-const enemy = {
-
-    x:800,
-    y:500,
-
-    size:44,
-
-    hp:100,
-
-    maxHp:100,
-
-    speed:1.25,
-
-    hit:0
-
-};
-
-
-/* =========================================================
-   BOSS
-========================================================= */
-
-const boss = {
-
-    x:1200,
-    y:800,
-
-    size:72,
-
-    hp:500,
-
-    maxHp:500,
-
-    active:false,
-
-    speed:.65,
-
-    hit:0
-
-};
-
-
-/* =========================================================
-   OTHER PLAYERS
-========================================================= */
-
-const players = [
-
-    {
-        name:"ShadowFox",
-        x:900,
-        y:700,
-        color:"#a55cff",
-        dx:.5,
-        dy:.35,
-        score:120
-    },
-
-    {
-        name:"CrystalFox",
-        x:500,
-        y:850,
-        color:"#35ffbd",
-        dx:-.35,
-        dy:.5,
-        score:90
-    },
-
-    {
-        name:"RedKnight",
-        x:1100,
-        y:350,
-        color:"#ff4168",
-        dx:.4,
-        dy:-.45,
-        score:70
-    }
-
-];
-
-
-/* =========================================================
-   WORLD
-========================================================= */
-
-const world = {
-    width:2200,
-    height:1500
-};
-
-let camera = {
-    x:0,
-    y:0
-};
-
-
-/* =========================================================
-   STARS
-========================================================= */
-
-for(let i=0;i<250;i++){
-
-    stars.push({
-
-        x:Math.random()*world.width,
-
-        y:Math.random()*world.height,
-
-        size:Math.random()*1.8+.3,
-
-        alpha:Math.random()*.75+.15,
-
-        twinkle:Math.random()*Math.PI*2
-
-    });
-
+  gm.textContent =
+    gems;
 }
 
 
 /* =========================================================
-   AUDIO
+   MOVE
 ========================================================= */
 
-function initAudio(){
+function move(dx,dy){
 
-    if(!audio){
+  if(paused)
+    return;
 
-        try{
-
-            audio =
-                new (
-                    window.AudioContext ||
-                    window.webkitAudioContext
-                )();
-
-        }catch(e){}
-
-    }
-
-}
-
-function beep(
-    frequency=440,
-    duration=.08,
-    type="sine"
-){
-
-    if(
-        !soundEnabled ||
-        !audio
-    )
-        return;
-
-    try{
-
-        const osc =
-            audio.createOscillator();
-
-        const gain =
-            audio.createGain();
-
-        osc.type = type;
-
-        osc.frequency.value =
-            frequency;
-
-        gain.gain.value =
-            volume*.08;
-
-        osc.connect(gain);
-
-        gain.connect(
-            audio.destination
-        );
-
-        osc.start();
-
-        gain.gain.exponentialRampToValueAtTime(
-            .001,
-            audio.currentTime+duration
-        );
-
-        osc.stop(
-            audio.currentTime+duration
-        );
-
-    }catch(e){}
-
-}
-
-
-/* =========================================================
-   RANDOM POSITION
-========================================================= */
-
-function randomPosition(size){
-
-    return {
-
-        x:
-            80+
-            Math.random()*
-            (world.width-size-160),
-
-        y:
-            80+
-            Math.random()*
-            (world.height-size-160)
-
-    };
-
-}
-
-
-/* =========================================================
-   COLLISION
-========================================================= */
-
-function collision(a,b){
-
-    return (
-        a.x < b.x+b.size &&
-        a.x+a.size > b.x &&
-        a.y < b.y+b.size &&
-        a.y+a.size > b.y
+  x =
+    clamp(
+      x + dx,
+      5,
+      95
     );
 
+  y =
+    clamp(
+      y + dy,
+      16,
+      90
+    );
+
+  render();
 }
 
 
 /* =========================================================
-   RESET
+   TOAST
 ========================================================= */
 
-function reset(){
-
-    score=0;
-    crystals=0;
-
-    gameOver=false;
-    paused=false;
-
-    player.hp=100;
-
-    player.x=world.width/2;
-    player.y=world.height/2;
-
-    player.tail=[];
-
-    player.attackCooldown=0;
-    player.invincible=0;
-
-    projectiles=[];
-    particles=[];
-    texts=[];
-
-    let c =
-        randomPosition(
-            crystal.size
-        );
-
-    crystal.x=c.x;
-    crystal.y=c.y;
-
-    let e =
-        randomPosition(
-            enemy.size
-        );
-
-    enemy.x=e.x;
-    enemy.y=e.y;
-    enemy.hp=enemy.maxHp;
-
-    boss.active=false;
-    boss.hp=boss.maxHp;
-
-    updateHUD();
-
-}
-
-
-/* =========================================================
-   MOVEMENT
-========================================================= */
-
-function updatePlayer(dt){
-
-    let dx=0;
-    let dy=0;
-
-    if(
-        keys["ArrowLeft"] ||
-        keys["a"] ||
-        keys["A"]
-    ) dx--;
-
-    if(
-        keys["ArrowRight"] ||
-        keys["d"] ||
-        keys["D"]
-    ) dx++;
-
-    if(
-        keys["ArrowUp"] ||
-        keys["w"] ||
-        keys["W"]
-    ) dy--;
-
-    if(
-        keys["ArrowDown"] ||
-        keys["s"] ||
-        keys["S"]
-    ) dy++;
-
-    if(dx || dy){
-
-        const len =
-            Math.hypot(dx,dy);
-
-        dx/=len;
-        dy/=len;
-
-        player.x +=
-            dx*
-            player.speed*
-            dt;
-
-        player.y +=
-            dy*
-            player.speed*
-            dt;
-
-        player.tail.unshift({
-
-            x:
-                player.x+
-                player.size/2,
-
-            y:
-                player.y+
-                player.size/2
-
-        });
-
-        if(
-            player.tail.length>24
-        )
-            player.tail.pop();
-
-    }
-
-    player.x =
-        Math.max(
-            0,
-            Math.min(
-                world.width-player.size,
-                player.x
-            )
-        );
-
-    player.y =
-        Math.max(
-            0,
-            Math.min(
-                world.height-player.size,
-                player.y
-            )
-        );
-
-}
-
-
-/* =========================================================
-   CRYSTAL
-========================================================= */
-
-function updateCrystal(){
-
-    crystal.pulse+=.06;
-
-    if(
-        collision(
-            player,
-            crystal
-        )
-    ){
-
-        score+=10;
-        crystals++;
-
-        beep(
-            900,
-            .12,
-            "triangle"
-        );
-
-        burst(
-            crystal.x+
-            crystal.size/2,
-
-            crystal.y+
-            crystal.size/2,
-
-            "#ffd52a",
-
-            24
-        );
-
-        floating(
-            crystal.x,
-            crystal.y,
-            "+10 💎",
-            "#ffd52a"
-        );
-
-        let p =
-            randomPosition(
-                crystal.size
-            );
-
-        crystal.x=p.x;
-        crystal.y=p.y;
-
-        if(
-            crystals>=10 &&
-            !boss.active
-        ){
-
-            boss.active=true;
-
-            let b =
-                randomPosition(
-                    boss.size
-                );
-
-            boss.x=b.x;
-            boss.y=b.y;
-
-            floating(
-                boss.x,
-                boss.y,
-                "⚠ BOSS APPEARS!",
-                "#ff4168"
-            );
-
-        }
-
-        updateHUD();
-
-    }
-
-}
-
-
-/* =========================================================
-   ENEMY
-========================================================= */
-
-function updateEnemy(dt){
-
-    const dx =
-        player.x-enemy.x;
-
-    const dy =
-        player.y-enemy.y;
-
-    const distance =
-        Math.hypot(dx,dy)||1;
-
-    const speed =
-        enemy.speed+
-        difficulty*.38;
-
-    enemy.x +=
-        dx/distance*
-        speed*
-        dt;
-
-    enemy.y +=
-        dy/distance*
-        speed*
-        dt;
-
-    if(enemy.hit>0)
-        enemy.hit-=.04*dt;
-
-    if(
-        collision(
-            player,
-            enemy
-        ) &&
-        player.invincible<=0
-    ){
-
-        damage(
-            8+
-            difficulty*2
-        );
-
-    }
-
-}
-
-
-/* =========================================================
-   BOSS
-========================================================= */
-
-function updateBoss(dt){
-
-    if(!boss.active)
-        return;
-
-    const dx =
-        player.x-boss.x;
-
-    const dy =
-        player.y-boss.y;
-
-    const distance =
-        Math.hypot(dx,dy)||1;
-
-    boss.x +=
-        dx/distance*
-        boss.speed*
-        dt;
-
-    boss.y +=
-        dy/distance*
-        boss.speed*
-        dt;
-
-    if(boss.hit>0)
-        boss.hit-=.04*dt;
-
-    if(
-        collision(
-            player,
-            boss
-        ) &&
-        player.invincible<=0
-    ){
-
-        damage(18);
-
-    }
-
+function toast(s){
+
+  t.textContent =
+    s;
+
+  t.classList.add('show');
+
+  clearTimeout(
+    window.tt
+  );
+
+  window.tt =
+    setTimeout(
+      () =>
+        t.classList.remove('show'),
+      850
+    );
 }
 
 
@@ -2081,1810 +1218,57 @@ function updateBoss(dt){
 
 function attack(){
 
-    if(
-        paused ||
-        gameOver ||
-        player.attackCooldown>0
-    )
-        return;
+  if(
+    paused ||
+    hp <= 0
+  )
+    return;
 
-    initAudio();
+  score += 10;
 
-    player.attackCooldown=.28;
+  if(
+    Math.random() < .35
+  ){
 
-    beep(
-        720,
-        .1,
-        "square"
+    gems++;
+
+    toast(
+      '💎 +1 GEM!'
     );
 
-    const sx =
-        player.x+
-        player.size/2;
+  }else{
 
-    const sy =
-        player.y+
-        player.size/2;
-
-    let target = enemy;
-
-    if(
-        boss.active &&
-        Math.hypot(
-            boss.x-player.x,
-            boss.y-player.y
-        ) <
-        Math.hypot(
-            enemy.x-player.x,
-            enemy.y-player.y
-        )
-    ){
-
-        target=boss;
-
-    }
-
-    const tx =
-        target.x+
-        target.size/2;
-
-    const ty =
-        target.y+
-        target.size/2;
-
-    const dx=tx-sx;
-    const dy=ty-sy;
-
-    const len =
-        Math.hypot(dx,dy)||1;
-
-    projectiles.push({
-
-        x:sx,
-        y:sy,
-
-        vx:dx/len*12,
-        vy:dy/len*12,
-
-        life:1
-
-    });
-
-    burst(
-        sx,
-        sy,
-        "#54e7ff",
-        10
+    toast(
+      '⚔️ SERANG! +10 SCORE'
     );
 
-}
+  }
 
+  if(
+    Math.random() < .22
+  ){
 
-/* =========================================================
-   PROJECTILES
-========================================================= */
-
-function updateProjectiles(dt){
-
-    projectiles.forEach(p=>{
-
-        p.x+=p.vx*dt;
-        p.y+=p.vy*dt;
-
-        p.life-=.025*dt;
-
-        const hitBox={
-            x:p.x-6,
-            y:p.y-6,
-            size:12
-        };
-
-        if(
-            collision(
-                hitBox,
-                enemy
-            )
-        ){
-
-            enemy.hp-=25;
-            enemy.hit=.5;
-            p.life=0;
-
-            beep(
-                180,
-                .06,
-                "square"
-            );
-
-            burst(
-                p.x,
-                p.y,
-                "#ff4168",
-                18
-            );
-
-            floating(
-                enemy.x,
-                enemy.y,
-                "-25",
-                "#ff4168"
-            );
-
-            if(enemy.hp<=0){
-
-                score+=50;
-
-                floating(
-                    enemy.x,
-                    enemy.y,
-                    "+50 ENEMY",
-                    "#ff4168"
-                );
-
-                burst(
-                    enemy.x+
-                    enemy.size/2,
-
-                    enemy.y+
-                    enemy.size/2,
-
-                    "#ff4168",
-                    45
-                );
-
-                let e =
-                    randomPosition(
-                        enemy.size
-                    );
-
-                enemy.x=e.x;
-                enemy.y=e.y;
-                enemy.hp=enemy.maxHp;
-
-                updateHUD();
-
-            }
-
-        }
-
-        if(
-            boss.active &&
-            collision(
-                hitBox,
-                boss
-            )
-        ){
-
-            boss.hp-=20;
-            boss.hit=.5;
-            p.life=0;
-
-            burst(
-                p.x,
-                p.y,
-                "#ff3b8d",
-                20
-            );
-
-            floating(
-                boss.x,
-                boss.y,
-                "-20",
-                "#ff3b8d"
-            );
-
-            if(boss.hp<=0){
-
-                score+=500;
-
-                floating(
-                    boss.x,
-                    boss.y,
-                    "⚔ BOSS DEFEATED +500",
-                    "#ffd52a"
-                );
-
-                burst(
-                    boss.x+
-                    boss.size/2,
-
-                    boss.y+
-                    boss.size/2,
-
-                    "#ffd52a",
-                    100
-                );
-
-                boss.active=false;
-
-                updateHUD();
-
-            }
-
-        }
-
-    });
-
-    projectiles =
-        projectiles.filter(
-            p =>
-                p.life>0 &&
-                p.x>-50 &&
-                p.y>-50 &&
-                p.x<world.width+50 &&
-                p.y<world.height+50
-        );
-
-}
-
-
-/* =========================================================
-   DAMAGE
-========================================================= */
-
-function damage(amount){
-
-    if(player.invincible>0)
-        return;
-
-    player.hp-=amount;
-
-    player.invincible=.8;
-
-    shake=9;
-
-    beep(
-        110,
-        .18,
-        "sawtooth"
-    );
-
-    burst(
-        player.x+
-        player.size/2,
-
-        player.y+
-        player.size/2,
-
-        "#ff4168",
-        20
-    );
-
-    floating(
-        player.x,
-        player.y,
-        "-"+amount,
-        "#ff4168"
-    );
-
-    const flash =
-        document.getElementById(
-            "damageFlash"
-        );
-
-    flash.style.opacity=".8";
-
-    setTimeout(
-        ()=>flash.style.opacity="0",
-        100
-    );
-
-    updateHUD();
-
-    if(player.hp<=0){
-
-        player.hp=0;
-
-        gameOver=true;
-
-        document.getElementById(
-            "finalScore"
-        ).textContent=score;
-
-        openModal("gameover");
-
-    }
-
-}
-
-
-/* =========================================================
-   PARTICLES
-========================================================= */
-
-function burst(
-    x,
-    y,
-    color,
-    count
-){
-
-    for(
-        let i=0;
-        i<count;
-        i++
-    ){
-
-        const angle =
-            Math.random()*
-            Math.PI*2;
-
-        const speed =
-            Math.random()*4+1;
-
-        particles.push({
-
-            x,
-            y,
-
-            vx:
-                Math.cos(angle)*
-                speed,
-
-            vy:
-                Math.sin(angle)*
-                speed,
-
-            life:1,
-
-            size:
-                Math.random()*4+1,
-
-            color
-
-        });
-
-    }
-
-}
-
-function floating(
-    x,
-    y,
-    text,
-    color
-){
-
-    texts.push({
-
-        x,
-        y,
-        text,
-        color,
-        life:1
-
-    });
-
-}
-
-
-/* =========================================================
-   PARTICLE UPDATE
-========================================================= */
-
-function updateParticles(dt){
-
-    particles.forEach(p=>{
-
-        p.x+=p.vx*dt;
-        p.y+=p.vy*dt;
-
-        p.vx*=.97;
-        p.vy*=.97;
-
-        p.vy+=.025*dt;
-
-        p.life-=.025*dt;
-
-    });
-
-    particles =
-        particles.filter(
-            p=>p.life>0
-        );
-
-    texts.forEach(t=>{
-
-        t.y-=.8*dt;
-        t.life-=.018*dt;
-
-    });
-
-    texts =
-        texts.filter(
-            t=>t.life>0
-        );
-
-}
-
-
-/* =========================================================
-   OTHER PLAYERS
-========================================================= */
-
-function updatePlayers(dt){
-
-    players.forEach(p=>{
-
-        p.x+=p.dx*dt;
-        p.y+=p.dy*dt;
-
-        if(
-            p.x<30 ||
-            p.x>world.width-50
-        )
-            p.dx*=-1;
-
-        if(
-            p.y<30 ||
-            p.y>world.height-50
-        )
-            p.dy*=-1;
-
-    });
-
-}
-
-
-/* =========================================================
-   CAMERA
-========================================================= */
-
-function updateCamera(){
-
-    camera.x =
-        player.x+
-        player.size/2-
-        W/2;
-
-    camera.y =
-        player.y+
-        player.size/2-
-        H/2;
-
-    camera.x =
-        Math.max(
-            0,
-            Math.min(
-                world.width-W,
-                camera.x
-            )
-        );
-
-    camera.y =
-        Math.max(
-            0,
-            Math.min(
-                world.height-H,
-                camera.y
-            )
-        );
-
-}
-
-
-/* =========================================================
-   DRAW BACKGROUND
-========================================================= */
-
-function drawBackground(time){
-
-    const gradient =
-        ctx.createLinearGradient(
-            0,
-            0,
-            0,
-            H
-        );
-
-    gradient.addColorStop(
+    hp =
+      Math.max(
         0,
-        "#061a35"
+        hp - 3
+      );
+
+    toast(
+      '💥 -3 HP'
     );
 
-    gradient.addColorStop(
-        .5,
-        "#03152b"
+  }
+
+  render();
+
+  if(hp <= 0){
+
+    toast(
+      '☠️ Kalah — tekan R'
     );
 
-    gradient.addColorStop(
-        1,
-        "#020917"
-    );
-
-    ctx.fillStyle=gradient;
-
-    ctx.fillRect(
-        0,
-        0,
-        W,
-        H
-    );
-
-    ctx.save();
-
-    ctx.translate(
-        -camera.x,
-        -camera.y
-    );
-
-    /* STARS */
-
-    stars.forEach(s=>{
-
-        const twinkle =
-            Math.sin(
-                time*.001+
-                s.twinkle
-            )*.25+.75;
-
-        ctx.globalAlpha =
-            s.alpha*
-            twinkle;
-
-        ctx.fillStyle="#dffaff";
-
-        ctx.beginPath();
-
-        ctx.arc(
-            s.x,
-            s.y,
-            s.size,
-            0,
-            Math.PI*2
-        );
-
-        ctx.fill();
-
-    });
-
-    ctx.globalAlpha=1;
-
-
-    /* GRID */
-
-    const grid=44;
-
-    ctx.strokeStyle=
-        "rgba(39,157,218,.13)";
-
-    ctx.lineWidth=1;
-
-    const startX =
-        Math.floor(
-            camera.x/grid
-        )*grid;
-
-    const endX =
-        camera.x+W+grid;
-
-    for(
-        let x=startX;
-        x<endX;
-        x+=grid
-    ){
-
-        ctx.beginPath();
-
-        ctx.moveTo(x,camera.y);
-        ctx.lineTo(x,camera.y+H);
-
-        ctx.stroke();
-
-    }
-
-    const startY =
-        Math.floor(
-            camera.y/grid
-        )*grid;
-
-    const endY =
-        camera.y+H+grid;
-
-    for(
-        let y=startY;
-        y<endY;
-        y+=grid
-    ){
-
-        ctx.beginPath();
-
-        ctx.moveTo(camera.x,y);
-        ctx.lineTo(camera.x+W,y);
-
-        ctx.stroke();
-
-    }
-
-
-    /* WORLD BORDER */
-
-    ctx.strokeStyle=
-        "rgba(53,232,255,.35)";
-
-    ctx.lineWidth=3;
-
-    ctx.strokeRect(
-        0,
-        0,
-        world.width,
-        world.height
-    );
-
-    ctx.restore();
-
-}
-
-
-/* =========================================================
-   DRAW CRYSTAL
-========================================================= */
-
-function drawCrystal(){
-
-    const pulse =
-        Math.sin(
-            crystal.pulse
-        )*5;
-
-    const x =
-        crystal.x+
-        crystal.size/2;
-
-    const y =
-        crystal.y+
-        crystal.size/2;
-
-    ctx.save();
-
-    ctx.translate(
-        -camera.x,
-        -camera.y
-    );
-
-    ctx.shadowBlur=
-        25+pulse;
-
-    ctx.shadowColor=
-        "#ffd52a";
-
-    ctx.fillStyle=
-        "#ffd52a";
-
-    ctx.beginPath();
-
-    ctx.moveTo(
-        x,
-        y-20-pulse
-    );
-
-    ctx.lineTo(
-        x+17,
-        y
-    );
-
-    ctx.lineTo(
-        x,
-        y+20+pulse
-    );
-
-    ctx.lineTo(
-        x-17,
-        y
-    );
-
-    ctx.closePath();
-
-    ctx.fill();
-
-    ctx.fillStyle="#fff8ad";
-
-    ctx.beginPath();
-
-    ctx.moveTo(
-        x,
-        y-12
-    );
-
-    ctx.lineTo(
-        x+7,
-        y
-    );
-
-    ctx.lineTo(
-        x,
-        y+7
-    );
-
-    ctx.lineTo(
-        x-6,
-        y
-    );
-
-    ctx.closePath();
-
-    ctx.fill();
-
-    ctx.restore();
-
-}
-
-
-/* =========================================================
-   DRAW KNIGHT
-========================================================= */
-
-function drawPlayer(){
-
-    const x =
-        player.x-camera.x;
-
-    const y =
-        player.y-camera.y;
-
-    const cx =
-        x+
-        player.size/2;
-
-    const cy =
-        y+
-        player.size/2;
-
-    /* TRAIL */
-
-    ctx.save();
-
-    for(
-        let i=player.tail.length-1;
-        i>=0;
-        i--
-    ){
-
-        const t=
-            player.tail[i];
-
-        const alpha =
-            1-
-            i/
-            Math.max(
-                player.tail.length,
-                1
-            );
-
-        ctx.globalAlpha=
-            alpha*.4;
-
-        ctx.fillStyle=
-            "#2699ff";
-
-        ctx.shadowBlur=18;
-
-        ctx.shadowColor=
-            "#2699ff";
-
-        ctx.beginPath();
-
-        ctx.arc(
-            t.x-camera.x,
-            t.y-camera.y,
-            3+alpha*9,
-            0,
-            Math.PI*2
-        );
-
-        ctx.fill();
-
-    }
-
-    ctx.restore();
-
-
-    /* BODY */
-
-    ctx.save();
-
-    const flashing =
-        player.invincible>.4;
-
-    ctx.shadowBlur=30;
-
-    ctx.shadowColor=
-        flashing?
-        "#ff4168":
-        "#2699ff";
-
-    ctx.fillStyle=
-        flashing?
-        "#ff4168":
-        "#2699ff";
-
-    roundRect(
-        ctx,
-        x,
-        y,
-        player.size,
-        player.size,
-        10
-    );
-
-    ctx.fill();
-
-
-    /* SHIELD */
-
-    ctx.shadowBlur=0;
-
-    ctx.fillStyle="#c9f6ff";
-
-    ctx.beginPath();
-
-    ctx.moveTo(
-        cx,
-        y+8
-    );
-
-    ctx.lineTo(
-        x+34,
-        cy-3
-    );
-
-    ctx.lineTo(
-        cx,
-        y+35
-    );
-
-    ctx.lineTo(
-        x+8,
-        cy-3
-    );
-
-    ctx.closePath();
-
-    ctx.fill();
-
-
-    /* HELMET */
-
-    ctx.fillStyle="#eaffff";
-
-    ctx.fillRect(
-        x+9,
-        y+5,
-        24,
-        13
-    );
-
-    /* VISOR */
-
-    ctx.fillStyle="#153247";
-
-    ctx.fillRect(
-        x+11,
-        y+10,
-        20,
-        6
-    );
-
-    /* EYES */
-
-    ctx.fillStyle="#4cefff";
-
-    ctx.shadowBlur=9;
-
-    ctx.shadowColor="#4cefff";
-
-    ctx.fillRect(
-        x+14,
-        y+11,
-        4,
-        3
-    );
-
-    ctx.fillRect(
-        x+24,
-        y+11,
-        4,
-        3
-    );
-
-    ctx.restore();
-
-}
-
-
-/* =========================================================
-   DRAW ENEMY
-========================================================= */
-
-function drawEnemy(){
-
-    const x=
-        enemy.x-camera.x;
-
-    const y=
-        enemy.y-camera.y;
-
-    ctx.save();
-
-    ctx.shadowBlur=
-        enemy.hit>0?
-        45:
-        28;
-
-    ctx.shadowColor=
-        "#ff4168";
-
-    ctx.fillStyle=
-        enemy.hit>0?
-        "#ffffff":
-        "#ff4168";
-
-    roundRect(
-        ctx,
-        x,
-        y,
-        enemy.size,
-        enemy.size,
-        10
-    );
-
-    ctx.fill();
-
-    ctx.shadowBlur=0;
-
-    ctx.fillStyle="#fff";
-
-    ctx.fillRect(
-        x+9,
-        y+12,
-        7,
-        8
-    );
-
-    ctx.fillRect(
-        x+28,
-        y+12,
-        7,
-        8
-    );
-
-    ctx.fillStyle="#171426";
-
-    ctx.fillRect(
-        x+11,
-        y+14,
-        3,
-        4
-    );
-
-    ctx.fillRect(
-        x+30,
-        y+14,
-        3,
-        4
-    );
-
-    /* HP */
-
-    ctx.fillStyle="#182233";
-
-    ctx.fillRect(
-        x,
-        y-10,
-        enemy.size,
-        5
-    );
-
-    ctx.fillStyle="#ff4168";
-
-    ctx.fillRect(
-        x,
-        y-10,
-        enemy.size*
-        (enemy.hp/enemy.maxHp),
-        5
-    );
-
-    ctx.restore();
-
-}
-
-
-/* =========================================================
-   DRAW BOSS
-========================================================= */
-
-function drawBoss(){
-
-    if(!boss.active)
-        return;
-
-    const x=
-        boss.x-camera.x;
-
-    const y=
-        boss.y-camera.y;
-
-    ctx.save();
-
-    ctx.shadowBlur=45;
-
-    ctx.shadowColor="#ff2384";
-
-    ctx.fillStyle=
-        boss.hit>0?
-        "#fff":
-        "#a51f76";
-
-    roundRect(
-        ctx,
-        x,
-        y,
-        boss.size,
-        boss.size,
-        17
-    );
-
-    ctx.fill();
-
-    ctx.shadowBlur=0;
-
-    ctx.fillStyle="#ffb4dc";
-
-    ctx.fillRect(
-        x+14,
-        y+20,
-        12,
-        14
-    );
-
-    ctx.fillRect(
-        x+46,
-        y+20,
-        12,
-        14
-    );
-
-    /* BOSS HP */
-
-    ctx.fillStyle="#151526";
-
-    ctx.fillRect(
-        x,
-        y-15,
-        boss.size,
-        7
-    );
-
-    ctx.fillStyle="#ff3186";
-
-    ctx.fillRect(
-        x,
-        y-15,
-        boss.size*
-        (boss.hp/boss.maxHp),
-        7
-    );
-
-    ctx.fillStyle="#ff8fc5";
-
-    ctx.font=
-        "bold 12px Arial";
-
-    ctx.textAlign="center";
-
-    ctx.fillText(
-        "BOSS",
-        x+boss.size/2,
-        y-20
-    );
-
-    ctx.restore();
-
-}
-
-
-/* =========================================================
-   DRAW OTHER PLAYERS
-========================================================= */
-
-function drawPlayers(){
-
-    players.forEach(p=>{
-
-        const x=
-            p.x-camera.x;
-
-        const y=
-            p.y-camera.y;
-
-        ctx.save();
-
-        ctx.shadowBlur=22;
-
-        ctx.shadowColor=p.color;
-
-        ctx.fillStyle=p.color;
-
-        roundRect(
-            ctx,
-            x,
-            y,
-            38,
-            38,
-            9
-        );
-
-        ctx.fill();
-
-        ctx.shadowBlur=0;
-
-        ctx.fillStyle="#fff";
-
-        ctx.font=
-            "bold 11px Arial";
-
-        ctx.textAlign="center";
-
-        ctx.fillText(
-            p.name,
-            x+19,
-            y-8
-        );
-
-        ctx.restore();
-
-    });
-
-}
-
-
-/* =========================================================
-   DRAW PROJECTILES
-========================================================= */
-
-function drawProjectiles(){
-
-    projectiles.forEach(p=>{
-
-        ctx.save();
-
-        ctx.shadowBlur=22;
-
-        ctx.shadowColor="#54e7ff";
-
-        ctx.fillStyle="#54e7ff";
-
-        ctx.beginPath();
-
-        ctx.arc(
-            p.x-camera.x,
-            p.y-camera.y,
-            6,
-            0,
-            Math.PI*2
-        );
-
-        ctx.fill();
-
-        ctx.restore();
-
-    });
-
-}
-
-
-/* =========================================================
-   DRAW PARTICLES
-========================================================= */
-
-function drawParticles(){
-
-    particles.forEach(p=>{
-
-        ctx.save();
-
-        ctx.globalAlpha=
-            Math.max(
-                0,
-                p.life
-            );
-
-        ctx.fillStyle=p.color;
-
-        ctx.shadowBlur=12;
-
-        ctx.shadowColor=p.color;
-
-        ctx.beginPath();
-
-        ctx.arc(
-            p.x-camera.x,
-            p.y-camera.y,
-            p.size,
-            0,
-            Math.PI*2
-        );
-
-        ctx.fill();
-
-        ctx.restore();
-
-    });
-
-}
-
-
-/* =========================================================
-   FLOATING TEXT
-========================================================= */
-
-function drawTexts(){
-
-    texts.forEach(t=>{
-
-        ctx.save();
-
-        ctx.globalAlpha=
-            Math.max(
-                0,
-                t.life
-            );
-
-        ctx.fillStyle=t.color;
-
-        ctx.font=
-            "900 16px Arial";
-
-        ctx.textAlign="center";
-
-        ctx.shadowBlur=10;
-
-        ctx.shadowColor=t.color;
-
-        ctx.fillText(
-            t.text,
-            t.x-camera.x,
-            t.y-camera.y
-        );
-
-        ctx.restore();
-
-    });
-
-}
-
-
-/* =========================================================
-   ROUNDED RECT
-========================================================= */
-
-function roundRect(
-    c,
-    x,
-    y,
-    w,
-    h,
-    r
-){
-
-    c.beginPath();
-
-    c.roundRect(
-        x,
-        y,
-        w,
-        h,
-        r
-    );
-
-}
-
-
-/* =========================================================
-   MINIMAP
-========================================================= */
-
-function drawMinimap(){
-
-    const mw=
-        minimap.width;
-
-    const mh=
-        minimap.height;
-
-    mctx.clearRect(
-        0,
-        0,
-        mw,
-        mh
-    );
-
-    mctx.fillStyle="#04172d";
-
-    mctx.fillRect(
-        0,
-        0,
-        mw,
-        mh
-    );
-
-    mctx.strokeStyle=
-        "rgba(53,232,255,.15)";
-
-    mctx.lineWidth=1;
-
-    for(
-        let x=0;
-        x<mw;
-        x+=25
-    ){
-
-        mctx.beginPath();
-        mctx.moveTo(x,0);
-        mctx.lineTo(x,mh);
-        mctx.stroke();
-
-    }
-
-    for(
-        let y=0;
-        y<mh;
-        y+=25
-    ){
-
-        mctx.beginPath();
-        mctx.moveTo(0,y);
-        mctx.lineTo(mw,y);
-        mctx.stroke();
-
-    }
-
-    const sx=
-        mw/world.width;
-
-    const sy=
-        mh/world.height;
-
-
-    /* CRYSTAL */
-
-    mctx.fillStyle="#ffd52a";
-
-    mctx.beginPath();
-
-    mctx.arc(
-        crystal.x*sx,
-        crystal.y*sy,
-        5,
-        0,
-        Math.PI*2
-    );
-
-    mctx.fill();
-
-
-    /* ENEMY */
-
-    mctx.fillStyle="#ff4168";
-
-    mctx.beginPath();
-
-    mctx.arc(
-        enemy.x*sx,
-        enemy.y*sy,
-        6,
-        0,
-        Math.PI*2
-    );
-
-    mctx.fill();
-
-
-    /* BOSS */
-
-    if(boss.active){
-
-        mctx.fillStyle="#ff2384";
-
-        mctx.beginPath();
-
-        mctx.arc(
-            boss.x*sx,
-            boss.y*sy,
-            7,
-            0,
-            Math.PI*2
-        );
-
-        mctx.fill();
-
-    }
-
-
-    /* OTHER PLAYERS */
-
-    players.forEach(p=>{
-
-        mctx.fillStyle=p.color;
-
-        mctx.beginPath();
-
-        mctx.arc(
-            p.x*sx,
-            p.y*sy,
-            4,
-            0,
-            Math.PI*2
-        );
-
-        mctx.fill();
-
-    });
-
-
-    /* PLAYER */
-
-    mctx.fillStyle="#54e7ff";
-
-    mctx.shadowBlur=8;
-
-    mctx.shadowColor="#54e7ff";
-
-    mctx.beginPath();
-
-    mctx.arc(
-        (
-            player.x+
-            player.size/2
-        )*sx,
-
-        (
-            player.y+
-            player.size/2
-        )*sy,
-
-        6,
-        0,
-        Math.PI*2
-    );
-
-    mctx.fill();
-
-    mctx.shadowBlur=0;
-
-}
-
-
-/* =========================================================
-   DRAW
-========================================================= */
-
-function draw(time){
-
-    ctx.save();
-
-    if(shake>0){
-
-        ctx.translate(
-            (Math.random()-.5)*shake,
-            (Math.random()-.5)*shake
-        );
-
-        shake-=.6;
-
-    }
-
-    drawBackground(time);
-
-    drawCrystal();
-
-    drawPlayers();
-
-    drawEnemy();
-
-    drawBoss();
-
-    drawProjectiles();
-
-    drawPlayer();
-
-    drawParticles();
-
-    drawTexts();
-
-    ctx.restore();
-
-    drawMinimap();
-
-}
-
-
-/* =========================================================
-   HUD
-========================================================= */
-
-function updateHUD(){
-
-    document.getElementById(
-        "score"
-    ).textContent=score;
-
-    document.getElementById(
-        "crystals"
-    ).textContent=crystals;
-
-    document.getElementById(
-        "hpText"
-    ).textContent=
-        Math.ceil(
-            Math.max(
-                0,
-                player.hp
-            )
-        );
-
-    document.getElementById(
-        "hpFill"
-    ).style.width=
-        Math.max(
-            0,
-            player.hp
-        )+"%";
-
-    document.getElementById(
-        "myScore"
-    ).textContent=score;
-
-}
-
-
-/* =========================================================
-   UPDATE
-========================================================= */
-
-function update(dt){
-
-    if(
-        paused ||
-        gameOver
-    )
-        return;
-
-    dt=
-        Math.min(
-            dt/16.67,
-            2
-        );
-
-    player.attackCooldown=
-        Math.max(
-            0,
-            player.attackCooldown-
-            .016*dt
-        );
-
-    player.invincible=
-        Math.max(
-            0,
-            player.invincible-
-            .016*dt
-        );
-
-    updatePlayer(dt);
-
-    updateCrystal();
-
-    updateEnemy(dt);
-
-    updateBoss(dt);
-
-    updateProjectiles(dt);
-
-    updateParticles(dt);
-
-    updatePlayers(dt);
-
-    updateCamera();
-
-}
-
-
-/* =========================================================
-   GAME LOOP
-========================================================= */
-
-function loop(time){
-
-    const dt=
-        time-last;
-
-    last=time;
-
-    update(dt);
-
-    draw(time);
-
-    requestAnimationFrame(loop);
-
-}
-
-requestAnimationFrame(loop);
-
-
-/* =========================================================
-   KEYBOARD
-========================================================= */
-
-window.addEventListener(
-    "keydown",
-    e=>{
-
-        keys[e.key]=true;
-
-        if(
-            [
-                " ",
-                "ArrowUp",
-                "ArrowDown",
-                "ArrowLeft",
-                "ArrowRight"
-            ].includes(e.key)
-        ){
-
-            e.preventDefault();
-
-        }
-
-        initAudio();
-
-        if(
-            e.key===" " &&
-            !e.repeat
-        ){
-
-            attack();
-
-        }
-
-        if(
-            e.key==="Escape"
-        ){
-
-            togglePause();
-
-        }
-
-    }
-);
-
-window.addEventListener(
-    "keyup",
-    e=>{
-
-        keys[e.key]=false;
-
-    }
-);
-
-
-/* =========================================================
-   TOUCH BUTTONS
-========================================================= */
-
-document
-.querySelectorAll(".joy")
-.forEach(btn=>{
-
-    const key=
-        btn.dataset.key;
-
-    btn.addEventListener(
-        "pointerdown",
-        e=>{
-
-            e.preventDefault();
-
-            initAudio();
-
-            keys[key]=true;
-
-        }
-    );
-
-    btn.addEventListener(
-        "pointerup",
-        e=>{
-
-            e.preventDefault();
-
-            keys[key]=false;
-
-        }
-    );
-
-    btn.addEventListener(
-        "pointercancel",
-        ()=>{
-
-            keys[key]=false;
-
-        }
-    );
-
-    btn.addEventListener(
-        "pointerleave",
-        ()=>{
-
-            keys[key]=false;
-
-        }
-    );
-
-});
-
-
-/* =========================================================
-   ATTACK BUTTON
-========================================================= */
-
-const attackButton=
-    document.getElementById(
-        "attack"
-    );
-
-attackButton.addEventListener(
-    "pointerdown",
-    e=>{
-
-        e.preventDefault();
-
-        initAudio();
-
-        attack();
-
-    }
-);
-
-
-/* =========================================================
-   MODALS
-========================================================= */
-
-function openModal(id){
-
-    if(id!=="pause")
-        paused=true;
-
-    document
-    .getElementById(id)
-    .classList
-    .add("show");
-
-}
-
-function closeModal(id){
-
-    document
-    .getElementById(id)
-    .classList
-    .remove("show");
-
-    if(
-        id!=="gameover"
-    ){
-
-        if(
-            !document.querySelector(
-                ".overlay.show"
-            )
-        ){
-
-            paused=false;
-
-        }
-
-    }
+  }
 
 }
 
@@ -3893,559 +1277,194 @@ function closeModal(id){
    PAUSE
 ========================================================= */
 
-function togglePause(){
+function pause(){
 
-    if(gameOver)
-        return;
+  paused =
+    !paused;
 
-    paused=!paused;
-
-    if(paused)
-        openModal("pause");
-    else
-        closeModal("pause");
-
+  modal.style.display =
+    paused
+      ? 'grid'
+      : 'none';
 }
+
+
+/* =========================================================
+   KEYBOARD
+========================================================= */
+
+window.onkeydown =
+function(e){
+
+  keys[e.key] = 1;
+
+  if(
+    e.code === 'Space'
+  ){
+
+    e.preventDefault();
+
+    attack();
+
+  }
+
+  if(
+    e.key.toLowerCase()
+    === 'p'
+  ){
+
+    pause();
+
+  }
+
+  if(
+    e.key.toLowerCase()
+    === 'r' &&
+    hp <= 0
+  ){
+
+    hp = 76;
+
+    score = 0;
+
+    gems = 0;
+
+    x = 48;
+
+    y = 54;
+
+    render();
+
+    toast(
+      '🔄 RESET'
+    );
+
+  }
+
+};
+
+
+/* =========================================================
+   KEY UP
+========================================================= */
+
+window.onkeyup =
+function(e){
+
+  keys[e.key] = 0;
+
+};
+
+
+/* =========================================================
+   MOVEMENT LOOP
+========================================================= */
+
+setInterval(
+function(){
+
+  if(paused)
+    return;
+
+  let dx = 0;
+  let dy = 0;
+
+  if(
+    keys.ArrowLeft ||
+    keys.a
+  )
+    dx -= .7;
+
+  if(
+    keys.ArrowRight ||
+    keys.d
+  )
+    dx += .7;
+
+  if(
+    keys.ArrowUp ||
+    keys.w
+  )
+    dy -= .7;
+
+  if(
+    keys.ArrowDown ||
+    keys.s
+  )
+    dy += .7;
+
+  if(
+    dx ||
+    dy
+  )
+    move(dx,dy);
+
+},
+30
+);
+
+
+/* =========================================================
+   MOBILE CONTROLS
+========================================================= */
+
+document
+.querySelectorAll('.ctrl')
+.forEach(
+function(b){
+
+  b.onpointerdown =
+  function(e){
+
+    e.preventDefault();
+
+    let k =
+      b.dataset.k;
+
+    move(
+      k === 'ArrowLeft'
+        ? -2.2
+        : k === 'ArrowRight'
+          ? 2.2
+          : 0,
+
+      k === 'ArrowUp'
+        ? -2.2
+        : k === 'ArrowDown'
+          ? 2.2
+          : 0
+    );
+
+  };
+
+});
+
+
+/* =========================================================
+   SCORE TIMER
+========================================================= */
+
+setInterval(
+function(){
+
+  if(!paused){
+
+    score++;
+
+    render();
+
+  }
+
+},
+1500
+);
 
 
 /* =========================================================
    START
 ========================================================= */
 
-function startGame(){
-
-    initAudio();
-
-    paused=false;
-
-    gameOver=false;
-
-    showToast(
-        "🚀 Selamat bermain, Knight!"
-    );
-
-}
-
-
-/* =========================================================
-   RESTART
-========================================================= */
-
-function restartGame(){
-
-    closeAll();
-
-    reset();
-
-    paused=false;
-
-    gameOver=false;
-
-    showToast(
-        "⚔️ Arena di-reset!"
-    );
-
-}
-
-function closeAll(){
-
-    document
-    .querySelectorAll(".overlay")
-    .forEach(
-        o=>
-            o.classList.remove(
-                "show"
-            )
-    );
-
-}
-
-
-/* =========================================================
-   SAVE
-========================================================= */
-
-function saveGame(){
-
-    const data={
-
-        score,
-        crystals,
-
-        hp:player.hp,
-
-        x:player.x,
-        y:player.y,
-
-        crystalX:crystal.x,
-        crystalY:crystal.y
-
-    };
-
-    localStorage.setItem(
-        "CubesAdvKnightSave",
-        JSON.stringify(data)
-    );
-
-    beep(
-        800,
-        .1
-    );
-
-    showToast(
-        "💾 Game berhasil disimpan!"
-    );
-
-}
-
-
-/* =========================================================
-   LOAD
-========================================================= */
-
-function loadGame(){
-
-    const raw=
-        localStorage.getItem(
-            "CubesAdvKnightSave"
-        );
-
-    if(!raw){
-
-        showToast(
-            "📂 Belum ada save!"
-        );
-
-        return;
-
-    }
-
-    try{
-
-        const data=
-            JSON.parse(raw);
-
-        score=
-            data.score||0;
-
-        crystals=
-            data.crystals||0;
-
-        player.hp=
-            data.hp||100;
-
-        player.x=
-            data.x??player.x;
-
-        player.y=
-            data.y??player.y;
-
-        crystal.x=
-            data.crystalX??crystal.x;
-
-        crystal.y=
-            data.crystalY??crystal.y;
-
-        gameOver=false;
-
-        updateHUD();
-
-        closeAll();
-
-        paused=false;
-
-        showToast(
-            "📂 Save berhasil dimuat!"
-        );
-
-    }catch(e){
-
-        showToast(
-            "❌ Save tidak dapat dibaca!"
-        );
-
-    }
-
-}
-
-
-/* =========================================================
-   LEADERBOARD
-========================================================= */
-
-function openBoard(){
-
-    const list=[
-
-        {
-            name:"CubesAdv_Knight",
-            score
-        },
-
-        {
-            name:"ShadowFox",
-            score:120
-        },
-
-        {
-            name:"CrystalFox",
-            score:90
-        },
-
-        {
-            name:"RedKnight",
-            score:70
-        },
-
-        {
-            name:"MoonBlade",
-            score:55
-        }
-
-    ];
-
-    list.sort(
-        (a,b)=>
-            b.score-a.score
-    );
-
-    document.getElementById(
-        "boardBody"
-    ).innerHTML=
-        list.map(
-            (p,i)=>`
-                <tr>
-                    <td>${i+1}</td>
-                    <td>${p.name}</td>
-                    <td>${p.score}</td>
-                </tr>
-            `
-        ).join("");
-
-    openModal("board");
-
-}
-
-
-/* =========================================================
-   CHAT
-========================================================= */
-
-function sendChat(){
-
-    const input=
-        document.getElementById(
-            "chatInput"
-        );
-
-    const text=
-        input.value.trim();
-
-    if(!text)
-        return;
-
-    const box=
-        document.getElementById(
-            "chatBox"
-        );
-
-    const div=
-        document.createElement(
-            "div"
-        );
-
-    div.className="chat-msg";
-
-    const b=
-        document.createElement(
-            "b"
-        );
-
-    b.textContent="You:";
-
-    div.appendChild(b);
-
-    div.appendChild(
-        document.createTextNode(
-            " "+text
-        )
-    );
-
-    box.appendChild(div);
-
-    input.value="";
-
-    box.scrollTop=
-        box.scrollHeight;
-
-    beep(
-        600,
-        .06
-    );
-
-}
-
-document
-.getElementById(
-    "chatInput"
-)
-.addEventListener(
-    "keydown",
-    e=>{
-
-        if(
-            e.key==="Enter"
-        )
-            sendChat();
-
-    }
-);
-
-
-/* =========================================================
-   MATCHMAKING
-========================================================= */
-
-let matchTimer=null;
-
-function findMatch(){
-
-    openModal("match");
-
-    const status=
-        document.getElementById(
-            "matchStatus"
-        );
-
-    const found=
-        document.getElementById(
-            "foundPlayers"
-        );
-
-    let n=1;
-
-    found.textContent="1";
-
-    status.textContent=
-        "🔎 Searching players...";
-
-    clearInterval(matchTimer);
-
-    matchTimer=
-        setInterval(
-            ()=>{
-
-                n++;
-
-                found.textContent=
-                    Math.min(
-                        n,
-                        4
-                    );
-
-                if(n>=4){
-
-                    clearInterval(
-                        matchTimer
-                    );
-
-                    status.textContent=
-                        "✅ MATCH FOUND! Arena ready.";
-
-                    beep(
-                        900,
-                        .15
-                    );
-
-                    showToast(
-                        "🎯 Match found!"
-                    );
-
-                }
-
-            },
-            500
-        );
-
-}
-
-
-/* =========================================================
-   SETTINGS
-========================================================= */
-
-function toggleSound(){
-
-    soundEnabled=
-        !soundEnabled;
-
-    document
-    .getElementById(
-        "soundToggle"
-    )
-    .classList
-    .toggle(
-        "on",
-        soundEnabled
-    );
-
-    if(soundEnabled){
-
-        initAudio();
-
-        beep(
-            700,
-            .1
-        );
-
-    }
-
-}
-
-function toggleMusic(){
-
-    musicEnabled=
-        !musicEnabled;
-
-    document
-    .getElementById(
-        "musicToggle"
-    )
-    .classList
-    .toggle(
-        "on",
-        musicEnabled
-    );
-
-    showToast(
-        musicEnabled?
-        "🎵 Music ON":
-        "🔇 Music OFF"
-    );
-
-}
-
-function toggleColorblind(){
-
-    document
-    .getElementById(
-        "colorToggle"
-    )
-    .classList
-    .toggle(
-        "on"
-    );
-
-    showToast(
-        "🌈 Mode warna diubah"
-    );
-
-}
-
-document
-.getElementById(
-    "difficulty"
-)
-.addEventListener(
-    "input",
-    e=>{
-
-        difficulty=
-            Number(
-                e.target.value
-            );
-
-        showToast(
-            "⚡ Difficulty "+difficulty
-        );
-
-    }
-);
-
-document
-.getElementById(
-    "volume"
-)
-.addEventListener(
-    "input",
-    e=>{
-
-        volume=
-            Number(
-                e.target.value
-            );
-
-    }
-);
-
-
-/* =========================================================
-   TOAST
-========================================================= */
-
-let toastTimer;
-
-function showToast(text){
-
-    const toast=
-        document.getElementById(
-            "toast"
-        );
-
-    toast.textContent=text;
-
-    toast.classList.add(
-        "show"
-    );
-
-    clearTimeout(
-        toastTimer
-    );
-
-    toastTimer=
-        setTimeout(
-            ()=>{
-                toast.classList.remove(
-                    "show"
-                );
-            },
-            2200
-        );
-
-}
-
-
-/* =========================================================
-   INITIALIZE
-========================================================= */
-
-reset();
-
-updateHUD();
-
-if(
-    !localStorage.getItem(
-        "CubesAdvKnightTutorial"
-    )
-){
-
-    setTimeout(
-        ()=>{
-
-            openModal(
-                "tutorial"
-            );
-
-            localStorage.setItem(
-                "CubesAdvKnightTutorial",
-                "1"
-            );
-
-        },
-        500
-    );
-
-}
+render();
 
 </script>
 
