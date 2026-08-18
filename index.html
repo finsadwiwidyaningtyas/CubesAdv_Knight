@@ -6627,5 +6627,81 @@ window.addEventListener(
 );
 
 </script>
+    <!-- TOMBOL SERANG -->
+<button id="attackButton" class="attack-button">
+    ⚔️ SERANG <span>[SPACE]</span>
+</button>
+
+<style>
+    .attack-button {
+        position: fixed;
+        right: 28px;
+        bottom: 28px;
+
+        padding: 18px 28px;
+
+        border: 1px solid rgba(255, 80, 150, 0.8);
+        border-radius: 18px;
+
+        background:
+            linear-gradient(
+                135deg,
+                rgba(255, 45, 100, 0.85),
+                rgba(110, 20, 100, 0.9)
+            );
+
+        color: white;
+
+        font-size: 20px;
+        font-weight: 800;
+
+        cursor: pointer;
+
+        box-shadow:
+            0 0 15px rgba(255, 50, 120, 0.45),
+            inset 0 0 20px rgba(255, 255, 255, 0.08);
+
+        backdrop-filter: blur(10px);
+
+        transition:
+            transform 0.12s ease,
+            box-shadow 0.12s ease;
+
+        z-index: 9999;
+
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+    }
+
+    .attack-button span {
+        opacity: 0.8;
+        font-size: 14px;
+    }
+
+    .attack-button:hover {
+        transform: scale(1.05);
+
+        box-shadow:
+            0 0 25px rgba(255, 50, 120, 0.7),
+            inset 0 0 20px rgba(255, 255, 255, 0.1);
+    }
+
+    .attack-button:active {
+        transform: scale(0.92);
+
+        box-shadow:
+            0 0 35px rgba(255, 80, 150, 1);
+    }
+
+    @media (max-width: 700px) {
+        .attack-button {
+            right: 18px;
+            bottom: 18px;
+            padding: 15px 20px;
+            font-size: 17px;
+        }
+    }
+</style>
 </body>
 </html>
