@@ -2,7 +2,8 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+
 <title>CubesAdv Knight</title>
 
 <style>
@@ -14,9 +15,8 @@
 }
 
 :root{
-    --bg:#020914;
-    --panel:rgba(5,18,38,.88);
-    --panel2:rgba(8,28,52,.94);
+    --bg:#020b19;
+    --panel:rgba(3,18,39,.88);
     --cyan:#54e7ff;
     --blue:#249cff;
     --purple:#9a62ff;
@@ -25,17 +25,19 @@
     --green:#42ffae;
     --gold:#ffd426;
     --white:#effcff;
-    --muted:#a9c2d4;
-    --line:rgba(84,231,255,.38);
 }
 
 html,body{
     width:100%;
     height:100%;
     overflow:hidden;
-    background:#020914;
+    background:#020b19;
     color:white;
-    font-family:Inter,"Segoe UI",Arial,sans-serif;
+    font-family:
+        Inter,
+        "Segoe UI",
+        Arial,
+        sans-serif;
 }
 
 body{
@@ -44,18 +46,23 @@ body{
 
 button,
 input{
-    font:inherit;
+    font-family:inherit;
 }
 
 button{
-    cursor:pointer;
+    -webkit-user-select:none;
+    user-select:none;
 }
+
+/* =====================================================
+   GAME
+===================================================== */
 
 #gameScreen{
     position:fixed;
     inset:0;
     overflow:hidden;
-    background:#020914;
+    background:#020b19;
 }
 
 #gameCanvas{
@@ -69,126 +76,110 @@ button{
 }
 
 /* =====================================================
-   INTRO / MAIN MENU
+   CINEMATIC OPENING
 ===================================================== */
 
-#introScreen{
+#intro{
     position:fixed;
     inset:0;
     z-index:500;
     display:flex;
     align-items:center;
     justify-content:center;
-    overflow:hidden;
     background:
-        radial-gradient(circle at 50% 45%,rgba(27,120,255,.18),transparent 35%),
-        radial-gradient(circle at 20% 80%,rgba(154,98,255,.12),transparent 30%),
-        linear-gradient(135deg,#010610,#03152b 55%,#05091b);
-    transition:opacity .7s,visibility .7s;
+        radial-gradient(
+            circle at center,
+            rgba(15,90,160,.22),
+            rgba(0,4,14,.97) 70%
+        );
+    backdrop-filter:blur(8px);
+    transition:opacity .7s, visibility .7s;
 }
 
-#introScreen.hide{
+#intro.hide{
     opacity:0;
     visibility:hidden;
     pointer-events:none;
 }
 
-.introStars{
-    position:absolute;
-    inset:0;
-    background-image:
-        radial-gradient(circle,rgba(255,255,255,.8) 1px,transparent 1.5px);
-    background-size:80px 80px;
-    opacity:.18;
-    animation:starMove 18s linear infinite;
-}
-
-@keyframes starMove{
-    from{transform:translateY(0)}
-    to{transform:translateY(80px)}
-}
-
 .introContent{
-    position:relative;
-    z-index:2;
-    width:min(650px,92vw);
+    width:min(600px,90vw);
     text-align:center;
-    padding:40px 30px;
+    animation:introFloat 1.5s ease both;
+}
+
+@keyframes introFloat{
+    from{
+        opacity:0;
+        transform:translateY(30px) scale(.96);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
 }
 
 .introLine{
     width:100px;
     height:2px;
     margin:0 auto 22px;
-    background:linear-gradient(90deg,transparent,var(--cyan),transparent);
-    box-shadow:0 0 20px var(--cyan);
+    background:linear-gradient(
+        90deg,
+        transparent,
+        var(--cyan),
+        transparent
+    );
+    box-shadow:0 0 15px var(--cyan);
 }
 
 .introTitle{
-    font-size:clamp(38px,7vw,78px);
+    font-size:clamp(32px,6vw,64px);
     font-weight:1000;
-    letter-spacing:7px;
-    color:#effcff;
+    letter-spacing:5px;
+    color:#e9fdff;
     text-shadow:
         0 0 12px var(--cyan),
-        0 0 35px rgba(84,231,255,.55);
+        0 0 35px rgba(84,231,255,.45);
 }
 
 .introSubtitle{
-    margin-top:13px;
-    color:#9fc6d7;
+    margin-top:12px;
+    color:#9ebdcc;
     font-size:15px;
-    letter-spacing:4px;
-    text-transform:uppercase;
+    letter-spacing:2px;
 }
 
-.introDescription{
-    max-width:540px;
-    margin:25px auto;
-    color:#b9ccda;
+.introText{
+    margin:30px auto;
+    max-width:480px;
+    color:#c4d9e5;
     line-height:1.7;
 }
 
-.menuButtons{
-    width:min(370px,90vw);
-    margin:30px auto 0;
-    display:flex;
-    flex-direction:column;
-    gap:11px;
-}
-
-.menuButton{
-    border:1px solid rgba(84,231,255,.35);
-    border-radius:15px;
-    padding:15px 20px;
+.startButton{
+    border:1px solid rgba(84,231,255,.7);
+    background:
+        linear-gradient(
+            135deg,
+            rgba(13,115,175,.95),
+            rgba(91,52,180,.95)
+        );
     color:white;
+    padding:15px 55px;
+    border-radius:16px;
+    font-size:17px;
     font-weight:900;
-    letter-spacing:1px;
-    background:linear-gradient(135deg,rgba(13,91,140,.92),rgba(78,45,145,.92));
+    letter-spacing:2px;
+    cursor:pointer;
     box-shadow:
-        0 0 25px rgba(36,156,255,.12),
-        inset 0 0 20px rgba(255,255,255,.04);
+        0 0 25px rgba(84,231,255,.22),
+        inset 0 0 18px rgba(255,255,255,.08);
     transition:.2s;
 }
 
-.menuButton:hover{
-    transform:translateY(-2px);
-    filter:brightness(1.18);
-    box-shadow:0 0 30px rgba(84,231,255,.25);
-}
-
-.menuButton.secondary{
-    background:rgba(8,30,52,.82);
-}
-
-.menuButton.danger{
-    background:linear-gradient(135deg,#752244,#351632);
-}
-
-.introHint{
-    margin-top:25px;
-    color:#68899d;
-    font-size:12px;
+.startButton:hover{
+    transform:translateY(-3px);
+    filter:brightness(1.15);
 }
 
 /* =====================================================
@@ -210,18 +201,22 @@ button{
 .leftHud{
     display:flex;
     flex-direction:column;
-    gap:10px;
+    gap:12px;
 }
 
 .hudBox{
     min-width:285px;
-    padding:14px 18px;
-    border:1px solid var(--line);
-    border-radius:16px;
+    padding:15px 18px;
+    border:1px solid rgba(84,231,255,.48);
+    border-radius:18px;
     background:
-        linear-gradient(135deg,rgba(3,21,43,.93),rgba(3,12,28,.8));
+        linear-gradient(
+            135deg,
+            rgba(3,21,43,.94),
+            rgba(3,12,28,.82)
+        );
     box-shadow:
-        0 0 25px rgba(0,180,255,.09),
+        0 0 25px rgba(0,180,255,.08),
         inset 0 0 20px rgba(30,150,255,.04);
     backdrop-filter:blur(10px);
 }
@@ -229,6 +224,7 @@ button{
 .hpHeader{
     display:flex;
     justify-content:space-between;
+    align-items:center;
     margin-bottom:10px;
 }
 
@@ -245,7 +241,7 @@ button{
 .hpBar{
     width:100%;
     height:14px;
-    background:#15263e;
+    background:#14243b;
     border:1px solid #294560;
     border-radius:30px;
     overflow:hidden;
@@ -255,29 +251,58 @@ button{
     height:100%;
     width:100%;
     border-radius:30px;
-    background:linear-gradient(90deg,#22f5c2,#35dff4);
+    background:
+        linear-gradient(
+            90deg,
+            #20e9d0,
+            #54e7ff
+        );
     box-shadow:0 0 15px #35dff4;
     transition:width .15s ease;
 }
 
 .scoreBox{
-    min-width:auto;
-    font-weight:900;
+    min-width:285px;
     font-size:17px;
+    font-weight:900;
 }
+
+/* =====================================================
+   CENTER TITLE
+===================================================== */
+
+#gameTitle{
+    position:absolute;
+    top:22px;
+    left:50%;
+    transform:translateX(-50%);
+    z-index:20;
+    font-size:25px;
+    font-weight:1000;
+    letter-spacing:3px;
+    color:#e7fcff;
+    text-shadow:
+        0 0 10px #54e7ff,
+        0 0 28px rgba(84,231,255,.55);
+    pointer-events:none;
+}
+
+/* =====================================================
+   RIGHT HUD
+===================================================== */
 
 .rightHud{
     display:flex;
     flex-direction:column;
     align-items:flex-end;
-    gap:10px;
+    gap:12px;
 }
 
 .onlineBox{
     padding:10px 15px;
-    border:1px solid rgba(84,231,255,.35);
-    border-radius:12px;
-    background:rgba(2,15,32,.82);
+    border:1px solid rgba(84,231,255,.4);
+    border-radius:13px;
+    background:rgba(2,15,32,.88);
     font-weight:800;
     backdrop-filter:blur(8px);
 }
@@ -288,64 +313,59 @@ button{
     height:8px;
     margin-right:6px;
     border-radius:50%;
-    background:var(--green);
-    box-shadow:0 0 10px var(--green);
+    background:#42ffae;
+    box-shadow:0 0 10px #42ffae;
 }
 
 #miniMap{
     width:220px;
     height:158px;
     border-radius:17px;
-    border:1px solid rgba(84,231,255,.55);
+    border:1px solid rgba(84,231,255,.6);
     background:#03152b;
-    box-shadow:0 0 25px rgba(0,190,255,.12);
-}
-
-#gameTitle{
-    position:absolute;
-    top:24px;
-    left:50%;
-    transform:translateX(-50%);
-    z-index:20;
-    font-size:18px;
-    font-weight:1000;
-    letter-spacing:3px;
-    color:#dffbff;
-    text-shadow:0 0 15px var(--cyan);
-    pointer-events:none;
+    box-shadow:
+        0 0 25px rgba(0,190,255,.12),
+        inset 0 0 20px rgba(0,0,0,.4);
 }
 
 /* =====================================================
-   ACCESSIBILITY BAR
+   CROSSHAIR
 ===================================================== */
 
-#accessibilityBar{
+#crosshair{
     position:absolute;
-    top:190px;
-    left:24px;
-    z-index:25;
-    display:flex;
-    gap:7px;
-    pointer-events:auto;
+    left:50%;
+    top:50%;
+    width:28px;
+    height:28px;
+    transform:translate(-50%,-50%);
+    pointer-events:none;
+    opacity:.18;
 }
 
-.smallControl{
-    border:1px solid rgba(84,231,255,.35);
-    background:rgba(3,20,40,.78);
-    color:#dffbff;
-    border-radius:10px;
-    padding:8px 11px;
-    font-size:11px;
-    font-weight:900;
-    backdrop-filter:blur(7px);
+#crosshair::before,
+#crosshair::after{
+    content:"";
+    position:absolute;
+    background:#54e7ff;
 }
 
-.smallControl:hover{
-    background:rgba(20,72,105,.9);
+#crosshair::before{
+    width:28px;
+    height:1px;
+    left:0;
+    top:13px;
+}
+
+#crosshair::after{
+    width:1px;
+    height:28px;
+    left:13px;
+    top:0;
 }
 
 /* =====================================================
-   D-PAD
+   D PAD
 ===================================================== */
 
 #dpad{
@@ -362,27 +382,54 @@ button{
     width:75px;
     height:75px;
     border-radius:20px;
-    border:1px solid rgba(84,231,255,.55);
-    background:linear-gradient(145deg,rgba(10,44,72,.9),rgba(4,23,46,.92));
+    border:1px solid rgba(84,231,255,.58);
+    background:
+        linear-gradient(
+            145deg,
+            rgba(10,44,72,.94),
+            rgba(4,23,46,.95)
+        );
     color:white;
     font-size:30px;
     font-weight:900;
-    box-shadow:0 0 18px rgba(0,190,255,.08);
+    box-shadow:
+        0 0 18px rgba(0,190,255,.08),
+        inset 0 0 18px rgba(50,180,255,.04);
     backdrop-filter:blur(7px);
-    user-select:none;
+    cursor:pointer;
     touch-action:none;
     transition:.08s;
 }
 
-.moveBtn:active{
-    transform:scale(.92);
-    background:rgba(23,91,126,.95);
+.moveBtn:hover{
+    border-color:#54e7ff;
 }
 
-#up{left:85px;top:0}
-#left{left:0;top:82px}
-#down{left:85px;top:82px}
-#right{left:170px;top:82px}
+.moveBtn:active{
+    transform:scale(.91);
+    background:rgba(23,91,126,.95);
+    box-shadow:0 0 25px rgba(84,231,255,.3);
+}
+
+#up{
+    left:85px;
+    top:0;
+}
+
+#left{
+    left:0;
+    top:82px;
+}
+
+#down{
+    left:85px;
+    top:82px;
+}
+
+#right{
+    left:170px;
+    top:82px;
+}
 
 /* =====================================================
    ATTACK
@@ -394,16 +441,22 @@ button{
     bottom:28px;
     z-index:30;
     min-width:290px;
-    min-height:76px;
-    border:none;
+    min-height:78px;
+    border:1px solid rgba(255,255,255,.14);
     border-radius:25px;
-    background:linear-gradient(135deg,#e62f73,#a52ac7);
+    background:
+        linear-gradient(
+            135deg,
+            #e62f73,
+            #a52ac7
+        );
     color:white;
     font-size:20px;
     font-weight:1000;
     letter-spacing:1px;
+    cursor:pointer;
     box-shadow:
-        0 0 30px rgba(255,43,139,.4),
+        0 0 35px rgba(255,43,139,.4),
         inset 0 0 18px rgba(255,255,255,.12);
     transition:.1s;
     touch-action:none;
@@ -422,50 +475,26 @@ button{
     display:block;
     margin-top:4px;
     font-size:11px;
-    opacity:.7;
-}
-
-#pauseButton{
-    position:absolute;
-    top:265px;
-    right:24px;
-    z-index:30;
-    border:1px solid rgba(84,231,255,.4);
-    background:rgba(3,20,40,.8);
-    color:white;
-    border-radius:12px;
-    padding:10px 14px;
-    font-weight:900;
-    backdrop-filter:blur(7px);
+    opacity:.72;
 }
 
 /* =====================================================
-   SUBTITLE
+   PAUSE
 ===================================================== */
 
-#subtitle{
+#pauseButton{
     position:absolute;
-    left:50%;
-    bottom:145px;
-    transform:translateX(-50%);
-    z-index:80;
-    width:min(650px,85vw);
-    padding:12px 18px;
-    text-align:center;
+    top:210px;
+    right:24px;
+    z-index:30;
+    border:1px solid rgba(84,231,255,.42);
+    background:rgba(3,20,40,.85);
     color:white;
-    font-weight:800;
-    line-height:1.5;
-    border-radius:13px;
-    background:rgba(0,5,14,.72);
-    border:1px solid rgba(84,231,255,.2);
-    backdrop-filter:blur(8px);
-    opacity:0;
-    transition:.25s;
-    pointer-events:none;
-}
-
-#subtitle.show{
-    opacity:1;
+    border-radius:12px;
+    padding:10px 15px;
+    font-weight:900;
+    cursor:pointer;
+    backdrop-filter:blur(7px);
 }
 
 /* =====================================================
@@ -475,13 +504,13 @@ button{
 #toast{
     position:absolute;
     left:50%;
-    bottom:105px;
+    bottom:130px;
     transform:translate(-50%,30px);
     z-index:100;
     padding:12px 20px;
     border-radius:13px;
-    border:1px solid var(--cyan);
-    background:rgba(3,20,40,.95);
+    border:1px solid #54e7ff;
+    background:rgba(3,20,40,.96);
     box-shadow:0 0 25px rgba(84,231,255,.25);
     font-weight:800;
     opacity:0;
@@ -495,7 +524,7 @@ button{
 }
 
 /* =====================================================
-   OVERLAYS
+   OVERLAY
 ===================================================== */
 
 .overlay{
@@ -506,12 +535,18 @@ button{
     align-items:center;
     justify-content:center;
     padding:20px;
-    background:rgba(0,4,14,.76);
+    background:rgba(0,4,14,.75);
     backdrop-filter:blur(10px);
 }
 
 .overlay.show{
     display:flex;
+    animation:fadeIn .2s ease;
+}
+
+@keyframes fadeIn{
+    from{opacity:0}
+    to{opacity:1}
 }
 
 .modal{
@@ -521,7 +556,12 @@ button{
     padding:30px;
     border-radius:25px;
     border:1px solid rgba(84,231,255,.5);
-    background:linear-gradient(145deg,rgba(6,31,58,.98),rgba(9,8,34,.98));
+    background:
+        linear-gradient(
+            145deg,
+            rgba(6,31,58,.98),
+            rgba(9,8,34,.98)
+        );
     box-shadow:0 0 60px rgba(30,160,255,.2);
     animation:modalIn .25s ease;
 }
@@ -529,7 +569,7 @@ button{
 @keyframes modalIn{
     from{
         opacity:0;
-        transform:scale(.94) translateY(15px);
+        transform:scale(.94) translateY(10px);
     }
     to{
         opacity:1;
@@ -565,7 +605,13 @@ button{
     color:white;
     font-size:16px;
     font-weight:900;
-    background:linear-gradient(90deg,#0d83be,#6946db);
+    cursor:pointer;
+    background:
+        linear-gradient(
+            90deg,
+            #0d83be,
+            #6946db
+        );
     transition:.15s;
 }
 
@@ -579,7 +625,12 @@ button{
 }
 
 .bigBtn.danger{
-    background:linear-gradient(90deg,#a82254,#611b40);
+    background:
+        linear-gradient(
+            90deg,
+            #a82254,
+            #611b40
+        );
 }
 
 /* =====================================================
@@ -590,7 +641,7 @@ button{
     display:grid;
     grid-template-columns:1fr 1fr;
     gap:10px;
-    margin:18px 0;
+    margin-top:18px;
 }
 
 .tutorialCard{
@@ -602,14 +653,13 @@ button{
 
 .tutorialCard strong{
     display:block;
-    color:var(--cyan);
-    margin-bottom:7px;
+    color:#54e7ff;
+    margin-bottom:6px;
 }
 
 .tutorialCard span{
-    color:#b6cbd8;
+    color:#a9c2cf;
     font-size:13px;
-    line-height:1.5;
 }
 
 /* =====================================================
@@ -618,28 +668,27 @@ button{
 
 .settingRow{
     display:flex;
-    align-items:center;
     justify-content:space-between;
-    gap:15px;
+    align-items:center;
+    gap:20px;
     padding:15px 0;
     border-bottom:1px solid rgba(255,255,255,.08);
 }
 
-.settingRow label{
-    font-weight:800;
+.settingInfo strong{
+    display:block;
+    margin-bottom:4px;
 }
 
-.settingRow small{
-    display:block;
-    color:#7893a5;
-    margin-top:4px;
+.settingInfo small{
+    color:#8ca6b5;
 }
 
 select{
-    min-width:145px;
-    padding:10px;
-    border-radius:10px;
-    border:1px solid #315671;
+    min-width:130px;
+    padding:9px;
+    border-radius:9px;
+    border:1px solid #28516c;
     background:#061426;
     color:white;
 }
@@ -689,62 +738,23 @@ th,td{
 }
 
 th{
-    color:var(--cyan);
+    color:#54e7ff;
 }
 
 /* =====================================================
-   POSTER / CREDITS
+   CREDITS
 ===================================================== */
 
-.poster{
-    min-height:250px;
-    border:1px solid rgba(84,231,255,.28);
-    border-radius:18px;
-    padding:30px;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    background:
-        radial-gradient(circle at 50% 40%,rgba(36,156,255,.18),transparent 35%),
-        linear-gradient(145deg,#061b35,#09091e);
-    box-shadow:inset 0 0 40px rgba(0,0,0,.3);
+.creditBox{
+    padding:20px;
+    border:1px solid rgba(84,231,255,.15);
+    border-radius:15px;
+    background:rgba(255,255,255,.035);
+    line-height:1.8;
 }
 
-.poster h1{
-    font-size:40px;
-    letter-spacing:5px;
-    text-shadow:0 0 20px var(--cyan);
-}
-
-.poster h3{
-    margin-top:10px;
-    color:var(--pink);
-    letter-spacing:3px;
-}
-
-.poster p{
-    max-width:450px;
-    margin-top:18px;
-}
-
-/* =====================================================
-   COLORBLIND MODE
-===================================================== */
-
-body.colorblind{
-    --cyan:#00d9ff;
-    --blue:#0080ff;
-    --purple:#b76cff;
-    --pink:#ff8c00;
-    --red:#ffb000;
-    --green:#00ff7f;
-    --gold:#ffff00;
-}
-
-body.colorblind #gameCanvas{
-    filter:saturate(.7) contrast(1.12);
+.creditBox span{
+    color:#54e7ff;
 }
 
 /* =====================================================
@@ -787,17 +797,6 @@ body.colorblind #gameCanvas{
         padding:7px 10px;
     }
 
-    #accessibilityBar{
-        top:130px;
-        left:12px;
-    }
-
-    #pauseButton{
-        top:145px;
-        right:12px;
-        font-size:11px;
-    }
-
     #dpad{
         left:15px;
         bottom:15px;
@@ -814,9 +813,10 @@ body.colorblind #gameCanvas{
         font-size:15px;
     }
 
-    #subtitle{
-        bottom:115px;
-        font-size:12px;
+    #pauseButton{
+        top:145px;
+        right:12px;
+        font-size:11px;
     }
 
     .tutorialGrid{
@@ -839,14 +839,6 @@ body.colorblind #gameCanvas{
         min-width:150px;
         padding:10px;
     }
-
-    .introTitle{
-        letter-spacing:3px;
-    }
-
-    .modal{
-        padding:22px;
-    }
 }
 </style>
 </head>
@@ -854,16 +846,50 @@ body.colorblind #gameCanvas{
 <body>
 
 <!-- =====================================================
-     MAIN GAME
+     OPENING / ONBOARDING
 ===================================================== -->
+
+<div id="intro">
+
+    <div class="introContent">
+
+        <div class="introLine"></div>
+
+        <div class="introTitle">
+            CUBESADV KNIGHT
+        </div>
+
+        <div class="introSubtitle">
+            FANTASY CUBE ARENA
+        </div>
+
+        <div class="introText">
+            Kumpulkan crystal energi, hindari musuh,
+            dan kalahkan mereka untuk mendapatkan score.
+            Gunakan keyboard atau kontrol layar untuk bergerak.
+        </div>
+
+        <button
+            class="startButton"
+            id="startButton">
+            MULAI PETUALANGAN
+        </button>
+
+    </div>
+
+</div>
+
 
 <div id="gameScreen">
 
 <canvas id="gameCanvas"></canvas>
 
 <div id="gameTitle">
-    CUBESADV // KNIGHT
+    CUBESADV KNIGHT
 </div>
+
+
+<!-- HUD -->
 
 <div id="hud">
 
@@ -872,8 +898,17 @@ body.colorblind #gameCanvas{
         <div class="hudBox">
 
             <div class="hpHeader">
-                <span class="hpTitle">HP</span>
-                <span class="hpNumber" id="hpText">100/100</span>
+
+                <span class="hpTitle">
+                    ♥ HP
+                </span>
+
+                <span
+                    class="hpNumber"
+                    id="hpText">
+                    100/100
+                </span>
+
             </div>
 
             <div class="hpBar">
@@ -883,56 +918,90 @@ body.colorblind #gameCanvas{
         </div>
 
         <div class="hudBox scoreBox">
-            SCORE:
+            ★ SCORE:
             <span id="scoreText">0</span>
         </div>
 
     </div>
 
+
     <div class="rightHud">
 
         <div class="onlineBox">
+
             <span class="onlineDot"></span>
-            ONLINE <span id="onlineText">4</span>
+
+            ONLINE
+            <span id="onlineText">4</span>
+
         </div>
 
-        <canvas id="miniMap" width="220" height="158"></canvas>
+        <canvas
+            id="miniMap"
+            width="220"
+            height="158">
+        </canvas>
 
     </div>
 
 </div>
 
-<div id="accessibilityBar">
 
-    <button class="smallControl" id="colorblindBtn">
-        COLOR MODE
-    </button>
+<div id="crosshair"></div>
 
-    <button class="smallControl" id="subtitleBtn">
-        SUBTITLE ON
-    </button>
 
-</div>
+<!-- D PAD -->
 
 <div id="dpad">
 
-    <button class="moveBtn" id="up" data-key="ArrowUp">▲</button>
-    <button class="moveBtn" id="left" data-key="ArrowLeft">◀</button>
-    <button class="moveBtn" id="down" data-key="ArrowDown">▼</button>
-    <button class="moveBtn" id="right" data-key="ArrowRight">▶</button>
+    <button
+        class="moveBtn"
+        id="up"
+        data-key="ArrowUp">
+        ▲
+    </button>
+
+    <button
+        class="moveBtn"
+        id="left"
+        data-key="ArrowLeft">
+        ◀
+    </button>
+
+    <button
+        class="moveBtn"
+        id="down"
+        data-key="ArrowDown">
+        ▼
+    </button>
+
+    <button
+        class="moveBtn"
+        id="right"
+        data-key="ArrowRight">
+        ▶
+    </button>
 
 </div>
 
+
+<!-- ATTACK -->
+
 <button id="attackButton">
-    SERANG
-    <span class="attackCooldown">SPACE / TAP</span>
+
+    ⚔ SERANG
+
+    <span class="attackCooldown">
+        SPACE
+    </span>
+
 </button>
+
 
 <button id="pauseButton">
     Ⅱ PAUSE
 </button>
 
-<div id="subtitle"></div>
 
 <div id="toast"></div>
 
@@ -940,52 +1009,78 @@ body.colorblind #gameCanvas{
 
 
 <!-- =====================================================
-     CINEMATIC INTRO / MENU
+     PAUSE
 ===================================================== -->
 
-<div id="introScreen">
+<div
+    class="overlay"
+    id="pauseOverlay">
 
-    <div class="introStars"></div>
+    <div class="modal">
 
-    <div class="introContent">
+        <h2>Ⅱ GAME PAUSED</h2>
 
-        <div class="introLine"></div>
-
-        <div class="introTitle">
-            CUBESADV
-        </div>
-
-        <div class="introSubtitle">
-            KNIGHT // NEON FANTASY ARENA
-        </div>
-
-        <p class="introDescription">
-            Masuki arena futuristik, kumpulkan crystal,
-            kalahkan musuh, dan raih skor tertinggi.
+        <p>
+            Permainan dihentikan sementara.
+            Pilih menu untuk melanjutkan.
         </p>
 
-        <div class="menuButtons">
+        <div class="modalButtons">
 
-            <button class="menuButton" id="startGameBtn">
-                ▶ MULAI PETUALANGAN
+            <button
+                class="bigBtn"
+                id="resumeBtn">
+                ▶ RESUME
             </button>
 
-            <button class="menuButton secondary" id="tutorialMenuBtn">
+            <button
+                class="bigBtn secondary"
+                id="tutorialBtn">
                 ? TUTORIAL
             </button>
 
-            <button class="menuButton secondary" id="settingsMenuBtn">
-                ⚙ PENGATURAN
+            <button
+                class="bigBtn secondary"
+                id="settingsBtn">
+                ⚙ SETTINGS
             </button>
 
-            <button class="menuButton secondary" id="creditsMenuBtn">
-                ✦ KREDIT
+            <button
+                class="bigBtn secondary"
+                id="saveBtn">
+                SAVE GAME
             </button>
 
-        </div>
+            <button
+                class="bigBtn secondary"
+                id="loadBtn">
+                LOAD GAME
+            </button>
 
-        <div class="introHint">
-            Keyboard: WASD / Arrow Keys • SPACE untuk menyerang
+            <button
+                class="bigBtn secondary"
+                id="playersBtn">
+                PLAYERS
+            </button>
+
+            <button
+                class="bigBtn secondary"
+                id="rankBtn">
+                LEADERBOARD
+            </button>
+
+            <button
+                class="bigBtn secondary"
+                id="creditsBtn">
+                CREDITS
+            </button>
+
+            <button
+                class="bigBtn danger"
+                id="restartBtn">
+                RESTART
+            </button>
+
         </div>
 
     </div>
@@ -997,123 +1092,59 @@ body.colorblind #gameCanvas{
      TUTORIAL
 ===================================================== -->
 
-<div class="overlay" id="tutorialOverlay">
+<div
+    class="overlay"
+    id="tutorialOverlay">
 
     <div class="modal">
 
-        <h2>HOW TO PLAY</h2>
+        <h2>? TUTORIAL</h2>
 
         <p>
-            Selamat datang, Knight. Bertahan hidup, kumpulkan
-            crystal dan kalahkan monster di arena.
+            Panduan singkat sebelum bermain.
         </p>
 
         <div class="tutorialGrid">
 
             <div class="tutorialCard">
-                <strong>MOVE</strong>
-                <span>
-                    Gunakan WASD, Arrow Keys, atau tombol
-                    arah di layar untuk bergerak.
-                </span>
+                <strong>W A S D</strong>
+                <span>Bergerak menggunakan keyboard.</span>
             </div>
 
             <div class="tutorialCard">
-                <strong>ATTACK</strong>
-                <span>
-                    Tekan SPACE atau tombol SERANG.
-                    Serangan otomatis mengarah ke musuh terdekat.
-                </span>
+                <strong>ARROW KEY</strong>
+                <span>Alternatif kontrol gerakan.</span>
+            </div>
+
+            <div class="tutorialCard">
+                <strong>SPACE</strong>
+                <span>Menyerang musuh terdekat.</span>
             </div>
 
             <div class="tutorialCard">
                 <strong>CRYSTAL</strong>
-                <span>
-                    Ambil crystal bercahaya untuk mendapatkan
-                    +10 SCORE.
-                </span>
+                <span>Ambil crystal kuning untuk +10 score.</span>
             </div>
 
             <div class="tutorialCard">
-                <strong>ENEMY</strong>
-                <span>
-                    Hindari musuh merah dan serang mereka
-                    sebelum HP kamu habis.
-                </span>
+                <strong>MUSUH</strong>
+                <span>Hindari kontak langsung dengan musuh.</span>
             </div>
 
             <div class="tutorialCard">
-                <strong>PAUSE</strong>
-                <span>
-                    Gunakan PAUSE untuk menghentikan permainan,
-                    restart, save, load atau keluar.
-                </span>
-            </div>
-
-            <div class="tutorialCard">
-                <strong>FEEDBACK</strong>
-                <span>
-                    Flash, particle, damage number, shake dan
-                    sound membantu mengetahui setiap aksi.
-                </span>
+                <strong>MINIMAP</strong>
+                <span>Gunakan minimap untuk melihat posisi arena.</span>
             </div>
 
         </div>
 
-        <button class="bigBtn" id="closeTutorialBtn">
-            ✓ MENGERTI
+        <br>
+
+        <button
+            class="bigBtn secondary"
+            data-close="tutorialOverlay">
+            TUTUP
         </button>
-
-    </div>
-
-</div>
-
-
-<!-- =====================================================
-     PAUSE
-===================================================== -->
-
-<div class="overlay" id="pauseOverlay">
-
-    <div class="modal">
-
-        <h2>Ⅱ GAME PAUSED</h2>
-
-        <p>
-            Permainan berhenti sementara. Pilih aksi berikut.
-        </p>
-
-        <div class="modalButtons">
-
-            <button class="bigBtn" id="resumeBtn">
-                ▶ RESUME
-            </button>
-
-            <button class="bigBtn secondary" id="restartBtn">
-                ↻ RESTART
-            </button>
-
-            <button class="bigBtn secondary" id="saveBtn">
-                SAVE
-            </button>
-
-            <button class="bigBtn secondary" id="loadBtn">
-                LOAD
-            </button>
-
-            <button class="bigBtn secondary" id="playersBtn">
-                PLAYERS
-            </button>
-
-            <button class="bigBtn secondary" id="rankBtn">
-                LEADERBOARD
-            </button>
-
-            <button class="bigBtn danger" id="exitBtn">
-                ← EXIT TO MENU
-            </button>
-
-        </div>
 
     </div>
 
@@ -1124,7 +1155,9 @@ body.colorblind #gameCanvas{
      SETTINGS
 ===================================================== -->
 
-<div class="overlay" id="settingsOverlay">
+<div
+    class="overlay"
+    id="settingsOverlay">
 
     <div class="modal">
 
@@ -1132,113 +1165,76 @@ body.colorblind #gameCanvas{
 
         <div class="settingRow">
 
-            <div>
-                <label>Difficulty</label>
+            <div class="settingInfo">
+                <strong>Difficulty</strong>
                 <small>
-                    Atur kecepatan dan kekuatan musuh.
+                    Atur kecepatan musuh.
                 </small>
             </div>
 
             <select id="difficultySelect">
-                <option value="easy">Easy</option>
-                <option value="normal" selected>Normal</option>
-                <option value="hard">Hard</option>
+
+                <option value="easy">
+                    EASY
+                </option>
+
+                <option value="normal" selected>
+                    NORMAL
+                </option>
+
+                <option value="hard">
+                    HARD
+                </option>
+
             </select>
 
         </div>
 
-        <div class="settingRow">
-
-            <div>
-                <label>Subtitle</label>
-                <small>
-                    Tampilkan feedback aksi di layar.
-                </small>
-            </div>
-
-            <button class="smallControl" id="settingsSubtitleBtn">
-                ON
-            </button>
-
-        </div>
 
         <div class="settingRow">
 
-            <div>
-                <label>Colorblind Mode</label>
+            <div class="settingInfo">
+                <strong>Colorblind Mode</strong>
                 <small>
-                    Tingkatkan pembeda warna.
+                    Gunakan warna alternatif.
                 </small>
             </div>
 
-            <button class="smallControl" id="settingsColorBtn">
+            <button
+                class="bigBtn secondary"
+                id="colorblindBtn"
+                style="width:auto;padding:9px 15px">
                 OFF
             </button>
 
         </div>
 
+
         <div class="settingRow">
 
-            <div>
-                <label>Sound UI</label>
+            <div class="settingInfo">
+                <strong>Sound UI</strong>
                 <small>
-                    Feedback suara untuk klik dan serangan.
+                    Suara feedback ketika tombol ditekan.
                 </small>
             </div>
 
-            <button class="smallControl" id="soundBtn">
+            <button
+                class="bigBtn secondary"
+                id="soundBtn"
+                style="width:auto;padding:9px 15px">
                 ON
             </button>
 
         </div>
 
-        <div class="modalButtons">
+        <br>
 
-            <button class="bigBtn" id="closeSettingsBtn">
-                ✓ SIMPAN
-            </button>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- =====================================================
-     GAME OVER
-===================================================== -->
-
-<div class="overlay" id="gameOverOverlay">
-
-    <div class="modal">
-
-        <h2>GAME OVER</h2>
-
-        <p>
-            Knight telah dikalahkan.
-        </p>
-
-        <p>
-            Final Score:
-            <b id="finalScore">0</b>
-        </p>
-
-        <div class="modalButtons">
-
-            <button class="bigBtn" id="gameOverRestart">
-                ⚔ MAIN LAGI
-            </button>
-
-            <button class="bigBtn secondary" id="gameOverRank">
-                LEADERBOARD
-            </button>
-
-            <button class="bigBtn danger" id="gameOverExit">
-                ← MENU UTAMA
-            </button>
-
-        </div>
+        <button
+            class="bigBtn secondary"
+            data-close="settingsOverlay">
+            SIMPAN & TUTUP
+        </button>
 
     </div>
 
@@ -1249,7 +1245,9 @@ body.colorblind #gameCanvas{
      PLAYERS
 ===================================================== -->
 
-<div class="overlay" id="playersOverlay">
+<div
+    class="overlay"
+    id="playersOverlay">
 
     <div class="modal">
 
@@ -1258,41 +1256,75 @@ body.colorblind #gameCanvas{
         <div class="playerList">
 
             <div class="playerRow">
+
                 <span>
-                    <i class="dot" style="background:#54e7ff"></i>
+                    <i
+                        class="dot"
+                        style="
+                        background:#54e7ff;
+                        box-shadow:0 0 10px #54e7ff;">
+                    </i>
                     CubesAdv Knight
                 </span>
+
                 <b id="myScore">0</b>
+
             </div>
 
             <div class="playerRow">
+
                 <span>
-                    <i class="dot" style="background:#9a62ff"></i>
+                    <i
+                        class="dot"
+                        style="
+                        background:#9a62ff;
+                        box-shadow:0 0 10px #9a62ff;">
+                    </i>
                     ShadowFox
                 </span>
+
                 <b>120</b>
+
             </div>
 
             <div class="playerRow">
+
                 <span>
-                    <i class="dot" style="background:#42ffae"></i>
+                    <i
+                        class="dot"
+                        style="
+                        background:#42ffae;
+                        box-shadow:0 0 10px #42ffae;">
+                    </i>
                     CrystalFox
                 </span>
+
                 <b>90</b>
+
             </div>
 
             <div class="playerRow">
+
                 <span>
-                    <i class="dot" style="background:#ff4168"></i>
+                    <i
+                        class="dot"
+                        style="
+                        background:#ff4168;
+                        box-shadow:0 0 10px #ff4168;">
+                    </i>
                     RedKnight
                 </span>
+
                 <b>70</b>
+
             </div>
 
         </div>
 
-        <button class="bigBtn secondary" data-close="playersOverlay">
-            ✕ CLOSE
+        <button
+            class="bigBtn secondary"
+            data-close="playersOverlay">
+            TUTUP
         </button>
 
     </div>
@@ -1304,7 +1336,9 @@ body.colorblind #gameCanvas{
      LEADERBOARD
 ===================================================== -->
 
-<div class="overlay" id="rankOverlay">
+<div
+    class="overlay"
+    id="rankOverlay">
 
     <div class="modal">
 
@@ -1326,8 +1360,10 @@ body.colorblind #gameCanvas{
 
         <br>
 
-        <button class="bigBtn secondary" data-close="rankOverlay">
-            ✕ CLOSE
+        <button
+            class="bigBtn secondary"
+            data-close="rankOverlay">
+            TUTUP
         </button>
 
     </div>
@@ -1336,35 +1372,49 @@ body.colorblind #gameCanvas{
 
 
 <!-- =====================================================
-     CREDITS / POSTER
+     CREDITS
 ===================================================== -->
 
-<div class="overlay" id="creditsOverlay">
+<div
+    class="overlay"
+    id="creditsOverlay">
 
     <div class="modal">
 
-        <div class="poster">
+        <h2>CREDITS</h2>
 
-            <h1>CUBESADV</h1>
-
-            <h3>KNIGHT</h3>
+        <div class="creditBox">
 
             <p>
-                Neon fantasy survival arena dengan fokus pada
-                kontrol sederhana, feedback interaktif,
-                visual futuristik dan pengalaman bermain responsif.
+                <span>CUBESADV KNIGHT</span>
             </p>
 
             <p>
-                UX • UI • GAMEPLAY • VISUAL • SOUND
+                Fantasy Cube Arena
+            </p>
+
+            <p>
+                Game Design · UI/UX · Programming
+            </p>
+
+            <p>
+                Fokus desain:
+                <br>
+                kontrol responsif,
+                visual feedback,
+                navigasi sederhana,
+                accessibility,
+                dan konsistensi visual.
             </p>
 
         </div>
 
         <br>
 
-        <button class="bigBtn secondary" data-close="creditsOverlay">
-            ✕ CLOSE
+        <button
+            class="bigBtn secondary"
+            data-close="creditsOverlay">
+            TUTUP
         </button>
 
     </div>
@@ -1372,20 +1422,69 @@ body.colorblind #gameCanvas{
 </div>
 
 
-<script>
+<!-- =====================================================
+     GAME OVER
+===================================================== -->
 
+<div
+    class="overlay"
+    id="gameOverOverlay">
+
+    <div class="modal">
+
+        <h2>GAME OVER</h2>
+
+        <p>
+            Knight telah dikalahkan.
+        </p>
+
+        <p>
+            Final Score:
+            <b id="finalScore">0</b>
+        </p>
+
+        <div class="modalButtons">
+
+            <button
+                class="bigBtn"
+                id="gameOverRestart">
+                MAIN LAGI
+            </button>
+
+            <button
+                class="bigBtn secondary"
+                id="gameOverRank">
+                LEADERBOARD
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
 /* =====================================================
    CANVAS
 ===================================================== */
 
-const canvas = document.getElementById("gameCanvas");
-const ctx = canvas.getContext("2d");
+const canvas =
+    document.getElementById("gameCanvas");
 
-const miniMap = document.getElementById("miniMap");
-const miniCtx = miniMap.getContext("2d");
+const ctx =
+    canvas.getContext("2d");
+
+const miniMap =
+    document.getElementById("miniMap");
+
+const miniCtx =
+    miniMap.getContext("2d");
+
 
 let W = 1200;
 let H = 750;
+
 let scaleX = 1;
 let scaleY = 1;
 
@@ -1401,12 +1500,16 @@ function resizeCanvas(){
     scaleY = H / 750;
 }
 
-window.addEventListener("resize",resizeCanvas);
+window.addEventListener(
+    "resize",
+    resizeCanvas
+);
+
 resizeCanvas();
 
 
 /* =====================================================
-   STATE
+   GAME STATE
 ===================================================== */
 
 let score = 0;
@@ -1426,63 +1529,44 @@ let lastTime = 0;
 
 const keys = {};
 
-let subtitleEnabled = true;
-let colorblindEnabled = false;
-let soundEnabled = true;
-
 
 /* =====================================================
-   DIFFICULTY
+   ACCESSIBILITY / SETTINGS
 ===================================================== */
 
+let colorblindMode = false;
+let soundEnabled = true;
 let difficulty = "normal";
 
-const difficultyData = {
-
-    easy:{
-        enemySpeed:.75,
-        enemyDamage:5
-    },
-
-    normal:{
-        enemySpeed:1.15,
-        enemyDamage:8
-    },
-
-    hard:{
-        enemySpeed:1.65,
-        enemyDamage:12
-    }
-
+const difficultySpeed = {
+    easy:.75,
+    normal:1,
+    hard:1.35
 };
 
 
 /* =====================================================
-   AUDIO
+   SOUND UI
 ===================================================== */
 
 let audioContext = null;
 
-function initAudio(){
+function playSound(type){
 
-    if(!audioContext){
-        audioContext =
-            new (window.AudioContext ||
-            window.webkitAudioContext)();
-    }
-
-    if(audioContext.state === "suspended"){
-        audioContext.resume();
-    }
-}
-
-function sound(type){
-
-    if(!soundEnabled) return;
+    if(!soundEnabled)
+        return;
 
     try{
 
-        initAudio();
+        if(!audioContext){
+
+            audioContext =
+                new (
+                    window.AudioContext ||
+                    window.webkitAudioContext
+                )();
+
+        }
 
         const osc =
             audioContext.createOscillator();
@@ -1496,50 +1580,36 @@ function sound(type){
         const now =
             audioContext.currentTime;
 
-        if(type === "click"){
+        if(type==="click"){
 
             osc.frequency.value = 500;
             gain.gain.setValueAtTime(.04,now);
-            gain.gain.exponentialRampToValueAtTime(.001,now+.08);
+            gain.gain.exponentialRampToValueAtTime(
+                .001,
+                now+.08
+            );
 
         }
 
-        if(type === "attack"){
+        if(type==="attack"){
 
             osc.frequency.value = 180;
-            osc.frequency.exponentialRampToValueAtTime(
-                720,
+            gain.gain.setValueAtTime(.05,now);
+            gain.gain.exponentialRampToValueAtTime(
+                .001,
                 now+.12
             );
 
-            gain.gain.setValueAtTime(.06,now);
-            gain.gain.exponentialRampToValueAtTime(.001,now+.15);
-
         }
 
-        if(type === "hit"){
+        if(type==="collect"){
 
-            osc.frequency.value = 100;
-            osc.frequency.exponentialRampToValueAtTime(
-                50,
-                now+.16
-            );
-
-            gain.gain.setValueAtTime(.08,now);
-            gain.gain.exponentialRampToValueAtTime(.001,now+.18);
-
-        }
-
-        if(type === "collect"){
-
-            osc.frequency.value = 700;
-            osc.frequency.exponentialRampToValueAtTime(
-                1200,
-                now+.14
-            );
-
+            osc.frequency.value = 760;
             gain.gain.setValueAtTime(.05,now);
-            gain.gain.exponentialRampToValueAtTime(.001,now+.18);
+            gain.gain.exponentialRampToValueAtTime(
+                .001,
+                now+.15
+            );
 
         }
 
@@ -1559,11 +1629,16 @@ const player = {
 
     x:600,
     y:375,
+
     size:40,
+
     speed:4.8,
+
     hp:100,
     maxHp:100,
+
     invincible:0,
+
     tail:[]
 
 };
@@ -1579,6 +1654,7 @@ const enemies = [
         x:780,
         y:570,
         size:40,
+        speed:1.2,
         hp:100,
         maxHp:100,
         color:"#ff4168",
@@ -1589,6 +1665,7 @@ const enemies = [
         x:930,
         y:250,
         size:38,
+        speed:1.05,
         hp:100,
         maxHp:100,
         color:"#ff3f91",
@@ -1599,7 +1676,7 @@ const enemies = [
 
 
 /* =====================================================
-   OTHER PLAYERS
+   ONLINE PLAYERS
 ===================================================== */
 
 const onlinePlayers = [
@@ -1651,14 +1728,16 @@ function createStars(){
 
             x:Math.random()*1200,
             y:Math.random()*750,
+
             r:Math.random()*1.7+.35,
+
             speed:Math.random()*.35+.04,
+
             alpha:Math.random()*.7+.2
 
         });
 
     }
-
 }
 
 createStars();
@@ -1678,13 +1757,14 @@ function createCrystals(){
 
             x:80+Math.random()*1040,
             y:100+Math.random()*580,
+
             size:22,
+
             pulse:Math.random()*6
 
         });
 
     }
-
 }
 
 createCrystals();
@@ -1694,113 +1774,111 @@ createCrystals();
    INPUT
 ===================================================== */
 
-window.addEventListener("keydown",e=>{
+window.addEventListener(
+    "keydown",
+    e=>{
 
-    keys[e.key]=true;
+        keys[e.key]=true;
 
-    if([
-        " ",
-        "ArrowUp",
-        "ArrowDown",
-        "ArrowLeft",
-        "ArrowRight"
-    ].includes(e.key)){
-        e.preventDefault();
+        if(
+            [
+                " ",
+                "ArrowUp",
+                "ArrowDown",
+                "ArrowLeft",
+                "ArrowRight"
+            ].includes(e.key)
+        ){
+            e.preventDefault();
+        }
+
+        if(
+            e.key===" " &&
+            !e.repeat
+        ){
+            attack();
+        }
+
+        if(
+            e.key==="Escape" &&
+            !gameOver
+        ){
+            togglePause();
+        }
+
     }
+);
 
-    if(e.key===" " && !e.repeat){
-        attack();
+window.addEventListener(
+    "keyup",
+    e=>{
+        keys[e.key]=false;
     }
-
-    if(e.key==="Escape" && !gameOver){
-        togglePause();
-    }
-
-});
-
-window.addEventListener("keyup",e=>{
-    keys[e.key]=false;
-});
+);
 
 
 /* =====================================================
-   GAMEPAD / CONTROLLER
+   TOUCH CONTROLS
 ===================================================== */
 
-function updateGamepad(){
+document
+.querySelectorAll(".moveBtn")
+.forEach(btn=>{
 
-    const pads =
-        navigator.getGamepads
-        ? navigator.getGamepads()
-        : [];
+    const key =
+        btn.dataset.key;
 
-    const pad = pads[0];
-
-    if(!pad) return;
-
-    const x =
-        pad.axes[0] || 0;
-
-    const y =
-        pad.axes[1] || 0;
-
-    if(x < -.25) keys["ArrowLeft"]=true;
-    else keys["ArrowLeft"]=false;
-
-    if(x > .25) keys["ArrowRight"]=true;
-    else keys["ArrowRight"]=false;
-
-    if(y < -.25) keys["ArrowUp"]=true;
-    else keys["ArrowUp"]=false;
-
-    if(y > .25) keys["ArrowDown"]=true;
-    else keys["ArrowDown"]=false;
-
-    if(pad.buttons[0] && pad.buttons[0].pressed){
-        attack();
-    }
-
-}
-
-
-/* =====================================================
-   TOUCH
-===================================================== */
-
-document.querySelectorAll(".moveBtn").forEach(btn=>{
-
-    const key=btn.dataset.key;
-
-    const start=e=>{
+    function start(e){
 
         e.preventDefault();
+
         keys[key]=true;
-        sound("click");
 
-    };
+        playSound("click");
+    }
 
-    const end=e=>{
+    function end(e){
 
         e.preventDefault();
+
         keys[key]=false;
+    }
 
-    };
+    btn.addEventListener(
+        "pointerdown",
+        start
+    );
 
-    btn.addEventListener("pointerdown",start);
-    btn.addEventListener("pointerup",end);
-    btn.addEventListener("pointercancel",end);
-    btn.addEventListener("pointerleave",end);
+    btn.addEventListener(
+        "pointerup",
+        end
+    );
+
+    btn.addEventListener(
+        "pointercancel",
+        end
+    );
+
+    btn.addEventListener(
+        "pointerleave",
+        end
+    );
 
 });
 
 
-document.getElementById("attackButton")
-.addEventListener("pointerdown",e=>{
+document
+.getElementById("attackButton")
+.addEventListener(
+    "pointerdown",
+    e=>{
 
-    e.preventDefault();
-    attack();
+        e.preventDefault();
 
-});
+        attack();
+
+    }
+);
 
 
 /* =====================================================
@@ -1815,6 +1893,23 @@ function collision(a,b){
         a.y < b.y+b.size &&
         a.y+a.size > b.y
     );
+
+}
+
+
+/* =====================================================
+   RANDOM POSITION
+===================================================== */
+
+function randomPosition(size){
+
+    return{
+
+        x:40+Math.random()*(1200-size-80),
+
+        y:80+Math.random()*(750-size-120)
+
+    };
 
 }
 
@@ -1835,22 +1930,27 @@ function attack(){
 
     attackCooldown=.38;
 
-    sound("attack");
+    playSound("attack");
 
-    showSubtitle("Knight menyerang musuh terdekat.");
+    const centerX =
+        player.x+player.size/2;
 
-    const centerX=player.x+player.size/2;
-    const centerY=player.y+player.size/2;
+    const centerY =
+        player.y+player.size/2;
 
     let target=null;
     let nearest=Infinity;
 
     enemies.forEach(enemy=>{
 
-        const dx=enemy.x-player.x;
-        const dy=enemy.y-player.y;
+        const dx =
+            enemy.x-player.x;
 
-        const dist=Math.hypot(dx,dy);
+        const dy =
+            enemy.y-player.y;
+
+        const dist =
+            Math.hypot(dx,dy);
 
         if(dist<nearest){
 
@@ -1861,20 +1961,28 @@ function attack(){
 
     });
 
-    if(!target) return;
+    if(!target)
+        return;
 
-    const dx=target.x-centerX;
-    const dy=target.y-centerY;
+    const dx =
+        target.x-centerX;
 
-    const length=Math.hypot(dx,dy)||1;
+    const dy =
+        target.y-centerY;
+
+    const length =
+        Math.hypot(dx,dy)||1;
 
     projectiles.push({
 
         x:centerX,
         y:centerY,
+
         vx:dx/length*11,
         vy:dy/length*11,
+
         life:1,
+
         size:7
 
     });
@@ -1895,15 +2003,14 @@ function attack(){
 
 function damagePlayer(amount){
 
-    if(player.invincible>0) return;
+    if(player.invincible>0)
+        return;
 
     player.hp-=amount;
+
     player.invincible=.75;
+
     shake=8;
-
-    sound("hit");
-
-    showSubtitle("PERINGATAN: Knight terkena serangan!");
 
     createBurst(
         player.x+20,
@@ -1924,12 +2031,16 @@ function damagePlayer(amount){
     if(player.hp<=0){
 
         player.hp=0;
+
         gameOver=true;
 
-        document.getElementById("finalScore")
+        document
+        .getElementById("finalScore")
         .textContent=score;
 
-        showOverlay("gameOverOverlay");
+        showOverlay(
+            "gameOverOverlay"
+        );
 
     }
 
@@ -1942,21 +2053,26 @@ function damagePlayer(amount){
 
 function update(dt){
 
-    if(paused || gameOver) return;
+    if(paused || gameOver)
+        return;
 
-    updateGamepad();
+    const delta =
+        Math.min(dt/16.67,2);
 
-    const delta=Math.min(dt/16.67,2);
+    attackCooldown =
+        Math.max(
+            0,
+            attackCooldown-dt/1000
+        );
 
-    attackCooldown=Math.max(
-        0,
-        attackCooldown-dt/1000
-    );
+    player.invincible =
+        Math.max(
+            0,
+            player.invincible-dt/1000
+        );
 
-    player.invincible=Math.max(
-        0,
-        player.invincible-dt/1000
-    );
+
+    /* MOVEMENT */
 
     let dx=0;
     let dy=0;
@@ -1965,53 +2081,67 @@ function update(dt){
         keys["ArrowLeft"] ||
         keys["a"] ||
         keys["A"]
-    ) dx--;
+    ){
+        dx--;
+    }
 
     if(
         keys["ArrowRight"] ||
         keys["d"] ||
         keys["D"]
-    ) dx++;
+    ){
+        dx++;
+    }
 
     if(
         keys["ArrowUp"] ||
         keys["w"] ||
         keys["W"]
-    ) dy--;
+    ){
+        dy--;
+    }
 
     if(
         keys["ArrowDown"] ||
         keys["s"] ||
         keys["S"]
-    ) dy++;
+    ){
+        dy++;
+    }
 
     if(dx!==0 || dy!==0){
 
-        const len=Math.hypot(dx,dy);
+        const len =
+            Math.hypot(dx,dy);
 
         dx/=len;
         dy/=len;
 
-        player.x+=dx*player.speed*delta;
-        player.y+=dy*player.speed*delta;
+        player.x +=
+            dx*player.speed*delta;
+
+        player.y +=
+            dy*player.speed*delta;
 
     }
 
-    player.x=Math.max(
-        0,
-        Math.min(
-            1200-player.size,
-            player.x
-        )
-    );
+    player.x =
+        Math.max(
+            0,
+            Math.min(
+                1200-player.size,
+                player.x
+            )
+        );
 
-    player.y=Math.max(
-        60,
-        Math.min(
-            750-player.size,
-            player.y
-        )
-    );
+    player.y =
+        Math.max(
+            60,
+            Math.min(
+                750-player.size,
+                player.y
+            )
+        );
 
 
     /* TRAIL */
@@ -2023,9 +2153,8 @@ function update(dt){
 
     });
 
-    if(player.tail.length>22){
+    if(player.tail.length>22)
         player.tail.pop();
-    }
 
 
     /* CRYSTALS */
@@ -2034,13 +2163,20 @@ function update(dt){
 
         crystal.pulse+=.08*delta;
 
-        if(collision(player,crystal)){
+        if(
+            collision(
+                player,
+                {
+                    x:crystal.x,
+                    y:crystal.y,
+                    size:crystal.size
+                }
+            )
+        ){
 
             score+=10;
 
-            sound("collect");
-
-            showSubtitle("Crystal dikumpulkan! +10 SCORE");
+            playSound("collect");
 
             createBurst(
                 crystal.x+11,
@@ -2056,9 +2192,10 @@ function update(dt){
                 "#ffd426"
             );
 
-            const p=randomPosition(
-                crystal.size
-            );
+            const p =
+                randomPosition(
+                    crystal.size
+                );
 
             crystal.x=p.x;
             crystal.y=p.y;
@@ -2074,36 +2211,41 @@ function update(dt){
 
     enemies.forEach(enemy=>{
 
-        enemy.hit=Math.max(
-            0,
-            enemy.hit-dt/1000
-        );
-
-        const ex=player.x-enemy.x;
-        const ey=player.y-enemy.y;
-
-        const distance=Math.hypot(ex,ey)||1;
-
-        const speed=
-            difficultyData[difficulty]
-            .enemySpeed;
-
-        enemy.x+=
-            ex/distance*
-            speed*
-            delta;
-
-        enemy.y+=
-            ey/distance*
-            speed*
-            delta;
-
-        if(collision(player,enemy)){
-
-            damagePlayer(
-                difficultyData[difficulty]
-                .enemyDamage
+        enemy.hit=
+            Math.max(
+                0,
+                enemy.hit-dt/1000
             );
+
+        const ex =
+            player.x-enemy.x;
+
+        const ey =
+            player.y-enemy.y;
+
+        const distance =
+            Math.hypot(ex,ey)||1;
+
+        enemy.x +=
+            ex/distance*
+            enemy.speed*
+            difficultySpeed[difficulty]*
+            delta;
+
+        enemy.y +=
+            ey/distance*
+            enemy.speed*
+            difficultySpeed[difficulty]*
+            delta;
+
+        if(
+            collision(
+                player,
+                enemy
+            )
+        ){
+
+            damagePlayer(8);
 
         }
 
@@ -2131,16 +2273,17 @@ function update(dt){
 
             if(
                 p.life>0 &&
-                collision(pseudo,enemy)
+                collision(
+                    pseudo,
+                    enemy
+                )
             ){
 
                 enemy.hp-=25;
+
                 enemy.hit=.18;
+
                 p.life=0;
-
-                sound("hit");
-
-                showSubtitle("Serangan mengenai musuh! -25 HP");
 
                 createBurst(
                     p.x,
@@ -2160,10 +2303,6 @@ function update(dt){
 
                     score+=50;
 
-                    showSubtitle(
-                        "Musuh dikalahkan! +50 SCORE"
-                    );
-
                     createBurst(
                         enemy.x+20,
                         enemy.y+20,
@@ -2174,16 +2313,18 @@ function update(dt){
                     addFloatingText(
                         enemy.x,
                         enemy.y,
-                        "+50 ENEMY",
+                        "+50",
                         "#ff4168"
                     );
 
-                    const pos=randomPosition(
-                        enemy.size
-                    );
+                    const pos =
+                        randomPosition(
+                            enemy.size
+                        );
 
                     enemy.x=pos.x;
                     enemy.y=pos.y;
+
                     enemy.hp=enemy.maxHp;
 
                     updateHUD();
@@ -2196,8 +2337,7 @@ function update(dt){
 
     });
 
-
-    projectiles=
+    projectiles =
         projectiles.filter(
             p=>
                 p.life>0 &&
@@ -2208,18 +2348,24 @@ function update(dt){
         );
 
 
-    /* ONLINE PLAYERS */
+    /* OTHER PLAYERS */
 
     onlinePlayers.forEach(p=>{
 
         p.x+=p.dx*delta;
         p.y+=p.dy*delta;
 
-        if(p.x<30 || p.x>1150){
+        if(
+            p.x<30 ||
+            p.x>1150
+        ){
             p.dx*=-1;
         }
 
-        if(p.y<80 || p.y>700){
+        if(
+            p.y<80 ||
+            p.y>700
+        ){
             p.dy*=-1;
         }
 
@@ -2239,7 +2385,7 @@ function update(dt){
 
     });
 
-    particles=
+    particles =
         particles.filter(
             p=>p.life>0
         );
@@ -2250,11 +2396,12 @@ function update(dt){
     floatingTexts.forEach(f=>{
 
         f.y-=.7*delta;
+
         f.life-=.018*delta;
 
     });
 
-    floatingTexts=
+    floatingTexts =
         floatingTexts.filter(
             f=>f.life>0
         );
@@ -2268,41 +2415,39 @@ function update(dt){
 
 
 /* =====================================================
-   RANDOM POSITION
-===================================================== */
-
-function randomPosition(size){
-
-    return{
-
-        x:40+Math.random()*(1200-size-80),
-        y:80+Math.random()*(750-size-120)
-
-    };
-
-}
-
-
-/* =====================================================
    PARTICLES
 ===================================================== */
 
-function createBurst(x,y,color,count){
+function createBurst(
+    x,
+    y,
+    color,
+    count
+){
 
     for(let i=0;i<count;i++){
 
-        const angle=Math.random()*Math.PI*2;
-        const speed=Math.random()*4+1;
+        const angle =
+            Math.random()*Math.PI*2;
+
+        const speed =
+            Math.random()*4+1;
 
         particles.push({
 
             x,
             y,
+
             vx:Math.cos(angle)*speed,
             vy:Math.sin(angle)*speed,
+
             size:Math.random()*4+1,
+
             life:1,
-            decay:.018+Math.random()*.025,
+
+            decay:.018+
+                Math.random()*.025,
+
             color
 
         });
@@ -2312,7 +2457,12 @@ function createBurst(x,y,color,count){
 }
 
 
-function addFloatingText(x,y,text,color){
+function addFloatingText(
+    x,
+    y,
+    text,
+    color
+){
 
     floatingTexts.push({
 
@@ -2331,20 +2481,39 @@ function addFloatingText(x,y,text,color){
    BACKGROUND
 ===================================================== */
 
-function drawBackground(){
+function drawBackground(time){
 
-    const gradient=
+    const gradient =
         ctx.createLinearGradient(
-            0,0,0,H
+            0,
+            0,
+            0,
+            H
         );
 
-    gradient.addColorStop(0,"#061a35");
-    gradient.addColorStop(.55,"#03152b");
-    gradient.addColorStop(1,"#020916");
+    gradient.addColorStop(
+        0,
+        "#061a35"
+    );
+
+    gradient.addColorStop(
+        .55,
+        "#03152b"
+    );
+
+    gradient.addColorStop(
+        1,
+        "#020916"
+    );
 
     ctx.fillStyle=gradient;
 
-    ctx.fillRect(0,0,W,H);
+    ctx.fillRect(
+        0,
+        0,
+        W,
+        H
+    );
 
 
     /* GRID */
@@ -2356,20 +2525,32 @@ function drawBackground(){
 
     ctx.lineWidth=1;
 
-    for(let x=0;x<W;x+=grid){
+    for(
+        let x=0;
+        x<W;
+        x+=grid
+    ){
 
         ctx.beginPath();
+
         ctx.moveTo(x,0);
         ctx.lineTo(x,H);
+
         ctx.stroke();
 
     }
 
-    for(let y=0;y<H;y+=grid){
+    for(
+        let y=0;
+        y<H;
+        y+=grid
+    ){
 
         ctx.beginPath();
+
         ctx.moveTo(0,y);
         ctx.lineTo(W,y);
+
         ctx.stroke();
 
     }
@@ -2381,7 +2562,8 @@ function drawBackground(){
 
         s.y+=s.speed;
 
-        if(s.y>750) s.y=0;
+        if(s.y>750)
+            s.y=0;
 
         ctx.globalAlpha=s.alpha;
 
@@ -2404,9 +2586,9 @@ function drawBackground(){
     ctx.globalAlpha=1;
 
 
-    /* CENTER GLOW */
+    /* GLOW */
 
-    const glow=
+    const glow =
         ctx.createRadialGradient(
             W/2,
             H/2,
@@ -2427,7 +2609,13 @@ function drawBackground(){
     );
 
     ctx.fillStyle=glow;
-    ctx.fillRect(0,0,W,H);
+
+    ctx.fillRect(
+        0,
+        0,
+        W,
+        H
+    );
 
 }
 
@@ -2440,9 +2628,11 @@ function drawCrystal(c){
 
     const x=c.x*scaleX;
     const y=c.y*scaleY;
+
     const size=c.size*scaleX;
 
-    const pulse=Math.sin(c.pulse)*3;
+    const pulse=
+        Math.sin(c.pulse)*3;
 
     ctx.save();
 
@@ -2456,17 +2646,35 @@ function drawCrystal(c){
     );
 
     ctx.shadowBlur=25+pulse;
-    ctx.shadowColor="#ffd426";
-    ctx.fillStyle="#ffd426";
+
+    ctx.shadowColor=
+        colorblindMode
+        ? "#ff7b22"
+        : "#ffd426";
+
+    ctx.fillStyle=
+        colorblindMode
+        ? "#ff7b22"
+        : "#ffd426";
 
     ctx.beginPath();
 
-    ctx.moveTo(0,-16-pulse);
+    ctx.moveTo(
+        0,
+        -16-pulse
+    );
+
     ctx.lineTo(13,0);
-    ctx.lineTo(0,17+pulse);
+
+    ctx.lineTo(
+        0,
+        17+pulse
+    );
+
     ctx.lineTo(-13,0);
 
     ctx.closePath();
+
     ctx.fill();
 
     ctx.fillStyle="#fff7a6";
@@ -2474,11 +2682,15 @@ function drawCrystal(c){
     ctx.beginPath();
 
     ctx.moveTo(0,-10);
+
     ctx.lineTo(6,0);
+
     ctx.lineTo(0,5);
+
     ctx.lineTo(-5,0);
 
     ctx.closePath();
+
     ctx.fill();
 
     ctx.restore();
@@ -2494,38 +2706,48 @@ function drawPlayer(){
 
     const x=player.x*scaleX;
     const y=player.y*scaleY;
+
     const size=player.size*scaleX;
 
     const cx=x+size/2;
     const cy=y+size/2;
 
 
-    player.tail.forEach((t,i)=>{
+    /* TRAIL */
 
-        const alpha=
-            (1-i/player.tail.length)*.5;
+    player.tail.forEach(
+        (t,i)=>{
 
-        ctx.save();
+            const alpha=
+                (1-i/player.tail.length)*.5;
 
-        ctx.globalAlpha=alpha;
-        ctx.fillStyle="#249cff";
-        ctx.shadowBlur=18;
-        ctx.shadowColor="#249cff";
+            ctx.save();
 
-        ctx.beginPath();
+            ctx.globalAlpha=alpha;
 
-        ctx.arc(
-            t.x*scaleX,
-            t.y*scaleY,
-            4+(1-i/player.tail.length)*7,
-            0,
-            Math.PI*2
-        );
+            ctx.fillStyle="#249cff";
 
-        ctx.fill();
-        ctx.restore();
+            ctx.shadowBlur=18;
 
-    });
+            ctx.shadowColor="#249cff";
+
+            ctx.beginPath();
+
+            ctx.arc(
+                t.x*scaleX,
+                t.y*scaleY,
+                4+
+                (1-i/player.tail.length)*7,
+                0,
+                Math.PI*2
+            );
+
+            ctx.fill();
+
+            ctx.restore();
+
+        }
+    );
 
 
     ctx.save();
@@ -2558,16 +2780,30 @@ function drawPlayer(){
     /* SHIELD */
 
     ctx.shadowBlur=0;
+
     ctx.fillStyle="#d5f7ff";
 
     ctx.beginPath();
 
     ctx.moveTo(cx,y+8);
-    ctx.lineTo(x+size-8,cy-3);
-    ctx.lineTo(cx,y+size-6);
-    ctx.lineTo(x+8,cy-3);
+
+    ctx.lineTo(
+        x+size-8,
+        cy-3
+    );
+
+    ctx.lineTo(
+        cx,
+        y+size-6
+    );
+
+    ctx.lineTo(
+        x+8,
+        cy-3
+    );
 
     ctx.closePath();
+
     ctx.fill();
 
 
@@ -2598,11 +2834,24 @@ function drawPlayer(){
     /* EYES */
 
     ctx.fillStyle="#54f4ff";
+
     ctx.shadowBlur=10;
+
     ctx.shadowColor="#54f4ff";
 
-    ctx.fillRect(x+13,y+11,4,3);
-    ctx.fillRect(x+23,y+11,4,3);
+    ctx.fillRect(
+        x+13,
+        y+11,
+        4,
+        3
+    );
+
+    ctx.fillRect(
+        x+23,
+        y+11,
+        4,
+        3
+    );
 
     ctx.restore();
 
@@ -2617,17 +2866,24 @@ function drawEnemy(enemy){
 
     const x=enemy.x*scaleX;
     const y=enemy.y*scaleY;
+
     const size=enemy.size*scaleX;
+
+    const enemyColor =
+        colorblindMode
+        ? "#ff9f1c"
+        : enemy.color;
 
     ctx.save();
 
     ctx.shadowBlur=28;
-    ctx.shadowColor=enemy.color;
+
+    ctx.shadowColor=enemyColor;
 
     ctx.fillStyle=
         enemy.hit>0
         ? "#ffffff"
-        : enemy.color;
+        : enemyColor;
 
     ctx.beginPath();
 
@@ -2678,7 +2934,8 @@ function drawEnemy(enemy){
 
     /* HP */
 
-    ctx.fillStyle="rgba(0,0,0,.45)";
+    ctx.fillStyle=
+        "rgba(0,0,0,.45)";
 
     ctx.fillRect(
         x,
@@ -2687,12 +2944,16 @@ function drawEnemy(enemy){
         4
     );
 
-    ctx.fillStyle="#ff4168";
+    ctx.fillStyle=
+        colorblindMode
+        ? "#ff9f1c"
+        : "#ff4168";
 
     ctx.fillRect(
         x,
         y-10,
-        size*(enemy.hp/enemy.maxHp),
+        size*
+        (enemy.hp/enemy.maxHp),
         4
     );
 
@@ -2713,7 +2974,9 @@ function drawOnlinePlayer(p){
     ctx.save();
 
     ctx.shadowBlur=22;
+
     ctx.shadowColor=p.color;
+
     ctx.fillStyle=p.color;
 
     ctx.beginPath();
@@ -2731,7 +2994,9 @@ function drawOnlinePlayer(p){
     ctx.shadowBlur=0;
 
     ctx.fillStyle="#fff";
+
     ctx.font="12px Arial";
+
     ctx.textAlign="center";
 
     ctx.fillText(
@@ -2756,7 +3021,9 @@ function drawProjectiles(){
         ctx.save();
 
         ctx.shadowBlur=25;
+
         ctx.shadowColor="#68eaff";
+
         ctx.fillStyle="#68eaff";
 
         ctx.beginPath();
@@ -2788,11 +3055,13 @@ function drawParticles(){
 
         ctx.save();
 
-        ctx.globalAlpha=Math.max(0,p.life);
+        ctx.globalAlpha=
+            Math.max(0,p.life);
 
         ctx.fillStyle=p.color;
 
         ctx.shadowBlur=12;
+
         ctx.shadowColor=p.color;
 
         ctx.beginPath();
@@ -2825,12 +3094,15 @@ function drawFloatingTexts(){
         ctx.save();
 
         ctx.globalAlpha=f.life;
+
         ctx.fillStyle=f.color;
 
         ctx.font="bold 17px Arial";
+
         ctx.textAlign="center";
 
         ctx.shadowBlur=10;
+
         ctx.shadowColor=f.color;
 
         ctx.fillText(
@@ -2855,7 +3127,12 @@ function drawMiniMap(){
     const mw=miniMap.width;
     const mh=miniMap.height;
 
-    miniCtx.clearRect(0,0,mw,mh);
+    miniCtx.clearRect(
+        0,
+        0,
+        mw,
+        mh
+    );
 
     miniCtx.fillStyle="#03172d";
 
@@ -2869,20 +3146,32 @@ function drawMiniMap(){
     miniCtx.strokeStyle=
         "rgba(84,231,255,.15)";
 
-    for(let x=0;x<mw;x+=20){
+    for(
+        let x=0;
+        x<mw;
+        x+=20
+    ){
 
         miniCtx.beginPath();
+
         miniCtx.moveTo(x,0);
         miniCtx.lineTo(x,mh);
+
         miniCtx.stroke();
 
     }
 
-    for(let y=0;y<mh;y+=20){
+    for(
+        let y=0;
+        y<mh;
+        y+=20
+    ){
 
         miniCtx.beginPath();
+
         miniCtx.moveTo(0,y);
         miniCtx.lineTo(mw,y);
+
         miniCtx.stroke();
 
     }
@@ -2893,7 +3182,10 @@ function drawMiniMap(){
 
     crystals.forEach(c=>{
 
-        miniCtx.fillStyle="#ffd426";
+        miniCtx.fillStyle=
+            colorblindMode
+            ? "#ff7b22"
+            : "#ffd426";
 
         miniCtx.beginPath();
 
@@ -2912,7 +3204,10 @@ function drawMiniMap(){
 
     enemies.forEach(enemy=>{
 
-        miniCtx.fillStyle=enemy.color;
+        miniCtx.fillStyle=
+            colorblindMode
+            ? "#ff9f1c"
+            : enemy.color;
 
         miniCtx.beginPath();
 
@@ -2951,6 +3246,7 @@ function drawMiniMap(){
     miniCtx.fillStyle="#54e7ff";
 
     miniCtx.shadowBlur=8;
+
     miniCtx.shadowColor="#54e7ff";
 
     miniCtx.beginPath();
@@ -2974,7 +3270,7 @@ function drawMiniMap(){
    DRAW
 ===================================================== */
 
-function draw(){
+function draw(time){
 
     ctx.save();
 
@@ -2987,7 +3283,7 @@ function draw(){
 
     }
 
-    drawBackground();
+    drawBackground(time);
 
     crystals.forEach(drawCrystal);
 
@@ -2996,8 +3292,11 @@ function draw(){
     enemies.forEach(drawEnemy);
 
     drawProjectiles();
+
     drawPlayer();
+
     drawParticles();
+
     drawFloatingTexts();
 
     ctx.restore();
@@ -3013,51 +3312,101 @@ function draw(){
 
 function updateHUD(){
 
-    document.getElementById("scoreText")
-        .textContent=score;
+    document
+    .getElementById("scoreText")
+    .textContent=score;
 
-    document.getElementById("hpText")
-        .textContent=
+    document
+    .getElementById("hpText")
+    .textContent=
         Math.max(
             0,
             Math.ceil(player.hp)
-        )+"/100";
+        )+
+        "/100";
 
-    document.getElementById("hpFill")
-        .style.width=
+    document
+    .getElementById("hpFill")
+    .style.width=
         Math.max(
             0,
             player.hp
-        )+"%";
+        )+
+        "%";
 
-    document.getElementById("myScore")
-        .textContent=score;
+    document
+    .getElementById("myScore")
+    .textContent=score;
 
 }
 
 
 /* =====================================================
-   SUBTITLE
+   OVERLAY
 ===================================================== */
 
-let subtitleTimer=null;
+function showOverlay(id){
 
-function showSubtitle(text){
+    document
+    .getElementById(id)
+    .classList
+    .add("show");
 
-    if(!subtitleEnabled) return;
+}
 
-    const el=document.getElementById("subtitle");
+function hideOverlay(id){
 
-    el.textContent=text;
-    el.classList.add("show");
+    document
+    .getElementById(id)
+    .classList
+    .remove("show");
 
-    clearTimeout(subtitleTimer);
+}
 
-    subtitleTimer=setTimeout(()=>{
 
-        el.classList.remove("show");
+document
+.querySelectorAll("[data-close]")
+.forEach(btn=>{
 
-    },1800);
+    btn.onclick=()=>{
+
+        playSound("click");
+
+        hideOverlay(
+            btn.dataset.close
+        );
+
+    };
+
+});
+
+
+/* =====================================================
+   PAUSE
+===================================================== */
+
+function togglePause(){
+
+    if(gameOver)
+        return;
+
+    paused=!paused;
+
+    playSound("click");
+
+    if(paused){
+
+        showOverlay(
+            "pauseOverlay"
+        );
+
+    }else{
+
+        hideOverlay(
+            "pauseOverlay"
+        );
+
+    }
 
 }
 
@@ -3079,66 +3428,34 @@ function showToast(message){
 
     clearTimeout(toastTimer);
 
-    toastTimer=setTimeout(()=>{
-
-        toast.classList.remove("show");
-
-    },2000);
-
-}
-
-
-/* =====================================================
-   OVERLAY
-===================================================== */
-
-function showOverlay(id){
-
-    document
-        .getElementById(id)
-        .classList
-        .add("show");
-
-}
-
-function hideOverlay(id){
-
-    document
-        .getElementById(id)
-        .classList
-        .remove("show");
-
-}
-
-document.querySelectorAll("[data-close]")
-.forEach(btn=>{
-
-    btn.onclick=()=>{
-
-        sound("click");
-
-        hideOverlay(
-            btn.dataset.close
+    toastTimer=
+        setTimeout(
+            ()=>{
+                toast.classList.remove("show");
+            },
+            2000
         );
 
-    };
-
-});
+}
 
 
 /* =====================================================
-   RESET GAME
+   RESET
 ===================================================== */
 
 function resetGame(){
 
     score=0;
+
     gameOver=false;
+
     paused=false;
 
     player.hp=100;
+
     player.x=600;
     player.y=375;
+
     player.tail=[];
 
     attackCooldown=0;
@@ -3159,36 +3476,19 @@ function resetGame(){
 
     updateHUD();
 
-    hideOverlay("gameOverOverlay");
-    hideOverlay("pauseOverlay");
+    hideOverlay(
+        "gameOverOverlay"
+    );
 
-    showToast("Arena siap!");
-    showSubtitle("Misi dimulai. Kalahkan musuh dan kumpulkan crystal.");
+    hideOverlay(
+        "pauseOverlay"
+    );
 
-}
+    showToast(
+        "Arena siap!"
+    );
 
-
-/* =====================================================
-   PAUSE
-===================================================== */
-
-function togglePause(){
-
-    if(gameOver) return;
-
-    paused=!paused;
-
-    sound("click");
-
-    if(paused){
-
-        showOverlay("pauseOverlay");
-
-    }else{
-
-        hideOverlay("pauseOverlay");
-
-    }
+    playSound("click");
 
 }
 
@@ -3204,8 +3504,7 @@ function saveGame(){
         score,
         hp:player.hp,
         x:player.x,
-        y:player.y,
-        difficulty
+        y:player.y
 
     };
 
@@ -3214,7 +3513,12 @@ function saveGame(){
         JSON.stringify(data)
     );
 
-    showToast("Game berhasil disimpan!");
+    playSound("click");
+
+    showToast(
+        "Game berhasil disimpan!"
+    );
+
 }
 
 
@@ -3231,7 +3535,9 @@ function loadGame(){
 
     if(!raw){
 
-        showToast("Belum ada save!");
+        showToast(
+            "Belum ada save!"
+        );
 
         return;
 
@@ -3239,32 +3545,38 @@ function loadGame(){
 
     try{
 
-        const data=JSON.parse(raw);
+        const data=
+            JSON.parse(raw);
 
         score=data.score??0;
+
         player.hp=data.hp??100;
+
         player.x=data.x??600;
+
         player.y=data.y??375;
 
-        difficulty=
-            data.difficulty??"normal";
-
-        document.getElementById(
-            "difficultySelect"
-        ).value=difficulty;
-
         gameOver=false;
+
         paused=false;
 
         updateHUD();
 
-        hideOverlay("pauseOverlay");
+        hideOverlay(
+            "pauseOverlay"
+        );
 
-        showToast("Save berhasil dimuat!");
+        playSound("click");
+
+        showToast(
+            "Save berhasil dimuat!"
+        );
 
     }catch{
 
-        showToast("Save rusak!");
+        showToast(
+            "Save rusak!"
+        );
 
     }
 
@@ -3310,102 +3622,47 @@ function updateLeaderboard(){
         (a,b)=>b.score-a.score
     );
 
-    document.getElementById(
-        "leaderboardBody"
-    ).innerHTML=
-
-        list.map((p,i)=>`
+    document
+    .getElementById("leaderboardBody")
+    .innerHTML=
+        list.map(
+            (p,i)=>`
 
             <tr>
+
                 <td>${i+1}</td>
+
                 <td>${p.name}</td>
+
                 <td>${p.score}</td>
+
             </tr>
 
-        `).join("");
+            `
+        )
+        .join("");
 
 }
 
 
 /* =====================================================
-   EXIT TO MENU
+   START / ONBOARDING
 ===================================================== */
 
-function exitToMenu(){
+document
+.getElementById("startButton")
+.onclick=()=>{
 
-    paused=false;
-    gameOver=false;
-
-    hideOverlay("pauseOverlay");
-    hideOverlay("gameOverOverlay");
+    playSound("click");
 
     document
-        .getElementById("introScreen")
-        .classList
-        .remove("hide");
+    .getElementById("intro")
+    .classList
+    .add("hide");
 
-}
-
-
-/* =====================================================
-   START
-===================================================== */
-
-document.getElementById("startGameBtn")
-.onclick=()=>{
-
-    sound("click");
-
-    initAudio();
-
-    document
-        .getElementById("introScreen")
-        .classList
-        .add("hide");
-
-    resetGame();
-
-    setTimeout(()=>{
-
-        showOverlay("tutorialOverlay");
-
-    },500);
-
-};
-
-
-document.getElementById("tutorialMenuBtn")
-.onclick=()=>{
-
-    sound("click");
-    showOverlay("tutorialOverlay");
-
-};
-
-
-document.getElementById("closeTutorialBtn")
-.onclick=()=>{
-
-    sound("click");
-    hideOverlay("tutorialOverlay");
-
-};
-
-
-document.getElementById("settingsMenuBtn")
-.onclick=()=>{
-
-    sound("click");
-    showOverlay("settingsOverlay");
-
-};
-
-
-document.getElementById("creditsMenuBtn")
-.onclick=()=>{
-
-    sound("click");
-    showOverlay("creditsOverlay");
+    showToast(
+        "Gunakan WASD / Arrow untuk bergerak"
+    );
 
 };
 
@@ -3414,214 +3671,161 @@ document.getElementById("creditsMenuBtn")
    BUTTONS
 ===================================================== */
 
-document.getElementById("attackButton")
-.onclick=attack;
-
-document.getElementById("pauseButton")
+document
+.getElementById("pauseButton")
 .onclick=togglePause;
 
-document.getElementById("resumeBtn")
+
+document
+.getElementById("resumeBtn")
 .onclick=()=>{
 
-    sound("click");
+    playSound("click");
 
     paused=false;
 
-    hideOverlay("pauseOverlay");
+    hideOverlay(
+        "pauseOverlay"
+    );
 
 };
 
-document.getElementById("restartBtn")
+
+document
+.getElementById("restartBtn")
+.onclick=resetGame;
+
+
+document
+.getElementById("saveBtn")
+.onclick=saveGame;
+
+
+document
+.getElementById("loadBtn")
+.onclick=loadGame;
+
+
+document
+.getElementById("tutorialBtn")
 .onclick=()=>{
 
-    sound("click");
-    resetGame();
+    playSound("click");
+
+    hideOverlay(
+        "pauseOverlay"
+    );
+
+    showOverlay(
+        "tutorialOverlay"
+    );
 
 };
 
-document.getElementById("saveBtn")
+
+document
+.getElementById("settingsBtn")
 .onclick=()=>{
 
-    sound("click");
-    saveGame();
+    playSound("click");
+
+    hideOverlay(
+        "pauseOverlay"
+    );
+
+    showOverlay(
+        "settingsOverlay"
+    );
 
 };
 
-document.getElementById("loadBtn")
+
+document
+.getElementById("playersBtn")
 .onclick=()=>{
 
-    sound("click");
-    loadGame();
+    playSound("click");
+
+    hideOverlay(
+        "pauseOverlay"
+    );
+
+    showOverlay(
+        "playersOverlay"
+    );
 
 };
 
-document.getElementById("playersBtn")
+
+document
+.getElementById("rankBtn")
 .onclick=()=>{
 
-    sound("click");
+    playSound("click");
 
-    hideOverlay("pauseOverlay");
-    showOverlay("playersOverlay");
-
-};
-
-document.getElementById("rankBtn")
-.onclick=()=>{
-
-    sound("click");
-
-    hideOverlay("pauseOverlay");
+    hideOverlay(
+        "pauseOverlay"
+    );
 
     updateLeaderboard();
 
-    showOverlay("rankOverlay");
+    showOverlay(
+        "rankOverlay"
+    );
 
 };
 
-document.getElementById("exitBtn")
+
+document
+.getElementById("creditsBtn")
 .onclick=()=>{
 
-    sound("click");
-    exitToMenu();
+    playSound("click");
+
+    hideOverlay(
+        "pauseOverlay"
+    );
+
+    showOverlay(
+        "creditsOverlay"
+    );
 
 };
 
-document.getElementById("gameOverRestart")
+
+document
+.getElementById("gameOverRestart")
+.onclick=resetGame;
+
+
+document
+.getElementById("gameOverRank")
 .onclick=()=>{
 
-    sound("click");
-    resetGame();
-
-};
-
-document.getElementById("gameOverRank")
-.onclick=()=>{
-
-    sound("click");
-
-    hideOverlay("gameOverOverlay");
+    hideOverlay(
+        "gameOverOverlay"
+    );
 
     updateLeaderboard();
 
-    showOverlay("rankOverlay");
-
-};
-
-document.getElementById("gameOverExit")
-.onclick=()=>{
-
-    sound("click");
-    exitToMenu();
-
-};
-
-
-/* =====================================================
-   ACCESSIBILITY
-===================================================== */
-
-function toggleColorblind(){
-
-    colorblindEnabled=
-        !colorblindEnabled;
-
-    document.body.classList.toggle(
-        "colorblind",
-        colorblindEnabled
-    );
-
-    document.getElementById(
-        "settingsColorBtn"
-    ).textContent=
-        colorblindEnabled
-        ? "ON"
-        : "OFF";
-
-    showToast(
-        colorblindEnabled
-        ? "Colorblind Mode ON"
-        : "Colorblind Mode OFF"
-    );
-
-}
-
-document.getElementById("colorblindBtn")
-.onclick=toggleColorblind;
-
-document.getElementById("settingsColorBtn")
-.onclick=toggleColorblind;
-
-
-function toggleSubtitle(){
-
-    subtitleEnabled=
-        !subtitleEnabled;
-
-    document.getElementById(
-        "subtitleBtn"
-    ).textContent=
-        subtitleEnabled
-        ? "SUBTITLE ON"
-        : "SUBTITLE OFF";
-
-    document.getElementById(
-        "settingsSubtitleBtn"
-    ).textContent=
-        subtitleEnabled
-        ? "ON"
-        : "OFF";
-
-    if(!subtitleEnabled){
-
-        document
-            .getElementById("subtitle")
-            .classList
-            .remove("show");
-
-    }
-
-}
-
-document.getElementById("subtitleBtn")
-.onclick=toggleSubtitle;
-
-document.getElementById("settingsSubtitleBtn")
-.onclick=toggleSubtitle;
-
-
-/* =====================================================
-   SOUND
-===================================================== */
-
-document.getElementById("soundBtn")
-.onclick=()=>{
-
-    soundEnabled=!soundEnabled;
-
-    document.getElementById(
-        "soundBtn"
-    ).textContent=
-        soundEnabled
-        ? "ON"
-        : "OFF";
-
-    showToast(
-        soundEnabled
-        ? "Sound UI ON"
-        : "Sound UI OFF"
+    showOverlay(
+        "rankOverlay"
     );
 
 };
 
 
 /* =====================================================
-   DIFFICULTY
+   SETTINGS
 ===================================================== */
 
-document.getElementById("difficultySelect")
+document
+.getElementById("difficultySelect")
 .onchange=e=>{
 
     difficulty=e.target.value;
+
+    playSound("click");
 
     showToast(
         "Difficulty: "+
@@ -3631,15 +3835,47 @@ document.getElementById("difficultySelect")
 };
 
 
-/* =====================================================
-   SETTINGS CLOSE
-===================================================== */
-
-document.getElementById("closeSettingsBtn")
+document
+.getElementById("colorblindBtn")
 .onclick=()=>{
 
-    sound("click");
-    hideOverlay("settingsOverlay");
+    colorblindMode=
+        !colorblindMode;
+
+    document
+    .getElementById("colorblindBtn")
+    .textContent=
+        colorblindMode
+        ? "ON"
+        : "OFF";
+
+    playSound("click");
+
+    showToast(
+        colorblindMode
+        ? "Colorblind Mode ON"
+        : "Colorblind Mode OFF"
+    );
+
+};
+
+
+document
+.getElementById("soundBtn")
+.onclick=()=>{
+
+    soundEnabled=
+        !soundEnabled;
+
+    document
+    .getElementById("soundBtn")
+    .textContent=
+        soundEnabled
+        ? "ON"
+        : "OFF";
+
+    if(soundEnabled)
+        playSound("click");
 
 };
 
@@ -3657,7 +3893,7 @@ function gameLoop(time){
 
     update(dt);
 
-    draw();
+    draw(time);
 
     requestAnimationFrame(
         gameLoop
@@ -3667,10 +3903,11 @@ function gameLoop(time){
 
 
 /* =====================================================
-   START LOOP
+   START
 ===================================================== */
 
 updateHUD();
+
 updateLeaderboard();
 
 requestAnimationFrame(
