@@ -4606,5 +4606,846 @@ requestAnimationFrame(
 
 </script>
 
+    <!-- =========================================================
+     CUBESADV_KNIGHT - STEP 2
+     MENU / PAUSE / RESUME / RESTART / SETTINGS / EXIT
+========================================================= -->
+
+<style>
+/* ===============================
+   MENU OVERLAY
+================================ */
+
+#gameMenuOverlay,
+#pauseOverlay,
+#settingsOverlay,
+#exitOverlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        radial-gradient(circle at 50% 30%,
+            rgba(45, 120, 190, .18),
+            transparent 35%),
+        rgba(5, 8, 20, .88);
+
+    backdrop-filter: blur(8px);
+}
+
+/* ===============================
+   PANEL
+================================ */
+
+.game-ui-panel {
+    width: min(430px, 90vw);
+    padding: 30px;
+
+    border: 1px solid rgba(120, 210, 255, .35);
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(20, 32, 55, .96),
+            rgba(10, 15, 30, .96)
+        );
+
+    box-shadow:
+        0 0 40px rgba(0, 170, 255, .18),
+        inset 0 0 30px rgba(255,255,255,.025);
+
+    text-align: center;
+
+    animation:
+        panelAppear .25s ease;
+}
+
+@keyframes panelAppear {
+    from {
+        opacity: 0;
+        transform: scale(.92) translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.game-ui-panel h2 {
+    margin-bottom: 8px;
+
+    font-size: 32px;
+    color: #eafaff;
+
+    text-shadow:
+        0 0 15px rgba(80,220,255,.7);
+}
+
+.game-ui-panel p {
+    margin-bottom: 24px;
+
+    color: #91a8ba;
+    font-size: 14px;
+}
+
+/* ===============================
+   BUTTONS
+================================ */
+
+.game-ui-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.game-ui-btn {
+    width: 100%;
+    padding: 14px 18px;
+
+    border: 1px solid rgba(100,200,255,.28);
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(38,94,140,.8),
+            rgba(24,46,76,.8)
+        );
+
+    color: white;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        transform .15s ease,
+        box-shadow .15s ease,
+        background .15s ease;
+}
+
+.game-ui-btn:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 25px rgba(0,180,255,.25);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(48,130,190,.9),
+            rgba(30,62,100,.9)
+        );
+}
+
+.game-ui-btn:active {
+    transform: scale(.97);
+}
+
+.game-ui-btn.danger {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(150,45,60,.9),
+            rgba(75,20,30,.9)
+        );
+}
+
+.game-ui-btn.danger:hover {
+    box-shadow:
+        0 8px 25px rgba(255,60,80,.25);
+}
+
+.game-ui-btn.secondary {
+    background:
+        rgba(255,255,255,.06);
+}
+
+/* ===============================
+   SETTINGS
+================================ */
+
+.setting-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 15px 0;
+
+    border-bottom:
+        1px solid rgba(255,255,255,.08);
+
+    color: #dceaf2;
+}
+
+.setting-row:last-child {
+    border-bottom: none;
+}
+
+.setting-row input[type="range"] {
+    width: 140px;
+}
+
+.setting-row input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+}
+
+/* ===============================
+   PAUSE BUTTON
+================================ */
+
+#pauseButton {
+    position: fixed;
+
+    top: 18px;
+    right: 18px;
+
+    z-index: 9000;
+
+    width: 48px;
+    height: 48px;
+
+    border-radius: 50%;
+    border: 1px solid rgba(120,220,255,.4);
+
+    background:
+        rgba(10,20,35,.85);
+
+    color: white;
+
+    font-size: 20px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 0 20px rgba(0,180,255,.18);
+
+    backdrop-filter: blur(8px);
+
+    transition: .2s;
+}
+
+#pauseButton:hover {
+    transform: scale(1.08);
+
+    box-shadow:
+        0 0 30px rgba(0,200,255,.35);
+}
+
+/* ===============================
+   MOBILE
+================================ */
+
+@media (max-width: 600px) {
+
+    .game-ui-panel {
+        padding: 24px;
+    }
+
+    .game-ui-panel h2 {
+        font-size: 26px;
+    }
+
+    .game-ui-btn {
+        padding: 16px;
+        font-size: 15px;
+    }
+}
+</style>
+
+
+<!-- ===============================
+     PAUSE BUTTON
+================================ -->
+
+<button id="pauseButton"
+        aria-label="Pause Game"
+        title="Pause">
+    ⏸
+</button>
+
+
+<!-- ===============================
+     PAUSE MENU
+================================ -->
+
+<div id="pauseOverlay">
+
+    <div class="game-ui-panel">
+
+        <h2>⏸ PAUSED</h2>
+
+        <p>
+            Permainan sedang dijeda.
+        </p>
+
+        <div class="game-ui-buttons">
+
+            <button
+                class="game-ui-btn"
+                id="resumeGameBtn">
+                ▶ Resume
+            </button>
+
+            <button
+                class="game-ui-btn"
+                id="restartGameBtn">
+                🔄 Restart
+            </button>
+
+            <button
+                class="game-ui-btn"
+                id="settingsGameBtn">
+                ⚙ Settings
+            </button>
+
+            <button
+                class="game-ui-btn danger"
+                id="exitGameBtn">
+                🚪 Exit
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ===============================
+     SETTINGS
+================================ -->
+
+<div id="settingsOverlay">
+
+    <div class="game-ui-panel">
+
+        <h2>⚙ SETTINGS</h2>
+
+        <p>
+            Atur pengalaman bermainmu.
+        </p>
+
+        <div class="setting-row">
+
+            <span>🔊 Sound</span>
+
+            <input
+                type="checkbox"
+                id="soundSetting"
+                checked>
+
+        </div>
+
+
+        <div class="setting-row">
+
+            <span>🎵 Music</span>
+
+            <input
+                type="checkbox"
+                id="musicSetting"
+                checked>
+
+        </div>
+
+
+        <div class="setting-row">
+
+            <span>✨ Effects</span>
+
+            <input
+                type="checkbox"
+                id="effectsSetting"
+                checked>
+
+        </div>
+
+
+        <div class="setting-row">
+
+            <span>☀ Brightness</span>
+
+            <input
+                type="range"
+                id="brightnessSetting"
+                min="70"
+                max="130"
+                value="100">
+
+        </div>
+
+
+        <div class="game-ui-buttons"
+             style="margin-top:22px;">
+
+            <button
+                class="game-ui-btn"
+                id="saveSettingsBtn">
+                ✓ Simpan
+            </button>
+
+            <button
+                class="game-ui-btn secondary"
+                id="closeSettingsBtn">
+                ← Kembali
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ===============================
+     EXIT CONFIRMATION
+================================ -->
+
+<div id="exitOverlay">
+
+    <div class="game-ui-panel">
+
+        <h2>🚪 EXIT GAME?</h2>
+
+        <p>
+            Yakin ingin keluar dari permainan?
+        </p>
+
+        <div class="game-ui-buttons">
+
+            <button
+                class="game-ui-btn danger"
+                id="confirmExitBtn">
+                Ya, Keluar
+            </button>
+
+            <button
+                class="game-ui-btn secondary"
+                id="cancelExitBtn">
+                Batal
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   STEP 2 MENU SYSTEM
+========================================================= */
+
+const pauseOverlay =
+    document.getElementById("pauseOverlay");
+
+const settingsOverlay =
+    document.getElementById("settingsOverlay");
+
+const exitOverlay =
+    document.getElementById("exitOverlay");
+
+const pauseButton =
+    document.getElementById("pauseButton");
+
+
+/* ===============================
+   PAUSE STATE
+================================ */
+
+let menuPaused = false;
+
+
+/* ===============================
+   PAUSE
+================================ */
+
+function pauseGame() {
+
+    menuPaused = true;
+
+    pauseOverlay.style.display =
+        "flex";
+
+}
+
+
+/* ===============================
+   RESUME
+================================ */
+
+function resumeGame() {
+
+    menuPaused = false;
+
+    pauseOverlay.style.display =
+        "none";
+
+    settingsOverlay.style.display =
+        "none";
+
+    exitOverlay.style.display =
+        "none";
+
+}
+
+
+/* ===============================
+   PAUSE BUTTON
+================================ */
+
+pauseButton.addEventListener(
+    "click",
+    pauseGame
+);
+
+
+/* ===============================
+   RESUME BUTTON
+================================ */
+
+document
+    .getElementById("resumeGameBtn")
+    .addEventListener(
+        "click",
+        resumeGame
+    );
+
+
+/* ===============================
+   RESTART
+================================ */
+
+document
+    .getElementById("restartGameBtn")
+    .addEventListener(
+        "click",
+        () => {
+
+            if (
+                typeof restartGame ===
+                "function"
+            ) {
+
+                restartGame();
+
+            }
+
+            resumeGame();
+
+        }
+    );
+
+
+/* ===============================
+   SETTINGS
+================================ */
+
+document
+    .getElementById("settingsGameBtn")
+    .addEventListener(
+        "click",
+        () => {
+
+            pauseOverlay.style.display =
+                "none";
+
+            settingsOverlay.style.display =
+                "flex";
+
+        }
+    );
+
+
+/* ===============================
+   CLOSE SETTINGS
+================================ */
+
+document
+    .getElementById("closeSettingsBtn")
+    .addEventListener(
+        "click",
+        () => {
+
+            settingsOverlay.style.display =
+                "none";
+
+            pauseOverlay.style.display =
+                "flex";
+
+        }
+    );
+
+
+/* ===============================
+   SAVE SETTINGS
+================================ */
+
+document
+    .getElementById("saveSettingsBtn")
+    .addEventListener(
+        "click",
+        () => {
+
+            const sound =
+                document.getElementById(
+                    "soundSetting"
+                ).checked;
+
+            const music =
+                document.getElementById(
+                    "musicSetting"
+                ).checked;
+
+            const effects =
+                document.getElementById(
+                    "effectsSetting"
+                ).checked;
+
+            const brightness =
+                document.getElementById(
+                    "brightnessSetting"
+                ).value;
+
+
+            localStorage.setItem(
+                "cubes_sound",
+                sound
+            );
+
+            localStorage.setItem(
+                "cubes_music",
+                music
+            );
+
+            localStorage.setItem(
+                "cubes_effects",
+                effects
+            );
+
+            localStorage.setItem(
+                "cubes_brightness",
+                brightness
+            );
+
+
+            settingsOverlay.style.display =
+                "none";
+
+            pauseOverlay.style.display =
+                "flex";
+
+
+            alert(
+                "Settings berhasil disimpan!"
+            );
+
+        }
+    );
+
+
+/* ===============================
+   EXIT
+================================ */
+
+document
+    .getElementById("exitGameBtn")
+    .addEventListener(
+        "click",
+        () => {
+
+            pauseOverlay.style.display =
+                "none";
+
+            exitOverlay.style.display =
+                "flex";
+
+        }
+    );
+
+
+/* ===============================
+   CANCEL EXIT
+================================ */
+
+document
+    .getElementById("cancelExitBtn")
+    .addEventListener(
+        "click",
+        () => {
+
+            exitOverlay.style.display =
+                "none";
+
+            pauseOverlay.style.display =
+                "flex";
+
+        }
+    );
+
+
+/* ===============================
+   CONFIRM EXIT
+================================ */
+
+document
+    .getElementById("confirmExitBtn")
+    .addEventListener(
+        "click",
+        () => {
+
+            /*
+             * Browser biasanya tidak mengizinkan
+             * JavaScript menutup tab yang dibuka
+             * oleh pengguna.
+             *
+             * Jadi kita arahkan kembali ke halaman
+             * utama GitHub Pages.
+             */
+
+            window.location.href = "./";
+
+        }
+    );
+
+
+/* ===============================
+   KEYBOARD PAUSE
+   ESC = PAUSE / RESUME
+================================ */
+
+window.addEventListener(
+    "keydown",
+    (e) => {
+
+        if (
+            e.key === "Escape"
+        ) {
+
+            if (menuPaused) {
+
+                resumeGame();
+
+            } else {
+
+                pauseGame();
+
+            }
+
+        }
+
+    }
+);
+
+
+/* ===============================
+   LOAD SETTINGS
+================================ */
+
+function loadGameSettings() {
+
+    const sound =
+        localStorage.getItem(
+            "cubes_sound"
+        );
+
+    const music =
+        localStorage.getItem(
+            "cubes_music"
+        );
+
+    const effects =
+        localStorage.getItem(
+            "cubes_effects"
+        );
+
+    const brightness =
+        localStorage.getItem(
+            "cubes_brightness"
+        );
+
+
+    if (sound !== null) {
+
+        document.getElementById(
+            "soundSetting"
+        ).checked =
+            sound === "true";
+
+    }
+
+
+    if (music !== null) {
+
+        document.getElementById(
+            "musicSetting"
+        ).checked =
+            music === "true";
+
+    }
+
+
+    if (effects !== null) {
+
+        document.getElementById(
+            "effectsSetting"
+        ).checked =
+            effects === "true";
+
+    }
+
+
+    if (brightness !== null) {
+
+        document.getElementById(
+            "brightnessSetting"
+        ).value =
+            brightness;
+
+    }
+
+}
+
+
+/* ===============================
+   INIT
+================================ */
+
+loadGameSettings();
+
+
+/* ===============================
+   BRIGHTNESS
+================================ */
+
+document
+    .getElementById(
+        "brightnessSetting"
+    )
+    .addEventListener(
+        "input",
+        function () {
+
+            const value =
+                this.value;
+
+            document.body.style.filter =
+                `brightness(${value}%)`;
+
+        }
+    );
+
+</script>
 </body>
 </html>
