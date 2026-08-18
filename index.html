@@ -5447,5 +5447,1185 @@ document
     );
 
 </script>
+    <!-- =========================================================
+     CUBESADV_KNIGHT
+     STEP 3 - TOUCH & MOBILE CONTROL
+========================================================= -->
+
+<style>
+
+/* =========================================================
+   MOBILE CONTROL CONTAINER
+========================================================= */
+
+#mobileControls {
+
+    position: fixed;
+
+    left: 0;
+    right: 0;
+    bottom: 22px;
+
+    z-index: 9500;
+
+    display: none;
+
+    justify-content: space-between;
+
+    align-items: flex-end;
+
+    padding:
+        0
+        25px;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   D-PAD
+========================================================= */
+
+.touch-dpad {
+
+    position: relative;
+
+    width: 170px;
+    height: 170px;
+
+    pointer-events: auto;
+
+    user-select: none;
+
+    touch-action: none;
+}
+
+
+.touch-btn {
+
+    position: absolute;
+
+    width: 58px;
+    height: 58px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 16px;
+
+    border:
+        1px solid
+        rgba(110,220,255,.4);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(26,80,125,.92),
+            rgba(16,28,55,.92)
+        );
+
+    color: #e8faff;
+
+    font-size: 25px;
+
+    font-weight: bold;
+
+    box-shadow:
+        0 8px 20px
+        rgba(0,0,0,.35),
+
+        inset 0 0 15px
+        rgba(100,220,255,.05);
+
+    backdrop-filter:
+        blur(8px);
+
+    -webkit-backdrop-filter:
+        blur(8px);
+
+    cursor: pointer;
+
+    transition:
+        transform .08s,
+        background .08s,
+        box-shadow .08s;
+
+    -webkit-tap-highlight-color:
+        transparent;
+}
+
+
+.touch-btn:active,
+.touch-btn.active {
+
+    transform:
+        scale(.88);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(40,145,210,.95),
+            rgba(50,60,140,.95)
+        );
+
+    box-shadow:
+        0 0 25px
+        rgba(50,200,255,.45),
+
+        inset 0 0 20px
+        rgba(255,255,255,.1);
+}
+
+
+/* UP */
+
+#touchUp {
+
+    top: 0;
+    left: 56px;
+
+}
+
+
+/* LEFT */
+
+#touchLeft {
+
+    top: 56px;
+    left: 0;
+
+}
+
+
+/* RIGHT */
+
+#touchRight {
+
+    top: 56px;
+    right: 0;
+
+}
+
+
+/* DOWN */
+
+#touchDown {
+
+    bottom: 0;
+    left: 56px;
+
+}
+
+
+/* =========================================================
+   ACTION BUTTONS
+========================================================= */
+
+.touch-actions {
+
+    display: flex;
+
+    align-items: flex-end;
+
+    gap: 16px;
+
+    pointer-events: auto;
+
+    user-select: none;
+
+    touch-action: none;
+}
+
+
+.action-btn {
+
+    width: 70px;
+    height: 70px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border:
+        1px solid
+        rgba(255,255,255,.25);
+
+    color: white;
+
+    font-size: 26px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    -webkit-tap-highlight-color:
+        transparent;
+
+    box-shadow:
+        0 8px 25px
+        rgba(0,0,0,.4);
+}
+
+
+#touchAttack {
+
+    background:
+        radial-gradient(
+            circle,
+            #ff6172,
+            #8e2638
+        );
+
+    box-shadow:
+        0 0 25px
+        rgba(255,70,90,.3);
+
+}
+
+
+#touchDash {
+
+    width: 58px;
+    height: 58px;
+
+    background:
+        radial-gradient(
+            circle,
+            #57e9ff,
+            #2160a0
+        );
+
+    box-shadow:
+        0 0 25px
+        rgba(50,210,255,.3);
+
+}
+
+
+/* =========================================================
+   TOUCH BUTTON PRESS EFFECT
+========================================================= */
+
+.action-btn.active {
+
+    transform:
+        scale(.88);
+
+    filter:
+        brightness(1.3);
+
+}
+
+
+/* =========================================================
+   MOBILE GAME NOTICE
+========================================================= */
+
+#touchHint {
+
+    position: fixed;
+
+    left: 50%;
+
+    bottom: 205px;
+
+    transform:
+        translateX(-50%);
+
+    z-index: 9400;
+
+    padding:
+        8px
+        14px;
+
+    border-radius: 20px;
+
+    background:
+        rgba(5,15,30,.7);
+
+    border:
+        1px solid
+        rgba(100,220,255,.2);
+
+    color:
+        rgba(220,245,255,.75);
+
+    font-size: 12px;
+
+    pointer-events: none;
+
+    opacity: 0;
+
+    transition:
+        opacity .5s;
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+/* Tablet / HP */
+
+@media (max-width: 900px) {
+
+    #mobileControls {
+
+        display: flex;
+
+    }
+
+}
+
+
+/* HP kecil */
+
+@media (max-width: 600px) {
+
+    #mobileControls {
+
+        bottom: 14px;
+
+        padding:
+            0
+            14px;
+
+    }
+
+
+    .touch-dpad {
+
+        width: 145px;
+        height: 145px;
+
+    }
+
+
+    .touch-btn {
+
+        width: 50px;
+        height: 50px;
+
+        border-radius: 14px;
+
+        font-size: 21px;
+
+    }
+
+
+    #touchUp {
+
+        left: 48px;
+
+    }
+
+
+    #touchLeft {
+
+        top: 48px;
+
+    }
+
+
+    #touchRight {
+
+        top: 48px;
+
+    }
+
+
+    #touchDown {
+
+        left: 48px;
+
+    }
+
+
+    .action-btn {
+
+        width: 62px;
+        height: 62px;
+
+        font-size: 23px;
+
+    }
+
+
+    #touchDash {
+
+        width: 52px;
+        height: 52px;
+
+    }
+
+
+    .touch-actions {
+
+        gap: 10px;
+
+    }
+
+
+    #touchHint {
+
+        bottom: 175px;
+
+    }
+
+}
+
+
+/* HP sangat kecil */
+
+@media (max-width: 420px) {
+
+    #mobileControls {
+
+        padding:
+            0
+            8px;
+
+    }
+
+
+    .touch-dpad {
+
+        transform:
+            scale(.88);
+
+        transform-origin:
+            bottom left;
+
+    }
+
+
+    .touch-actions {
+
+        transform:
+            scale(.88);
+
+        transform-origin:
+            bottom right;
+
+    }
+
+}
+
+</style>
+
+
+<!-- =========================================================
+     MOBILE CONTROL UI
+========================================================= -->
+
+<div id="mobileControls">
+
+
+    <!-- =========================
+         D-PAD
+    ========================== -->
+
+    <div class="touch-dpad">
+
+
+        <button
+            id="touchUp"
+            class="touch-btn"
+            aria-label="Move Up">
+
+            ▲
+
+        </button>
+
+
+        <button
+            id="touchLeft"
+            class="touch-btn"
+            aria-label="Move Left">
+
+            ◀
+
+        </button>
+
+
+        <button
+            id="touchRight"
+            class="touch-btn"
+            aria-label="Move Right">
+
+            ▶
+
+        </button>
+
+
+        <button
+            id="touchDown"
+            class="touch-btn"
+            aria-label="Move Down">
+
+            ▼
+
+        </button>
+
+
+    </div>
+
+
+    <!-- =========================
+         ACTION BUTTONS
+    ========================== -->
+
+    <div class="touch-actions">
+
+
+        <button
+            id="touchDash"
+            class="action-btn"
+            aria-label="Dash">
+
+            ⚡
+
+        </button>
+
+
+        <button
+            id="touchAttack"
+            class="action-btn"
+            aria-label="Attack">
+
+            ⚔
+
+        </button>
+
+
+    </div>
+
+
+</div>
+
+
+<div id="touchHint">
+
+    👆 Gunakan tombol untuk bergerak
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   STEP 3
+   TOUCH CONTROL SYSTEM
+========================================================= */
+
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const mobileControls =
+    document.getElementById(
+        "mobileControls"
+    );
+
+
+const touchHint =
+    document.getElementById(
+        "touchHint"
+    );
+
+
+/* =========================================================
+   MOVEMENT BUTTONS
+========================================================= */
+
+const movementButtons = {
+
+    touchUp: "ArrowUp",
+
+    touchDown: "ArrowDown",
+
+    touchLeft: "ArrowLeft",
+
+    touchRight: "ArrowRight"
+
+};
+
+
+/* =========================================================
+   START TOUCH MOVEMENT
+========================================================= */
+
+function startTouchMovement(
+    button,
+    key
+) {
+
+    button.classList.add(
+        "active"
+    );
+
+
+    /*
+     * Kita memasukkan key ke object
+     * keys yang sudah dipakai game kamu.
+     *
+     * Jadi sistem movement lama
+     * tetap digunakan.
+     */
+
+    keys[key] = true;
+
+}
+
+
+/* =========================================================
+   STOP TOUCH MOVEMENT
+========================================================= */
+
+function stopTouchMovement(
+    button,
+    key
+) {
+
+    button.classList.remove(
+        "active"
+    );
+
+
+    keys[key] = false;
+
+}
+
+
+/* =========================================================
+   INSTALL TOUCH BUTTON
+========================================================= */
+
+function setupTouchButton(
+    id,
+    key
+) {
+
+    const button =
+        document.getElementById(
+            id
+        );
+
+
+    if (!button) return;
+
+
+    /* TOUCH START */
+
+    button.addEventListener(
+        "pointerdown",
+        function(e) {
+
+            e.preventDefault();
+
+            startTouchMovement(
+                button,
+                key
+            );
+
+
+            /*
+             * Supaya jari tetap dianggap
+             * sebagai kontrol walaupun
+             * sedikit bergeser.
+             */
+
+            if (
+                button.setPointerCapture
+            ) {
+
+                button.setPointerCapture(
+                    e.pointerId
+                );
+
+            }
+
+        }
+    );
+
+
+    /* TOUCH END */
+
+    button.addEventListener(
+        "pointerup",
+        function(e) {
+
+            e.preventDefault();
+
+            stopTouchMovement(
+                button,
+                key
+            );
+
+        }
+    );
+
+
+    /* TOUCH CANCEL */
+
+    button.addEventListener(
+        "pointercancel",
+        function(e) {
+
+            e.preventDefault();
+
+            stopTouchMovement(
+                button,
+                key
+            );
+
+        }
+    );
+
+
+    /* TOUCH LEAVE */
+
+    button.addEventListener(
+        "pointerleave",
+        function(e) {
+
+            if (
+                e.buttons === 0
+            ) {
+
+                stopTouchMovement(
+                    button,
+                    key
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   ACTIVATE D-PAD
+========================================================= */
+
+setupTouchButton(
+    "touchUp",
+    "ArrowUp"
+);
+
+
+setupTouchButton(
+    "touchDown",
+    "ArrowDown"
+);
+
+
+setupTouchButton(
+    "touchLeft",
+    "ArrowLeft"
+);
+
+
+setupTouchButton(
+    "touchRight",
+    "ArrowRight"
+);
+
+
+/* =========================================================
+   ATTACK BUTTON
+========================================================= */
+
+const attackButton =
+    document.getElementById(
+        "touchAttack"
+    );
+
+
+attackButton.addEventListener(
+    "pointerdown",
+    function(e) {
+
+        e.preventDefault();
+
+        attackButton.classList.add(
+            "active"
+        );
+
+
+        /*
+         * Untuk sekarang kita kirim
+         * tombol SPACE ke sistem game.
+         *
+         * Nanti Step senjata akan
+         * memakai ini untuk serangan.
+         */
+
+        keys[" "] = true;
+
+
+        /*
+         * Efek visual sederhana.
+         */
+
+        if (
+            typeof screenShake !==
+            "undefined"
+        ) {
+
+            screenShake = 4;
+
+        }
+
+    }
+);
+
+
+attackButton.addEventListener(
+    "pointerup",
+    function(e) {
+
+        e.preventDefault();
+
+        attackButton.classList.remove(
+            "active"
+        );
+
+        keys[" "] = false;
+
+    }
+);
+
+
+attackButton.addEventListener(
+    "pointercancel",
+    function() {
+
+        attackButton.classList.remove(
+            "active"
+        );
+
+        keys[" "] = false;
+
+    }
+);
+
+
+/* =========================================================
+   DASH BUTTON
+========================================================= */
+
+const dashButton =
+    document.getElementById(
+        "touchDash"
+    );
+
+
+dashButton.addEventListener(
+    "pointerdown",
+    function(e) {
+
+        e.preventDefault();
+
+        dashButton.classList.add(
+            "active"
+        );
+
+
+        /*
+         * Dash memakai arah terakhir.
+         */
+
+        const dashPower = 18;
+
+
+        if (
+            keys["ArrowUp"]
+        ) {
+
+            player.y -= dashPower;
+
+        }
+
+
+        if (
+            keys["ArrowDown"]
+        ) {
+
+            player.y += dashPower;
+
+        }
+
+
+        if (
+            keys["ArrowLeft"]
+        ) {
+
+            player.x -= dashPower;
+
+        }
+
+
+        if (
+            keys["ArrowRight"]
+        ) {
+
+            player.x += dashPower;
+
+        }
+
+
+        /*
+         * Batasi player supaya
+         * tidak keluar canvas.
+         */
+
+        if (
+            player.x < 0
+        ) {
+
+            player.x = 0;
+
+        }
+
+
+        if (
+            player.y < 0
+        ) {
+
+            player.y = 0;
+
+        }
+
+
+        if (
+            player.x >
+            canvas.width -
+            player.size
+        ) {
+
+            player.x =
+                canvas.width -
+                player.size;
+
+        }
+
+
+        if (
+            player.y >
+            canvas.height -
+            player.size
+        ) {
+
+            player.y =
+                canvas.height -
+                player.size;
+
+        }
+
+
+        /*
+         * Screen shake jika tersedia.
+         */
+
+        if (
+            typeof screenShake !==
+            "undefined"
+        ) {
+
+            screenShake = 7;
+
+        }
+
+    }
+);
+
+
+dashButton.addEventListener(
+    "pointerup",
+    function() {
+
+        dashButton.classList.remove(
+            "active"
+        );
+
+    }
+);
+
+
+dashButton.addEventListener(
+    "pointercancel",
+    function() {
+
+        dashButton.classList.remove(
+            "active"
+        );
+
+    }
+);
+
+
+/* =========================================================
+   PREVENT MOBILE SCROLL
+========================================================= */
+
+document.addEventListener(
+    "touchmove",
+    function(e) {
+
+        if (
+            e.target.closest(
+                "#mobileControls"
+            )
+        ) {
+
+            e.preventDefault();
+
+        }
+
+    },
+    {
+        passive: false
+    }
+);
+
+
+/* =========================================================
+   SHOW TOUCH HINT
+========================================================= */
+
+function showTouchHint() {
+
+    if (
+        window.innerWidth <= 900
+    ) {
+
+        touchHint.style.opacity =
+            "1";
+
+
+        setTimeout(
+            function() {
+
+                touchHint.style.opacity =
+                    "0";
+
+            },
+            3500
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   DETECT TOUCH DEVICE
+========================================================= */
+
+function detectTouchDevice() {
+
+    const hasTouch =
+        "ontouchstart" in window ||
+        navigator.maxTouchPoints > 0;
+
+
+    if (
+        hasTouch ||
+        window.innerWidth <= 900
+    ) {
+
+        mobileControls.style.display =
+            "flex";
+
+        showTouchHint();
+
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE CHECK
+========================================================= */
+
+window.addEventListener(
+    "resize",
+    function() {
+
+        if (
+            window.innerWidth <= 900
+        ) {
+
+            mobileControls.style.display =
+                "flex";
+
+        } else {
+
+            mobileControls.style.display =
+                "none";
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+detectTouchDevice();
+
+
+/* =========================================================
+   KEYBOARD SHORTCUT
+========================================================= */
+
+/*
+   Space = Attack
+*/
+
+window.addEventListener(
+    "keydown",
+    function(e) {
+
+        if (
+            e.code === "Space"
+        ) {
+
+            keys[" "] = true;
+
+        }
+
+    }
+);
+
+
+window.addEventListener(
+    "keyup",
+    function(e) {
+
+        if (
+            e.code === "Space"
+        ) {
+
+            keys[" "] = false;
+
+        }
+
+    }
+);
+
+</script>
 </body>
 </html>
