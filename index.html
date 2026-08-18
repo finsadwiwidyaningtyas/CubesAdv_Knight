@@ -391,6 +391,71 @@ body {
         transform-origin: top right;
     }
 }
+    /* ===== AESTHETIC UPGRADE - STEP 1A ===== */
+
+body {
+    background:
+        radial-gradient(circle at 50% 20%, rgba(40, 130, 220, 0.18), transparent 35%),
+        radial-gradient(circle at 20% 80%, rgba(120, 50, 255, 0.12), transparent 30%),
+        #080b18 !important;
+    overflow-x: hidden;
+}
+
+/* Cahaya lembut di belakang game */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background:
+        radial-gradient(circle at 30% 30%, rgba(0, 200, 255, 0.08), transparent 25%),
+        radial-gradient(circle at 75% 65%, rgba(150, 70, 255, 0.08), transparent 25%);
+    animation: ambientGlow 6s ease-in-out infinite alternate;
+    z-index: -1;
+}
+
+@keyframes ambientGlow {
+    from {
+        opacity: 0.55;
+        transform: scale(1);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1.08);
+    }
+}
+
+/* Judul game */
+.game-title {
+    text-shadow:
+        0 0 8px rgba(80, 210, 255, 0.8),
+        0 0 25px rgba(40, 140, 255, 0.45);
+    letter-spacing: 2px;
+}
+
+/* Arena game */
+.game-wrapper {
+    position: relative;
+    filter: drop-shadow(0 0 25px rgba(0, 180, 255, 0.12));
+}
+
+/* Canvas lebih seperti arena game */
+#gameCanvas {
+    border-color: #27627f !important;
+    box-shadow:
+        0 0 12px rgba(0, 190, 255, 0.18),
+        0 0 40px rgba(20, 100, 180, 0.15),
+        inset 0 0 30px rgba(0, 0, 0, 0.6) !important;
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+/* Efek saat mouse diarahkan ke arena */
+#gameCanvas:hover {
+    box-shadow:
+        0 0 18px rgba(0, 210, 255, 0.28),
+        0 0 55px rgba(20, 120, 220, 0.22),
+        inset 0 0 30px rgba(0, 0, 0, 0.6) !important;
+}
 </style>
 </head>
 
