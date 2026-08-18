@@ -15,8 +15,9 @@
 }
 
 :root{
-    --bg:#020814;
-    --panel:rgba(4,18,38,.88);
+    --bg:#020b19;
+    --panel:rgba(3,18,39,.82);
+    --line:#1684a8;
     --cyan:#54e7ff;
     --blue:#249cff;
     --purple:#9a62ff;
@@ -27,24 +28,33 @@
     --white:#effcff;
 }
 
-html,body{
+html,
+body{
     width:100%;
     height:100%;
     overflow:hidden;
-    background:#020814;
+    background:#020b19;
     color:white;
-    font-family:Inter,Segoe UI,Arial,sans-serif;
+    font-family:
+        Inter,
+        Segoe UI,
+        Arial,
+        sans-serif;
 }
 
 body{
     position:relative;
 }
 
+/* =========================================================
+   GAME SCREEN
+========================================================= */
+
 #gameScreen{
     position:fixed;
     inset:0;
     overflow:hidden;
-    background:#020814;
+    background:#020b19;
 }
 
 #gameCanvas{
@@ -53,7 +63,7 @@ body{
     width:100%;
     height:100%;
     display:block;
-    background:#020d1d;
+    background:#031326;
     touch-action:none;
 }
 
@@ -63,15 +73,13 @@ body{
 
 #hud{
     position:absolute;
-    top:20px;
-    left:20px;
-    right:20px;
+    top:24px;
+    left:24px;
+    right:24px;
     z-index:20;
-
     display:flex;
     justify-content:space-between;
     align-items:flex-start;
-
     pointer-events:none;
 }
 
@@ -83,78 +91,68 @@ body{
 
 .hudBox{
     min-width:285px;
-    padding:13px 17px;
-
+    padding:14px 18px;
     border:1px solid rgba(84,231,255,.42);
     border-radius:16px;
-
     background:
         linear-gradient(
             135deg,
-            rgba(5,30,58,.94),
-            rgba(2,13,30,.82)
+            rgba(3,21,43,.9),
+            rgba(3,12,28,.78)
         );
-
     box-shadow:
-        0 0 28px rgba(0,190,255,.10),
-        inset 0 0 25px rgba(50,180,255,.04);
-
-    backdrop-filter:blur(12px);
+        0 0 25px rgba(0,180,255,.09),
+        inset 0 0 20px rgba(30,150,255,.04);
+    backdrop-filter:blur(10px);
 }
 
 .hpHeader{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    margin-bottom:9px;
+    margin-bottom:10px;
 }
 
 .hpTitle{
-    font-size:17px;
+    font-size:18px;
     font-weight:900;
 }
 
 .hpNumber{
-    font-size:17px;
+    font-size:18px;
     font-weight:900;
 }
 
 .hpBar{
     width:100%;
-    height:13px;
-
-    background:#14243a;
+    height:14px;
+    background:#15263e;
     border:1px solid #294560;
     border-radius:30px;
     overflow:hidden;
-
-    box-shadow:
-        inset 0 2px 8px rgba(0,0,0,.55);
+    box-shadow:inset 0 2px 8px rgba(0,0,0,.5);
 }
 
 #hpFill{
     height:100%;
     width:100%;
     border-radius:30px;
-
     background:
         linear-gradient(
             90deg,
-            #20f5bd,
-            #43dff5
+            #22f5c2,
+            #35dff4
         );
-
     box-shadow:
-        0 0 18px #35dff4;
-
+        0 0 15px #35dff4;
     transition:width .15s ease;
 }
 
 .scoreBox{
-    min-width:auto;
-    padding:10px 16px;
-    font-size:16px;
     font-weight:900;
+    font-size:17px;
+    min-width:auto;
+    padding:11px 17px;
 }
 
 /* =========================================================
@@ -165,133 +163,101 @@ body{
     display:flex;
     flex-direction:column;
     align-items:flex-end;
-    gap:9px;
+    gap:10px;
 }
 
 .onlineBox{
-    padding:9px 14px;
-
-    border:1px solid rgba(84,231,255,.38);
+    padding:10px 15px;
+    border:1px solid rgba(84,231,255,.35);
     border-radius:12px;
-
-    background:rgba(2,15,32,.84);
-
-    font-weight:900;
-
-    backdrop-filter:blur(9px);
-
-    box-shadow:
-        0 0 18px rgba(0,180,255,.08);
+    background:rgba(2,15,32,.82);
+    font-weight:800;
+    backdrop-filter:blur(8px);
 }
 
 .onlineDot{
     display:inline-block;
-
     width:8px;
     height:8px;
-
     margin-right:6px;
-
     border-radius:50%;
-
     background:#42ffae;
-
-    box-shadow:
-        0 0 12px #42ffae;
+    box-shadow:0 0 10px #42ffae;
 }
-
-/* =========================================================
-   MINI MAP
-========================================================= */
 
 #miniMap{
     width:220px;
     height:158px;
-
     border-radius:17px;
-
     border:1px solid rgba(84,231,255,.55);
-
     background:#03152b;
-
     box-shadow:
-        0 0 30px rgba(0,190,255,.14),
-        inset 0 0 25px rgba(0,0,0,.45);
+        0 0 25px rgba(0,190,255,.12),
+        inset 0 0 20px rgba(0,0,0,.4);
 }
 
 /* =========================================================
-   TITLE
+   TOP CENTER
 ========================================================= */
 
 #gameTitle{
     position:absolute;
-
-    top:20px;
+    top:22px;
     left:50%;
-
     transform:translateX(-50%);
-
     z-index:20;
-
     font-size:18px;
     font-weight:1000;
-
     letter-spacing:2px;
-
-    color:#e4fcff;
-
+    color:#dffbff;
     text-shadow:
         0 0 10px #54e7ff,
-        0 0 28px rgba(84,231,255,.55);
-
+        0 0 25px rgba(84,231,255,.5);
     pointer-events:none;
 }
 
 /* =========================================================
-   D-PAD
+   TOUCH D-PAD
 ========================================================= */
 
 #dpad{
     position:absolute;
-
-    left:22px;
-    bottom:23px;
-
+    left:24px;
+    bottom:26px;
     z-index:30;
-
     width:245px;
     height:170px;
 }
 
 .moveBtn{
     position:absolute;
-
     width:75px;
     height:75px;
 
     border-radius:20px;
 
-    border:1px solid rgba(84,231,255,.58);
+    border:1px solid rgba(84,231,255,.55);
 
     background:
         linear-gradient(
             145deg,
-            rgba(11,50,80,.94),
-            rgba(3,22,44,.94)
+            rgba(10,44,72,.9),
+            rgba(4,23,46,.92)
         );
 
     color:white;
 
-    font-size:29px;
-    font-weight:1000;
+    font-size:30px;
+    font-weight:900;
 
     box-shadow:
-        0 0 20px rgba(0,190,255,.10),
-        inset 0 0 18px rgba(50,180,255,.06);
+        0 0 18px rgba(0,190,255,.08),
+        inset 0 0 18px rgba(50,180,255,.04);
 
-    backdrop-filter:blur(8px);
+    backdrop-filter:blur(7px);
 
     cursor:pointer;
+
     user-select:none;
     touch-action:none;
 
@@ -301,14 +267,8 @@ body{
 }
 
 .moveBtn:active{
-    transform:scale(.91);
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(28,105,142,.98),
-            rgba(7,42,70,.98)
-        );
+    transform:scale(.92);
+    background:rgba(23,91,126,.95);
 }
 
 #up{
@@ -332,28 +292,26 @@ body{
 }
 
 /* =========================================================
-   ATTACK
+   ATTACK BUTTON
 ========================================================= */
 
 #attackButton{
     position:absolute;
-
-    right:36px;
-    bottom:25px;
-
+    right:42px;
+    bottom:28px;
     z-index:30;
 
-    min-width:285px;
+    min-width:290px;
     min-height:76px;
 
     border:none;
-    border-radius:24px;
+    border-radius:25px;
 
     background:
         linear-gradient(
             135deg,
-            #ef367b,
-            #a72bc8
+            #e62f73,
+            #a52ac7
         );
 
     color:white;
@@ -366,8 +324,8 @@ body{
     cursor:pointer;
 
     box-shadow:
-        0 0 35px rgba(255,43,139,.38),
-        inset 0 0 20px rgba(255,255,255,.13);
+        0 0 30px rgba(255,43,139,.4),
+        inset 0 0 18px rgba(255,255,255,.12);
 
     transition:
         transform .1s,
@@ -377,7 +335,7 @@ body{
 }
 
 #attackButton:hover{
-    filter:brightness(1.14);
+    filter:brightness(1.15);
     transform:translateY(-2px);
 }
 
@@ -388,44 +346,35 @@ body{
 .attackCooldown{
     display:block;
     margin-top:4px;
-
     font-size:11px;
-    opacity:.72;
+    opacity:.7;
 }
 
 /* =========================================================
-   CROSSHAIR
+   CENTER CROSSHAIR
 ========================================================= */
 
 #crosshair{
     position:absolute;
-
     left:50%;
     top:50%;
-
     width:28px;
     height:28px;
-
     transform:translate(-50%,-50%);
-
     pointer-events:none;
-
     opacity:.16;
 }
 
 #crosshair::before,
 #crosshair::after{
     content:"";
-
     position:absolute;
-
     background:#54e7ff;
 }
 
 #crosshair::before{
     width:28px;
     height:1px;
-
     left:0;
     top:13px;
 }
@@ -433,38 +382,33 @@ body{
 #crosshair::after{
     width:1px;
     height:28px;
-
     left:13px;
     top:0;
 }
 
 /* =========================================================
-   PAUSE
+   PAUSE BUTTON
 ========================================================= */
 
 #pauseButton{
     position:absolute;
-
-    top:200px;
-    right:20px;
-
+    top:210px;
+    right:24px;
     z-index:30;
 
-    border:1px solid rgba(84,231,255,.42);
-
-    background:rgba(3,20,40,.84);
+    border:1px solid rgba(84,231,255,.4);
+    background:rgba(3,20,40,.8);
 
     color:white;
 
     border-radius:12px;
-
-    padding:9px 13px;
+    padding:10px 14px;
 
     font-weight:900;
 
     cursor:pointer;
 
-    backdrop-filter:blur(8px);
+    backdrop-filter:blur(7px);
 }
 
 /* =========================================================
@@ -473,10 +417,8 @@ body{
 
 #toast{
     position:absolute;
-
     left:50%;
-    bottom:125px;
-
+    bottom:130px;
     transform:translate(-50%,30px);
 
     z-index:100;
@@ -487,12 +429,12 @@ body{
 
     border:1px solid #54e7ff;
 
-    background:rgba(3,20,40,.96);
+    background:rgba(3,20,40,.95);
 
     box-shadow:
-        0 0 28px rgba(84,231,255,.28);
+        0 0 25px rgba(84,231,255,.25);
 
-    font-weight:900;
+    font-weight:800;
 
     opacity:0;
 
@@ -507,7 +449,7 @@ body{
 }
 
 /* =========================================================
-   OVERLAY
+   MODAL
 ========================================================= */
 
 .overlay{
@@ -523,9 +465,10 @@ body{
 
     padding:20px;
 
-    background:rgba(0,4,14,.72);
+    background:
+        rgba(0,4,14,.72);
 
-    backdrop-filter:blur(11px);
+    backdrop-filter:blur(10px);
 }
 
 .overlay.show{
@@ -542,7 +485,7 @@ body{
 
     border-radius:25px;
 
-    border:1px solid rgba(84,231,255,.52);
+    border:1px solid rgba(84,231,255,.5);
 
     background:
         linear-gradient(
@@ -552,7 +495,7 @@ body{
         );
 
     box-shadow:
-        0 0 65px rgba(30,160,255,.22);
+        0 0 60px rgba(30,160,255,.2);
 }
 
 .modal h2{
@@ -563,23 +506,19 @@ body{
     color:white;
 
     text-shadow:
-        0 0 16px rgba(84,231,255,.52);
+        0 0 16px rgba(84,231,255,.5);
 }
 
 .modal p{
     color:#b8cedc;
-
     line-height:1.65;
-
     margin-bottom:15px;
 }
 
 .modalButtons{
     display:flex;
     flex-direction:column;
-
     gap:10px;
-
     margin-top:20px;
 }
 
@@ -626,9 +565,7 @@ body{
 .playerList{
     display:flex;
     flex-direction:column;
-
     gap:9px;
-
     margin:15px 0;
 }
 
@@ -658,6 +595,54 @@ body{
 }
 
 /* =========================================================
+   CHAT
+========================================================= */
+
+.chatBox{
+    height:240px;
+    overflow:auto;
+
+    padding:12px;
+
+    border-radius:13px;
+
+    border:1px solid rgba(84,231,255,.15);
+
+    background:rgba(0,0,0,.25);
+}
+
+.chatMessage{
+    margin:8px 0;
+    color:#c7dae5;
+}
+
+.chatMessage b{
+    color:#54e7ff;
+}
+
+.chatInput{
+    display:flex;
+    gap:8px;
+    margin-top:10px;
+}
+
+.chatInput input{
+    flex:1;
+
+    padding:12px;
+
+    border-radius:10px;
+
+    border:1px solid #28516c;
+
+    outline:none;
+
+    background:#061426;
+
+    color:white;
+}
+
+/* =========================================================
    LEADERBOARD
 ========================================================= */
 
@@ -666,7 +651,8 @@ table{
     border-collapse:collapse;
 }
 
-th,td{
+th,
+td{
     padding:11px;
     text-align:left;
 
@@ -685,14 +671,14 @@ th{
 @media(max-width:700px){
 
     #hud{
-        top:10px;
-        left:10px;
-        right:10px;
+        top:12px;
+        left:12px;
+        right:12px;
     }
 
     .hudBox{
         min-width:190px;
-        padding:9px 11px;
+        padding:10px 12px;
     }
 
     .hpTitle,
@@ -719,30 +705,24 @@ th{
     }
 
     #dpad{
-        left:12px;
-        bottom:12px;
-
+        left:15px;
+        bottom:15px;
         transform:scale(.78);
-
         transform-origin:bottom left;
     }
 
     #attackButton{
-        right:12px;
-        bottom:14px;
-
+        right:15px;
+        bottom:18px;
         min-width:170px;
         min-height:62px;
-
         border-radius:20px;
-
         font-size:15px;
     }
 
     #pauseButton{
-        top:135px;
-        right:10px;
-
+        top:145px;
+        right:12px;
         font-size:11px;
     }
 }
@@ -773,10 +753,12 @@ th{
 <canvas id="gameCanvas"></canvas>
 
 <div id="gameTitle">
-⚔️ CUBESADV_KNIGHT
+    ⚔️ CUBESADV_KNIGHT
 </div>
 
-<!-- HUD -->
+<!-- =====================================================
+     HUD
+===================================================== -->
 
 <div id="hud">
 
@@ -813,6 +795,7 @@ th{
 
     </div>
 
+
     <div class="rightHud">
 
         <div class="onlineBox">
@@ -834,9 +817,13 @@ th{
 
 </div>
 
+
 <div id="crosshair"></div>
 
-<!-- D-PAD -->
+
+<!-- =====================================================
+     D-PAD
+===================================================== -->
 
 <div id="dpad">
 
@@ -870,7 +857,10 @@ th{
 
 </div>
 
-<!-- ATTACK -->
+
+<!-- =====================================================
+     ATTACK
+===================================================== -->
 
 <button id="attackButton">
 
@@ -882,15 +872,20 @@ th{
 
 </button>
 
+
 <button id="pauseButton">
     Ⅱ PAUSE
 </button>
+
 
 <div id="toast"></div>
 
 </div>
 
-<!-- PAUSE -->
+
+<!-- =====================================================
+     PAUSE
+===================================================== -->
 
 <div
     class="overlay"
@@ -948,7 +943,10 @@ th{
 
 </div>
 
-<!-- GAME OVER -->
+
+<!-- =====================================================
+     GAME OVER
+===================================================== -->
 
 <div
     class="overlay"
@@ -987,7 +985,10 @@ th{
 
 </div>
 
-<!-- PLAYERS -->
+
+<!-- =====================================================
+     PLAYERS
+===================================================== -->
 
 <div
     class="overlay"
@@ -1006,15 +1007,19 @@ th{
                         class="dot"
                         style="
                         background:#54e7ff;
-                        box-shadow:0 0 10px #54e7ff;">
+                        box-shadow:0 0 10px #54e7ff;
+                        ">
                     </i>
 
                     CubesAdv_Knight
                 </span>
 
-                <b id="myScore">0</b>
+                <b id="myScore">
+                    0
+                </b>
 
             </div>
+
 
             <div class="playerRow">
 
@@ -1023,7 +1028,8 @@ th{
                         class="dot"
                         style="
                         background:#9a62ff;
-                        box-shadow:0 0 10px #9a62ff;">
+                        box-shadow:0 0 10px #9a62ff;
+                        ">
                     </i>
 
                     ShadowFox
@@ -1033,6 +1039,7 @@ th{
 
             </div>
 
+
             <div class="playerRow">
 
                 <span>
@@ -1040,7 +1047,8 @@ th{
                         class="dot"
                         style="
                         background:#42ffae;
-                        box-shadow:0 0 10px #42ffae;">
+                        box-shadow:0 0 10px #42ffae;
+                        ">
                     </i>
 
                     CrystalFox
@@ -1050,6 +1058,7 @@ th{
 
             </div>
 
+
             <div class="playerRow">
 
                 <span>
@@ -1057,7 +1066,8 @@ th{
                         class="dot"
                         style="
                         background:#ff4168;
-                        box-shadow:0 0 10px #ff4168;">
+                        box-shadow:0 0 10px #ff4168;
+                        ">
                     </i>
 
                     RedKnight
@@ -1079,7 +1089,10 @@ th{
 
 </div>
 
-<!-- LEADERBOARD -->
+
+<!-- =====================================================
+     LEADERBOARD
+===================================================== -->
 
 <div
     class="overlay"
@@ -1101,7 +1114,9 @@ th{
 
             </thead>
 
-            <tbody id="leaderboardBody"></tbody>
+            <tbody
+                id="leaderboardBody">
+            </tbody>
 
         </table>
 
@@ -1117,8 +1132,8 @@ th{
 
 </div>
 
-<script>
 
+<script>
 /* =========================================================
    CANVAS
 ========================================================= */
@@ -1172,191 +1187,28 @@ resizeCanvas();
 ========================================================= */
 
 let score = 0;
+
 let paused = false;
+
 let gameOver = false;
 
 let attackCooldown = 0;
+
 let shake = 0;
 
 const keys = {};
 
 let particles = [];
+
 let projectiles = [];
+
 let floatingTexts = [];
+
 let stars = [];
+
 let crystals = [];
 
 let lastTime = 0;
-
-
-/* =========================================================
-   SOUND SYSTEM
-   Tidak membutuhkan file MP3 eksternal
-========================================================= */
-
-let audioContext = null;
-
-function initAudio(){
-
-    if(!audioContext){
-
-        const AudioCtx =
-            window.AudioContext ||
-            window.webkitAudioContext;
-
-        if(AudioCtx){
-
-            audioContext =
-                new AudioCtx();
-
-        }
-
-    }
-
-    if(
-        audioContext &&
-        audioContext.state === "suspended"
-    ){
-
-        audioContext.resume();
-
-    }
-
-}
-
-function playSound(
-    frequency,
-    duration,
-    type="sine",
-    volume=.05
-){
-
-    try{
-
-        initAudio();
-
-        if(!audioContext)
-            return;
-
-        const osc =
-            audioContext.createOscillator();
-
-        const gain =
-            audioContext.createGain();
-
-        osc.type = type;
-
-        osc.frequency.value =
-            frequency;
-
-        gain.gain.setValueAtTime(
-            volume,
-            audioContext.currentTime
-        );
-
-        gain.gain.exponentialRampToValueAtTime(
-            .001,
-            audioContext.currentTime + duration
-        );
-
-        osc.connect(gain);
-        gain.connect(audioContext.destination);
-
-        osc.start();
-
-        osc.stop(
-            audioContext.currentTime +
-            duration
-        );
-
-    }catch(e){}
-
-}
-
-function attackSound(){
-
-    playSound(
-        180,
-        .10,
-        "sawtooth",
-        .06
-    );
-
-    setTimeout(
-        ()=>playSound(
-            420,
-            .12,
-            "square",
-            .035
-        ),
-        30
-    );
-
-}
-
-function crystalSound(){
-
-    playSound(
-        720,
-        .12,
-        "sine",
-        .045
-    );
-
-    setTimeout(
-        ()=>playSound(
-            1050,
-            .16,
-            "sine",
-            .035
-        ),
-        55
-    );
-
-}
-
-function damageSound(){
-
-    playSound(
-        100,
-        .18,
-        "sawtooth",
-        .08
-    );
-
-}
-
-function enemyDeathSound(){
-
-    playSound(
-        300,
-        .12,
-        "square",
-        .055
-    );
-
-    setTimeout(
-        ()=>playSound(
-            150,
-            .22,
-            "sawtooth",
-            .045
-        ),
-        60
-    );
-
-}
-
-function clickSound(){
-
-    playSound(
-        500,
-        .05,
-        "sine",
-        .025
-    );
-
-}
 
 
 /* =========================================================
@@ -1366,6 +1218,7 @@ function clickSound(){
 const player = {
 
     x:600,
+
     y:375,
 
     size:40,
@@ -1373,6 +1226,7 @@ const player = {
     speed:4.8,
 
     hp:100,
+
     maxHp:100,
 
     invincible:0,
@@ -1391,32 +1245,22 @@ const enemies = [
     {
         x:780,
         y:570,
-
         size:40,
-
         speed:1.2,
-
         hp:100,
         maxHp:100,
-
         color:"#ff4168",
-
         hit:0
     },
 
     {
         x:930,
         y:250,
-
         size:38,
-
         speed:1.05,
-
         hp:100,
         maxHp:100,
-
         color:"#ff3f91",
-
         hit:0
     }
 
@@ -1424,50 +1268,38 @@ const enemies = [
 
 
 /* =========================================================
-   ONLINE PLAYERS
+   OTHER PLAYERS
 ========================================================= */
 
 const onlinePlayers = [
 
     {
         name:"ShadowFox",
-
         x:970,
         y:620,
-
         color:"#9a62ff",
-
         dx:.65,
         dy:-.35,
-
         score:120
     },
 
     {
         name:"CrystalFox",
-
         x:270,
         y:690,
-
         color:"#42ffae",
-
         dx:.5,
         dy:-.55,
-
         score:90
     },
 
     {
         name:"RedKnight",
-
         x:180,
         y:280,
-
         color:"#ff4168",
-
         dx:.45,
         dy:.7,
-
         score:70
     }
 
@@ -1535,24 +1367,24 @@ createCrystals();
 
 
 /* =========================================================
-   KEYBOARD
+   INPUT
 ========================================================= */
 
 window.addEventListener(
     "keydown",
     e=>{
 
-        initAudio();
-
         keys[e.key] = true;
 
-        if([
-            " ",
-            "ArrowUp",
-            "ArrowDown",
-            "ArrowLeft",
-            "ArrowRight"
-        ].includes(e.key)){
+        if(
+            [
+                " ",
+                "ArrowUp",
+                "ArrowDown",
+                "ArrowLeft",
+                "ArrowRight"
+            ].includes(e.key)
+        ){
 
             e.preventDefault();
 
@@ -1579,6 +1411,7 @@ window.addEventListener(
     }
 );
 
+
 window.addEventListener(
     "keyup",
     e=>{
@@ -1590,7 +1423,7 @@ window.addEventListener(
 
 
 /* =========================================================
-   MOBILE MOVEMENT
+   MOBILE CONTROLS
 ========================================================= */
 
 document
@@ -1603,8 +1436,6 @@ document
     const start = e=>{
 
         e.preventDefault();
-
-        initAudio();
 
         keys[key] = true;
 
@@ -1641,6 +1472,20 @@ document
 });
 
 
+document
+.getElementById("attackButton")
+.addEventListener(
+    "pointerdown",
+    e=>{
+
+        e.preventDefault();
+
+        attack();
+
+    }
+);
+
+
 /* =========================================================
    RANDOM POSITION
 ========================================================= */
@@ -1649,15 +1494,9 @@ function randomPosition(size){
 
     return {
 
-        x:
-            40 +
-            Math.random()*
-            (1200-size-80),
+        x:40 + Math.random()*(1200-size-80),
 
-        y:
-            80 +
-            Math.random()*
-            (750-size-120)
+        y:80 + Math.random()*(750-size-120)
 
     };
 
@@ -1698,20 +1537,16 @@ function attack(){
 
     }
 
-    initAudio();
-
-    attackSound();
-
     attackCooldown = .38;
 
     const centerX =
-        player.x +
-        player.size/2;
+        player.x + player.size/2;
 
     const centerY =
-        player.y +
-        player.size/2;
+        player.y + player.size/2;
 
+
+    /* Target nearest enemy */
 
     let target = null;
 
@@ -1720,10 +1555,10 @@ function attack(){
     enemies.forEach(enemy=>{
 
         const dx =
-            enemy.x-player.x;
+            enemy.x - player.x;
 
         const dy =
-            enemy.y-player.y;
+            enemy.y - player.y;
 
         const dist =
             Math.hypot(dx,dy);
@@ -1731,6 +1566,7 @@ function attack(){
         if(dist < nearest){
 
             nearest = dist;
+
             target = enemy;
 
         }
@@ -1743,10 +1579,12 @@ function attack(){
 
 
     const dx =
-        target.x-centerX;
+        target.x -
+        centerX;
 
     const dy =
-        target.y-centerY;
+        target.y -
+        centerY;
 
     const length =
         Math.hypot(dx,dy) || 1;
@@ -1755,9 +1593,11 @@ function attack(){
     projectiles.push({
 
         x:centerX,
+
         y:centerY,
 
         vx:dx/length*11,
+
         vy:dy/length*11,
 
         life:1,
@@ -1778,7 +1618,7 @@ function attack(){
 
 
 /* =========================================================
-   PLAYER DAMAGE
+   DAMAGE
 ========================================================= */
 
 function damagePlayer(amount){
@@ -1791,8 +1631,6 @@ function damagePlayer(amount){
     player.invincible = .75;
 
     shake = 8;
-
-    damageSound();
 
     createBurst(
         player.x+20,
@@ -1810,19 +1648,11 @@ function damagePlayer(amount){
 
     updateHUD();
 
-
     if(player.hp <= 0){
 
         player.hp = 0;
 
         gameOver = true;
-
-        playSound(
-            75,
-            .45,
-            "sawtooth",
-            .09
-        );
 
         document
         .getElementById("finalScore")
@@ -1847,33 +1677,26 @@ function update(dt){
         return;
 
     const delta =
-        Math.min(
-            dt/16.67,
-            2
-        );
+        Math.min(dt/16.67,2);
 
 
     attackCooldown =
         Math.max(
             0,
-            attackCooldown -
-            dt/1000
+            attackCooldown-dt/1000
         );
-
 
     player.invincible =
         Math.max(
             0,
-            player.invincible -
-            dt/1000
+            player.invincible-dt/1000
         );
 
 
     /* MOVEMENT */
 
-    let dx=0;
-    let dy=0;
-
+    let dx = 0;
+    let dy = 0;
 
     if(
         keys["ArrowLeft"] ||
@@ -1885,7 +1708,6 @@ function update(dt){
 
     }
 
-
     if(
         keys["ArrowRight"] ||
         keys["d"] ||
@@ -1896,7 +1718,6 @@ function update(dt){
 
     }
 
-
     if(
         keys["ArrowUp"] ||
         keys["w"] ||
@@ -1906,7 +1727,6 @@ function update(dt){
         dy--;
 
     }
-
 
     if(
         keys["ArrowDown"] ||
@@ -1928,14 +1748,10 @@ function update(dt){
         dy /= len;
 
         player.x +=
-            dx*
-            player.speed*
-            delta;
+            dx*player.speed*delta;
 
         player.y +=
-            dy*
-            player.speed*
-            delta;
+            dy*player.speed*delta;
 
     }
 
@@ -1948,7 +1764,6 @@ function update(dt){
                 player.x
             )
         );
-
 
     player.y =
         Math.max(
@@ -1965,10 +1780,10 @@ function update(dt){
     player.tail.unshift({
 
         x:player.x+20,
+
         y:player.y+20
 
     });
-
 
     if(player.tail.length>22)
         player.tail.pop();
@@ -1978,9 +1793,7 @@ function update(dt){
 
     crystals.forEach(crystal=>{
 
-        crystal.pulse +=
-            .08*delta;
-
+        crystal.pulse += .08*delta;
 
         if(
             collision(
@@ -1990,8 +1803,6 @@ function update(dt){
         ){
 
             score += 10;
-
-            crystalSound();
 
             createBurst(
                 crystal.x+11,
@@ -2007,14 +1818,13 @@ function update(dt){
                 "#ffd426"
             );
 
-
             const p =
                 randomPosition(
                     crystal.size
                 );
 
-            crystal.x=p.x;
-            crystal.y=p.y;
+            crystal.x = p.x;
+            crystal.y = p.y;
 
             updateHUD();
 
@@ -2030,8 +1840,7 @@ function update(dt){
         enemy.hit =
             Math.max(
                 0,
-                enemy.hit-
-                dt/1000
+                enemy.hit-dt/1000
             );
 
 
@@ -2046,13 +1855,13 @@ function update(dt){
 
 
         enemy.x +=
-            ex/distance*
-            enemy.speed*
+            ex/distance *
+            enemy.speed *
             delta;
 
         enemy.y +=
-            ey/distance*
-            enemy.speed*
+            ey/distance *
+            enemy.speed *
             delta;
 
 
@@ -2074,22 +1883,20 @@ function update(dt){
 
     projectiles.forEach(p=>{
 
-        p.x +=
-            p.vx*delta;
+        p.x += p.vx*delta;
+        p.y += p.vy*delta;
 
-        p.y +=
-            p.vy*delta;
-
-        p.life -=
-            .025*delta;
+        p.life -= .025*delta;
 
 
         enemies.forEach(enemy=>{
 
-            const pseudo={
+            const pseudo = {
 
                 x:p.x-5,
+
                 y:p.y-5,
+
                 size:10
 
             };
@@ -2105,10 +1912,9 @@ function update(dt){
 
                 enemy.hp -= 25;
 
-                enemy.hit=.18;
+                enemy.hit = .18;
 
-                p.life=0;
-
+                p.life = 0;
 
                 createBurst(
                     p.x,
@@ -2116,7 +1922,6 @@ function update(dt){
                     "#ff4b78",
                     18
                 );
-
 
                 addFloatingText(
                     enemy.x,
@@ -2126,11 +1931,9 @@ function update(dt){
                 );
 
 
-                if(enemy.hp<=0){
+                if(enemy.hp <= 0){
 
                     score += 50;
-
-                    enemyDeathSound();
 
                     createBurst(
                         enemy.x+20,
@@ -2138,7 +1941,6 @@ function update(dt){
                         "#ff4168",
                         45
                     );
-
 
                     addFloatingText(
                         enemy.x,
@@ -2153,9 +1955,8 @@ function update(dt){
                             enemy.size
                         );
 
-
-                    enemy.x=pos.x;
-                    enemy.y=pos.y;
+                    enemy.x = pos.x;
+                    enemy.y = pos.y;
 
                     enemy.hp =
                         enemy.maxHp;
@@ -2182,30 +1983,28 @@ function update(dt){
         );
 
 
-    /* ONLINE PLAYERS */
+    /* OTHER PLAYERS */
 
     onlinePlayers.forEach(p=>{
 
         p.x += p.dx*delta;
         p.y += p.dy*delta;
 
-
         if(
             p.x<30 ||
             p.x>1150
         ){
 
-            p.dx*=-1;
+            p.dx *= -1;
 
         }
-
 
         if(
             p.y<80 ||
             p.y>700
         ){
 
-            p.dy*=-1;
+            p.dy *= -1;
 
         }
 
@@ -2219,14 +2018,11 @@ function update(dt){
         p.x += p.vx*delta;
         p.y += p.vy*delta;
 
-        p.vy +=
-            .025*delta;
+        p.vy += .025*delta;
 
-        p.life -=
-            p.decay*delta;
+        p.life -= p.decay*delta;
 
     });
-
 
     particles =
         particles.filter(
@@ -2238,14 +2034,11 @@ function update(dt){
 
     floatingTexts.forEach(f=>{
 
-        f.y -=
-            .7*delta;
+        f.y -= .7*delta;
 
-        f.life -=
-            .018*delta;
+        f.life -= .018*delta;
 
     });
-
 
     floatingTexts =
         floatingTexts.filter(
@@ -2255,8 +2048,7 @@ function update(dt){
 
     if(shake>0){
 
-        shake -=
-            .5*delta;
+        shake -= .5*delta;
 
     }
 
@@ -2277,34 +2069,26 @@ function createBurst(
     for(let i=0;i<count;i++){
 
         const angle =
-            Math.random()*
-            Math.PI*2;
+            Math.random()*Math.PI*2;
 
         const speed =
             Math.random()*4+1;
 
-
         particles.push({
 
             x:x,
+
             y:y,
 
-            vx:
-                Math.cos(angle)*
-                speed,
+            vx:Math.cos(angle)*speed,
 
-            vy:
-                Math.sin(angle)*
-                speed,
+            vy:Math.sin(angle)*speed,
 
-            size:
-                Math.random()*4+1,
+            size:Math.random()*4+1,
 
             life:1,
 
-            decay:
-                .018+
-                Math.random()*.025,
+            decay:.018+Math.random()*.025,
 
             color:color
 
@@ -2325,6 +2109,7 @@ function addFloatingText(
     floatingTexts.push({
 
         x:x,
+
         y:y,
 
         text:text,
@@ -2352,14 +2137,13 @@ function drawBackground(time){
             H
         );
 
-
     gradient.addColorStop(
         0,
         "#061a35"
     );
 
     gradient.addColorStop(
-        .5,
+        .55,
         "#03152b"
     );
 
@@ -2368,8 +2152,7 @@ function drawBackground(time){
         "#020916"
     );
 
-
-    ctx.fillStyle=gradient;
+    ctx.fillStyle = gradient;
 
     ctx.fillRect(
         0,
@@ -2381,13 +2164,12 @@ function drawBackground(time){
 
     /* GRID */
 
-    const grid=38;
+    const grid = 38;
 
-    ctx.strokeStyle=
+    ctx.strokeStyle =
         "rgba(47,156,205,.12)";
 
-    ctx.lineWidth=1;
-
+    ctx.lineWidth = 1;
 
     for(
         let x=0;
@@ -2398,6 +2180,7 @@ function drawBackground(time){
         ctx.beginPath();
 
         ctx.moveTo(x,0);
+
         ctx.lineTo(x,H);
 
         ctx.stroke();
@@ -2414,6 +2197,7 @@ function drawBackground(time){
         ctx.beginPath();
 
         ctx.moveTo(0,y);
+
         ctx.lineTo(W,y);
 
         ctx.stroke();
@@ -2427,10 +2211,15 @@ function drawBackground(time){
 
         s.y += s.speed;
 
-
         if(s.y>750)
             s.y=0;
 
+
+        const x =
+            s.x*scaleX;
+
+        const y =
+            s.y*scaleY;
 
         ctx.globalAlpha =
             s.alpha;
@@ -2438,12 +2227,11 @@ function drawBackground(time){
         ctx.fillStyle =
             "#e9fbff";
 
-
         ctx.beginPath();
 
         ctx.arc(
-            s.x*scaleX,
-            s.y*scaleY,
+            x,
+            y,
             s.r,
             0,
             Math.PI*2
@@ -2453,11 +2241,10 @@ function drawBackground(time){
 
     });
 
-
     ctx.globalAlpha=1;
 
 
-    /* CENTRAL GLOW */
+    /* CENTER GLOW */
 
     const glow =
         ctx.createRadialGradient(
@@ -2469,10 +2256,9 @@ function drawBackground(time){
             Math.max(W,H)*.65
         );
 
-
     glow.addColorStop(
         0,
-        "rgba(22,113,255,.09)"
+        "rgba(22,113,255,.08)"
     );
 
     glow.addColorStop(
@@ -2480,8 +2266,7 @@ function drawBackground(time){
         "rgba(0,0,0,0)"
     );
 
-
-    ctx.fillStyle=glow;
+    ctx.fillStyle = glow;
 
     ctx.fillRect(
         0,
@@ -2514,17 +2299,14 @@ function drawCrystal(c){
 
     ctx.save();
 
-
     ctx.translate(
         x+size/2,
         y+size/2
     );
 
-
     ctx.rotate(
         Math.sin(c.pulse*.5)*.1
     );
-
 
     ctx.shadowBlur =
         25+pulse;
@@ -2565,7 +2347,6 @@ function drawCrystal(c){
 
     ctx.fillStyle =
         "#fff7a6";
-
 
     ctx.beginPath();
 
@@ -2629,25 +2410,32 @@ function drawPlayer(){
             const alpha =
                 (1-i/player.tail.length)*.5;
 
+            const tx =
+                t.x*scaleX;
+
+            const ty =
+                t.y*scaleY;
 
             ctx.save();
 
-            ctx.globalAlpha=alpha;
+            ctx.globalAlpha =
+                alpha;
 
-            ctx.fillStyle="#249cff";
+            ctx.fillStyle =
+                "#249cff";
 
-            ctx.shadowBlur=18;
+            ctx.shadowBlur =
+                18;
 
-            ctx.shadowColor="#249cff";
-
+            ctx.shadowColor =
+                "#249cff";
 
             ctx.beginPath();
 
             ctx.arc(
-                t.x*scaleX,
-                t.y*scaleY,
-                4+
-                (1-i/player.tail.length)*7,
+                tx,
+                ty,
+                4+(1-i/player.tail.length)*7,
                 0,
                 Math.PI*2
             );
@@ -2662,22 +2450,19 @@ function drawPlayer(){
 
     ctx.save();
 
-
-    ctx.shadowBlur=30;
+    ctx.shadowBlur =
+        30;
 
     ctx.shadowColor =
         player.invincible>.35
         ? "#ff4168"
         : "#249cff";
 
-
     ctx.fillStyle =
         player.invincible>.35
         ? "#ff4168"
         : "#249cff";
 
-
-    /* CUBE */
 
     ctx.beginPath();
 
@@ -2696,8 +2481,8 @@ function drawPlayer(){
 
     ctx.shadowBlur=0;
 
-    ctx.fillStyle="#d5f7ff";
-
+    ctx.fillStyle =
+        "#d5f7ff";
 
     ctx.beginPath();
 
@@ -2728,7 +2513,8 @@ function drawPlayer(){
 
     /* HELMET */
 
-    ctx.fillStyle="#e7fbff";
+    ctx.fillStyle =
+        "#e7fbff";
 
     ctx.fillRect(
         x+9,
@@ -2740,7 +2526,8 @@ function drawPlayer(){
 
     /* VISOR */
 
-    ctx.fillStyle="#18384e";
+    ctx.fillStyle =
+        "#18384e";
 
     ctx.fillRect(
         x+11,
@@ -2752,12 +2539,14 @@ function drawPlayer(){
 
     /* EYES */
 
-    ctx.fillStyle="#54f4ff";
+    ctx.fillStyle =
+        "#54f4ff";
 
-    ctx.shadowBlur=10;
+    ctx.shadowBlur =
+        10;
 
-    ctx.shadowColor="#54f4ff";
-
+    ctx.shadowColor =
+        "#54f4ff";
 
     ctx.fillRect(
         x+13,
@@ -2797,10 +2586,10 @@ function drawEnemy(enemy){
 
     ctx.save();
 
+    ctx.shadowBlur =
+        28;
 
-    ctx.shadowBlur=28;
-
-    ctx.shadowColor=
+    ctx.shadowColor =
         enemy.color;
 
     ctx.fillStyle =
@@ -2862,24 +2651,26 @@ function drawEnemy(enemy){
 
     /* HP */
 
-    ctx.fillStyle=
+    const hpWidth =
+        size;
+
+    ctx.fillStyle =
         "rgba(0,0,0,.45)";
 
     ctx.fillRect(
         x,
         y-10,
-        size,
+        hpWidth,
         4
     );
 
-
-    ctx.fillStyle=
+    ctx.fillStyle =
         "#ff4168";
 
     ctx.fillRect(
         x,
         y-10,
-        size*
+        hpWidth*
         (enemy.hp/enemy.maxHp),
         4
     );
@@ -2891,7 +2682,7 @@ function drawEnemy(enemy){
 
 
 /* =========================================================
-   ONLINE PLAYER
+   OTHER PLAYERS
 ========================================================= */
 
 function drawOnlinePlayer(p){
@@ -2902,15 +2693,15 @@ function drawOnlinePlayer(p){
     const y =
         p.y*scaleY;
 
-
     ctx.save();
-
 
     ctx.shadowBlur=22;
 
-    ctx.shadowColor=p.color;
+    ctx.shadowColor =
+        p.color;
 
-    ctx.fillStyle=p.color;
+    ctx.fillStyle =
+        p.color;
 
 
     ctx.beginPath();
@@ -2930,10 +2721,10 @@ function drawOnlinePlayer(p){
 
     ctx.fillStyle="#fff";
 
-    ctx.font="12px Arial";
+    ctx.font =
+        "12px Arial";
 
     ctx.textAlign="center";
-
 
     ctx.fillText(
         p.name,
@@ -2963,7 +2754,6 @@ function drawProjectiles(){
 
 
         ctx.save();
-
 
         ctx.shadowBlur=25;
 
@@ -3008,11 +2798,13 @@ function drawParticles(){
                 p.life
             );
 
-        ctx.fillStyle=p.color;
+        ctx.fillStyle =
+            p.color;
 
         ctx.shadowBlur=12;
 
-        ctx.shadowColor=p.color;
+        ctx.shadowColor =
+            p.color;
 
 
         ctx.beginPath();
@@ -3026,7 +2818,6 @@ function drawParticles(){
         );
 
         ctx.fill();
-
 
         ctx.restore();
 
@@ -3045,17 +2836,22 @@ function drawFloatingTexts(){
 
         ctx.save();
 
-        ctx.globalAlpha=f.life;
+        ctx.globalAlpha =
+            f.life;
 
-        ctx.fillStyle=f.color;
+        ctx.fillStyle =
+            f.color;
 
-        ctx.font="bold 17px Arial";
+        ctx.font =
+            "bold 17px Arial";
 
-        ctx.textAlign="center";
+        ctx.textAlign =
+            "center";
 
         ctx.shadowBlur=10;
 
-        ctx.shadowColor=f.color;
+        ctx.shadowColor =
+            f.color;
 
 
         ctx.fillText(
@@ -3073,7 +2869,7 @@ function drawFloatingTexts(){
 
 
 /* =========================================================
-   MINI MAP
+   MINIMAP
 ========================================================= */
 
 function drawMiniMap(){
@@ -3093,9 +2889,8 @@ function drawMiniMap(){
     );
 
 
-    /* MAP BACKGROUND */
-
-    miniCtx.fillStyle="#03172d";
+    miniCtx.fillStyle =
+        "#03172d";
 
     miniCtx.fillRect(
         0,
@@ -3105,11 +2900,8 @@ function drawMiniMap(){
     );
 
 
-    /* MAP GRID */
-
-    miniCtx.strokeStyle=
-        "rgba(84,231,255,.13)";
-
+    miniCtx.strokeStyle =
+        "rgba(84,231,255,.15)";
 
     for(
         let x=0;
@@ -3120,6 +2912,7 @@ function drawMiniMap(){
         miniCtx.beginPath();
 
         miniCtx.moveTo(x,0);
+
         miniCtx.lineTo(x,mh);
 
         miniCtx.stroke();
@@ -3136,6 +2929,7 @@ function drawMiniMap(){
         miniCtx.beginPath();
 
         miniCtx.moveTo(0,y);
+
         miniCtx.lineTo(mw,y);
 
         miniCtx.stroke();
@@ -3150,16 +2944,12 @@ function drawMiniMap(){
         mh/750;
 
 
-    /* CRYSTALS */
+    /* crystals */
 
     crystals.forEach(c=>{
 
-        miniCtx.fillStyle="#ffd426";
-
-        miniCtx.shadowBlur=8;
-
-        miniCtx.shadowColor="#ffd426";
-
+        miniCtx.fillStyle =
+            "#ffd426";
 
         miniCtx.beginPath();
 
@@ -3176,18 +2966,12 @@ function drawMiniMap(){
     });
 
 
-    /* ENEMIES */
+    /* enemies */
 
     enemies.forEach(enemy=>{
 
-        miniCtx.fillStyle=
+        miniCtx.fillStyle =
             enemy.color;
-
-        miniCtx.shadowBlur=7;
-
-        miniCtx.shadowColor=
-            enemy.color;
-
 
         miniCtx.beginPath();
 
@@ -3204,16 +2988,12 @@ function drawMiniMap(){
     });
 
 
-    /* ONLINE PLAYERS */
+    /* online */
 
     onlinePlayers.forEach(p=>{
 
-        miniCtx.fillStyle=p.color;
-
-        miniCtx.shadowBlur=7;
-
-        miniCtx.shadowColor=p.color;
-
+        miniCtx.fillStyle =
+            p.color;
 
         miniCtx.beginPath();
 
@@ -3230,14 +3010,15 @@ function drawMiniMap(){
     });
 
 
-    /* PLAYER */
+    /* player */
 
-    miniCtx.fillStyle="#54e7ff";
+    miniCtx.fillStyle =
+        "#54e7ff";
 
-    miniCtx.shadowBlur=10;
+    miniCtx.shadowBlur=8;
 
-    miniCtx.shadowColor="#54e7ff";
-
+    miniCtx.shadowColor =
+        "#54e7ff";
 
     miniCtx.beginPath();
 
@@ -3250,7 +3031,6 @@ function drawMiniMap(){
     );
 
     miniCtx.fill();
-
 
     miniCtx.shadowBlur=0;
 
@@ -3306,8 +3086,6 @@ function draw(time){
     ctx.restore();
 
 
-    /* MINI MAP */
-
     drawMiniMap();
 
 }
@@ -3321,32 +3099,34 @@ function updateHUD(){
 
     document
     .getElementById("scoreText")
-    .textContent=score;
+    .textContent =
+        score;
 
 
     document
     .getElementById("hpText")
-    .textContent=
+    .textContent =
         Math.max(
             0,
             Math.ceil(player.hp)
-        )+
+        ) +
         "/100";
 
 
     document
     .getElementById("hpFill")
-    .style.width=
+    .style.width =
         Math.max(
             0,
             player.hp
-        )+
+        ) +
         "%";
 
 
     document
     .getElementById("myScore")
-    .textContent=score;
+    .textContent =
+        score;
 
 }
 
@@ -3356,10 +3136,6 @@ function updateHUD(){
 ========================================================= */
 
 function resetGame(){
-
-    initAudio();
-
-    clickSound();
 
     score=0;
 
@@ -3374,8 +3150,6 @@ function resetGame(){
     player.y=375;
 
     player.tail=[];
-
-    player.invincible=0;
 
     attackCooldown=0;
 
@@ -3400,7 +3174,6 @@ function resetGame(){
 
     updateHUD();
 
-
     hideOverlay(
         "gameOverOverlay"
     );
@@ -3408,7 +3181,6 @@ function resetGame(){
     hideOverlay(
         "pauseOverlay"
     );
-
 
     showToast(
         "⚔️ Arena siap!"
@@ -3427,12 +3199,8 @@ function togglePause(){
         return;
 
 
-    initAudio();
-
-    clickSound();
-
-
-    paused=!paused;
+    paused =
+        !paused;
 
 
     if(paused){
@@ -3482,8 +3250,6 @@ document
 
     btn.onclick=()=>{
 
-        clickSound();
-
         hideOverlay(
             btn.dataset.close
         );
@@ -3506,8 +3272,8 @@ function showToast(message){
             "toast"
         );
 
-
-    toast.textContent=message;
+    toast.textContent =
+        message;
 
     toast.classList.add(
         "show"
@@ -3519,7 +3285,7 @@ function showToast(message){
     );
 
 
-    toastTimer=
+    toastTimer =
         setTimeout(
             ()=>{
 
@@ -3539,11 +3305,6 @@ function showToast(message){
 ========================================================= */
 
 function saveGame(){
-
-    initAudio();
-
-    clickSound();
-
 
     const data={
 
@@ -3576,11 +3337,6 @@ function saveGame(){
 ========================================================= */
 
 function loadGame(){
-
-    initAudio();
-
-    clickSound();
-
 
     const raw =
         localStorage.getItem(
@@ -3693,8 +3449,7 @@ function updateLeaderboard(){
     .getElementById(
         "leaderboardBody"
     )
-    .innerHTML=
-
+    .innerHTML =
         list.map(
             (p,i)=>`
 
@@ -3723,26 +3478,20 @@ document
 .getElementById("attackButton")
 .addEventListener(
     "click",
-    ()=>{
-        initAudio();
-        attack();
-    }
+    attack
 );
 
 
 document
 .getElementById("pauseButton")
-.onclick=
+.onclick =
     togglePause;
 
 
 document
 .getElementById("resumeBtn")
-.onclick=
+.onclick =
     ()=>{
-
-        initAudio();
-        clickSound();
 
         paused=false;
 
@@ -3755,29 +3504,26 @@ document
 
 document
 .getElementById("restartBtn")
-.onclick=
+.onclick =
     resetGame;
 
 
 document
 .getElementById("saveBtn")
-.onclick=
+.onclick =
     saveGame;
 
 
 document
 .getElementById("loadBtn")
-.onclick=
+.onclick =
     loadGame;
 
 
 document
 .getElementById("playersBtn")
-.onclick=
+.onclick =
     ()=>{
-
-        initAudio();
-        clickSound();
 
         hideOverlay(
             "pauseOverlay"
@@ -3792,11 +3538,8 @@ document
 
 document
 .getElementById("rankBtn")
-.onclick=
+.onclick =
     ()=>{
-
-        initAudio();
-        clickSound();
 
         hideOverlay(
             "pauseOverlay"
@@ -3813,17 +3556,14 @@ document
 
 document
 .getElementById("gameOverRestart")
-.onclick=
+.onclick =
     resetGame;
 
 
 document
 .getElementById("gameOverRank")
-.onclick=
+.onclick =
     ()=>{
-
-        initAudio();
-        clickSound();
 
         hideOverlay(
             "gameOverOverlay"
@@ -3836,15 +3576,6 @@ document
         );
 
     };
-
-
-/* =========================================================
-   START
-========================================================= */
-
-updateHUD();
-
-updateLeaderboard();
 
 
 /* =========================================================
@@ -3868,6 +3599,14 @@ function gameLoop(time){
 
 }
 
+
+/* =========================================================
+   START
+========================================================= */
+
+updateHUD();
+
+updateLeaderboard();
 
 requestAnimationFrame(
     gameLoop
