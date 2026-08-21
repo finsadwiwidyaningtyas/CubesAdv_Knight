@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>CubesAdy Knight</title>
 
 <style>
@@ -12,156 +11,211 @@
    RESET
 ========================================================= */
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    user-select: none;
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    user-select:none;
 }
 
-html,
-body {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
+html,body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
 }
 
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: #020d1d;
-    color: white;
+body{
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background:#020d1d;
+    color:white;
 }
 
 
 /* =========================================================
-   GAME
+   GAME AREA
 ========================================================= */
 
-#game {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
+#game{
+    position:relative;
 
-    background-color: #031426;
+    width:100vw;
+    height:100vh;
 
-    background-image:
+    overflow:hidden;
+
+    background:
+        radial-gradient(
+            circle at 50% 45%,
+            rgba(11,53,91,.5),
+            transparent 45%
+        ),
         linear-gradient(
-            rgba(20, 116, 165, 0.18) 1px,
+            rgba(20,116,165,.15) 1px,
             transparent 1px
         ),
         linear-gradient(
             90deg,
-            rgba(20, 116, 165, 0.18) 1px,
+            rgba(20,116,165,.15) 1px,
             transparent 1px
+        ),
+        #020e1f;
+
+    background-size:
+        100% 100%,
+        46px 46px,
+        46px 46px,
+        100% 100%;
+}
+
+
+/* =========================================================
+   DECORATIVE LIGHT
+========================================================= */
+
+.glow{
+    position:absolute;
+
+    width:300px;
+    height:300px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(30,170,255,.08),
+            transparent 70%
         );
 
-    background-size: 50px 50px;
+    pointer-events:none;
+}
+
+.glow.one{
+    left:35%;
+    top:20%;
+}
+
+.glow.two{
+    right:5%;
+    bottom:0;
 }
 
 
 /* =========================================================
-   BACKGROUND STARS
+   STARS
 ========================================================= */
 
-.star {
-    position: absolute;
+.star{
+    position:absolute;
 
-    width: 3px;
-    height: 3px;
+    width:3px;
+    height:3px;
 
-    border-radius: 50%;
+    border-radius:50%;
 
-    background: #bdeaff;
+    background:#a9dcff;
 
-    opacity: .65;
-}
-
-
-/* =========================================================
-   HP PANEL
-========================================================= */
-
-.hp-panel {
-    position: absolute;
-
-    left: 25px;
-    top: 28px;
-
-    width: 379px;
-    height: 102px;
-
-    padding: 20px 24px;
-
-    border: 1px solid #126487;
-    border-radius: 20px;
-
-    background: rgba(3, 24, 49, .94);
+    opacity:.65;
 
     box-shadow:
-        0 0 20px rgba(0, 140, 220, .08);
+        0 0 6px rgba(130,220,255,.6);
 }
 
-.hp-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+
+/* =========================================================
+   TOP HUD
+========================================================= */
+
+.hp-panel{
+    position:absolute;
+
+    left:25px;
+    top:28px;
+
+    width:380px;
+
+    padding:20px 24px;
+
+    border:1px solid #126487;
+    border-radius:20px;
+
+    background:
+        rgba(3,24,49,.94);
+
+    box-shadow:
+        0 0 25px rgba(0,150,255,.08);
 }
 
-.hp-label {
-    display: flex;
-    align-items: center;
+.hp-top{
+    display:flex;
 
-    gap: 9px;
-
-    font-size: 20px;
-    font-weight: bold;
+    justify-content:space-between;
+    align-items:center;
 }
 
-.heart {
-    color: #ff68a8;
+.hp-label{
+    display:flex;
 
-    font-size: 26px;
+    align-items:center;
+
+    gap:10px;
+
+    font-size:20px;
+    font-weight:bold;
+}
+
+.heart{
+    color:#ff68a8;
+
+    font-size:27px;
 
     filter:
         drop-shadow(
-            0 0 8px #ff3b8b
+            0 0 9px #ff3b8b
         );
 }
 
-.hp-number {
-    font-size: 21px;
-    font-weight: bold;
+.hp-number{
+    font-size:21px;
+    font-weight:bold;
 }
 
-.hp-bar {
-    width: 100%;
-    height: 18px;
+.hp-bar{
+    width:100%;
+    height:18px;
 
-    margin-top: 12px;
+    margin-top:14px;
 
-    border-radius: 20px;
+    overflow:hidden;
 
-    background: #152d48;
+    border:
+        1px solid #284b67;
 
-    border: 1px solid #284b67;
+    border-radius:20px;
 
-    overflow: hidden;
+    background:#142c46;
 }
 
-.hp-fill {
-    width: 64%;
-    height: 100%;
+.hp-fill{
+    width:64%;
+    height:100%;
 
     background:
         linear-gradient(
             90deg,
             #22dbc1,
-            #2ac8ed
+            #2bc8ed
         );
 
+    box-shadow:
+        0 0 15px #22d7dd;
+
     transition:
-        width .3s ease;
+        width .25s ease;
 }
 
 
@@ -169,33 +223,35 @@ body {
    SCORE
 ========================================================= */
 
-.score-panel {
-    position: absolute;
+.score-panel{
+    position:absolute;
 
-    left: 25px;
-    top: 146px;
+    left:25px;
+    top:146px;
 
-    height: 49px;
+    padding:13px 23px;
 
-    padding: 13px 24px;
+    border:1px solid #126487;
+    border-radius:17px;
 
-    border: 1px solid #126487;
-    border-radius: 17px;
+    background:
+        rgba(3,24,49,.94);
 
-    background: rgba(3, 24, 49, .94);
+    font-size:16px;
+    font-weight:bold;
 
-    font-size: 16px;
-    font-weight: bold;
+    box-shadow:
+        0 0 15px rgba(0,140,220,.05);
 }
 
-.score {
-    color: #ffd438;
+.score{
+    color:#ffd438;
 }
 
-.diamond {
-    color: #58cfff;
+.diamond{
+    color:#57cfff;
 
-    margin-left: 14px;
+    margin-left:15px;
 }
 
 
@@ -203,34 +259,35 @@ body {
    ONLINE
 ========================================================= */
 
-.online {
-    position: absolute;
+.online{
+    position:absolute;
 
-    right: 25px;
-    top: 30px;
+    right:25px;
+    top:30px;
 
-    padding: 13px 19px;
+    padding:13px 20px;
 
-    border: 1px solid #126487;
-    border-radius: 18px;
+    border:1px solid #126487;
+    border-radius:18px;
 
-    background: rgba(3, 24, 49, .94);
+    background:
+        rgba(3,24,49,.94);
 
-    font-size: 16px;
-    font-weight: bold;
+    font-size:16px;
+    font-weight:bold;
 }
 
-.online-dot {
-    display: inline-block;
+.online-dot{
+    display:inline-block;
 
-    width: 11px;
-    height: 11px;
+    width:11px;
+    height:11px;
 
-    margin-right: 9px;
+    margin-right:9px;
 
-    border-radius: 50%;
+    border-radius:50%;
 
-    background: #2df0bd;
+    background:#2df0bd;
 
     box-shadow:
         0 0 12px #2df0bd;
@@ -238,130 +295,147 @@ body {
 
 
 /* =========================================================
-   MINIMAP
+   TOP MENU
+   LOBBY DKK DI ATAS
 ========================================================= */
 
-.minimap {
-    position: absolute;
+.top-menu{
+    position:absolute;
 
-    right: 25px;
-    top: 88px;
+    top:105px;
+    left:50%;
 
-    width: 292px;
-    height: 210px;
+    transform:
+        translateX(-50%);
 
-    border: 1px solid #126487;
+    display:flex;
 
-    border-radius: 20px;
+    gap:9px;
 
-    overflow: hidden;
-
-    background-color: #061b31;
-
-    background-image:
-        linear-gradient(
-            rgba(20, 126, 165, .18) 1px,
-            transparent 1px
-        ),
-        linear-gradient(
-            90deg,
-            rgba(20, 126, 165, .18) 1px,
-            transparent 1px
-        );
-
-    background-size: 32px 32px;
+    z-index:20;
 }
 
-.map-dot {
-    position: absolute;
+.menu-btn{
+    height:46px;
 
-    width: 12px;
-    height: 12px;
+    padding:0 18px;
 
-    border-radius: 50%;
+    border:
+        1px solid #126487;
 
-    box-shadow: 0 0 10px currentColor;
-}
+    border-radius:14px;
 
-.map-cyan {
-    background: #45eaff;
-    color: #45eaff;
-}
+    background:
+        rgba(3,24,49,.94);
 
-.map-pink {
-    background: #ff3e68;
-    color: #ff3e68;
-}
+    color:white;
 
-.map-yellow {
-    background: #ffd43b;
-    color: #ffd43b;
-}
+    font-size:15px;
+    font-weight:bold;
 
-.map-purple {
-    background: #a954ff;
-    color: #a954ff;
-}
+    cursor:pointer;
 
-
-/* =========================================================
-   MENU
-   SEKARANG DI SEBELAH KIRI
-========================================================= */
-
-.menu {
-    position: absolute;
-
-    left: 25px;
-    top: 215px;
-
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 8px;
-
-    width: 180px;
-}
-
-.menu-btn {
-    width: 180px;
-    height: 44px;
-
-    padding: 0 17px;
-
-    border: 1px solid #126487;
-    border-radius: 15px;
-
-    background: rgba(3, 24, 49, .94);
-
-    color: white;
-
-    font-size: 15px;
-    font-weight: bold;
-
-    cursor: pointer;
-
-    text-align: left;
+    white-space:nowrap;
 
     transition:
         .2s ease;
 }
 
-.menu-btn:hover {
-    background: #0d3653;
+.menu-btn:hover{
+    background:
+        linear-gradient(
+            135deg,
+            #0c3654,
+            #092b46
+        );
 
     transform:
-        translateX(4px);
+        translateY(-2px);
 
     box-shadow:
-        0 0 15px
-        rgba(40, 190, 255, .2);
+        0 0 18px
+        rgba(30,200,255,.18);
 }
 
-.menu-btn:active {
+.menu-btn:active{
     transform:
         scale(.94);
+}
+
+
+/* =========================================================
+   MINIMAP
+========================================================= */
+
+.minimap{
+    position:absolute;
+
+    right:25px;
+    top:155px;
+
+    width:292px;
+    height:210px;
+
+    overflow:hidden;
+
+    border:
+        1px solid #126487;
+
+    border-radius:20px;
+
+    background:
+        linear-gradient(
+            rgba(20,126,165,.17) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(20,126,165,.17) 1px,
+            transparent 1px
+        ),
+        #061b31;
+
+    background-size:
+        32px 32px;
+
+    box-shadow:
+        inset 0 0 25px
+        rgba(0,130,220,.05);
+}
+
+.map-dot{
+    position:absolute;
+
+    width:12px;
+    height:12px;
+
+    border-radius:50%;
+
+    box-shadow:
+        0 0 12px currentColor;
+}
+
+.map-player{
+    width:16px;
+    height:16px;
+
+    background:#43eaff;
+    color:#43eaff;
+}
+
+.map-enemy{
+    background:#ff3e68;
+    color:#ff3e68;
+}
+
+.map-yellow{
+    background:#ffd43b;
+    color:#ffd43b;
+}
+
+.map-purple{
+    background:#a954ff;
+    color:#a954ff;
 }
 
 
@@ -369,60 +443,74 @@ body {
    PLAYER
 ========================================================= */
 
-.player {
-    position: absolute;
+.player{
+    position:absolute;
 
-    left: 59.3%;
-    top: 53.3%;
+    width:60px;
+    height:60px;
 
-    width: 60px;
-    height: 60px;
+    left:50%;
+    top:52%;
 
-    border-radius: 12px;
+    border-radius:12px;
 
-    background: #ff3d68;
+    background:
+        linear-gradient(
+            145deg,
+            #ff537a,
+            #f52f60
+        );
 
     box-shadow:
-        0 0 13px #ff3d68,
-        0 0 30px rgba(255, 61, 104, .45);
+        0 0 14px #ff3d68,
+        0 0 35px rgba(255,61,104,.45);
+
+    z-index:10;
 
     transition:
-        left .05s linear,
-        top .05s linear;
+        left .04s linear,
+        top .04s linear;
 }
 
 .player::before,
-.player::after {
-    content: "";
+.player::after{
+    content:"";
 
-    position: absolute;
+    position:absolute;
 
-    top: 20px;
+    top:20px;
 
-    width: 8px;
-    height: 8px;
+    width:8px;
+    height:8px;
 
-    background: white;
+    background:white;
+
+    border-radius:1px;
 }
 
-.player::before {
-    left: 15px;
+.player::before{
+    left:15px;
 }
 
-.player::after {
-    right: 15px;
+.player::after{
+    right:15px;
 }
 
-.player-top {
-    position: absolute;
+.player-bar{
+    position:absolute;
 
-    left: 0;
-    top: -12px;
+    left:0;
+    top:-13px;
 
-    width: 60px;
-    height: 7px;
+    width:60px;
+    height:7px;
 
-    background: #ff3d68;
+    border-radius:5px;
+
+    background:#ff3d68;
+
+    box-shadow:
+        0 0 8px #ff3d68;
 }
 
 
@@ -430,24 +518,91 @@ body {
    ENEMY
 ========================================================= */
 
-.enemy {
-    position: absolute;
+.enemy{
+    position:absolute;
 
-    left: 74%;
-    top: 60%;
+    width:50px;
+    height:50px;
 
-    width: 48px;
-    height: 48px;
+    left:70%;
+    top:58%;
 
-    border-radius: 10px;
+    border-radius:11px;
 
-    background: #a94cff;
+    background:
+        linear-gradient(
+            145deg,
+            #b85cff,
+            #8b38e8
+        );
 
     box-shadow:
-        0 0 25px #a94cff;
+        0 0 15px #a94cff,
+        0 0 35px rgba(169,76,255,.4);
+
+    z-index:8;
 
     transition:
-        .15s ease;
+        left .12s linear,
+        top .12s linear,
+        transform .15s ease,
+        opacity .2s ease;
+}
+
+.enemy::before,
+.enemy::after{
+    content:"";
+
+    position:absolute;
+
+    top:17px;
+
+    width:7px;
+    height:7px;
+
+    background:#fff;
+}
+
+.enemy::before{
+    left:12px;
+}
+
+.enemy::after{
+    right:12px;
+}
+
+
+/* =========================================================
+   ENEMY HP
+========================================================= */
+
+.enemy-hp{
+    position:absolute;
+
+    left:50%;
+    top:-13px;
+
+    transform:
+        translateX(-50%);
+
+    width:55px;
+    height:6px;
+
+    border-radius:10px;
+
+    overflow:hidden;
+
+    background:#1b2032;
+}
+
+.enemy-hp-fill{
+    width:100%;
+    height:100%;
+
+    background:#ff3f6b;
+
+    transition:
+        width .15s ease;
 }
 
 
@@ -455,85 +610,90 @@ body {
    CONTROLLER
 ========================================================= */
 
-.controller {
-    position: absolute;
+.controller{
+    position:absolute;
 
-    left: 30px;
-    bottom: 76px;
+    left:30px;
+    bottom:75px;
 
-    width: 320px;
-    height: 210px;
+    width:320px;
+    height:210px;
+
+    z-index:20;
 }
 
-.direction {
-    position: absolute;
+.direction{
+    position:absolute;
 
-    width: 100px;
-    height: 100px;
+    width:100px;
+    height:100px;
 
-    border: 1px solid #087fa9;
-    border-radius: 22px;
+    border:
+        1px solid #087fa9;
 
-    background: rgba(3, 24, 49, .9);
+    border-radius:22px;
 
-    color: white;
+    background:
+        rgba(3,24,49,.9);
 
-    font-size: 38px;
+    color:white;
 
-    cursor: pointer;
+    font-size:38px;
+
+    cursor:pointer;
 
     transition:
-        .1s;
+        .1s ease;
 }
 
-.direction:hover {
-    background: #0c3855;
+.direction:hover{
+    background:#0d3855;
 }
 
-.direction:active {
+.direction:active{
     transform:
         scale(.91);
 
-    background: #104a6b;
+    background:#104a6b;
 }
 
-.up {
-    left: 110px;
-    top: 0;
+.up{
+    left:110px;
+    top:0;
 }
 
-.left {
-    left: 0;
-    bottom: 0;
+.left{
+    left:0;
+    bottom:0;
 }
 
-.down {
-    left: 110px;
-    bottom: 0;
+.down{
+    left:110px;
+    bottom:0;
 }
 
-.right {
-    right: 0;
-    bottom: 0;
+.right{
+    right:0;
+    bottom:0;
 }
 
 
 /* =========================================================
-   ATTACK BUTTON
+   ATTACK
 ========================================================= */
 
-.attack {
-    position: absolute;
+.attack{
+    position:absolute;
 
-    right: 28px;
-    bottom: 75px;
+    right:28px;
+    bottom:75px;
 
-    width: 378px;
-    height: 88px;
+    width:378px;
+    height:88px;
 
-    border: none;
+    border:none;
 
-    border-radius: 24px;
+    border-radius:24px;
 
     background:
         linear-gradient(
@@ -542,64 +702,70 @@ body {
             #a62fd4
         );
 
-    color: white;
+    color:white;
 
-    font-size: 23px;
-    font-weight: bold;
+    font-size:23px;
+    font-weight:bold;
 
-    cursor: pointer;
+    cursor:pointer;
+
+    z-index:20;
 
     box-shadow:
         0 0 25px
-        rgba(218, 39, 127, .48);
+        rgba(218,39,127,.48);
 
     transition:
         .15s ease;
 }
 
-.attack:hover {
+.attack:hover{
     transform:
         scale(1.015);
 
     box-shadow:
         0 0 35px
-        rgba(218, 39, 127, .7);
+        rgba(218,39,127,.7);
 }
 
-.attack:active {
+.attack:active{
     transform:
         scale(.95);
 }
 
 
 /* =========================================================
-   CONTROL GUIDE
+   GUIDE
 ========================================================= */
 
-.guide {
-    position: absolute;
+.guide{
+    position:absolute;
 
-    left: 50%;
-    bottom: 17px;
+    left:50%;
+    bottom:17px;
 
     transform:
         translateX(-50%);
 
-    padding: 10px 21px;
+    padding:10px 21px;
 
-    border: 1px solid #103d5b;
-    border-radius: 13px;
+    border:
+        1px solid #103d5b;
+
+    border-radius:13px;
 
     background:
-        rgba(3, 24, 49, .9);
+        rgba(3,24,49,.92);
 
-    color: #a5b6c6;
+    color:#a5b6c6;
 
-    font-size: 14px;
+    font-size:14px;
+
+    z-index:25;
 }
 
-.guide strong {
-    color: #3bdeeb;
+.guide strong{
+    color:#3bdeeb;
 }
 
 
@@ -607,50 +773,134 @@ body {
    ATTACK EFFECT
 ========================================================= */
 
-.attack-effect {
-    position: absolute;
+.attack-effect{
+    position:absolute;
 
-    width: 120px;
-    height: 120px;
+    width:130px;
+    height:130px;
 
     border:
         5px solid #ff4b91;
 
-    border-radius: 50%;
+    border-radius:50%;
 
-    pointer-events: none;
+    pointer-events:none;
 
-    opacity: 0;
+    opacity:0;
 
     transform:
-        translate(-50%, -50%)
+        translate(-50%,-50%)
         scale(.3);
 
+    z-index:15;
+
     box-shadow:
-        0 0 25px #ff4b91;
+        0 0 30px #ff4b91,
+        inset 0 0 20px #ff4b91;
 }
 
-.attack-effect.active {
+.attack-effect.active{
     animation:
-        attack .3s ease-out;
+        attackAnimation .35s ease-out;
 }
 
-@keyframes attack {
+@keyframes attackAnimation{
 
-    0% {
-        opacity: 1;
+    0%{
+        opacity:1;
 
         transform:
-            translate(-50%, -50%)
+            translate(-50%,-50%)
             scale(.3);
     }
 
-    100% {
-        opacity: 0;
+    100%{
+        opacity:0;
 
         transform:
-            translate(-50%, -50%)
-            scale(1.4);
+            translate(-50%,-50%)
+            scale(1.5);
+    }
+}
+
+
+/* =========================================================
+   DAMAGE FLASH
+========================================================= */
+
+.damage-flash{
+    position:absolute;
+
+    inset:0;
+
+    pointer-events:none;
+
+    background:
+        rgba(255,0,50,.25);
+
+    opacity:0;
+
+    z-index:90;
+}
+
+.damage-flash.active{
+    animation:
+        damageFlash .25s ease;
+}
+
+@keyframes damageFlash{
+
+    0%{
+        opacity:0;
+    }
+
+    40%{
+        opacity:1;
+    }
+
+    100%{
+        opacity:0;
+    }
+}
+
+
+/* =========================================================
+   FLOATING TEXT
+========================================================= */
+
+.float-text{
+    position:absolute;
+
+    color:#fff;
+
+    font-size:20px;
+    font-weight:bold;
+
+    pointer-events:none;
+
+    z-index:50;
+
+    text-shadow:
+        0 0 8px rgba(255,255,255,.7);
+
+    animation:
+        floatUp .8s ease-out forwards;
+}
+
+@keyframes floatUp{
+
+    0%{
+        opacity:1;
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+    100%{
+        opacity:0;
+        transform:
+            translateY(-50px)
+            scale(1.15);
     }
 }
 
@@ -659,95 +909,108 @@ body {
    MODAL
 ========================================================= */
 
-.modal {
-    position: absolute;
+.modal{
+    position:absolute;
 
-    inset: 0;
+    inset:0;
 
-    display: none;
+    display:none;
 
-    align-items: center;
-    justify-content: center;
-
-    z-index: 100;
+    align-items:center;
+    justify-content:center;
 
     background:
-        rgba(0, 10, 25, .72);
+        rgba(0,10,25,.72);
 
     backdrop-filter:
-        blur(5px);
+        blur(6px);
+
+    z-index:100;
 }
 
-.modal.show {
-    display: flex;
+.modal.show{
+    display:flex;
 }
 
-.modal-box {
-    width: 420px;
+.modal-box{
+    width:430px;
 
-    padding: 32px;
+    padding:35px;
 
-    border: 1px solid #1abde8;
-    border-radius: 22px;
+    border:
+        1px solid #1abde8;
 
-    background: #061a30;
+    border-radius:22px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #071f36,
+            #041426
+        );
 
     box-shadow:
-        0 0 35px
-        rgba(0, 200, 255, .25);
+        0 0 40px
+        rgba(0,200,255,.22);
 
     animation:
-        modalIn .2s ease;
+        modalIn .22s ease;
 }
 
-@keyframes modalIn {
+@keyframes modalIn{
 
-    from {
-        opacity: 0;
+    from{
+        opacity:0;
 
         transform:
-            translateY(20px);
+            translateY(20px)
+            scale(.97);
     }
 
-    to {
-        opacity: 1;
+    to{
+        opacity:1;
 
         transform:
-            translateY(0);
+            translateY(0)
+            scale(1);
     }
 }
 
-.modal h2 {
-    margin-bottom: 20px;
+.modal h2{
+    margin-bottom:20px;
 }
 
-.modal p {
-    margin: 10px 0;
+.modal p{
+    margin:10px 0;
 
-    color: #b7c9d9;
+    color:#b7c9d9;
 }
 
-.modal-action {
-    width: 100%;
+.modal-btn{
+    width:100%;
 
-    margin-top: 10px;
+    margin-top:10px;
 
-    padding: 13px;
+    padding:13px;
 
     border:
         1px solid #176484;
 
-    border-radius: 12px;
+    border-radius:12px;
 
-    background: #092b45;
+    background:#092b45;
 
-    color: white;
+    color:white;
 
-    cursor: pointer;
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.2s;
 }
 
-.modal-action:hover {
-    background: #10476b;
+.modal-btn:hover{
+    background:#10476b;
 }
 
 
@@ -755,30 +1018,30 @@ body {
    TUTORIAL
 ========================================================= */
 
-.tutorial {
-    text-align: center;
+.tutorial{
+    text-align:center;
 }
 
-.tutorial h1 {
-    font-size: 34px;
+.tutorial h1{
+    font-size:34px;
 
-    margin-bottom: 18px;
+    margin-bottom:18px;
 }
 
-.tutorial p {
-    color: #b8cada;
+.tutorial p{
+    color:#b8cada;
 
-    line-height: 1.7;
+    line-height:1.7;
 
-    margin-bottom: 25px;
+    margin-bottom:25px;
 }
 
-.start {
-    padding: 14px 34px;
+.start{
+    padding:14px 35px;
 
-    border: none;
+    border:none;
 
-    border-radius: 12px;
+    border-radius:12px;
 
     background:
         linear-gradient(
@@ -787,11 +1050,39 @@ body {
             #2bc9f2
         );
 
-    color: #00121e;
+    color:#00121e;
 
-    font-weight: bold;
+    font-weight:bold;
 
-    cursor: pointer;
+    cursor:pointer;
+}
+
+
+/* =========================================================
+   GAME OVER
+========================================================= */
+
+.game-over{
+    text-align:center;
+}
+
+.game-over h1{
+    font-size:42px;
+
+    color:#ff4d71;
+
+    text-shadow:
+        0 0 15px #ff315b;
+
+    margin-bottom:15px;
+}
+
+.game-over .final-score{
+    font-size:24px;
+
+    margin:20px 0;
+
+    color:#ffd438;
 }
 
 
@@ -799,34 +1090,36 @@ body {
    SUBTITLE
 ========================================================= */
 
-.subtitle {
-    position: absolute;
+.subtitle{
+    position:absolute;
 
-    left: 50%;
-    bottom: 120px;
+    left:50%;
+    bottom:120px;
 
     transform:
         translateX(-50%);
 
-    padding: 10px 18px;
+    padding:10px 18px;
 
-    border-radius: 9px;
+    border-radius:9px;
 
     background:
         rgba(0,0,0,.78);
 
-    color: white;
+    color:white;
 
-    opacity: 0;
+    opacity:0;
 
     transition:
         opacity .2s;
 
-    pointer-events: none;
+    pointer-events:none;
+
+    z-index:80;
 }
 
-.subtitle.show {
-    opacity: 1;
+.subtitle.show{
+    opacity:1;
 }
 
 
@@ -834,14 +1127,14 @@ body {
    ACCESSIBILITY
 ========================================================= */
 
-body.colorblind #game {
+body.colorblind #game{
     filter:
         saturate(.45)
         contrast(1.15);
 }
 
-body.large-text {
-    font-size: 115%;
+body.large-text{
+    font-size:115%;
 }
 
 
@@ -849,17 +1142,18 @@ body.large-text {
    RESPONSIVE
 ========================================================= */
 
-@media (max-width: 1000px) {
+@media(max-width:1000px){
 
-    .hp-panel {
+    .top-menu{
         transform:
-            scale(.85);
+            translateX(-50%)
+            scale(.8);
 
         transform-origin:
-            top left;
+            top center;
     }
 
-    .minimap {
+    .minimap{
         transform:
             scale(.8);
 
@@ -867,8 +1161,8 @@ body.large-text {
             top right;
     }
 
-    .attack {
-        width: 300px;
+    .attack{
+        width:300px;
     }
 }
 
@@ -881,522 +1175,54 @@ body.large-text {
 <div id="game">
 
 
-    <!-- STARS -->
+<!-- =====================================================
+     DECORATION
+===================================================== -->
 
-    <div class="star" style="left:23%;top:22%;"></div>
-    <div class="star" style="left:33%;top:36%;"></div>
-    <div class="star" style="left:43%;top:15%;"></div>
-    <div class="star" style="left:52%;top:30%;"></div>
-    <div class="star" style="left:65%;top:17%;"></div>
-    <div class="star" style="left:75%;top:47%;"></div>
-    <div class="star" style="left:43%;top:73%;"></div>
-    <div class="star" style="left:20%;top:65%;"></div>
+<div class="glow one"></div>
+<div class="glow two"></div>
+
+<div class="star" style="left:23%;top:22%;"></div>
+<div class="star" style="left:33%;top:36%;"></div>
+<div class="star" style="left:43%;top:15%;"></div>
+<div class="star" style="left:52%;top:30%;"></div>
+<div class="star" style="left:65%;top:17%;"></div>
+<div class="star" style="left:75%;top:47%;"></div>
+<div class="star" style="left:43%;top:73%;"></div>
+<div class="star" style="left:20%;top:65%;"></div>
+<div class="star" style="left:88%;top:60%;"></div>
+<div class="star" style="left:56%;top:82%;"></div>
 
 
-    <!-- HP -->
+<!-- =====================================================
+     HP
+===================================================== -->
 
-    <div class="hp-panel">
+<div class="hp-panel">
 
-        <div class="hp-top">
+    <div class="hp-top">
 
-            <div class="hp-label">
+        <div class="hp-label">
 
-                <span class="heart">♥</span>
+            <span class="heart">♥</span>
 
-                <span>HP</span>
-
-            </div>
-
-            <div class="hp-number">
-
-                <span id="hp">64</span>/100
-
-            </div>
+            <span>HP</span>
 
         </div>
 
+        <div class="hp-number">
 
-        <div class="hp-bar">
-
-            <div
-                class="hp-fill"
-                id="hpFill">
-            </div>
+            <span id="hp">100</span>/100
 
         </div>
 
     </div>
 
-
-    <!-- SCORE -->
-
-    <div class="score-panel">
-
-        ⭐
-
-        <span class="score">
-
-            SCORE:
-            <span id="score">
-                20
-            </span>
-
-        </span>
-
-        <span> • </span>
-
-        💎
-
-        <span class="diamond">
-
-            <span id="diamond">
-                2
-            </span>
-
-        </span>
-
-    </div>
-
-
-    <!-- MENU DI KIRI -->
-
-    <div class="menu">
-
-        <button
-            class="menu-btn"
-            onclick="openMenu('Lobby')">
-
-            🏠 Lobby
-
-        </button>
-
-
-        <button
-            class="menu-btn"
-            onclick="openMenu('Players')">
-
-            👥 Players
-
-        </button>
-
-
-        <button
-            class="menu-btn"
-            onclick="openMenu('Chat')">
-
-            💬 Chat
-
-        </button>
-
-
-        <button
-            class="menu-btn"
-            onclick="openMenu('Rank')">
-
-            🏆 Rank
-
-        </button>
-
-
-        <button
-            class="menu-btn"
-            onclick="openMenu('Match')">
-
-            🎯 Match
-
-        </button>
-
-
-        <button
-            class="menu-btn"
-            onclick="pauseGame()">
-
-            II Pause
-
-        </button>
-
-    </div>
-
-
-    <!-- ONLINE -->
-
-    <div class="online">
-
-        <span class="online-dot"></span>
-
-        ONLINE 4
-
-    </div>
-
-
-    <!-- MINIMAP -->
-
-    <div class="minimap">
+    <div class="hp-bar">
 
         <div
-            class="map-dot map-cyan"
-            style="
-                left:0;
-                top:45px;
-            ">
-        </div>
-
-
-        <div
-            class="map-dot map-pink"
-            style="
-                left:90px;
-                top:45px;
-            ">
-        </div>
-
-
-        <div
-            class="map-dot map-pink"
-            style="
-                right:45px;
-                top:55px;
-            ">
-        </div>
-
-
-        <div
-            class="map-dot map-yellow"
-            style="
-                left:140px;
-                top:85px;
-            ">
-        </div>
-
-
-        <div
-            class="map-dot map-purple"
-            style="
-                right:55px;
-                bottom:25px;
-            ">
-        </div>
-
-
-        <div
-            class="map-dot map-cyan"
-            style="
-                left:15px;
-                bottom:30px;
-            ">
-        </div>
-
-    </div>
-
-
-    <!-- PLAYER -->
-
-    <div
-        class="player"
-        id="player">
-
-        <div class="player-top"></div>
-
-    </div>
-
-
-    <!-- ENEMY -->
-
-    <div
-        class="enemy"
-        id="enemy">
-    </div>
-
-
-    <!-- ATTACK EFFECT -->
-
-    <div
-        class="attack-effect"
-        id="attackEffect">
-    </div>
-
-
-    <!-- CONTROLLER -->
-
-    <div class="controller">
-
-        <button
-            class="direction up"
-            data-key="ArrowUp">
-
-            ▲
-
-        </button>
-
-
-        <button
-            class="direction left"
-            data-key="ArrowLeft">
-
-            ◀
-
-        </button>
-
-
-        <button
-            class="direction down"
-            data-key="ArrowDown">
-
-            ▼
-
-        </button>
-
-
-        <button
-            class="direction right"
-            data-key="ArrowRight">
-
-            ▶
-
-        </button>
-
-    </div>
-
-
-    <!-- ATTACK -->
-
-    <button
-        class="attack"
-        id="attackButton">
-
-        ⚔ SERANG [ SPACE ]
-
-    </button>
-
-
-    <!-- GUIDE -->
-
-    <div class="guide">
-
-        <strong>WASD / ARROW</strong>
-        Gerak
-
-        &nbsp; • &nbsp;
-
-        <strong>SPACE</strong>
-        Serang
-
-        &nbsp; • &nbsp;
-
-        <strong>ESC</strong>
-        Pause
-
-    </div>
-
-
-    <!-- SUBTITLE -->
-
-    <div
-        class="subtitle"
-        id="subtitle">
-    </div>
-
-
-    <!-- TUTORIAL -->
-
-    <div
-        class="modal show"
-        id="tutorial">
-
-        <div class="modal-box tutorial">
-
-            <h1>
-                ⚔ CUBESADY KNIGHT
-            </h1>
-
-            <p>
-
-                Gunakan
-                <strong>WASD / ARROW</strong>
-                untuk bergerak.
-
-                <br>
-
-                Tekan
-                <strong>SPACE</strong>
-                untuk menyerang.
-
-                <br>
-
-                Tekan
-                <strong>ESC</strong>
-                untuk Pause.
-
-            </p>
-
-
-            <button
-                class="start"
-                onclick="startGame()">
-
-                MULAI BERMAIN
-
-            </button>
-
-        </div>
-
-    </div>
-
-
-    <!-- MENU MODAL -->
-
-    <div
-        class="modal"
-        id="menuModal">
-
-        <div class="modal-box">
-
-            <h2 id="menuTitle">
-                Menu
-            </h2>
-
-            <div id="menuContent"></div>
-
-            <button
-                class="modal-action"
-                onclick="closeMenu()">
-
-                TUTUP
-
-            </button>
-
-        </div>
-
-    </div>
-
-
-    <!-- PAUSE -->
-
-    <div
-        class="modal"
-        id="pauseModal">
-
-        <div class="modal-box">
-
-            <h2>
-                ⏸ Game Paused
-            </h2>
-
-
-            <button
-                class="modal-action"
-                onclick="resumeGame()">
-
-                ▶ Lanjutkan
-
-            </button>
-
-
-            <button
-                class="modal-action"
-                onclick="openSettings()">
-
-                ⚙ Pengaturan
-
-            </button>
-
-
-            <button
-                class="modal-action"
-                onclick="exitGame()">
-
-                🚪 Exit
-
-            </button>
-
-        </div>
-
-    </div>
-
-
-    <!-- SETTINGS -->
-
-    <div
-        class="modal"
-        id="settingsModal">
-
-        <div class="modal-box">
-
-            <h2>
-                ⚙ Pengaturan
-            </h2>
-
-
-            <p>
-                Tingkat Kesulitan
-            </p>
-
-
-            <select
-                id="difficulty"
-                style="
-                    width:100%;
-                    padding:10px;
-                    background:#092b45;
-                    color:white;
-                    border:1px solid #176484;
-                    border-radius:10px;
-                ">
-
-                <option value="easy">
-                    Easy
-                </option>
-
-                <option
-                    value="normal"
-                    selected>
-
-                    Normal
-
-                </option>
-
-                <option value="hard">
-                    Hard
-                </option>
-
-            </select>
-
-
-            <button
-                class="modal-action"
-                onclick="toggleColorblind()">
-
-                👁 Colorblind Mode
-
-            </button>
-
-
-            <button
-                class="modal-action"
-                onclick="toggleLargeText()">
-
-                🔤 Large Text
-
-            </button>
-
-
-            <button
-                class="modal-action"
-                onclick="toggleSubtitle()">
-
-                💬 Subtitle
-
-            </button>
-
-
-            <button
-                class="modal-action"
-                onclick="saveSettings()">
-
-                SIMPAN
-
-            </button>
-
+            class="hp-fill"
+            id="hpFill">
         </div>
 
     </div>
@@ -1404,11 +1230,539 @@ body.large-text {
 </div>
 
 
+<!-- =====================================================
+     SCORE
+===================================================== -->
+
+<div class="score-panel">
+
+    ⭐
+
+    <span class="score">
+
+        SCORE:
+        <span id="score">
+            0
+        </span>
+
+    </span>
+
+    <span> • </span>
+
+    💎
+
+    <span class="diamond">
+
+        <span id="diamond">
+            2
+        </span>
+
+    </span>
+
+</div>
+
+
+<!-- =====================================================
+     TOP MENU
+===================================================== -->
+
+<div class="top-menu">
+
+    <button
+        class="menu-btn"
+        onclick="openMenu('Lobby')">
+
+        🏠 Lobby
+
+    </button>
+
+    <button
+        class="menu-btn"
+        onclick="openMenu('Players')">
+
+        👥 Players
+
+    </button>
+
+    <button
+        class="menu-btn"
+        onclick="openMenu('Chat')">
+
+        💬 Chat
+
+    </button>
+
+    <button
+        class="menu-btn"
+        onclick="openMenu('Rank')">
+
+        🏆 Rank
+
+    </button>
+
+    <button
+        class="menu-btn"
+        onclick="openMenu('Match')">
+
+        🎯 Match
+
+    </button>
+
+    <button
+        class="menu-btn"
+        onclick="pauseGame()">
+
+        II Pause
+
+    </button>
+
+</div>
+
+
+<!-- =====================================================
+     ONLINE
+===================================================== -->
+
+<div class="online">
+
+    <span class="online-dot"></span>
+
+    ONLINE 4
+
+</div>
+
+
+<!-- =====================================================
+     MINIMAP
+===================================================== -->
+
+<div class="minimap" id="minimap">
+
+    <div
+        class="map-dot map-player"
+        id="mapPlayer"
+        style="left:50%;top:50%;">
+    </div>
+
+    <div
+        class="map-dot map-enemy"
+        id="mapEnemy"
+        style="left:75%;top:35%;">
+    </div>
+
+    <div
+        class="map-dot map-yellow"
+        style="left:45%;top:60%;">
+    </div>
+
+    <div
+        class="map-dot map-purple"
+        style="right:25px;bottom:25px;">
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     PLAYER
+===================================================== -->
+
+<div
+    class="player"
+    id="player">
+
+    <div class="player-bar"></div>
+
+</div>
+
+
+<!-- =====================================================
+     ENEMY
+===================================================== -->
+
+<div
+    class="enemy"
+    id="enemy">
+
+    <div class="enemy-hp">
+
+        <div
+            class="enemy-hp-fill"
+            id="enemyHp">
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     ATTACK EFFECT
+===================================================== -->
+
+<div
+    class="attack-effect"
+    id="attackEffect">
+</div>
+
+
+<!-- =====================================================
+     DAMAGE FLASH
+===================================================== -->
+
+<div
+    class="damage-flash"
+    id="damageFlash">
+</div>
+
+
+<!-- =====================================================
+     CONTROLLER
+===================================================== -->
+
+<div class="controller">
+
+    <button
+        class="direction up"
+        data-key="arrowup">
+
+        ▲
+
+    </button>
+
+    <button
+        class="direction left"
+        data-key="arrowleft">
+
+        ◀
+
+    </button>
+
+    <button
+        class="direction down"
+        data-key="arrowdown">
+
+        ▼
+
+    </button>
+
+    <button
+        class="direction right"
+        data-key="arrowright">
+
+        ▶
+
+    </button>
+
+</div>
+
+
+<!-- =====================================================
+     ATTACK
+===================================================== -->
+
+<button
+    class="attack"
+    id="attackButton">
+
+    ⚔ SERANG [ SPACE ]
+
+</button>
+
+
+<!-- =====================================================
+     GUIDE
+===================================================== -->
+
+<div class="guide">
+
+    <strong>WASD / ARROW</strong>
+    Gerak
+
+    &nbsp; • &nbsp;
+
+    <strong>SPACE</strong>
+    Serang
+
+    &nbsp; • &nbsp;
+
+    <strong>ESC</strong>
+    Pause
+
+</div>
+
+
+<!-- =====================================================
+     SUBTITLE
+===================================================== -->
+
+<div
+    class="subtitle"
+    id="subtitle">
+</div>
+
+
+<!-- =====================================================
+     TUTORIAL
+===================================================== -->
+
+<div
+    class="modal show"
+    id="tutorial">
+
+    <div class="modal-box tutorial">
+
+        <h1>
+            ⚔ CUBESADY KNIGHT
+        </h1>
+
+        <p>
+
+            Selamat datang, Knight!
+
+            <br>
+
+            Gunakan
+            <strong>WASD / ARROW</strong>
+            untuk bergerak.
+
+            <br>
+
+            Tekan
+            <strong>SPACE</strong>
+            untuk menyerang.
+
+            <br>
+
+            Jangan sampai HP kamu habis!
+
+        </p>
+
+        <button
+            class="start"
+            onclick="startGame()">
+
+            MULAI BERMAIN
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     GENERAL MENU
+===================================================== -->
+
+<div
+    class="modal"
+    id="menuModal">
+
+    <div class="modal-box">
+
+        <h2 id="menuTitle">
+            Menu
+        </h2>
+
+        <div id="menuContent"></div>
+
+        <button
+            class="modal-btn"
+            onclick="closeMenu()">
+
+            TUTUP
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     PAUSE
+===================================================== -->
+
+<div
+    class="modal"
+    id="pauseModal">
+
+    <div class="modal-box">
+
+        <h2>
+            ⏸ GAME PAUSED
+        </h2>
+
+        <p>
+            Permainan dihentikan sementara.
+        </p>
+
+        <button
+            class="modal-btn"
+            onclick="resumeGame()">
+
+            ▶ LANJUTKAN
+
+        </button>
+
+        <button
+            class="modal-btn"
+            onclick="openSettings()">
+
+            ⚙ PENGATURAN
+
+        </button>
+
+        <button
+            class="modal-btn"
+            onclick="exitGame()">
+
+            🚪 EXIT KE LOBBY
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     SETTINGS
+===================================================== -->
+
+<div
+    class="modal"
+    id="settingsModal">
+
+    <div class="modal-box">
+
+        <h2>
+            ⚙ PENGATURAN
+        </h2>
+
+        <p>
+            Tingkat Kesulitan
+        </p>
+
+        <select
+            id="difficulty"
+            style="
+                width:100%;
+                padding:11px;
+                margin-top:5px;
+                background:#092b45;
+                color:white;
+                border:1px solid #176484;
+                border-radius:10px;
+            ">
+
+            <option value="easy">
+                Easy
+            </option>
+
+            <option
+                value="normal"
+                selected>
+
+                Normal
+
+            </option>
+
+            <option value="hard">
+                Hard
+            </option>
+
+        </select>
+
+        <button
+            class="modal-btn"
+            onclick="toggleColorblind()">
+
+            👁 Colorblind Mode
+
+        </button>
+
+        <button
+            class="modal-btn"
+            onclick="toggleLargeText()">
+
+            🔤 Large Text
+
+        </button>
+
+        <button
+            class="modal-btn"
+            onclick="saveSettings()">
+
+            SIMPAN
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     GAME OVER
+===================================================== -->
+
+<div
+    class="modal"
+    id="gameOver">
+
+    <div class="modal-box game-over">
+
+        <h1>
+            GAME OVER
+        </h1>
+
+        <p>
+            Knight telah kalah dalam pertempuran.
+        </p>
+
+        <div class="final-score">
+
+            ⭐ SCORE:
+            <span id="finalScore">
+                0
+            </span>
+
+        </div>
+
+        <button
+            class="modal-btn"
+            onclick="restartGame()">
+
+            🔄 MAIN LAGI
+
+        </button>
+
+        <button
+            class="modal-btn"
+            onclick="backToLobby()">
+
+            🏠 KEMBALI KE LOBBY
+
+        </button>
+
+    </div>
+
+</div>
+
+
+</div>
+
+
 <script>
 
 /* =========================================================
-   GAME VARIABLES
+   ELEMENTS
 ========================================================= */
+
+const game =
+    document.getElementById("game");
 
 const player =
     document.getElementById("player");
@@ -1428,49 +1782,165 @@ const scoreText =
 const diamondText =
     document.getElementById("diamond");
 
+const enemyHp =
+    document.getElementById("enemyHp");
+
 const attackEffect =
     document.getElementById("attackEffect");
+
+const damageFlash =
+    document.getElementById("damageFlash");
+
+const mapPlayer =
+    document.getElementById("mapPlayer");
+
+const mapEnemy =
+    document.getElementById("mapEnemy");
 
 const subtitle =
     document.getElementById("subtitle");
 
 
-let x =
-    window.innerWidth * .593;
+/* =========================================================
+   GAME VARIABLES
+========================================================= */
 
-let y =
-    window.innerHeight * .533;
+let playerX =
+    window.innerWidth * .50;
+
+let playerY =
+    window.innerHeight * .52;
+
+let enemyX =
+    window.innerWidth * .70;
+
+let enemyY =
+    window.innerHeight * .58;
 
 
-let hp = 64;
+let hp = 100;
 
-let score = 20;
+let score = 0;
 
-let diamond = 2;
+let diamonds = 2;
+
+let enemyHealth = 100;
 
 let speed = 5;
+
+let enemySpeed = 1.25;
 
 let playing = false;
 
 let paused = false;
 
+let attacking = false;
+
 let subtitleEnabled = true;
+
+let damageCooldown = false;
+
+let enemyRespawnTimer = null;
 
 
 const keys = {};
 
 
 /* =========================================================
-   PLAYER UPDATE
+   PLAYER POSITION
 ========================================================= */
 
-function updatePlayer() {
+function updatePlayer(){
 
     player.style.left =
-        x + "px";
+        playerX + "px";
 
     player.style.top =
-        y + "px";
+        playerY + "px";
+
+}
+
+
+/* =========================================================
+   ENEMY POSITION
+========================================================= */
+
+function updateEnemy(){
+
+    enemy.style.left =
+        enemyX + "px";
+
+    enemy.style.top =
+        enemyY + "px";
+
+}
+
+
+/* =========================================================
+   MINIMAP
+========================================================= */
+
+function updateMinimap(){
+
+    const maxX =
+        window.innerWidth;
+
+    const maxY =
+        window.innerHeight;
+
+
+    let px =
+        (playerX / maxX) * 100;
+
+    let py =
+        (playerY / maxY) * 100;
+
+
+    let ex =
+        (enemyX / maxX) * 100;
+
+    let ey =
+        (enemyY / maxY) * 100;
+
+
+    mapPlayer.style.left =
+        Math.max(
+            2,
+            Math.min(
+                94,
+                px
+            )
+        ) + "%";
+
+
+    mapPlayer.style.top =
+        Math.max(
+            5,
+            Math.min(
+                90,
+                py
+            )
+        ) + "%";
+
+
+    mapEnemy.style.left =
+        Math.max(
+            2,
+            Math.min(
+                94,
+                ex
+            )
+        ) + "%";
+
+
+    mapEnemy.style.top =
+        Math.max(
+            5,
+            Math.min(
+                90,
+                ey
+            )
+        ) + "%";
 
 }
 
@@ -1481,13 +1951,11 @@ function updatePlayer() {
 
 document.addEventListener(
     "keydown",
-    function(event) {
+    function(e){
 
-        if (
-            event.code === "Space"
-        ) {
+        if(e.code === "Space"){
 
-            event.preventDefault();
+            e.preventDefault();
 
             attack();
 
@@ -1496,11 +1964,9 @@ document.addEventListener(
         }
 
 
-        if (
-            event.code === "Escape"
-        ) {
+        if(e.code === "Escape"){
 
-            if (playing) {
+            if(playing){
 
                 pauseGame();
 
@@ -1512,7 +1978,7 @@ document.addEventListener(
 
 
         keys[
-            event.key.toLowerCase()
+            e.key.toLowerCase()
         ] = true;
 
     }
@@ -1521,10 +1987,10 @@ document.addEventListener(
 
 document.addEventListener(
     "keyup",
-    function(event) {
+    function(e){
 
         keys[
-            event.key.toLowerCase()
+            e.key.toLowerCase()
         ] = false;
 
     }
@@ -1532,76 +1998,190 @@ document.addEventListener(
 
 
 /* =========================================================
+   TOUCH CONTROLLER
+========================================================= */
+
+document
+.querySelectorAll(".direction")
+.forEach(button => {
+
+    const key =
+        button.dataset.key;
+
+
+    button.addEventListener(
+        "mousedown",
+        () => {
+
+            keys[key] = true;
+
+        }
+    );
+
+
+    button.addEventListener(
+        "mouseup",
+        () => {
+
+            keys[key] = false;
+
+        }
+    );
+
+
+    button.addEventListener(
+        "mouseleave",
+        () => {
+
+            keys[key] = false;
+
+        }
+    );
+
+
+    button.addEventListener(
+        "touchstart",
+        e => {
+
+            e.preventDefault();
+
+            keys[key] = true;
+
+        }
+    );
+
+
+    button.addEventListener(
+        "touchend",
+        e => {
+
+            e.preventDefault();
+
+            keys[key] = false;
+
+        }
+    );
+
+});
+
+
+/* =========================================================
+   DISTANCE
+========================================================= */
+
+function distanceBetween(
+    x1,
+    y1,
+    x2,
+    y2
+){
+
+    const dx =
+        x1 - x2;
+
+    const dy =
+        y1 - y2;
+
+    return Math.sqrt(
+        dx * dx +
+        dy * dy
+    );
+
+}
+
+
+/* =========================================================
    GAME LOOP
 ========================================================= */
 
-function gameLoop() {
+function gameLoop(){
 
-    if (
+    if(
         playing &&
         !paused
-    ) {
+    ){
 
+        /* PLAYER MOVEMENT */
 
-        if (
+        if(
             keys["w"] ||
             keys["arrowup"]
-        ) {
+        ){
 
-            y -= speed;
+            playerY -= speed;
 
         }
 
 
-        if (
+        if(
             keys["s"] ||
             keys["arrowdown"]
-        ) {
+        ){
 
-            y += speed;
+            playerY += speed;
 
         }
 
 
-        if (
+        if(
             keys["a"] ||
             keys["arrowleft"]
-        ) {
+        ){
 
-            x -= speed;
+            playerX -= speed;
 
         }
 
 
-        if (
+        if(
             keys["d"] ||
             keys["arrowright"]
-        ) {
+        ){
 
-            x += speed;
+            playerX += speed;
 
         }
 
 
-        x = Math.max(
-            0,
-            Math.min(
-                window.innerWidth - 60,
-                x
-            )
-        );
+        /* BOUNDARY */
+
+        playerX =
+            Math.max(
+                10,
+                Math.min(
+                    window.innerWidth - 70,
+                    playerX
+                )
+            );
 
 
-        y = Math.max(
-            0,
-            Math.min(
-                window.innerHeight - 60,
-                y
-            )
-        );
+        playerY =
+            Math.max(
+                180,
+                Math.min(
+                    window.innerHeight - 85,
+                    playerY
+                )
+            );
 
+
+        /* ENEMY AI */
+
+        moveEnemy();
+
+
+        /* UPDATE */
 
         updatePlayer();
+
+        updateEnemy();
+
+        updateMinimap();
+
+
+        /* COLLISION */
+
+        checkEnemyCollision();
 
     }
 
@@ -1616,165 +2196,16 @@ gameLoop();
 
 
 /* =========================================================
-   TOUCH CONTROLLER
+   ENEMY AI
 ========================================================= */
 
-document
-.querySelectorAll(".direction")
-.forEach(button => {
-
-    const key =
-        button.dataset.key.toLowerCase();
-
-
-    button.addEventListener(
-        "mousedown",
-        function() {
-
-            keys[key] = true;
-
-        }
-    );
-
-
-    button.addEventListener(
-        "mouseup",
-        function() {
-
-            keys[key] = false;
-
-        }
-    );
-
-
-    button.addEventListener(
-        "mouseleave",
-        function() {
-
-            keys[key] = false;
-
-        }
-    );
-
-
-    button.addEventListener(
-        "touchstart",
-        function(event) {
-
-            event.preventDefault();
-
-            keys[key] = true;
-
-        }
-    );
-
-
-    button.addEventListener(
-        "touchend",
-        function(event) {
-
-            event.preventDefault();
-
-            keys[key] = false;
-
-        }
-    );
-
-});
-
-
-/* =========================================================
-   START GAME
-========================================================= */
-
-function startGame() {
-
-    document
-    .getElementById("tutorial")
-    .classList.remove("show");
-
-
-    playing = true;
-
-    paused = false;
-
-
-    showSubtitle(
-        "🎮 Game dimulai!"
-    );
-
-}
-
-
-/* =========================================================
-   ATTACK
-========================================================= */
-
-function attack() {
-
-    if (
-        !playing ||
-        paused
-    ) {
-
-        return;
-
-    }
-
-
-    const rect =
-        player.getBoundingClientRect();
-
-
-    attackEffect.style.left =
-        (
-            rect.left + 30
-        ) + "px";
-
-
-    attackEffect.style.top =
-        (
-            rect.top + 30
-        ) + "px";
-
-
-    attackEffect.classList.remove(
-        "active"
-    );
-
-
-    void attackEffect.offsetWidth;
-
-
-    attackEffect.classList.add(
-        "active"
-    );
-
-
-    score += 5;
-
-
-    scoreText.textContent =
-        score;
-
-
-    showSubtitle(
-        "⚔ SERANG!"
-    );
-
-
-    const enemyRect =
-        enemy.getBoundingClientRect();
-
+function moveEnemy(){
 
     const dx =
-        rect.left -
-        enemyRect.left;
-
+        playerX - enemyX;
 
     const dy =
-        rect.top -
-        enemyRect.top;
+        playerY - enemyY;
 
 
     const distance =
@@ -1784,35 +2215,15 @@ function attack() {
         );
 
 
-    if (
-        distance < 160
-    ) {
+    if(distance > 60){
 
-        enemy.style.transform =
-            "scale(.65)";
+        enemyX +=
+            (dx / distance)
+            * enemySpeed;
 
-
-        enemy.style.opacity =
-            ".5";
-
-
-        showSubtitle(
-            "💥 Musuh terkena!"
-        );
-
-
-        setTimeout(
-            function() {
-
-                enemy.style.transform =
-                    "scale(1)";
-
-                enemy.style.opacity =
-                    "1";
-
-            },
-            200
-        );
+        enemyY +=
+            (dy / distance)
+            * enemySpeed;
 
     }
 
@@ -1820,24 +2231,529 @@ function attack() {
 
 
 /* =========================================================
-   ATTACK BUTTON
+   ENEMY COLLISION
 ========================================================= */
 
-document
-.getElementById("attackButton")
-.addEventListener(
-    "click",
-    attack
-);
+function checkEnemyCollision(){
+
+    const distance =
+        distanceBetween(
+            playerX,
+            playerY,
+            enemyX,
+            enemyY
+        );
+
+
+    if(
+        distance < 65 &&
+        !damageCooldown
+    ){
+
+        takeDamage(10);
+
+    }
+
+}
+
+
+/* =========================================================
+   TAKE DAMAGE
+========================================================= */
+
+function takeDamage(amount){
+
+    if(!playing)
+        return;
+
+
+    damageCooldown = true;
+
+
+    hp -= amount;
+
+
+    hp =
+        Math.max(
+            0,
+            hp
+        );
+
+
+    hpText.textContent =
+        hp;
+
+
+    hpFill.style.width =
+        hp + "%";
+
+
+    /* FLASH */
+
+    damageFlash.classList.remove(
+        "active"
+    );
+
+    void damageFlash.offsetWidth;
+
+    damageFlash.classList.add(
+        "active"
+    );
+
+
+    showFloatingText(
+        "-" + amount,
+        playerX,
+        playerY
+    );
+
+
+    showSubtitle(
+        "💔 Kamu terkena serangan!"
+    );
+
+
+    /* LOW HP */
+
+    if(hp <= 30){
+
+        hpFill.style.background =
+            "linear-gradient(90deg,#ff3f68,#ff7755)";
+
+    }
+
+
+    /* DEATH */
+
+    if(hp <= 0){
+
+        playerDeath();
+
+        return;
+
+    }
+
+
+    setTimeout(
+        () => {
+
+            damageCooldown = false;
+
+        },
+        600
+    );
+
+}
+
+
+/* =========================================================
+   ATTACK
+========================================================= */
+
+function attack(){
+
+    if(
+        !playing ||
+        paused ||
+        attacking
+    ){
+
+        return;
+
+    }
+
+
+    attacking = true;
+
+
+    const centerX =
+        playerX + 30;
+
+    const centerY =
+        playerY + 30;
+
+
+    /* EFFECT */
+
+    attackEffect.style.left =
+        centerX + "px";
+
+    attackEffect.style.top =
+        centerY + "px";
+
+
+    attackEffect.classList.remove(
+        "active"
+    );
+
+    void attackEffect.offsetWidth;
+
+    attackEffect.classList.add(
+        "active"
+    );
+
+
+    /* FIND ENEMY */
+
+    const distance =
+        distanceBetween(
+            playerX,
+            playerY,
+            enemyX,
+            enemyY
+        );
+
+
+    if(distance < 145){
+
+        enemyHealth -= 50;
+
+
+        enemyHp.style.width =
+            enemyHealth + "%";
+
+
+        enemy.style.transform =
+            "scale(.75)";
+
+
+        showFloatingText(
+            "-50",
+            enemyX,
+            enemyY
+        );
+
+
+        showSubtitle(
+            "💥 MUSUH TERKENA!"
+        );
+
+
+        setTimeout(
+            () => {
+
+                enemy.style.transform =
+                    "scale(1)";
+
+            },
+            120
+        );
+
+
+        if(enemyHealth <= 0){
+
+            killEnemy();
+
+        }
+
+    }
+    else{
+
+        showSubtitle(
+            "⚔ SERANGAN!"
+
+        );
+
+    }
+
+
+    setTimeout(
+        () => {
+
+            attacking = false;
+
+        },
+        250
+    );
+
+}
+
+
+/* =========================================================
+   KILL ENEMY
+========================================================= */
+
+function killEnemy(){
+
+    score += 10;
+
+    scoreText.textContent =
+        score;
+
+
+    /* RANDOM DIAMOND */
+
+    if(
+        Math.random() > .45
+    ){
+
+        diamonds++;
+
+        diamondText.textContent =
+            diamonds;
+
+        showSubtitle(
+            "💎 +1 Diamond!"
+        );
+
+    }
+    else{
+
+        showSubtitle(
+            "⭐ +10 Score!"
+
+        );
+
+    }
+
+
+    enemy.style.opacity =
+        "0";
+
+    enemy.style.transform =
+        "scale(1.5)";
+
+
+    clearTimeout(
+        enemyRespawnTimer
+    );
+
+
+    enemyRespawnTimer =
+        setTimeout(
+            respawnEnemy,
+            1200
+        );
+
+}
+
+
+/* =========================================================
+   RESPAWN ENEMY
+========================================================= */
+
+function respawnEnemy(){
+
+    enemyX =
+        250 +
+        Math.random() *
+        (
+            window.innerWidth - 500
+        );
+
+
+    enemyY =
+        250 +
+        Math.random() *
+        (
+            window.innerHeight - 400
+        );
+
+
+    enemyHealth = 100;
+
+
+    enemyHp.style.width =
+        "100%";
+
+
+    enemy.style.opacity =
+        "1";
+
+
+    enemy.style.transform =
+        "scale(1)";
+
+
+    updateEnemy();
+
+}
+
+
+/* =========================================================
+   PLAYER DEATH
+========================================================= */
+
+function playerDeath(){
+
+    playing = false;
+
+    paused = false;
+
+
+    player.style.opacity =
+        "0";
+
+
+    showSubtitle(
+        "💀 Kamu kalah!"
+    );
+
+
+    setTimeout(
+        () => {
+
+            document
+            .getElementById(
+                "finalScore"
+            )
+            .textContent =
+                score;
+
+
+            document
+            .getElementById(
+                "gameOver"
+            )
+            .classList.add(
+                "show"
+            );
+
+        },
+        700
+    );
+
+}
+
+
+/* =========================================================
+   START GAME
+========================================================= */
+
+function startGame(){
+
+    document
+    .getElementById(
+        "tutorial"
+    )
+    .classList.remove(
+        "show"
+    );
+
+
+    playing = true;
+
+    paused = false;
+
+
+    showSubtitle(
+        "🎮 SELAMAT DATANG, KNIGHT!"
+    );
+
+}
+
+
+/* =========================================================
+   RESTART GAME
+========================================================= */
+
+function restartGame(){
+
+    document
+    .getElementById(
+        "gameOver"
+    )
+    .classList.remove(
+        "show"
+    );
+
+
+    hp = 100;
+
+    score = 0;
+
+    diamonds = 2;
+
+    enemyHealth = 100;
+
+
+    hpText.textContent =
+        hp;
+
+    hpFill.style.width =
+        "100%";
+
+    hpFill.style.background =
+        "linear-gradient(90deg,#22dbc1,#2bc8ed)";
+
+
+    scoreText.textContent =
+        score;
+
+    diamondText.textContent =
+        diamonds;
+
+
+    playerX =
+        window.innerWidth * .50;
+
+    playerY =
+        window.innerHeight * .52;
+
+
+    player.style.opacity =
+        "1";
+
+
+    respawnEnemy();
+
+
+    playing = true;
+
+    paused = false;
+
+
+    updatePlayer();
+
+    updateEnemy();
+
+    updateMinimap();
+
+
+    showSubtitle(
+        "🔄 PERTEMPURAN DIMULAI LAGI!"
+    );
+
+}
+
+
+/* =========================================================
+   BACK TO LOBBY
+========================================================= */
+
+function backToLobby(){
+
+    document
+    .getElementById(
+        "gameOver"
+    )
+    .classList.remove(
+        "show"
+    );
+
+
+    document
+    .getElementById(
+        "tutorial"
+    )
+    .classList.add(
+        "show"
+    );
+
+
+    player.style.opacity =
+        "1";
+
+}
 
 
 /* =========================================================
    PAUSE
 ========================================================= */
 
-function pauseGame() {
+function pauseGame(){
 
-    if (!playing)
+    if(!playing)
         return;
 
 
@@ -1845,20 +2761,33 @@ function pauseGame() {
 
 
     document
-    .getElementById("pauseModal")
-    .classList.add("show");
+    .getElementById(
+        "pauseModal"
+    )
+    .classList.add(
+        "show"
+    );
 
 }
 
 
-function resumeGame() {
+function resumeGame(){
 
     paused = false;
 
 
     document
-    .getElementById("pauseModal")
-    .classList.remove("show");
+    .getElementById(
+        "pauseModal"
+    )
+    .classList.remove(
+        "show"
+    );
+
+
+    showSubtitle(
+        "▶ GAME DILANJUTKAN"
+    );
 
 }
 
@@ -1867,7 +2796,7 @@ function resumeGame() {
    EXIT
 ========================================================= */
 
-function exitGame() {
+function exitGame(){
 
     playing = false;
 
@@ -1875,13 +2804,21 @@ function exitGame() {
 
 
     document
-    .getElementById("pauseModal")
-    .classList.remove("show");
+    .getElementById(
+        "pauseModal"
+    )
+    .classList.remove(
+        "show"
+    );
 
 
     document
-    .getElementById("tutorial")
-    .classList.add("show");
+    .getElementById(
+        "tutorial"
+    )
+    .classList.add(
+        "show"
+    );
 
 }
 
@@ -1890,7 +2827,7 @@ function exitGame() {
    MENU
 ========================================================= */
 
-function openMenu(name) {
+function openMenu(name){
 
     const modal =
         document.getElementById(
@@ -1910,36 +2847,31 @@ function openMenu(name) {
         );
 
 
-    title.innerText =
+    title.textContent =
         name;
 
 
-    if (
-        name === "Lobby"
-    ) {
+    if(name === "Lobby"){
 
         content.innerHTML =
-            "<p>🏠 Kamu berada di Lobby.</p>";
+            "<p>🏠 Selamat datang di Lobby.</p>" +
+            "<p>Pilih Match untuk memulai permainan.</p>";
 
     }
 
 
-    if (
-        name === "Players"
-    ) {
+    if(name === "Players"){
 
         content.innerHTML =
-            "<p>🟢 Player 1</p>" +
-            "<p>🟢 Player 2</p>" +
-            "<p>🟢 Player 3</p>" +
-            "<p>🟢 Player 4</p>";
+            "<p>🟢 Knight Player</p>" +
+            "<p>🟢 Shadow Knight</p>" +
+            "<p>🟢 Red Cube</p>" +
+            "<p>🟢 Blue Cube</p>";
 
     }
 
 
-    if (
-        name === "Chat"
-    ) {
+    if(name === "Chat"){
 
         content.innerHTML =
             "<p>💬 Welcome, Knight!</p>" +
@@ -1948,9 +2880,7 @@ function openMenu(name) {
     }
 
 
-    if (
-        name === "Rank"
-    ) {
+    if(name === "Rank"){
 
         content.innerHTML =
             "<p>🥇 Knight — 1200</p>" +
@@ -1960,12 +2890,11 @@ function openMenu(name) {
     }
 
 
-    if (
-        name === "Match"
-    ) {
+    if(name === "Match"){
 
         content.innerHTML =
-            "<p>🎯 Match sedang berlangsung.</p>";
+            "<p>🎯 Match sedang berlangsung.</p>" +
+            "<p>Kalahkan musuh dan kumpulkan score!</p>";
 
     }
 
@@ -1977,11 +2906,15 @@ function openMenu(name) {
 }
 
 
-function closeMenu() {
+function closeMenu(){
 
     document
-    .getElementById("menuModal")
-    .classList.remove("show");
+    .getElementById(
+        "menuModal"
+    )
+    .classList.remove(
+        "show"
+    );
 
 }
 
@@ -1990,21 +2923,29 @@ function closeMenu() {
    SETTINGS
 ========================================================= */
 
-function openSettings() {
+function openSettings(){
 
     document
-    .getElementById("pauseModal")
-    .classList.remove("show");
+    .getElementById(
+        "pauseModal"
+    )
+    .classList.remove(
+        "show"
+    );
 
 
     document
-    .getElementById("settingsModal")
-    .classList.add("show");
+    .getElementById(
+        "settingsModal"
+    )
+    .classList.add(
+        "show"
+    );
 
 }
 
 
-function toggleColorblind() {
+function toggleColorblind(){
 
     document.body
     .classList.toggle(
@@ -2014,7 +2955,7 @@ function toggleColorblind() {
 }
 
 
-function toggleLargeText() {
+function toggleLargeText(){
 
     document.body
     .classList.toggle(
@@ -2024,15 +2965,7 @@ function toggleLargeText() {
 }
 
 
-function toggleSubtitle() {
-
-    subtitleEnabled =
-        !subtitleEnabled;
-
-}
-
-
-function saveSettings() {
+function saveSettings(){
 
     const difficulty =
         document
@@ -2042,29 +2975,35 @@ function saveSettings() {
         .value;
 
 
-    if (
+    if(
         difficulty === "easy"
-    ) {
-
-        speed = 4;
-
-    }
-
-
-    if (
-        difficulty === "normal"
-    ) {
+    ){
 
         speed = 5;
 
+        enemySpeed = 1;
+
     }
 
 
-    if (
-        difficulty === "hard"
-    ) {
+    if(
+        difficulty === "normal"
+    ){
 
-        speed = 8;
+        speed = 5;
+
+        enemySpeed = 1.25;
+
+    }
+
+
+    if(
+        difficulty === "hard"
+    ){
+
+        speed = 7;
+
+        enemySpeed = 1.7;
 
     }
 
@@ -2090,16 +3029,65 @@ function saveSettings() {
 
 
 /* =========================================================
+   FLOATING DAMAGE
+========================================================= */
+
+function showFloatingText(
+    text,
+    x,
+    y
+){
+
+    const element =
+        document.createElement(
+            "div"
+        );
+
+
+    element.className =
+        "float-text";
+
+
+    element.textContent =
+        text;
+
+
+    element.style.left =
+        x + "px";
+
+
+    element.style.top =
+        y + "px";
+
+
+    game.appendChild(
+        element
+    );
+
+
+    setTimeout(
+        () => {
+
+            element.remove();
+
+        },
+        800
+    );
+
+}
+
+
+/* =========================================================
    SUBTITLE
 ========================================================= */
 
-function showSubtitle(text) {
+function showSubtitle(text){
 
-    if (!subtitleEnabled)
+    if(!subtitleEnabled)
         return;
 
 
-    subtitle.innerText =
+    subtitle.textContent =
         text;
 
 
@@ -2109,17 +3097,31 @@ function showSubtitle(text) {
 
 
     setTimeout(
-        function() {
+        () => {
 
             subtitle.classList.remove(
                 "show"
             );
 
         },
-        1800
+        1600
     );
 
 }
+
+
+/* =========================================================
+   ATTACK BUTTON
+========================================================= */
+
+document
+.getElementById(
+    "attackButton"
+)
+.addEventListener(
+    "click",
+    attack
+);
 
 
 /* =========================================================
@@ -2128,8 +3130,41 @@ function showSubtitle(text) {
 
 window.addEventListener(
     "resize",
-    updatePlayer
+    () => {
+
+        playerX =
+            Math.min(
+                playerX,
+                window.innerWidth - 70
+            );
+
+
+        playerY =
+            Math.min(
+                playerY,
+                window.innerHeight - 85
+            );
+
+
+        updatePlayer();
+
+        updateEnemy();
+
+        updateMinimap();
+
+    }
 );
+
+
+/* =========================================================
+   INITIAL POSITION
+========================================================= */
+
+updatePlayer();
+
+updateEnemy();
+
+updateMinimap();
 
 </script>
 
