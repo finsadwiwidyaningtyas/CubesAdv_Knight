@@ -26,42 +26,55 @@ body{
 }
 
 body{
-    font-family:Arial, Helvetica, sans-serif;
-    background:#020d1d;
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background:#020b18;
     color:#fff;
 }
 
 
 /* =====================================================
-   GAME BACKGROUND
+   GAME
 ===================================================== */
 
 #game{
     position:relative;
+
     width:100vw;
     height:100vh;
+
     overflow:hidden;
 
-    background-color:#031426;
-
-    background-image:
+    background:
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(8,72,110,.18),
+            transparent 45%
+        ),
         linear-gradient(
-            rgba(20,116,165,.17) 1px,
+            rgba(21,111,157,.16) 1px,
             transparent 1px
         ),
         linear-gradient(
             90deg,
-            rgba(20,116,165,.17) 1px,
+            rgba(21,111,157,.16) 1px,
             transparent 1px
-        );
+        ),
+        #020d1d;
 
     background-size:
-        46px 46px;
+        100% 100%,
+        46px 46px,
+        46px 46px,
+        100% 100%;
 }
 
 
 /* =====================================================
-   BACKGROUND LIGHT
+   BACKGROUND GLOW
 ===================================================== */
 
 .bg-glow{
@@ -72,22 +85,22 @@ body{
 
     border-radius:50%;
 
+    pointer-events:none;
+
     background:
         radial-gradient(
             circle,
-            rgba(0,160,255,.10),
-            transparent 68%
+            rgba(0,174,255,.09),
+            transparent 70%
         );
-
-    pointer-events:none;
 }
 
-.bg-glow.one{
-    left:30%;
-    top:15%;
+.bg-glow.left{
+    left:10%;
+    top:25%;
 }
 
-.bg-glow.two{
+.bg-glow.right{
     right:-100px;
     bottom:-150px;
 }
@@ -105,49 +118,54 @@ body{
 
     border-radius:50%;
 
-    background:#b7e7ff;
+    background:#b9e9ff;
 
-    opacity:.65;
+    opacity:.55;
 
     box-shadow:
-        0 0 6px rgba(120,220,255,.6);
+        0 0 7px #65d9ff;
 }
 
 
 /* =====================================================
-   HP PANEL
+   HP
 ===================================================== */
 
 .hp-panel{
     position:absolute;
 
     left:25px;
-    top:28px;
+    top:25px;
 
     width:380px;
+    height:105px;
 
-    padding:20px 24px;
+    padding:19px 23px;
 
-    border:1px solid #126487;
+    border:1px solid #11648b;
     border-radius:20px;
 
-    background:rgba(3,24,49,.94);
+    background:
+        rgba(3,24,49,.96);
 
     box-shadow:
-        0 0 25px rgba(0,150,255,.08);
+        0 0 25px rgba(0,155,235,.08);
 
-    z-index:20;
+    z-index:50;
 }
 
 .hp-top{
     display:flex;
+
     justify-content:space-between;
     align-items:center;
 }
 
 .hp-label{
     display:flex;
+
     align-items:center;
+
     gap:10px;
 
     font-size:20px;
@@ -155,13 +173,13 @@ body{
 }
 
 .heart{
-    color:#ff68a8;
+    color:#ff67a7;
 
     font-size:27px;
 
     filter:
         drop-shadow(
-            0 0 9px #ff3b8b
+            0 0 8px #ff3d8b
         );
 }
 
@@ -174,14 +192,14 @@ body{
     width:100%;
     height:18px;
 
-    margin-top:14px;
+    margin-top:13px;
 
     overflow:hidden;
 
-    border:1px solid #284b67;
+    border:1px solid #284a66;
     border-radius:20px;
 
-    background:#142c46;
+    background:#142b45;
 }
 
 .hp-fill{
@@ -191,12 +209,12 @@ body{
     background:
         linear-gradient(
             90deg,
-            #22dbc1,
-            #2bc8ed
+            #20d9bd,
+            #2cc8ed
         );
 
     box-shadow:
-        0 0 15px #22d7dd;
+        0 0 15px #23d8d5;
 
     transition:
         width .25s ease,
@@ -212,19 +230,22 @@ body{
     position:absolute;
 
     left:25px;
-    top:146px;
+    top:145px;
 
-    padding:13px 23px;
+    height:49px;
 
-    border:1px solid #126487;
+    padding:13px 22px;
+
+    border:1px solid #11648b;
     border-radius:17px;
 
-    background:rgba(3,24,49,.94);
+    background:
+        rgba(3,24,49,.96);
 
     font-size:16px;
     font-weight:bold;
 
-    z-index:20;
+    z-index:50;
 }
 
 .score{
@@ -232,8 +253,112 @@ body{
 }
 
 .diamond{
-    color:#57cfff;
-    margin-left:15px;
+    color:#58cfff;
+
+    margin-left:12px;
+}
+
+
+/* =====================================================
+   MENU
+   >>> INI YANG DIUBAH <<<
+   DEKAT PANEL HP
+===================================================== */
+
+.top-menu{
+
+    position:absolute;
+
+    /*
+       SEJAJAR DENGAN HP
+       MULAI DARI SEBELAH KANAN HP
+    */
+
+    left:430px;
+    top:32px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    z-index:60;
+}
+
+
+/* =====================================================
+   MENU BUTTON
+===================================================== */
+
+.menu-btn{
+
+    height:46px;
+
+    padding:
+        0 16px;
+
+    border:
+        1px solid
+        rgba(25,157,210,.65);
+
+    border-radius:15px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(8,39,66,.96),
+            rgba(3,24,46,.96)
+        );
+
+    color:#fff;
+
+    font-size:15px;
+
+    font-weight:bold;
+
+    white-space:nowrap;
+
+    cursor:pointer;
+
+    box-shadow:
+        inset 0 1px
+        rgba(255,255,255,.04),
+
+        0 0 12px
+        rgba(0,140,220,.04);
+
+    transition:
+        transform .18s ease,
+        background .18s ease,
+        box-shadow .18s ease,
+        border-color .18s ease;
+}
+
+.menu-btn:hover{
+
+    transform:
+        translateY(-2px);
+
+    border-color:
+        #28c8f4;
+
+    background:
+        linear-gradient(
+            145deg,
+            #0c3858,
+            #082945
+        );
+
+    box-shadow:
+        0 0 18px
+        rgba(28,197,245,.2);
+}
+
+.menu-btn:active{
+
+    transform:
+        scale(.94);
 }
 
 
@@ -242,25 +367,32 @@ body{
 ===================================================== */
 
 .online{
+
     position:absolute;
 
     right:25px;
     top:30px;
 
-    padding:13px 20px;
+    padding:
+        13px 19px;
 
-    border:1px solid #126487;
+    border:
+        1px solid #11648b;
+
     border-radius:18px;
 
-    background:rgba(3,24,49,.94);
+    background:
+        rgba(3,24,49,.96);
 
     font-size:16px;
+
     font-weight:bold;
 
-    z-index:20;
+    z-index:60;
 }
 
 .online-dot{
+
     display:inline-block;
 
     width:11px;
@@ -278,104 +410,35 @@ body{
 
 
 /* =====================================================
-   TOP MENU
-   TEPAT DI TENGAH
-===================================================== */
-
-.top-menu{
-    position:absolute;
-
-    top:105px;
-    left:50%;
-
-    transform:translateX(-50%);
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    gap:9px;
-
-    width:max-content;
-
-    z-index:30;
-}
-
-.menu-btn{
-    height:46px;
-
-    padding:0 18px;
-
-    border:1px solid #126487;
-    border-radius:15px;
-
-    background:rgba(3,24,49,.96);
-
-    color:white;
-
-    font-size:15px;
-    font-weight:bold;
-
-    cursor:pointer;
-
-    white-space:nowrap;
-
-    transition:
-        .2s ease;
-
-    box-shadow:
-        0 0 12px
-        rgba(0,130,220,.04);
-}
-
-.menu-btn:hover{
-    background:
-        linear-gradient(
-            135deg,
-            #0d3857,
-            #092b46
-        );
-
-    transform:
-        translateY(-2px);
-
-    box-shadow:
-        0 0 18px
-        rgba(30,200,255,.2);
-}
-
-.menu-btn:active{
-    transform:
-        scale(.94);
-}
-
-
-/* =====================================================
    MINIMAP
 ===================================================== */
 
 .minimap{
+
     position:absolute;
 
     right:25px;
-    top:155px;
+    top:105px;
 
     width:292px;
     height:210px;
 
     overflow:hidden;
 
-    border:1px solid #126487;
+    border:
+        1px solid #11648b;
+
     border-radius:20px;
 
     background-color:#061b31;
 
     background-image:
+
         linear-gradient(
             rgba(20,126,165,.17) 1px,
             transparent 1px
         ),
+
         linear-gradient(
             90deg,
             rgba(20,126,165,.17) 1px,
@@ -384,10 +447,20 @@ body{
 
     background-size:32px 32px;
 
-    z-index:15;
+    box-shadow:
+        inset 0 0 25px
+        rgba(0,150,220,.05);
+
+    z-index:40;
 }
 
+
+/* =====================================================
+   MAP DOT
+===================================================== */
+
 .map-dot{
+
     position:absolute;
 
     width:12px;
@@ -404,79 +477,102 @@ body{
 }
 
 .map-player{
+
     width:15px;
     height:15px;
 
     background:#42eaff;
+
     color:#42eaff;
 }
 
 .map-enemy{
+
     background:#ff3e68;
+
     color:#ff3e68;
 }
 
 .map-yellow{
+
     background:#ffd43b;
+
     color:#ffd43b;
 }
 
 .map-purple{
+
     background:#a954ff;
+
     color:#a954ff;
 }
 
 
 /* =====================================================
-   PLAYER TRAIL / BUNTUT
+   PLAYER TRAIL
+   BUNTUT
 ===================================================== */
 
 .player-trail{
+
     position:absolute;
 
-    width:90px;
-    height:30px;
+    width:100px;
+    height:34px;
 
     border-radius:50%;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(255,61,104,.35),
-            rgba(255,61,104,.75)
-        );
-
-    filter:
-        blur(8px);
-
-    opacity:0;
 
     pointer-events:none;
 
     z-index:5;
 
-    transform-origin:right center;
+    opacity:0;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent 0%,
+            rgba(255,45,105,.10) 20%,
+            rgba(255,55,110,.35) 55%,
+            rgba(255,80,135,.85) 100%
+        );
+
+    filter:
+        blur(8px);
+
+    transform-origin:
+        right center;
+
+    transition:
+        opacity .2s ease;
 }
 
 .player-trail.active{
-    opacity:.8;
+
+    opacity:.9;
+
     animation:
-        trailPulse .18s infinite alternate;
+        trailMove .18s
+        infinite
+        alternate;
 }
 
-@keyframes trailPulse{
+@keyframes trailMove{
 
     from{
+
         transform:
-            translateX(-5px)
+            translateX(-2px)
             scaleX(.85);
+
     }
 
     to{
+
         transform:
-            translateX(-12px)
-            scaleX(1);
+            translateX(-13px)
+            scaleX(1.05);
+
     }
 }
 
@@ -486,6 +582,7 @@ body{
 ===================================================== */
 
 .player{
+
     position:absolute;
 
     width:60px;
@@ -499,23 +596,30 @@ body{
     background:
         linear-gradient(
             145deg,
-            #ff537a,
-            #f52f60
+            #ff557b,
+            #f42f60
         );
 
     box-shadow:
-        0 0 15px #ff3d68,
-        0 0 38px rgba(255,61,104,.45);
 
-    z-index:10;
+        0 0 15px
+        #ff3d68,
+
+        0 0 35px
+        rgba(255,61,104,.45);
+
+    z-index:15;
 
     transition:
         left .04s linear,
-        top .04s linear;
+        top .04s linear,
+        transform .1s ease,
+        opacity .2s ease;
 }
 
 .player::before,
 .player::after{
+
     content:"";
 
     position:absolute;
@@ -525,18 +629,23 @@ body{
     width:8px;
     height:8px;
 
-    background:white;
+    background:#fff;
+
+    border-radius:1px;
 }
 
 .player::before{
+
     left:15px;
 }
 
 .player::after{
+
     right:15px;
 }
 
 .player-bar{
+
     position:absolute;
 
     left:0;
@@ -545,7 +654,7 @@ body{
     width:60px;
     height:7px;
 
-    border-radius:5px;
+    border-radius:6px;
 
     background:#ff3d68;
 
@@ -559,6 +668,7 @@ body{
 ===================================================== */
 
 .enemy{
+
     position:absolute;
 
     width:50px;
@@ -573,14 +683,18 @@ body{
         linear-gradient(
             145deg,
             #b85cff,
-            #8b38e8
+            #8636e2
         );
 
     box-shadow:
-        0 0 15px #a94cff,
-        0 0 35px rgba(169,76,255,.4);
 
-    z-index:8;
+        0 0 15px
+        #a94cff,
+
+        0 0 35px
+        rgba(169,76,255,.4);
+
+    z-index:12;
 
     transition:
         left .12s linear,
@@ -591,6 +705,7 @@ body{
 
 .enemy::before,
 .enemy::after{
+
     content:"";
 
     position:absolute;
@@ -604,10 +719,12 @@ body{
 }
 
 .enemy::before{
+
     left:12px;
 }
 
 .enemy::after{
+
     right:12px;
 }
 
@@ -617,10 +734,11 @@ body{
 ===================================================== */
 
 .enemy-trail{
+
     position:absolute;
 
-    width:75px;
-    height:24px;
+    width:80px;
+    height:27px;
 
     border-radius:50%;
 
@@ -628,17 +746,18 @@ body{
         linear-gradient(
             90deg,
             transparent,
-            rgba(169,76,255,.3),
+            rgba(169,76,255,.35),
             rgba(169,76,255,.8)
         );
 
-    filter:blur(7px);
-
-    opacity:.65;
+    filter:
+        blur(7px);
 
     pointer-events:none;
 
-    z-index:4;
+    z-index:6;
+
+    opacity:.7;
 }
 
 
@@ -647,12 +766,14 @@ body{
 ===================================================== */
 
 .enemy-hp{
+
     position:absolute;
 
     left:50%;
     top:-13px;
 
-    transform:translateX(-50%);
+    transform:
+        translateX(-50%);
 
     width:55px;
     height:6px;
@@ -661,10 +782,11 @@ body{
 
     border-radius:10px;
 
-    background:#1b2032;
+    background:#172035;
 }
 
 .enemy-hp-fill{
+
     width:100%;
     height:100%;
 
@@ -680,6 +802,7 @@ body{
 ===================================================== */
 
 .controller{
+
     position:absolute;
 
     left:30px;
@@ -688,21 +811,25 @@ body{
     width:320px;
     height:210px;
 
-    z-index:20;
+    z-index:50;
 }
 
 .direction{
+
     position:absolute;
 
     width:100px;
     height:100px;
 
-    border:1px solid #087fa9;
+    border:
+        1px solid #087fa9;
+
     border-radius:22px;
 
-    background:rgba(3,24,49,.9);
+    background:
+        rgba(3,24,49,.9);
 
-    color:white;
+    color:#fff;
 
     font-size:38px;
 
@@ -712,41 +839,49 @@ body{
 }
 
 .direction:hover{
-    background:#0d3855;
+
+    background:#0c3855;
 }
 
 .direction:active{
-    transform:scale(.91);
+
+    transform:
+        scale(.91);
 
     background:#104a6b;
 }
 
 .up{
+
     left:110px;
     top:0;
 }
 
 .left{
+
     left:0;
     bottom:0;
 }
 
 .down{
+
     left:110px;
     bottom:0;
 }
 
 .right{
+
     right:0;
     bottom:0;
 }
 
 
 /* =====================================================
-   ATTACK BUTTON
+   ATTACK
 ===================================================== */
 
 .attack{
+
     position:absolute;
 
     right:28px;
@@ -756,6 +891,7 @@ body{
     height:88px;
 
     border:none;
+
     border-radius:24px;
 
     background:
@@ -768,21 +904,25 @@ body{
     color:white;
 
     font-size:23px;
+
     font-weight:bold;
 
     cursor:pointer;
 
-    z-index:20;
+    z-index:50;
 
     box-shadow:
         0 0 25px
         rgba(218,39,127,.48);
 
-    transition:.15s ease;
+    transition:
+        .15s ease;
 }
 
 .attack:hover{
-    transform:scale(1.015);
+
+    transform:
+        scale(1.015);
 
     box-shadow:
         0 0 35px
@@ -790,7 +930,9 @@ body{
 }
 
 .attack:active{
-    transform:scale(.95);
+
+    transform:
+        scale(.95);
 }
 
 
@@ -799,28 +941,35 @@ body{
 ===================================================== */
 
 .guide{
+
     position:absolute;
 
     left:50%;
     bottom:17px;
 
-    transform:translateX(-50%);
+    transform:
+        translateX(-50%);
 
-    padding:10px 21px;
+    padding:
+        10px 21px;
 
-    border:1px solid #103d5b;
+    border:
+        1px solid #103d5b;
+
     border-radius:13px;
 
-    background:rgba(3,24,49,.92);
+    background:
+        rgba(3,24,49,.92);
 
     color:#a5b6c6;
 
     font-size:14px;
 
-    z-index:25;
+    z-index:50;
 }
 
 .guide strong{
+
     color:#3bdeeb;
 }
 
@@ -830,12 +979,14 @@ body{
 ===================================================== */
 
 .attack-effect{
+
     position:absolute;
 
     width:130px;
     height:130px;
 
-    border:5px solid #ff4b91;
+    border:
+        5px solid #ff4b91;
 
     border-radius:50%;
 
@@ -847,7 +998,7 @@ body{
         translate(-50%,-50%)
         scale(.3);
 
-    z-index:15;
+    z-index:30;
 
     box-shadow:
         0 0 30px #ff4b91,
@@ -855,13 +1006,16 @@ body{
 }
 
 .attack-effect.active{
+
     animation:
-        attackAnimation .35s ease-out;
+        attackAnimation .35s
+        ease-out;
 }
 
 @keyframes attackAnimation{
 
     0%{
+
         opacity:1;
 
         transform:
@@ -870,6 +1024,7 @@ body{
     }
 
     100%{
+
         opacity:0;
 
         transform:
@@ -884,6 +1039,7 @@ body{
 ===================================================== */
 
 .damage-flash{
+
     position:absolute;
 
     inset:0;
@@ -891,7 +1047,7 @@ body{
     pointer-events:none;
 
     background:
-        rgba(255,0,50,.22);
+        rgba(255,0,50,.20);
 
     opacity:0;
 
@@ -899,16 +1055,24 @@ body{
 }
 
 .damage-flash.active{
+
     animation:
         damageFlash .25s ease;
 }
 
 @keyframes damageFlash{
 
-    0%{opacity:0;}
-    40%{opacity:1;}
-    100%{opacity:0;}
+    0%{
+        opacity:0;
+    }
 
+    40%{
+        opacity:1;
+    }
+
+    100%{
+        opacity:0;
+    }
 }
 
 
@@ -917,27 +1081,32 @@ body{
 ===================================================== */
 
 .float-text{
+
     position:absolute;
 
-    color:#fff;
+    color:white;
 
     font-size:20px;
+
     font-weight:bold;
 
     pointer-events:none;
 
-    z-index:50;
+    z-index:80;
 
     text-shadow:
         0 0 8px rgba(255,255,255,.7);
 
     animation:
-        floatUp .8s ease-out forwards;
+        floatUp .8s
+        ease-out
+        forwards;
 }
 
 @keyframes floatUp{
 
     0%{
+
         opacity:1;
 
         transform:
@@ -946,6 +1115,7 @@ body{
     }
 
     100%{
+
         opacity:0;
 
         transform:
@@ -956,10 +1126,51 @@ body{
 
 
 /* =====================================================
+   SUBTITLE
+===================================================== */
+
+.subtitle{
+
+    position:absolute;
+
+    left:50%;
+    bottom:120px;
+
+    transform:
+        translateX(-50%);
+
+    padding:
+        10px 18px;
+
+    border-radius:9px;
+
+    background:
+        rgba(0,0,0,.78);
+
+    color:white;
+
+    opacity:0;
+
+    transition:
+        opacity .2s;
+
+    pointer-events:none;
+
+    z-index:80;
+}
+
+.subtitle.show{
+
+    opacity:1;
+}
+
+
+/* =====================================================
    MODAL
 ===================================================== */
 
 .modal{
+
     position:absolute;
 
     inset:0;
@@ -972,21 +1183,26 @@ body{
     background:
         rgba(0,10,25,.72);
 
-    backdrop-filter:blur(6px);
+    backdrop-filter:
+        blur(6px);
 
-    z-index:100;
+    z-index:200;
 }
 
 .modal.show{
+
     display:flex;
 }
 
 .modal-box{
+
     width:430px;
 
     padding:35px;
 
-    border:1px solid #1abde8;
+    border:
+        1px solid #1abde8;
+
     border-radius:22px;
 
     background:
@@ -1007,6 +1223,7 @@ body{
 @keyframes modalIn{
 
     from{
+
         opacity:0;
 
         transform:
@@ -1015,6 +1232,7 @@ body{
     }
 
     to{
+
         opacity:1;
 
         transform:
@@ -1024,23 +1242,28 @@ body{
 }
 
 .modal h2{
+
     margin-bottom:20px;
 }
 
 .modal p{
+
     margin:10px 0;
 
     color:#b7c9d9;
 }
 
 .modal-btn{
+
     width:100%;
 
     margin-top:10px;
 
     padding:13px;
 
-    border:1px solid #176484;
+    border:
+        1px solid #176484;
+
     border-radius:12px;
 
     background:#092b45;
@@ -1053,6 +1276,7 @@ body{
 }
 
 .modal-btn:hover{
+
     background:#10476b;
 }
 
@@ -1062,16 +1286,19 @@ body{
 ===================================================== */
 
 .tutorial{
+
     text-align:center;
 }
 
 .tutorial h1{
+
     font-size:34px;
 
     margin-bottom:18px;
 }
 
 .tutorial p{
+
     color:#b8cada;
 
     line-height:1.7;
@@ -1080,7 +1307,9 @@ body{
 }
 
 .start{
-    padding:14px 35px;
+
+    padding:
+        14px 35px;
 
     border:none;
 
@@ -1106,10 +1335,12 @@ body{
 ===================================================== */
 
 .game-over{
+
     text-align:center;
 }
 
 .game-over h1{
+
     font-size:42px;
 
     color:#ff4d71;
@@ -1121,6 +1352,7 @@ body{
 }
 
 .final-score{
+
     font-size:24px;
 
     margin:20px 0;
@@ -1130,56 +1362,36 @@ body{
 
 
 /* =====================================================
-   SUBTITLE
-===================================================== */
-
-.subtitle{
-    position:absolute;
-
-    left:50%;
-    bottom:120px;
-
-    transform:translateX(-50%);
-
-    padding:10px 18px;
-
-    border-radius:9px;
-
-    background:rgba(0,0,0,.78);
-
-    color:white;
-
-    opacity:0;
-
-    transition:opacity .2s;
-
-    pointer-events:none;
-
-    z-index:80;
-}
-
-.subtitle.show{
-    opacity:1;
-}
-
-
-/* =====================================================
    RESPONSIVE
 ===================================================== */
 
-@media(max-width:1200px){
+@media(max-width:1250px){
 
     .top-menu{
+
+        left:420px;
+
         transform:
-            translateX(-50%)
-            scale(.85);
+            scale(.82);
 
         transform-origin:
-            top center;
+            left top;
     }
 
-    .attack{
-        width:320px;
+}
+
+@media(max-width:950px){
+
+    .top-menu{
+
+        left:25px;
+        top:205px;
+
+        transform:
+            scale(.8);
+
+        transform-origin:
+            left top;
     }
 
 }
@@ -1193,10 +1405,12 @@ body{
 <div id="game">
 
 
-<!-- BACKGROUND -->
+<!-- =====================================================
+     BACKGROUND
+===================================================== -->
 
-<div class="bg-glow one"></div>
-<div class="bg-glow two"></div>
+<div class="bg-glow left"></div>
+<div class="bg-glow right"></div>
 
 <div class="star" style="left:23%;top:22%;"></div>
 <div class="star" style="left:33%;top:36%;"></div>
@@ -1208,7 +1422,9 @@ body{
 <div class="star" style="left:20%;top:65%;"></div>
 
 
-<!-- HP -->
+<!-- =====================================================
+     HP
+===================================================== -->
 
 <div class="hp-panel">
 
@@ -1244,39 +1460,10 @@ body{
 </div>
 
 
-<!-- SCORE -->
-
-<div class="score-panel">
-
-    ⭐
-
-    <span class="score">
-
-        SCORE:
-        <span id="score">
-            0
-        </span>
-
-    </span>
-
-    <span> • </span>
-
-    💎
-
-    <span class="diamond">
-
-        <span id="diamond">
-            2
-        </span>
-
-    </span>
-
-</div>
-
-
-<!-- =================================================
-     MENU TENGAH
-================================================= -->
+<!-- =====================================================
+     MENU
+     DEKAT HP
+===================================================== -->
 
 <div class="top-menu">
 
@@ -1331,7 +1518,9 @@ body{
 </div>
 
 
-<!-- ONLINE -->
+<!-- =====================================================
+     ONLINE
+===================================================== -->
 
 <div class="online">
 
@@ -1342,7 +1531,41 @@ body{
 </div>
 
 
-<!-- MINIMAP -->
+<!-- =====================================================
+     SCORE
+===================================================== -->
+
+<div class="score-panel">
+
+    ⭐
+
+    <span class="score">
+
+        SCORE:
+        <span id="score">
+            0
+        </span>
+
+    </span>
+
+    <span> • </span>
+
+    💎
+
+    <span class="diamond">
+
+        <span id="diamond">
+            2
+        </span>
+
+    </span>
+
+</div>
+
+
+<!-- =====================================================
+     MINIMAP
+===================================================== -->
 
 <div class="minimap">
 
@@ -1375,15 +1598,14 @@ body{
 </div>
 
 
-<!-- PLAYER TRAIL -->
+<!-- =====================================================
+     TRAIL
+===================================================== -->
 
 <div
     class="player-trail"
     id="playerTrail">
 </div>
-
-
-<!-- ENEMY TRAIL -->
 
 <div
     class="enemy-trail"
@@ -1391,7 +1613,9 @@ body{
 </div>
 
 
-<!-- PLAYER -->
+<!-- =====================================================
+     PLAYER
+===================================================== -->
 
 <div
     class="player"
@@ -1402,7 +1626,9 @@ body{
 </div>
 
 
-<!-- ENEMY -->
+<!-- =====================================================
+     ENEMY
+===================================================== -->
 
 <div
     class="enemy"
@@ -1420,7 +1646,9 @@ body{
 </div>
 
 
-<!-- ATTACK EFFECT -->
+<!-- =====================================================
+     ATTACK EFFECT
+===================================================== -->
 
 <div
     class="attack-effect"
@@ -1428,7 +1656,9 @@ body{
 </div>
 
 
-<!-- DAMAGE FLASH -->
+<!-- =====================================================
+     DAMAGE FLASH
+===================================================== -->
 
 <div
     class="damage-flash"
@@ -1436,7 +1666,9 @@ body{
 </div>
 
 
-<!-- CONTROLLER -->
+<!-- =====================================================
+     CONTROLLER
+===================================================== -->
 
 <div class="controller">
 
@@ -1475,7 +1707,9 @@ body{
 </div>
 
 
-<!-- ATTACK -->
+<!-- =====================================================
+     ATTACK
+===================================================== -->
 
 <button
     class="attack"
@@ -1486,7 +1720,9 @@ body{
 </button>
 
 
-<!-- GUIDE -->
+<!-- =====================================================
+     GUIDE
+===================================================== -->
 
 <div class="guide">
 
@@ -1506,7 +1742,9 @@ body{
 </div>
 
 
-<!-- SUBTITLE -->
+<!-- =====================================================
+     SUBTITLE
+===================================================== -->
 
 <div
     class="subtitle"
@@ -1514,7 +1752,9 @@ body{
 </div>
 
 
-<!-- TUTORIAL -->
+<!-- =====================================================
+     TUTORIAL
+===================================================== -->
 
 <div
     class="modal show"
@@ -1530,7 +1770,7 @@ body{
 
             Selamat datang, Knight!
 
-            <br>
+            <br><br>
 
             Gunakan
             <strong>WASD / ARROW</strong>
@@ -1561,7 +1801,9 @@ body{
 </div>
 
 
-<!-- MENU MODAL -->
+<!-- =====================================================
+     MENU MODAL
+===================================================== -->
 
 <div
     class="modal"
@@ -1588,7 +1830,9 @@ body{
 </div>
 
 
-<!-- PAUSE -->
+<!-- =====================================================
+     PAUSE
+===================================================== -->
 
 <div
     class="modal"
@@ -1625,7 +1869,9 @@ body{
 </div>
 
 
-<!-- GAME OVER -->
+<!-- =====================================================
+     GAME OVER
+===================================================== -->
 
 <div
     class="modal"
@@ -1677,7 +1923,7 @@ body{
 <script>
 
 /* =====================================================
-   ELEMENT
+   ELEMENTS
 ===================================================== */
 
 const game =
@@ -1727,7 +1973,7 @@ const subtitle =
 
 
 /* =====================================================
-   GAME STATE
+   VARIABLES
 ===================================================== */
 
 let playerX =
@@ -1741,7 +1987,6 @@ let enemyX =
 
 let enemyY =
     window.innerHeight * .58;
-
 
 let hp = 100;
 
@@ -1779,16 +2024,14 @@ function updatePlayer(){
         playerY + "px";
 
 
-    /* BUNTUT */
-
     playerTrail.style.left =
-        (playerX - 70) + "px";
+        (playerX - 72) + "px";
 
     playerTrail.style.top =
         (playerY + 18) + "px";
 
 
-    if(
+    const moving =
         keys["w"] ||
         keys["s"] ||
         keys["a"] ||
@@ -1796,8 +2039,10 @@ function updatePlayer(){
         keys["arrowup"] ||
         keys["arrowdown"] ||
         keys["arrowleft"] ||
-        keys["arrowright"]
-    ){
+        keys["arrowright"];
+
+
+    if(moving){
 
         playerTrail.classList.add(
             "active"
@@ -1851,7 +2096,6 @@ function updateMinimap(){
         (playerY /
         window.innerHeight) * 100;
 
-
     const ex =
         (enemyX /
         window.innerWidth) * 100;
@@ -1869,7 +2113,6 @@ function updateMinimap(){
                 px
             )
         ) + "%";
-
 
     mapPlayer.style.top =
         Math.max(
@@ -1889,7 +2132,6 @@ function updateMinimap(){
                 ex
             )
         ) + "%";
-
 
     mapEnemy.style.top =
         Math.max(
@@ -2063,8 +2305,6 @@ function gameLoop(){
         !paused
     ){
 
-        /* MOVEMENT */
-
         if(
             keys["w"] ||
             keys["arrowup"]
@@ -2105,8 +2345,6 @@ function gameLoop(){
         }
 
 
-        /* BOUNDARY */
-
         playerX =
             Math.max(
                 10,
@@ -2119,7 +2357,7 @@ function gameLoop(){
 
         playerY =
             Math.max(
-                180,
+                150,
                 Math.min(
                     window.innerHeight - 90,
                     playerY
@@ -2127,15 +2365,9 @@ function gameLoop(){
             );
 
 
-        /* MUSUH MENGEJAR */
-
         moveEnemy();
 
-
-        /* COLLISION */
-
         checkCollision();
-
 
         updatePlayer();
 
@@ -2167,7 +2399,6 @@ function moveEnemy(){
     const dy =
         playerY - enemyY;
 
-
     const dist =
         Math.sqrt(
             dx * dx +
@@ -2175,7 +2406,9 @@ function moveEnemy(){
         );
 
 
-    if(dist > 60){
+    if(
+        dist > 60
+    ){
 
         enemyX +=
             (dx / dist)
@@ -2264,7 +2497,9 @@ function takeDamage(amount){
     );
 
 
-    if(hp <= 30){
+    if(
+        hp <= 30
+    ){
 
         hpFill.style.background =
             "linear-gradient(90deg,#ff3f68,#ff7755)";
@@ -2272,7 +2507,9 @@ function takeDamage(amount){
     }
 
 
-    if(hp <= 0){
+    if(
+        hp <= 0
+    ){
 
         playerDeath();
 
@@ -2340,7 +2577,9 @@ function attack(){
         );
 
 
-    if(dist < 150){
+    if(
+        dist < 150
+    ){
 
         enemyHealth -= 50;
 
@@ -2375,7 +2614,9 @@ function attack(){
         );
 
 
-        if(enemyHealth <= 0){
+        if(
+            enemyHealth <= 0
+        ){
 
             killEnemy();
 
@@ -2466,7 +2707,6 @@ function respawnEnemy(){
             window.innerWidth - 500
         );
 
-
     enemyY =
         250 +
         Math.random() *
@@ -2484,11 +2724,11 @@ function respawnEnemy(){
     enemy.style.opacity =
         "1";
 
-    enemyTrail.style.opacity =
-        ".65";
-
     enemy.style.transform =
         "scale(1)";
+
+    enemyTrail.style.opacity =
+        ".7";
 
 
     updateEnemy();
@@ -2507,13 +2747,12 @@ function playerDeath(){
     paused = false;
 
 
+    player.style.opacity =
+        "0";
+
     playerTrail.classList.remove(
         "active"
     );
-
-
-    player.style.opacity =
-        "0";
 
 
     setTimeout(
@@ -2600,7 +2839,7 @@ function restartGame(){
         "100%";
 
     hpFill.style.background =
-        "linear-gradient(90deg,#22dbc1,#2bc8ed)";
+        "linear-gradient(90deg,#20d9bd,#2cc8ed)";
 
 
     scoreText.textContent =
@@ -2679,7 +2918,9 @@ function backToLobby(){
 
 function pauseGame(){
 
-    if(!playing)
+    if(
+        !playing
+    )
         return;
 
 
@@ -2775,7 +3016,9 @@ function openMenu(name){
         name;
 
 
-    if(name === "Lobby"){
+    if(
+        name === "Lobby"
+    ){
 
         content.innerHTML =
             "<p>🏠 Selamat datang di Lobby.</p>" +
@@ -2784,7 +3027,9 @@ function openMenu(name){
     }
 
 
-    if(name === "Players"){
+    if(
+        name === "Players"
+    ){
 
         content.innerHTML =
             "<p>🟢 Knight Player</p>" +
@@ -2795,7 +3040,9 @@ function openMenu(name){
     }
 
 
-    if(name === "Chat"){
+    if(
+        name === "Chat"
+    ){
 
         content.innerHTML =
             "<p>💬 Welcome, Knight!</p>" +
@@ -2804,7 +3051,9 @@ function openMenu(name){
     }
 
 
-    if(name === "Rank"){
+    if(
+        name === "Rank"
+    ){
 
         content.innerHTML =
             "<p>🥇 Knight — 1200</p>" +
@@ -2814,7 +3063,9 @@ function openMenu(name){
     }
 
 
-    if(name === "Match"){
+    if(
+        name === "Match"
+    ){
 
         content.innerHTML =
             "<p>🎯 Match sedang berlangsung.</p>" +
@@ -2844,7 +3095,7 @@ function closeMenu(){
 
 
 /* =====================================================
-   FLOATING TEXT
+   FLOAT TEXT
 ===================================================== */
 
 function showFloatingText(
@@ -2869,7 +3120,6 @@ function showFloatingText(
 
     element.style.left =
         x + "px";
-
 
     element.style.top =
         y + "px";
