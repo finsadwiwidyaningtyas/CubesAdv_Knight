@@ -3,177 +3,220 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CubesAdy Knight - UI/UX & BE</title>
+
+<title>CubesAdy Knight</title>
 
 <style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    user-select: none;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
 }
 
 body {
-    overflow: hidden;
     font-family: Arial, Helvetica, sans-serif;
     background: #020d1d;
     color: white;
 }
 
-/* =====================================================
-   GAME BACKGROUND
-===================================================== */
+
+/* =========================================================
+   GAME
+========================================================= */
 
 #game {
+    position: relative;
     width: 100vw;
     height: 100vh;
-    position: relative;
     overflow: hidden;
 
-    background:
-        linear-gradient(rgba(0,100,160,.13) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,100,160,.13) 1px, transparent 1px),
-        radial-gradient(circle at 50% 40%, #09294b, #020d1d 75%);
+    background-color: #031426;
 
-    background-size:
-        50px 50px,
-        50px 50px,
-        100% 100%;
+    background-image:
+        linear-gradient(
+            rgba(20, 116, 165, 0.18) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(20, 116, 165, 0.18) 1px,
+            transparent 1px
+        );
 
-    transition: filter .4s ease;
+    background-size: 50px 50px;
 }
 
-/* =====================================================
-   STARS
-===================================================== */
+
+/* =========================================================
+   BACKGROUND STARS
+========================================================= */
 
 .star {
     position: absolute;
+
     width: 3px;
     height: 3px;
+
     border-radius: 50%;
-    background: #8edaff;
-    opacity: .6;
+
+    background: #bdeaff;
+
+    opacity: .65;
 }
 
-/* =====================================================
-   TOP HUD
-===================================================== */
 
-.hp-box {
+/* =========================================================
+   HP PANEL
+========================================================= */
+
+.hp-panel {
     position: absolute;
-    left: 25px;
-    top: 30px;
 
-    width: 380px;
-    padding: 22px;
+    left: 25px;
+    top: 28px;
+
+    width: 379px;
+    height: 102px;
+
+    padding: 20px 24px;
 
     border: 1px solid #126487;
     border-radius: 20px;
 
-    background: rgba(3,24,49,.92);
+    background: rgba(3, 24, 49, .94);
 
     box-shadow:
-        0 0 20px rgba(0,150,255,.08);
+        0 0 20px rgba(0, 140, 220, .08);
 }
 
-.hp-title {
+.hp-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.hp-label {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+
+    gap: 9px;
 
     font-size: 20px;
     font-weight: bold;
 }
 
-.hp-name {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
 .heart {
-    color: #ff67a5;
+    color: #ff68a8;
+
     font-size: 26px;
-    text-shadow: 0 0 12px #ff2d80;
+
+    filter:
+        drop-shadow(
+            0 0 8px #ff3b8b
+        );
 }
 
-.hp-value {
+.hp-number {
     font-size: 21px;
+    font-weight: bold;
 }
 
 .hp-bar {
     width: 100%;
     height: 18px;
 
-    margin-top: 17px;
+    margin-top: 12px;
 
-    background: #152e49;
-
-    border: 1px solid #254b68;
     border-radius: 20px;
+
+    background: #152d48;
+
+    border: 1px solid #284b67;
 
     overflow: hidden;
 }
 
 .hp-fill {
-    height: 100%;
     width: 64%;
+    height: 100%;
 
-    background: linear-gradient(
-        90deg,
-        #25ddc2,
-        #2bc9f2
-    );
+    background:
+        linear-gradient(
+            90deg,
+            #22dbc1,
+            #2ac8ed
+        );
 
-    box-shadow: 0 0 15px #25d8dd;
-
-    transition: width .3s ease;
+    transition:
+        width .3s ease;
 }
 
-/* =====================================================
+
+/* =========================================================
    SCORE
-===================================================== */
+========================================================= */
 
-.score-box {
+.score-panel {
     position: absolute;
-    left: 25px;
-    top: 145px;
 
-    padding: 13px 23px;
+    left: 25px;
+    top: 146px;
+
+    height: 49px;
+
+    padding: 13px 24px;
 
     border: 1px solid #126487;
     border-radius: 17px;
 
-    background: rgba(3,24,49,.92);
+    background: rgba(3, 24, 49, .94);
 
+    font-size: 16px;
     font-weight: bold;
 }
 
 .score {
-    color: #ffd43b;
+    color: #ffd438;
 }
 
 .diamond {
-    color: #52cfff;
-    margin-left: 17px;
+    color: #58cfff;
+
+    margin-left: 14px;
 }
 
-/* =====================================================
+
+/* =========================================================
    ONLINE
-===================================================== */
+========================================================= */
 
 .online {
     position: absolute;
+
     right: 25px;
     top: 30px;
 
-    padding: 13px 20px;
+    padding: 13px 19px;
 
     border: 1px solid #126487;
     border-radius: 18px;
 
-    background: rgba(3,24,49,.92);
+    background: rgba(3, 24, 49, .94);
 
+    font-size: 16px;
     font-weight: bold;
 }
 
@@ -187,14 +230,16 @@ body {
 
     border-radius: 50%;
 
-    background: #28efbd;
+    background: #2df0bd;
 
-    box-shadow: 0 0 12px #28efbd;
+    box-shadow:
+        0 0 12px #2df0bd;
 }
 
-/* =====================================================
+
+/* =========================================================
    MINIMAP
-===================================================== */
+========================================================= */
 
 .minimap {
     position: absolute;
@@ -206,37 +251,46 @@ body {
     height: 210px;
 
     border: 1px solid #126487;
+
     border-radius: 20px;
 
-    background:
-        linear-gradient(rgba(0,150,200,.14) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,150,200,.14) 1px, transparent 1px),
-        #061b31;
+    overflow: hidden;
+
+    background-color: #061b31;
+
+    background-image:
+        linear-gradient(
+            rgba(20, 126, 165, .18) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(20, 126, 165, .18) 1px,
+            transparent 1px
+        );
 
     background-size: 32px 32px;
-
-    overflow: hidden;
 }
 
 .map-dot {
     position: absolute;
 
-    width: 13px;
-    height: 13px;
+    width: 12px;
+    height: 12px;
 
     border-radius: 50%;
 
-    box-shadow: 0 0 12px currentColor;
+    box-shadow: 0 0 10px currentColor;
 }
 
-.map-blue {
-    background: #43eaff;
-    color: #43eaff;
+.map-cyan {
+    background: #45eaff;
+    color: #45eaff;
 }
 
-.map-red {
-    background: #ff3868;
-    color: #ff3868;
+.map-pink {
+    background: #ff3e68;
+    color: #ff3e68;
 }
 
 .map-yellow {
@@ -249,76 +303,92 @@ body {
     color: #a954ff;
 }
 
-/* =====================================================
-   NAVIGATION
-===================================================== */
+
+/* =========================================================
+   MENU
+   SEKARANG DI SEBELAH KIRI
+========================================================= */
 
 .menu {
     position: absolute;
 
-    right: 25px;
-    top: 310px;
+    left: 25px;
+    top: 215px;
 
     display: flex;
-    gap: 9px;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+    width: 180px;
 }
 
-.menu button {
+.menu-btn {
+    width: 180px;
+    height: 44px;
+
+    padding: 0 17px;
+
     border: 1px solid #126487;
     border-radius: 15px;
 
-    padding: 13px 17px;
+    background: rgba(3, 24, 49, .94);
 
     color: white;
-
-    background: rgba(3,24,49,.92);
 
     font-size: 15px;
     font-weight: bold;
 
     cursor: pointer;
 
+    text-align: left;
+
     transition:
-        transform .2s ease,
-        background .2s ease,
-        box-shadow .2s ease;
+        .2s ease;
 }
 
-.menu button:hover {
-    background: #123958;
+.menu-btn:hover {
+    background: #0d3653;
 
-    transform: translateY(-2px);
+    transform:
+        translateX(4px);
 
     box-shadow:
-        0 0 15px rgba(50,200,255,.25);
+        0 0 15px
+        rgba(40, 190, 255, .2);
 }
 
-.menu button:active {
-    transform: scale(.95);
+.menu-btn:active {
+    transform:
+        scale(.94);
 }
 
-/* =====================================================
+
+/* =========================================================
    PLAYER
-===================================================== */
+========================================================= */
 
 .player {
     position: absolute;
 
-    left: 60%;
-    top: 52%;
+    left: 59.3%;
+    top: 53.3%;
 
     width: 60px;
     height: 60px;
 
     border-radius: 12px;
 
-    background: #ff3f69;
+    background: #ff3d68;
 
     box-shadow:
-        0 0 15px #ff3f69,
-        0 0 35px rgba(255,63,105,.45);
+        0 0 13px #ff3d68,
+        0 0 30px rgba(255, 61, 104, .45);
 
-    transition: transform .08s linear;
+    transition:
+        left .05s linear,
+        top .05s linear;
 }
 
 .player::before,
@@ -343,7 +413,7 @@ body {
     right: 15px;
 }
 
-.player-bar {
+.player-top {
     position: absolute;
 
     left: 0;
@@ -352,49 +422,50 @@ body {
     width: 60px;
     height: 7px;
 
-    background: #ff3f69;
+    background: #ff3d68;
 }
 
-/* =====================================================
+
+/* =========================================================
    ENEMY
-===================================================== */
+========================================================= */
 
 .enemy {
     position: absolute;
 
-    left: 73%;
-    top: 58%;
+    left: 74%;
+    top: 60%;
 
     width: 48px;
     height: 48px;
 
     border-radius: 10px;
 
-    background: #a84dff;
+    background: #a94cff;
 
     box-shadow:
-        0 0 25px #a84dff;
+        0 0 25px #a94cff;
 
     transition:
-        transform .15s ease,
-        opacity .2s ease;
+        .15s ease;
 }
 
-/* =====================================================
-   TOUCH CONTROLLER
-===================================================== */
 
-.controls {
+/* =========================================================
+   CONTROLLER
+========================================================= */
+
+.controller {
     position: absolute;
 
     left: 30px;
-    bottom: 75px;
+    bottom: 76px;
 
     width: 320px;
     height: 210px;
 }
 
-.control {
+.direction {
     position: absolute;
 
     width: 100px;
@@ -403,23 +474,27 @@ body {
     border: 1px solid #087fa9;
     border-radius: 22px;
 
-    color: white;
+    background: rgba(3, 24, 49, .9);
 
-    background: rgba(3,24,49,.9);
+    color: white;
 
     font-size: 38px;
 
     cursor: pointer;
 
-    transition: .1s;
+    transition:
+        .1s;
 }
 
-.control:hover {
-    background: #10476b;
+.direction:hover {
+    background: #0c3855;
 }
 
-.control:active {
-    transform: scale(.92);
+.direction:active {
+    transform:
+        scale(.91);
+
+    background: #104a6b;
 }
 
 .up {
@@ -442,9 +517,10 @@ body {
     bottom: 0;
 }
 
-/* =====================================================
-   ATTACK
-===================================================== */
+
+/* =========================================================
+   ATTACK BUTTON
+========================================================= */
 
 .attack {
     position: absolute;
@@ -452,17 +528,18 @@ body {
     right: 28px;
     bottom: 75px;
 
-    width: 380px;
+    width: 378px;
     height: 88px;
 
     border: none;
+
     border-radius: 24px;
 
     background:
         linear-gradient(
             90deg,
-            #d9277f,
-            #a52ed4
+            #d8277e,
+            #a62fd4
         );
 
     color: white;
@@ -473,56 +550,62 @@ body {
     cursor: pointer;
 
     box-shadow:
-        0 0 25px rgba(218,39,127,.45);
+        0 0 25px
+        rgba(218, 39, 127, .48);
 
     transition:
-        transform .15s ease,
-        box-shadow .15s ease;
+        .15s ease;
 }
 
 .attack:hover {
-    transform: scale(1.02);
+    transform:
+        scale(1.015);
 
     box-shadow:
-        0 0 35px rgba(218,39,127,.7);
+        0 0 35px
+        rgba(218, 39, 127, .7);
 }
 
 .attack:active {
-    transform: scale(.95);
+    transform:
+        scale(.95);
 }
 
-/* =====================================================
-   CONTROL GUIDE
-===================================================== */
 
-.help {
+/* =========================================================
+   CONTROL GUIDE
+========================================================= */
+
+.guide {
     position: absolute;
 
     left: 50%;
     bottom: 17px;
 
-    transform: translateX(-50%);
+    transform:
+        translateX(-50%);
 
-    padding: 10px 22px;
+    padding: 10px 21px;
 
     border: 1px solid #103d5b;
     border-radius: 13px;
 
-    background: rgba(3,24,49,.9);
+    background:
+        rgba(3, 24, 49, .9);
+
+    color: #a5b6c6;
 
     font-size: 14px;
-
-    color: #9bb0c4;
 }
 
-.help span {
-    color: #39dce9;
-    font-weight: bold;
+.guide strong {
+    color: #3bdeeb;
 }
 
-/* =====================================================
+
+/* =========================================================
    ATTACK EFFECT
-===================================================== */
+========================================================= */
 
 .attack-effect {
     position: absolute;
@@ -530,7 +613,8 @@ body {
     width: 120px;
     height: 120px;
 
-    border: 5px solid #ff4b91;
+    border:
+        5px solid #ff4b91;
 
     border-radius: 50%;
 
@@ -539,39 +623,41 @@ body {
     opacity: 0;
 
     transform:
-        translate(-50%,-50%)
+        translate(-50%, -50%)
         scale(.3);
 
     box-shadow:
-        0 0 25px #ff4b91,
-        inset 0 0 20px #ff4b91;
+        0 0 25px #ff4b91;
 }
 
 .attack-effect.active {
     animation:
-        attackAnimation .3s ease-out;
+        attack .3s ease-out;
 }
 
-@keyframes attackAnimation {
+@keyframes attack {
 
     0% {
         opacity: 1;
+
         transform:
-            translate(-50%,-50%)
+            translate(-50%, -50%)
             scale(.3);
     }
 
     100% {
         opacity: 0;
+
         transform:
-            translate(-50%,-50%)
+            translate(-50%, -50%)
             scale(1.4);
     }
 }
 
-/* =====================================================
-   MODAL / MENU
-===================================================== */
+
+/* =========================================================
+   MODAL
+========================================================= */
 
 .modal {
     position: absolute;
@@ -583,105 +669,123 @@ body {
     align-items: center;
     justify-content: center;
 
-    z-index: 50;
+    z-index: 100;
 
-    background: rgba(0,10,25,.75);
+    background:
+        rgba(0, 10, 25, .72);
 
-    backdrop-filter: blur(5px);
+    backdrop-filter:
+        blur(5px);
 }
 
-.modal.active {
+.modal.show {
     display: flex;
 }
 
 .modal-box {
-    width: 430px;
+    width: 420px;
 
-    padding: 35px;
+    padding: 32px;
 
-    border: 1px solid #1bbfe8;
+    border: 1px solid #1abde8;
     border-radius: 22px;
 
     background: #061a30;
 
     box-shadow:
-        0 0 35px rgba(0,200,255,.25);
+        0 0 35px
+        rgba(0, 200, 255, .25);
 
     animation:
-        modalIn .25s ease;
+        modalIn .2s ease;
 }
 
 @keyframes modalIn {
 
     from {
         opacity: 0;
-        transform: translateY(20px);
+
+        transform:
+            translateY(20px);
     }
 
     to {
         opacity: 1;
-        transform: translateY(0);
+
+        transform:
+            translateY(0);
     }
 }
 
-.modal-box h2 {
+.modal h2 {
     margin-bottom: 20px;
 }
 
-.modal-button {
+.modal p {
+    margin: 10px 0;
+
+    color: #b7c9d9;
+}
+
+.modal-action {
     width: 100%;
 
     margin-top: 10px;
 
     padding: 13px;
 
-    border: 1px solid #176484;
+    border:
+        1px solid #176484;
+
     border-radius: 12px;
 
-    background: #092a44;
+    background: #092b45;
+
     color: white;
 
     cursor: pointer;
 }
 
-.modal-button:hover {
+.modal-action:hover {
     background: #10476b;
 }
 
-/* =====================================================
+
+/* =========================================================
    TUTORIAL
-===================================================== */
+========================================================= */
 
-#tutorial {
-    display: flex;
-}
-
-.tutorial-content {
+.tutorial {
     text-align: center;
 }
 
-.tutorial-content h1 {
-    font-size: 36px;
-    margin-bottom: 15px;
+.tutorial h1 {
+    font-size: 34px;
+
+    margin-bottom: 18px;
 }
 
-.tutorial-content p {
-    color: #b7cada;
-    line-height: 1.6;
+.tutorial p {
+    color: #b8cada;
+
+    line-height: 1.7;
+
     margin-bottom: 25px;
 }
 
-.start-button {
-    padding: 14px 35px;
+.start {
+    padding: 14px 34px;
 
     border: none;
+
     border-radius: 12px;
 
-    background: linear-gradient(
-        90deg,
-        #24d9ca,
-        #2bc9f2
-    );
+    background:
+        linear-gradient(
+            90deg,
+            #24d9ca,
+            #2bc9f2
+        );
 
     color: #00121e;
 
@@ -690,45 +794,10 @@ body {
     cursor: pointer;
 }
 
-/* =====================================================
-   SETTINGS
-===================================================== */
 
-.setting {
-    margin: 18px 0;
-}
-
-.setting label {
-    display: block;
-    margin-bottom: 8px;
-}
-
-.setting select,
-.setting input {
-    width: 100%;
-}
-
-/* =====================================================
-   PAUSE
-===================================================== */
-
-.pause-title {
-    text-align: center;
-    font-size: 30px;
-    margin-bottom: 20px;
-}
-
-/* =====================================================
-   ACCESSIBILITY
-===================================================== */
-
-body.colorblind #game {
-    filter: saturate(.45) contrast(1.15);
-}
-
-body.large-text {
-    font-size: 115%;
-}
+/* =========================================================
+   SUBTITLE
+========================================================= */
 
 .subtitle {
     position: absolute;
@@ -736,113 +805,221 @@ body.large-text {
     left: 50%;
     bottom: 120px;
 
-    transform: translateX(-50%);
+    transform:
+        translateX(-50%);
 
-    padding: 10px 20px;
+    padding: 10px 18px;
 
-    border-radius: 10px;
+    border-radius: 9px;
 
-    background: rgba(0,0,0,.75);
+    background:
+        rgba(0,0,0,.78);
 
     color: white;
 
-    font-size: 16px;
-
     opacity: 0;
 
-    transition: opacity .2s;
+    transition:
+        opacity .2s;
+
+    pointer-events: none;
 }
 
 .subtitle.show {
     opacity: 1;
 }
 
-/* =====================================================
+
+/* =========================================================
+   ACCESSIBILITY
+========================================================= */
+
+body.colorblind #game {
+    filter:
+        saturate(.45)
+        contrast(1.15);
+}
+
+body.large-text {
+    font-size: 115%;
+}
+
+
+/* =========================================================
    RESPONSIVE
-===================================================== */
+========================================================= */
 
-@media(max-width: 950px) {
+@media (max-width: 1000px) {
 
-    .minimap {
-        width: 220px;
-        height: 160px;
+    .hp-panel {
+        transform:
+            scale(.85);
+
+        transform-origin:
+            top left;
     }
 
-    .menu {
-        transform: scale(.75);
-        transform-origin: right top;
+    .minimap {
+        transform:
+            scale(.8);
+
+        transform-origin:
+            top right;
     }
 
     .attack {
         width: 300px;
     }
 }
+
 </style>
 </head>
+
 
 <body>
 
 <div id="game">
 
+
     <!-- STARS -->
-    <div class="star" style="left:25%;top:20%"></div>
-    <div class="star" style="left:33%;top:35%"></div>
-    <div class="star" style="left:45%;top:15%"></div>
-    <div class="star" style="left:55%;top:30%"></div>
-    <div class="star" style="left:68%;top:18%"></div>
-    <div class="star" style="left:75%;top:50%"></div>
-    <div class="star" style="left:42%;top:75%"></div>
+
+    <div class="star" style="left:23%;top:22%;"></div>
+    <div class="star" style="left:33%;top:36%;"></div>
+    <div class="star" style="left:43%;top:15%;"></div>
+    <div class="star" style="left:52%;top:30%;"></div>
+    <div class="star" style="left:65%;top:17%;"></div>
+    <div class="star" style="left:75%;top:47%;"></div>
+    <div class="star" style="left:43%;top:73%;"></div>
+    <div class="star" style="left:20%;top:65%;"></div>
+
 
     <!-- HP -->
-    <div class="hp-box">
 
-        <div class="hp-title">
+    <div class="hp-panel">
 
-            <div class="hp-name">
+        <div class="hp-top">
+
+            <div class="hp-label">
+
                 <span class="heart">♥</span>
+
                 <span>HP</span>
+
             </div>
 
-            <span>
-                <span id="hpText">64</span>/100
-            </span>
+            <div class="hp-number">
+
+                <span id="hp">64</span>/100
+
+            </div>
 
         </div>
 
+
         <div class="hp-bar">
+
             <div
                 class="hp-fill"
                 id="hpFill">
             </div>
+
         </div>
 
     </div>
 
 
     <!-- SCORE -->
-    <div class="score-box">
+
+    <div class="score-panel">
 
         ⭐
+
         <span class="score">
+
             SCORE:
             <span id="score">
                 20
             </span>
+
         </span>
 
-        <span>•</span>
+        <span> • </span>
 
         💎
+
         <span class="diamond">
+
             <span id="diamond">
                 2
             </span>
+
         </span>
 
     </div>
 
 
+    <!-- MENU DI KIRI -->
+
+    <div class="menu">
+
+        <button
+            class="menu-btn"
+            onclick="openMenu('Lobby')">
+
+            🏠 Lobby
+
+        </button>
+
+
+        <button
+            class="menu-btn"
+            onclick="openMenu('Players')">
+
+            👥 Players
+
+        </button>
+
+
+        <button
+            class="menu-btn"
+            onclick="openMenu('Chat')">
+
+            💬 Chat
+
+        </button>
+
+
+        <button
+            class="menu-btn"
+            onclick="openMenu('Rank')">
+
+            🏆 Rank
+
+        </button>
+
+
+        <button
+            class="menu-btn"
+            onclick="openMenu('Match')">
+
+            🎯 Match
+
+        </button>
+
+
+        <button
+            class="menu-btn"
+            onclick="pauseGame()">
+
+            II Pause
+
+        </button>
+
+    </div>
+
+
     <!-- ONLINE -->
+
     <div class="online">
 
         <span class="online-dot"></span>
@@ -853,82 +1030,78 @@ body.large-text {
 
 
     <!-- MINIMAP -->
+
     <div class="minimap">
 
         <div
-            class="map-dot map-blue"
-            style="left:0;top:45px">
+            class="map-dot map-cyan"
+            style="
+                left:0;
+                top:45px;
+            ">
         </div>
 
-        <div
-            class="map-dot map-red"
-            style="left:90px;top:45px">
-        </div>
 
         <div
-            class="map-dot map-red"
-            style="right:45px;top:55px">
+            class="map-dot map-pink"
+            style="
+                left:90px;
+                top:45px;
+            ">
         </div>
+
+
+        <div
+            class="map-dot map-pink"
+            style="
+                right:45px;
+                top:55px;
+            ">
+        </div>
+
 
         <div
             class="map-dot map-yellow"
-            style="left:140px;top:85px">
+            style="
+                left:140px;
+                top:85px;
+            ">
         </div>
+
 
         <div
             class="map-dot map-purple"
-            style="right:55px;bottom:25px">
+            style="
+                right:55px;
+                bottom:25px;
+            ">
         </div>
+
 
         <div
-            class="map-dot map-blue"
-            style="left:15px;bottom:30px">
+            class="map-dot map-cyan"
+            style="
+                left:15px;
+                bottom:30px;
+            ">
         </div>
-
-    </div>
-
-
-    <!-- MENU -->
-    <div class="menu">
-
-        <button onclick="openModal('lobby')">
-            🏠 Lobby
-        </button>
-
-        <button onclick="openModal('players')">
-            👥 Players
-        </button>
-
-        <button onclick="openModal('chat')">
-            💬 Chat
-        </button>
-
-        <button onclick="openModal('rank')">
-            🏆 Rank
-        </button>
-
-        <button onclick="openModal('match')">
-            🎯 Match
-        </button>
-
-        <button onclick="togglePause()">
-            II Pause
-        </button>
 
     </div>
 
 
     <!-- PLAYER -->
+
     <div
         class="player"
         id="player">
 
-        <div class="player-bar"></div>
+        <div class="player-top"></div>
 
     </div>
 
 
     <!-- ENEMY -->
+
     <div
         class="enemy"
         id="enemy">
@@ -936,43 +1109,57 @@ body.large-text {
 
 
     <!-- ATTACK EFFECT -->
+
     <div
         class="attack-effect"
         id="attackEffect">
     </div>
 
 
-    <!-- TOUCH CONTROLLER -->
-    <div class="controls">
+    <!-- CONTROLLER -->
+
+    <div class="controller">
 
         <button
-            class="control up"
-            data-key="arrowup">
+            class="direction up"
+            data-key="ArrowUp">
+
             ▲
+
         </button>
 
+
         <button
-            class="control left"
-            data-key="arrowleft">
+            class="direction left"
+            data-key="ArrowLeft">
+
             ◀
+
         </button>
 
+
         <button
-            class="control down"
-            data-key="arrowdown">
+            class="direction down"
+            data-key="ArrowDown">
+
             ▼
+
         </button>
 
+
         <button
-            class="control right"
-            data-key="arrowright">
+            class="direction right"
+            data-key="ArrowRight">
+
             ▶
+
         </button>
 
     </div>
 
 
     <!-- ATTACK -->
+
     <button
         class="attack"
         id="attackButton">
@@ -982,53 +1169,69 @@ body.large-text {
     </button>
 
 
-    <!-- HELP -->
-    <div class="help">
+    <!-- GUIDE -->
 
-        <span>WASD / ARROW</span>
+    <div class="guide">
+
+        <strong>WASD / ARROW</strong>
         Gerak
 
         &nbsp; • &nbsp;
 
-        <span>SPACE</span>
+        <strong>SPACE</strong>
         Serang
 
         &nbsp; • &nbsp;
 
-        <span>ESC</span>
+        <strong>ESC</strong>
         Pause
 
     </div>
 
 
     <!-- SUBTITLE -->
+
     <div
         class="subtitle"
         id="subtitle">
     </div>
 
 
-    <!-- =================================================
-         TUTORIAL / ONBOARDING
-    ================================================== -->
+    <!-- TUTORIAL -->
 
     <div
-        class="modal active"
+        class="modal show"
         id="tutorial">
 
-        <div class="tutorial-content">
+        <div class="modal-box tutorial">
 
-            <h1>⚔ CUBESADY KNIGHT</h1>
+            <h1>
+                ⚔ CUBESADY KNIGHT
+            </h1>
 
             <p>
-                Selamat datang, Knight!<br>
-                Gunakan WASD atau Arrow untuk bergerak.<br>
-                Tekan SPACE untuk menyerang musuh.<br>
-                Tekan ESC untuk membuka Pause.
+
+                Gunakan
+                <strong>WASD / ARROW</strong>
+                untuk bergerak.
+
+                <br>
+
+                Tekan
+                <strong>SPACE</strong>
+                untuk menyerang.
+
+                <br>
+
+                Tekan
+                <strong>ESC</strong>
+                untuk Pause.
+
             </p>
 
+
             <button
-                class="start-button"
+                class="start"
                 onclick="startGame()">
 
                 MULAI BERMAIN
@@ -1040,27 +1243,25 @@ body.large-text {
     </div>
 
 
-    <!-- =================================================
-         GENERAL MODAL
-    ================================================== -->
+    <!-- MENU MODAL -->
 
     <div
         class="modal"
-        id="generalModal">
+        id="menuModal">
 
         <div class="modal-box">
 
-            <h2 id="modalTitle">
+            <h2 id="menuTitle">
                 Menu
             </h2>
 
-            <div id="modalContent"></div>
+            <div id="menuContent"></div>
 
             <button
-                class="modal-button"
-                onclick="closeModal()">
+                class="modal-action"
+                onclick="closeMenu()">
 
-                Tutup
+                TUTUP
 
             </button>
 
@@ -1069,9 +1270,7 @@ body.large-text {
     </div>
 
 
-    <!-- =================================================
-         PAUSE
-    ================================================== -->
+    <!-- PAUSE -->
 
     <div
         class="modal"
@@ -1079,31 +1278,34 @@ body.large-text {
 
         <div class="modal-box">
 
-            <h2 class="pause-title">
-                ⏸ GAME PAUSED
+            <h2>
+                ⏸ Game Paused
             </h2>
 
+
             <button
-                class="modal-button"
+                class="modal-action"
                 onclick="resumeGame()">
 
                 ▶ Lanjutkan
 
             </button>
 
+
             <button
-                class="modal-button"
+                class="modal-action"
                 onclick="openSettings()">
 
                 ⚙ Pengaturan
 
             </button>
 
+
             <button
-                class="modal-button"
+                class="modal-action"
                 onclick="exitGame()">
 
-                🚪 Exit ke Lobby
+                🚪 Exit
 
             </button>
 
@@ -1112,9 +1314,7 @@ body.large-text {
     </div>
 
 
-    <!-- =================================================
-         SETTINGS
-    ================================================== -->
+    <!-- SETTINGS -->
 
     <div
         class="modal"
@@ -1122,86 +1322,78 @@ body.large-text {
 
         <div class="modal-box">
 
-            <h2>⚙ Pengaturan</h2>
-
-            <div class="setting">
-
-                <label>
-                    Tingkat Kesulitan
-                </label>
-
-                <select id="difficulty">
-
-                    <option value="easy">
-                        Easy
-                    </option>
-
-                    <option
-                        value="normal"
-                        selected>
-                        Normal
-                    </option>
-
-                    <option value="hard">
-                        Hard
-                    </option>
-
-                </select>
-
-            </div>
+            <h2>
+                ⚙ Pengaturan
+            </h2>
 
 
-            <div class="setting">
-
-                <label>
-                    Subtitle
-                </label>
-
-                <input
-                    type="checkbox"
-                    id="subtitleToggle"
-                    checked>
-
-                Aktif
-
-            </div>
+            <p>
+                Tingkat Kesulitan
+            </p>
 
 
-            <div class="setting">
+            <select
+                id="difficulty"
+                style="
+                    width:100%;
+                    padding:10px;
+                    background:#092b45;
+                    color:white;
+                    border:1px solid #176484;
+                    border-radius:10px;
+                ">
 
-                <label>
-                    Colorblind Mode
-                </label>
+                <option value="easy">
+                    Easy
+                </option>
 
-                <input
-                    type="checkbox"
-                    id="colorblindToggle">
+                <option
+                    value="normal"
+                    selected>
 
-                Aktif
+                    Normal
 
-            </div>
+                </option>
 
+                <option value="hard">
+                    Hard
+                </option>
 
-            <div class="setting">
-
-                <label>
-                    Ukuran teks
-                </label>
-
-                <input
-                    type="checkbox"
-                    id="largeTextToggle">
-
-                Teks besar
-
-            </div>
+            </select>
 
 
             <button
-                class="modal-button"
-                onclick="applySettings()">
+                class="modal-action"
+                onclick="toggleColorblind()">
 
-                Simpan Pengaturan
+                👁 Colorblind Mode
+
+            </button>
+
+
+            <button
+                class="modal-action"
+                onclick="toggleLargeText()">
+
+                🔤 Large Text
+
+            </button>
+
+
+            <button
+                class="modal-action"
+                onclick="toggleSubtitle()">
+
+                💬 Subtitle
+
+            </button>
+
+
+            <button
+                class="modal-action"
+                onclick="saveSettings()">
+
+                SIMPAN
 
             </button>
 
@@ -1214,9 +1406,9 @@ body.large-text {
 
 <script>
 
-/* =====================================================
+/* =========================================================
    GAME VARIABLES
-===================================================== */
+========================================================= */
 
 const player =
     document.getElementById("player");
@@ -1224,11 +1416,11 @@ const player =
 const enemy =
     document.getElementById("enemy");
 
+const hpText =
+    document.getElementById("hp");
+
 const hpFill =
     document.getElementById("hpFill");
-
-const hpText =
-    document.getElementById("hpText");
 
 const scoreText =
     document.getElementById("score");
@@ -1242,62 +1434,86 @@ const attackEffect =
 const subtitle =
     document.getElementById("subtitle");
 
-let x = window.innerWidth * .60;
-let y = window.innerHeight * .52;
+
+let x =
+    window.innerWidth * .593;
+
+let y =
+    window.innerHeight * .533;
+
 
 let hp = 64;
+
 let score = 20;
+
 let diamond = 2;
 
-let speed = 6;
-let paused = true;
-let gameStarted = false;
+let speed = 5;
+
+let playing = false;
+
+let paused = false;
+
+let subtitleEnabled = true;
+
 
 const keys = {};
 
 
-/* =====================================================
-   UPDATE PLAYER
-===================================================== */
+/* =========================================================
+   PLAYER UPDATE
+========================================================= */
 
 function updatePlayer() {
 
-    player.style.left = x + "px";
-    player.style.top = y + "px";
+    player.style.left =
+        x + "px";
+
+    player.style.top =
+        y + "px";
 
 }
 
 
-/* =====================================================
+/* =========================================================
    KEYBOARD CONTROL
-   UX1
-===================================================== */
+========================================================= */
 
 document.addEventListener(
     "keydown",
-    function(e) {
+    function(event) {
 
-        if (e.code === "Space") {
+        if (
+            event.code === "Space"
+        ) {
 
-            e.preventDefault();
+            event.preventDefault();
 
             attack();
 
             return;
+
         }
 
-        if (e.code === "Escape") {
 
-            if (gameStarted) {
+        if (
+            event.code === "Escape"
+        ) {
 
-                togglePause();
+            if (playing) {
+
+                pauseGame();
 
             }
 
             return;
+
         }
 
-        keys[e.key.toLowerCase()] = true;
+
+        keys[
+            event.key.toLowerCase()
+        ] = true;
 
     }
 );
@@ -1305,24 +1521,27 @@ document.addEventListener(
 
 document.addEventListener(
     "keyup",
-    function(e) {
+    function(event) {
 
-        keys[e.key.toLowerCase()] = false;
+        keys[
+            event.key.toLowerCase()
+        ] = false;
 
     }
 );
 
 
-/* =====================================================
+/* =========================================================
    GAME LOOP
-===================================================== */
+========================================================= */
 
 function gameLoop() {
 
     if (
-        !paused &&
-        gameStarted
+        playing &&
+        !paused
     ) {
+
 
         if (
             keys["w"] ||
@@ -1333,6 +1552,7 @@ function gameLoop() {
 
         }
 
+
         if (
             keys["s"] ||
             keys["arrowdown"]
@@ -1342,6 +1562,7 @@ function gameLoop() {
 
         }
 
+
         if (
             keys["a"] ||
             keys["arrowleft"]
@@ -1350,6 +1571,7 @@ function gameLoop() {
             x -= speed;
 
         }
+
 
         if (
             keys["d"] ||
@@ -1361,8 +1583,6 @@ function gameLoop() {
         }
 
 
-        /* batas arena */
-
         x = Math.max(
             0,
             Math.min(
@@ -1370,6 +1590,7 @@ function gameLoop() {
                 x
             )
         );
+
 
         y = Math.max(
             0,
@@ -1384,68 +1605,75 @@ function gameLoop() {
 
     }
 
-    requestAnimationFrame(gameLoop);
+
+    requestAnimationFrame(
+        gameLoop
+    );
 
 }
 
 gameLoop();
 
 
-/* =====================================================
-   TOUCH CONTROL
-   UX1
-===================================================== */
+/* =========================================================
+   TOUCH CONTROLLER
+========================================================= */
 
 document
-.querySelectorAll(".control")
+.querySelectorAll(".direction")
 .forEach(button => {
 
     const key =
-        button.dataset.key;
+        button.dataset.key.toLowerCase();
+
 
     button.addEventListener(
         "mousedown",
-        () => {
+        function() {
 
             keys[key] = true;
 
         }
     );
+
 
     button.addEventListener(
         "mouseup",
-        () => {
+        function() {
 
             keys[key] = false;
 
         }
     );
+
 
     button.addEventListener(
         "mouseleave",
-        () => {
+        function() {
 
             keys[key] = false;
 
         }
     );
 
+
     button.addEventListener(
         "touchstart",
-        e => {
+        function(event) {
 
-            e.preventDefault();
+            event.preventDefault();
 
             keys[key] = true;
 
         }
     );
 
+
     button.addEventListener(
         "touchend",
-        e => {
+        function(event) {
 
-            e.preventDefault();
+            event.preventDefault();
 
             keys[key] = false;
 
@@ -1455,16 +1683,38 @@ document
 });
 
 
-/* =====================================================
+/* =========================================================
+   START GAME
+========================================================= */
+
+function startGame() {
+
+    document
+    .getElementById("tutorial")
+    .classList.remove("show");
+
+
+    playing = true;
+
+    paused = false;
+
+
+    showSubtitle(
+        "🎮 Game dimulai!"
+    );
+
+}
+
+
+/* =========================================================
    ATTACK
-   UX2 - FEEDBACK INTERAKTIF
-===================================================== */
+========================================================= */
 
 function attack() {
 
     if (
-        paused ||
-        !gameStarted
+        !playing ||
+        paused
     ) {
 
         return;
@@ -1472,55 +1722,60 @@ function attack() {
     }
 
 
-    /* visual feedback */
+    const rect =
+        player.getBoundingClientRect();
+
+
+    attackEffect.style.left =
+        (
+            rect.left + 30
+        ) + "px";
+
+
+    attackEffect.style.top =
+        (
+            rect.top + 30
+        ) + "px";
+
 
     attackEffect.classList.remove(
         "active"
     );
 
+
     void attackEffect.offsetWidth;
 
-    const rect =
-        player.getBoundingClientRect();
-
-    attackEffect.style.left =
-        (rect.left + 30) + "px";
-
-    attackEffect.style.top =
-        (rect.top + 30) + "px";
 
     attackEffect.classList.add(
         "active"
     );
 
 
-    /* subtitle */
-
-    showSubtitle(
-        "⚔ Serangan dilakukan!"
-    );
-
-
-    /* score */
-
     score += 5;
+
 
     scoreText.textContent =
         score;
 
 
-    /* hit detection */
+    showSubtitle(
+        "⚔ SERANG!"
+    );
+
 
     const enemyRect =
         enemy.getBoundingClientRect();
+
 
     const dx =
         rect.left -
         enemyRect.left;
 
+
     const dy =
         rect.top -
         enemyRect.top;
+
 
     const distance =
         Math.sqrt(
@@ -1529,37 +1784,44 @@ function attack() {
         );
 
 
-    if (distance < 160) {
+    if (
+        distance < 160
+    ) {
 
         enemy.style.transform =
             "scale(.65)";
 
+
         enemy.style.opacity =
             ".5";
 
+
         showSubtitle(
-            "💥 Musuh terkena serangan!"
+            "💥 Musuh terkena!"
         );
 
 
-        setTimeout(() => {
+        setTimeout(
+            function() {
 
-            enemy.style.transform =
-                "scale(1)";
+                enemy.style.transform =
+                    "scale(1)";
 
-            enemy.style.opacity =
-                "1";
+                enemy.style.opacity =
+                    "1";
 
-        }, 200);
+            },
+            200
+        );
 
     }
 
 }
 
 
-/* =====================================================
+/* =========================================================
    ATTACK BUTTON
-===================================================== */
+========================================================= */
 
 document
 .getElementById("attackButton")
@@ -1569,73 +1831,22 @@ document
 );
 
 
-/* =====================================================
-   ONBOARDING
-   UX3
-===================================================== */
-
-function startGame() {
-
-    document
-    .getElementById("tutorial")
-    .classList.remove("active");
-
-    gameStarted = true;
-    paused = false;
-
-    showSubtitle(
-        "🎮 Gunakan WASD / Arrow untuk bergerak"
-    );
-
-}
-
-
-/* =====================================================
-   SUBTITLE
-   UX2 / ACCESSIBILITY
-===================================================== */
-
-function showSubtitle(text) {
-
-    const enabled =
-        document
-        .getElementById("subtitleToggle")
-        ?.checked !== false;
-
-    if (!enabled) return;
-
-    subtitle.textContent = text;
-
-    subtitle.classList.add("show");
-
-    setTimeout(() => {
-
-        subtitle.classList.remove(
-            "show"
-        );
-
-    }, 2000);
-
-}
-
-
-/* =====================================================
+/* =========================================================
    PAUSE
-   UX2
-===================================================== */
+========================================================= */
 
-function togglePause() {
+function pauseGame() {
 
-    if (!gameStarted) return;
+    if (!playing)
+        return;
 
-    paused = !paused;
+
+    paused = true;
+
 
     document
     .getElementById("pauseModal")
-    .classList.toggle(
-        "active",
-        paused
-    );
+    .classList.add("show");
 
 }
 
@@ -1644,104 +1855,102 @@ function resumeGame() {
 
     paused = false;
 
+
     document
     .getElementById("pauseModal")
-    .classList.remove(
-        "active"
-    );
+    .classList.remove("show");
 
 }
 
 
-/* =====================================================
+/* =========================================================
    EXIT
-   FLOW GAME
-===================================================== */
+========================================================= */
 
 function exitGame() {
 
-    paused = true;
+    playing = false;
 
-    gameStarted = false;
+    paused = false;
+
 
     document
     .getElementById("pauseModal")
-    .classList.remove(
-        "active"
-    );
+    .classList.remove("show");
+
 
     document
     .getElementById("tutorial")
-    .classList.add(
-        "active"
-    );
+    .classList.add("show");
 
 }
 
 
-/* =====================================================
-   MENU MODAL
-===================================================== */
+/* =========================================================
+   MENU
+========================================================= */
 
-function openModal(type) {
+function openMenu(name) {
 
     const modal =
         document.getElementById(
-            "generalModal"
+            "menuModal"
         );
+
 
     const title =
         document.getElementById(
-            "modalTitle"
+            "menuTitle"
         );
+
 
     const content =
         document.getElementById(
-            "modalContent"
+            "menuContent"
         );
 
 
-    if (type === "lobby") {
+    title.innerText =
+        name;
 
-        title.textContent =
-            "🏠 Lobby";
+
+    if (
+        name === "Lobby"
+    ) {
 
         content.innerHTML =
-            "<p>Selamat datang kembali, Knight!</p>";
+            "<p>🏠 Kamu berada di Lobby.</p>";
 
     }
 
 
-    if (type === "players") {
-
-        title.textContent =
-            "👥 Players";
+    if (
+        name === "Players"
+    ) {
 
         content.innerHTML =
-            "<p>🟢 Knight Player</p>" +
-            "<p>🟢 Shadow Knight</p>" +
-            "<p>🟢 Red Cube</p>" +
-            "<p>🟢 Blue Cube</p>";
+            "<p>🟢 Player 1</p>" +
+            "<p>🟢 Player 2</p>" +
+            "<p>🟢 Player 3</p>" +
+            "<p>🟢 Player 4</p>";
 
     }
 
 
-    if (type === "chat") {
-
-        title.textContent =
-            "💬 Chat";
+    if (
+        name === "Chat"
+    ) {
 
         content.innerHTML =
-            "<p>💬 Welcome to the arena!</p>" +
-            "<p>💬 Good luck, Knight!</p>";
+            "<p>💬 Welcome, Knight!</p>" +
+            "<p>💬 Good luck!</p>";
 
     }
 
 
-    if (type === "rank") {
-
-        title.textContent =
-            "🏆 Rank";
+    if (
+        name === "Rank"
+    ) {
 
         content.innerHTML =
             "<p>🥇 Knight — 1200</p>" +
@@ -1751,154 +1960,171 @@ function openModal(type) {
     }
 
 
-    if (type === "match") {
-
-        title.textContent =
-            "🎯 Match";
+    if (
+        name === "Match"
+    ) {
 
         content.innerHTML =
-            "<p>Match sedang berlangsung.</p>";
+            "<p>🎯 Match sedang berlangsung.</p>";
 
     }
 
 
-    modal.classList.add("active");
-
-}
-
-
-function closeModal() {
-
-    document
-    .getElementById(
-        "generalModal"
-    )
-    .classList.remove(
-        "active"
+    modal.classList.add(
+        "show"
     );
 
 }
 
 
-/* =====================================================
+function closeMenu() {
+
+    document
+    .getElementById("menuModal")
+    .classList.remove("show");
+
+}
+
+
+/* =========================================================
    SETTINGS
-   UX2 ACCESSIBILITY
-===================================================== */
+========================================================= */
 
 function openSettings() {
 
     document
     .getElementById("pauseModal")
-    .classList.remove(
-        "active"
-    );
+    .classList.remove("show");
+
 
     document
     .getElementById("settingsModal")
-    .classList.add(
-        "active"
+    .classList.add("show");
+
+}
+
+
+function toggleColorblind() {
+
+    document.body
+    .classList.toggle(
+        "colorblind"
     );
 
 }
 
 
-function applySettings() {
+function toggleLargeText() {
+
+    document.body
+    .classList.toggle(
+        "large-text"
+    );
+
+}
+
+
+function toggleSubtitle() {
+
+    subtitleEnabled =
+        !subtitleEnabled;
+
+}
+
+
+function saveSettings() {
 
     const difficulty =
         document
-        .getElementById("difficulty")
+        .getElementById(
+            "difficulty"
+        )
         .value;
 
 
-    /* adjustable difficulty */
-
-    if (difficulty === "easy") {
+    if (
+        difficulty === "easy"
+    ) {
 
         speed = 4;
 
     }
 
-    if (difficulty === "normal") {
 
-        speed = 6;
+    if (
+        difficulty === "normal"
+    ) {
 
-    }
-
-    if (difficulty === "hard") {
-
-        speed = 9;
+        speed = 5;
 
     }
 
 
-    /* colorblind */
+    if (
+        difficulty === "hard"
+    ) {
 
-    const colorblind =
-        document
-        .getElementById(
-            "colorblindToggle"
-        ).checked;
-
-    document.body.classList.toggle(
-        "colorblind",
-        colorblind
-    );
-
-
-    /* large text */
-
-    const largeText =
-        document
-        .getElementById(
-            "largeTextToggle"
-        ).checked;
-
-    document.body.classList.toggle(
-        "large-text",
-        largeText
-    );
-
-
-    /* subtitle */
-
-    const subtitleOn =
-        document
-        .getElementById(
-            "subtitleToggle"
-        ).checked;
-
-    if (subtitleOn) {
-
-        showSubtitle(
-            "⚙ Pengaturan berhasil diterapkan"
-        );
+        speed = 8;
 
     }
 
 
     document
-    .getElementById("settingsModal")
+    .getElementById(
+        "settingsModal"
+    )
     .classList.remove(
-        "active"
+        "show"
     );
 
 
-    if (gameStarted) {
-
-        document
-        .getElementById("pauseModal")
-        .classList.add(
-            "active"
-        );
-
-    }
+    document
+    .getElementById(
+        "pauseModal"
+    )
+    .classList.add(
+        "show"
+    );
 
 }
 
 
-/* =====================================================
-   RESPONSIVE
-===================================================== */
+/* =========================================================
+   SUBTITLE
+========================================================= */
+
+function showSubtitle(text) {
+
+    if (!subtitleEnabled)
+        return;
+
+
+    subtitle.innerText =
+        text;
+
+
+    subtitle.classList.add(
+        "show"
+    );
+
+
+    setTimeout(
+        function() {
+
+            subtitle.classList.remove(
+                "show"
+            );
+
+        },
+        1800
+    );
+
+}
+
+
+/* =========================================================
+   RESIZE
+========================================================= */
 
 window.addEventListener(
     "resize",
