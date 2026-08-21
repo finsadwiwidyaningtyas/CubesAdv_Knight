@@ -12,9 +12,9 @@
 ===================================================== */
 
 *{
-    box-sizing:border-box;
     margin:0;
     padding:0;
+    box-sizing:border-box;
     user-select:none;
 }
 
@@ -26,13 +26,9 @@ body{
 }
 
 body{
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
+    font-family:Arial, Helvetica, sans-serif;
     background:#020b18;
-    color:#fff;
+    color:white;
 }
 
 
@@ -41,6 +37,7 @@ body{
 ===================================================== */
 
 #game{
+
     position:relative;
 
     width:100vw;
@@ -48,69 +45,33 @@ body{
 
     overflow:hidden;
 
-    background:
-        radial-gradient(
-            circle at 50% 50%,
-            rgba(8,72,110,.18),
-            transparent 45%
-        ),
+    background-color:#020d1d;
+
+    background-image:
+
         linear-gradient(
-            rgba(21,111,157,.16) 1px,
+            rgba(20,116,165,.17) 1px,
             transparent 1px
         ),
+
         linear-gradient(
             90deg,
-            rgba(21,111,157,.16) 1px,
+            rgba(20,116,165,.17) 1px,
             transparent 1px
-        ),
-        #020d1d;
+        );
 
     background-size:
-        100% 100%,
-        46px 46px,
-        46px 46px,
-        100% 100%;
+        46px 46px;
+
 }
 
 
 /* =====================================================
-   BACKGROUND GLOW
-===================================================== */
-
-.bg-glow{
-    position:absolute;
-
-    width:500px;
-    height:500px;
-
-    border-radius:50%;
-
-    pointer-events:none;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(0,174,255,.09),
-            transparent 70%
-        );
-}
-
-.bg-glow.left{
-    left:10%;
-    top:25%;
-}
-
-.bg-glow.right{
-    right:-100px;
-    bottom:-150px;
-}
-
-
-/* =====================================================
-   STARS
+   STAR
 ===================================================== */
 
 .star{
+
     position:absolute;
 
     width:3px;
@@ -120,10 +81,11 @@ body{
 
     background:#b9e9ff;
 
-    opacity:.55;
+    opacity:.6;
 
     box-shadow:
-        0 0 7px #65d9ff;
+        0 0 8px #65d9ff;
+
 }
 
 
@@ -132,36 +94,43 @@ body{
 ===================================================== */
 
 .hp-panel{
+
     position:absolute;
 
     left:25px;
     top:25px;
 
     width:380px;
-    height:105px;
 
     padding:19px 23px;
 
     border:1px solid #11648b;
+
     border-radius:20px;
 
     background:
         rgba(3,24,49,.96);
 
-    box-shadow:
-        0 0 25px rgba(0,155,235,.08);
+    z-index:100;
 
-    z-index:50;
+    box-shadow:
+        0 0 25px
+        rgba(0,155,235,.08);
+
 }
 
 .hp-top{
+
     display:flex;
 
     justify-content:space-between;
+
     align-items:center;
+
 }
 
 .hp-label{
+
     display:flex;
 
     align-items:center;
@@ -169,10 +138,13 @@ body{
     gap:10px;
 
     font-size:20px;
+
     font-weight:bold;
+
 }
 
 .heart{
+
     color:#ff67a7;
 
     font-size:27px;
@@ -181,15 +153,21 @@ body{
         drop-shadow(
             0 0 8px #ff3d8b
         );
+
 }
 
 .hp-number{
+
     font-size:21px;
+
     font-weight:bold;
+
 }
 
 .hp-bar{
+
     width:100%;
+
     height:18px;
 
     margin-top:13px;
@@ -197,13 +175,17 @@ body{
     overflow:hidden;
 
     border:1px solid #284a66;
+
     border-radius:20px;
 
     background:#142b45;
+
 }
 
 .hp-fill{
+
     width:100%;
+
     height:100%;
 
     background:
@@ -217,8 +199,8 @@ body{
         0 0 15px #23d8d5;
 
     transition:
-        width .25s ease,
-        background .25s ease;
+        width .25s ease;
+
 }
 
 
@@ -227,69 +209,62 @@ body{
 ===================================================== */
 
 .score-panel{
+
     position:absolute;
 
     left:25px;
     top:145px;
 
-    height:49px;
-
     padding:13px 22px;
 
     border:1px solid #11648b;
+
     border-radius:17px;
 
     background:
         rgba(3,24,49,.96);
 
     font-size:16px;
+
     font-weight:bold;
 
-    z-index:50;
+    z-index:100;
+
 }
 
 .score{
+
     color:#ffd438;
+
 }
 
 .diamond{
+
     color:#58cfff;
 
     margin-left:12px;
+
 }
 
 
 /* =====================================================
-   MENU
-   >>> INI YANG DIUBAH <<<
-   DEKAT PANEL HP
+   TOP MENU
 ===================================================== */
 
 .top-menu{
 
     position:absolute;
 
-    /*
-       SEJAJAR DENGAN HP
-       MULAI DARI SEBELAH KANAN HP
-    */
-
     left:430px;
     top:32px;
 
     display:flex;
 
-    align-items:center;
-
     gap:8px;
 
-    z-index:60;
+    z-index:100;
+
 }
-
-
-/* =====================================================
-   MENU BUTTON
-===================================================== */
 
 .menu-btn{
 
@@ -311,7 +286,7 @@ body{
             rgba(3,24,46,.96)
         );
 
-    color:#fff;
+    color:white;
 
     font-size:15px;
 
@@ -321,18 +296,8 @@ body{
 
     cursor:pointer;
 
-    box-shadow:
-        inset 0 1px
-        rgba(255,255,255,.04),
+    transition:.2s;
 
-        0 0 12px
-        rgba(0,140,220,.04);
-
-    transition:
-        transform .18s ease,
-        background .18s ease,
-        box-shadow .18s ease,
-        border-color .18s ease;
 }
 
 .menu-btn:hover{
@@ -340,25 +305,12 @@ body{
     transform:
         translateY(-2px);
 
-    border-color:
-        #28c8f4;
-
-    background:
-        linear-gradient(
-            145deg,
-            #0c3858,
-            #082945
-        );
+    border-color:#28c8f4;
 
     box-shadow:
         0 0 18px
-        rgba(28,197,245,.2);
-}
+        rgba(28,197,245,.25);
 
-.menu-btn:active{
-
-    transform:
-        scale(.94);
 }
 
 
@@ -376,8 +328,7 @@ body{
     padding:
         13px 19px;
 
-    border:
-        1px solid #11648b;
+    border:1px solid #11648b;
 
     border-radius:18px;
 
@@ -388,7 +339,8 @@ body{
 
     font-weight:bold;
 
-    z-index:60;
+    z-index:100;
+
 }
 
 .online-dot{
@@ -406,6 +358,7 @@ body{
 
     box-shadow:
         0 0 12px #2df0bd;
+
 }
 
 
@@ -425,8 +378,7 @@ body{
 
     overflow:hidden;
 
-    border:
-        1px solid #11648b;
+    border:1px solid #11648b;
 
     border-radius:20px;
 
@@ -447,353 +399,344 @@ body{
 
     background-size:32px 32px;
 
-    box-shadow:
-        inset 0 0 25px
-        rgba(0,150,220,.05);
+    z-index:80;
 
-    z-index:40;
 }
 
 
 /* =====================================================
-   MAP DOT
+   SNAKE
 ===================================================== */
 
-.map-dot{
+.snake{
 
     position:absolute;
 
-    width:12px;
-    height:12px;
+    width:100%;
 
-    border-radius:50%;
-
-    box-shadow:
-        0 0 12px currentColor;
-
-    transition:
-        left .15s linear,
-        top .15s linear;
-}
-
-.map-player{
-
-    width:15px;
-    height:15px;
-
-    background:#42eaff;
-
-    color:#42eaff;
-}
-
-.map-enemy{
-
-    background:#ff3e68;
-
-    color:#ff3e68;
-}
-
-.map-yellow{
-
-    background:#ffd43b;
-
-    color:#ffd43b;
-}
-
-.map-purple{
-
-    background:#a954ff;
-
-    color:#a954ff;
-}
-
-
-/* =====================================================
-   PLAYER TRAIL
-   BUNTUT
-===================================================== */
-
-.player-trail{
-
-    position:absolute;
-
-    width:100px;
-    height:34px;
-
-    border-radius:50%;
+    height:100%;
 
     pointer-events:none;
 
-    z-index:5;
+    z-index:30;
 
-    opacity:0;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent 0%,
-            rgba(255,45,105,.10) 20%,
-            rgba(255,55,110,.35) 55%,
-            rgba(255,80,135,.85) 100%
-        );
-
-    filter:
-        blur(8px);
-
-    transform-origin:
-        right center;
-
-    transition:
-        opacity .2s ease;
-}
-
-.player-trail.active{
-
-    opacity:.9;
-
-    animation:
-        trailMove .18s
-        infinite
-        alternate;
-}
-
-@keyframes trailMove{
-
-    from{
-
-        transform:
-            translateX(-2px)
-            scaleX(.85);
-
-    }
-
-    to{
-
-        transform:
-            translateX(-13px)
-            scaleX(1.05);
-
-    }
 }
 
 
 /* =====================================================
-   PLAYER
+   SNAKE SEGMENT
 ===================================================== */
 
-.player{
+.segment{
 
     position:absolute;
 
-    width:60px;
-    height:60px;
+    width:38px;
+    height:38px;
 
-    left:50%;
-    top:52%;
+    border-radius:9px;
 
-    border-radius:12px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #ff557b,
-            #f42f60
-        );
-
-    box-shadow:
-
-        0 0 15px
-        #ff3d68,
-
-        0 0 35px
-        rgba(255,61,104,.45);
-
-    z-index:15;
+    transform:
+        translate(-50%,-50%);
 
     transition:
-        left .04s linear,
-        top .04s linear,
-        transform .1s ease,
-        opacity .2s ease;
-}
+        transform .05s linear;
 
-.player::before,
-.player::after{
-
-    content:"";
-
-    position:absolute;
-
-    top:20px;
-
-    width:8px;
-    height:8px;
-
-    background:#fff;
-
-    border-radius:1px;
-}
-
-.player::before{
-
-    left:15px;
-}
-
-.player::after{
-
-    right:15px;
-}
-
-.player-bar{
-
-    position:absolute;
-
-    left:0;
-    top:-13px;
-
-    width:60px;
-    height:7px;
-
-    border-radius:6px;
-
-    background:#ff3d68;
-
-    box-shadow:
-        0 0 9px #ff3d68;
 }
 
 
 /* =====================================================
-   ENEMY
+   RED SNAKE BODY
 ===================================================== */
 
-.enemy{
-
-    position:absolute;
-
-    width:50px;
-    height:50px;
-
-    left:70%;
-    top:58%;
-
-    border-radius:11px;
+.player-segment{
 
     background:
         linear-gradient(
             145deg,
-            #b85cff,
-            #8636e2
+            #ff6687,
+            #ed2859
         );
 
     box-shadow:
 
-        0 0 15px
+        0 0 9px
+        #ff3c68,
+
+        0 0 22px
+        rgba(255,55,100,.65);
+
+}
+
+
+/* =====================================================
+   PURPLE SNAKE BODY
+===================================================== */
+
+.enemy-segment{
+
+    background:
+        linear-gradient(
+            145deg,
+            #bf70ff,
+            #8434df
+        );
+
+    box-shadow:
+
+        0 0 9px
         #a94cff,
 
-        0 0 35px
-        rgba(169,76,255,.4);
+        0 0 22px
+        rgba(169,76,255,.65);
 
-    z-index:12;
-
-    transition:
-        left .12s linear,
-        top .12s linear,
-        transform .15s ease,
-        opacity .2s ease;
-}
-
-.enemy::before,
-.enemy::after{
-
-    content:"";
-
-    position:absolute;
-
-    top:17px;
-
-    width:7px;
-    height:7px;
-
-    background:#fff;
-}
-
-.enemy::before{
-
-    left:12px;
-}
-
-.enemy::after{
-
-    right:12px;
 }
 
 
 /* =====================================================
-   ENEMY TRAIL
+   SNAKE HEAD
 ===================================================== */
 
-.enemy-trail{
+.snake-head{
 
     position:absolute;
 
-    width:80px;
-    height:27px;
+    width:76px;
+    height:76px;
 
-    border-radius:50%;
+    border-radius:16px;
+
+    transform:
+        translate(-50%,-50%);
+
+    z-index:50;
+
+}
+
+
+/* =====================================================
+   PLAYER HEAD
+===================================================== */
+
+.player-head{
 
     background:
         linear-gradient(
-            90deg,
-            transparent,
-            rgba(169,76,255,.35),
-            rgba(169,76,255,.8)
+            145deg,
+            #ff6685,
+            #f3265b
         );
 
-    filter:
-        blur(7px);
+    box-shadow:
 
-    pointer-events:none;
+        0 0 18px
+        #ff3b67,
 
-    z-index:6;
+        0 0 45px
+        rgba(255,45,100,.75);
 
-    opacity:.7;
 }
 
 
 /* =====================================================
-   ENEMY HP
+   ENEMY HEAD
 ===================================================== */
 
-.enemy-hp{
+.enemy-head{
+
+    background:
+        linear-gradient(
+            145deg,
+            #c36cff,
+            #8934e4
+        );
+
+    box-shadow:
+
+        0 0 18px
+        #a94cff,
+
+        0 0 45px
+        rgba(169,76,255,.75);
+
+}
+
+
+/* =====================================================
+   EYES
+===================================================== */
+
+.eye{
 
     position:absolute;
 
+    top:27px;
+
+    width:10px;
+    height:10px;
+
+    border-radius:2px;
+
+    background:white;
+
+    box-shadow:
+        0 0 7px white;
+
+}
+
+.eye.left{
+    left:20px;
+}
+
+.eye.right{
+    right:20px;
+}
+
+
+/* =====================================================
+   HEALTH BAR
+===================================================== */
+
+.snake-health{
+
+    position:absolute;
+
+    top:-19px;
     left:50%;
-    top:-13px;
 
     transform:
         translateX(-50%);
 
-    width:55px;
-    height:6px;
-
-    overflow:hidden;
+    width:82px;
+    height:8px;
 
     border-radius:10px;
 
-    background:#172035;
+    background:#182032;
+
+    overflow:hidden;
+
 }
 
-.enemy-hp-fill{
+.snake-health-fill{
 
     width:100%;
+
     height:100%;
 
-    background:#ff3f6b;
+    background:#ff3e68;
+
+    box-shadow:
+        0 0 10px #ff3e68;
 
     transition:
-        width .15s ease;
+        width .15s;
+
+}
+
+
+/* =====================================================
+   DAMAGE NUMBER
+===================================================== */
+
+.damage-number{
+
+    position:absolute;
+
+    color:#ff6684;
+
+    font-size:25px;
+
+    font-weight:bold;
+
+    pointer-events:none;
+
+    z-index:200;
+
+    text-shadow:
+        0 0 12px #ff3d68;
+
+    animation:
+        damageFloat .8s
+        ease-out
+        forwards;
+
+}
+
+@keyframes damageFloat{
+
+    0%{
+
+        opacity:1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
+    100%{
+
+        opacity:0;
+
+        transform:
+            translateY(-60px)
+            scale(1.15);
+
+    }
+
+}
+
+
+/* =====================================================
+   PARTICLE
+===================================================== */
+
+.particle{
+
+    position:absolute;
+
+    width:6px;
+    height:6px;
+
+    border-radius:2px;
+
+    pointer-events:none;
+
+    z-index:20;
+
+    animation:
+        particleFade .7s
+        ease-out
+        forwards;
+
+}
+
+@keyframes particleFade{
+
+    0%{
+
+        opacity:.9;
+
+        transform:
+            scale(1)
+            translate(0,0);
+
+    }
+
+    100%{
+
+        opacity:0;
+
+        transform:
+            scale(.1)
+            translate(
+                var(--dx),
+                var(--dy)
+            );
+
+    }
+
 }
 
 
@@ -811,7 +754,8 @@ body{
     width:320px;
     height:210px;
 
-    z-index:50;
+    z-index:100;
+
 }
 
 .direction{
@@ -821,63 +765,59 @@ body{
     width:100px;
     height:100px;
 
-    border:
-        1px solid #087fa9;
+    border:1px solid #087fa9;
 
     border-radius:22px;
 
     background:
         rgba(3,24,49,.9);
 
-    color:#fff;
+    color:white;
 
     font-size:38px;
 
     cursor:pointer;
 
-    transition:.1s ease;
-}
-
-.direction:hover{
-
-    background:#0c3855;
 }
 
 .direction:active{
 
     transform:
-        scale(.91);
+        scale(.92);
 
-    background:#104a6b;
 }
 
 .up{
 
     left:110px;
     top:0;
+
 }
 
 .left{
 
     left:0;
     bottom:0;
+
 }
 
 .down{
 
     left:110px;
     bottom:0;
+
 }
 
 .right{
 
     right:0;
     bottom:0;
+
 }
 
 
 /* =====================================================
-   ATTACK
+   ATTACK BUTTON
 ===================================================== */
 
 .attack{
@@ -909,30 +849,89 @@ body{
 
     cursor:pointer;
 
-    z-index:50;
+    z-index:100;
 
     box-shadow:
-        0 0 25px
-        rgba(218,39,127,.48);
+        0 0 30px
+        rgba(218,39,127,.5);
 
-    transition:
-        .15s ease;
+    transition:.15s;
+
 }
 
 .attack:hover{
 
     transform:
-        scale(1.015);
+        scale(1.02);
 
-    box-shadow:
-        0 0 35px
-        rgba(218,39,127,.7);
 }
 
 .attack:active{
 
     transform:
         scale(.95);
+
+}
+
+
+/* =====================================================
+   ATTACK RING
+===================================================== */
+
+.attack-ring{
+
+    position:absolute;
+
+    width:140px;
+    height:140px;
+
+    border:
+        5px solid #ff4b91;
+
+    border-radius:50%;
+
+    pointer-events:none;
+
+    opacity:0;
+
+    transform:
+        translate(-50%,-50%)
+        scale(.3);
+
+    z-index:70;
+
+}
+
+.attack-ring.active{
+
+    animation:
+        attackRing .35s
+        ease-out;
+
+}
+
+@keyframes attackRing{
+
+    0%{
+
+        opacity:1;
+
+        transform:
+            translate(-50%,-50%)
+            scale(.3);
+
+    }
+
+    100%{
+
+        opacity:0;
+
+        transform:
+            translate(-50%,-50%)
+            scale(1.5);
+
+    }
+
 }
 
 
@@ -965,203 +964,14 @@ body{
 
     font-size:14px;
 
-    z-index:50;
+    z-index:100;
+
 }
 
 .guide strong{
 
     color:#3bdeeb;
-}
 
-
-/* =====================================================
-   ATTACK EFFECT
-===================================================== */
-
-.attack-effect{
-
-    position:absolute;
-
-    width:130px;
-    height:130px;
-
-    border:
-        5px solid #ff4b91;
-
-    border-radius:50%;
-
-    pointer-events:none;
-
-    opacity:0;
-
-    transform:
-        translate(-50%,-50%)
-        scale(.3);
-
-    z-index:30;
-
-    box-shadow:
-        0 0 30px #ff4b91,
-        inset 0 0 20px #ff4b91;
-}
-
-.attack-effect.active{
-
-    animation:
-        attackAnimation .35s
-        ease-out;
-}
-
-@keyframes attackAnimation{
-
-    0%{
-
-        opacity:1;
-
-        transform:
-            translate(-50%,-50%)
-            scale(.3);
-    }
-
-    100%{
-
-        opacity:0;
-
-        transform:
-            translate(-50%,-50%)
-            scale(1.5);
-    }
-}
-
-
-/* =====================================================
-   DAMAGE FLASH
-===================================================== */
-
-.damage-flash{
-
-    position:absolute;
-
-    inset:0;
-
-    pointer-events:none;
-
-    background:
-        rgba(255,0,50,.20);
-
-    opacity:0;
-
-    z-index:90;
-}
-
-.damage-flash.active{
-
-    animation:
-        damageFlash .25s ease;
-}
-
-@keyframes damageFlash{
-
-    0%{
-        opacity:0;
-    }
-
-    40%{
-        opacity:1;
-    }
-
-    100%{
-        opacity:0;
-    }
-}
-
-
-/* =====================================================
-   FLOAT TEXT
-===================================================== */
-
-.float-text{
-
-    position:absolute;
-
-    color:white;
-
-    font-size:20px;
-
-    font-weight:bold;
-
-    pointer-events:none;
-
-    z-index:80;
-
-    text-shadow:
-        0 0 8px rgba(255,255,255,.7);
-
-    animation:
-        floatUp .8s
-        ease-out
-        forwards;
-}
-
-@keyframes floatUp{
-
-    0%{
-
-        opacity:1;
-
-        transform:
-            translateY(0)
-            scale(1);
-    }
-
-    100%{
-
-        opacity:0;
-
-        transform:
-            translateY(-50px)
-            scale(1.15);
-    }
-}
-
-
-/* =====================================================
-   SUBTITLE
-===================================================== */
-
-.subtitle{
-
-    position:absolute;
-
-    left:50%;
-    bottom:120px;
-
-    transform:
-        translateX(-50%);
-
-    padding:
-        10px 18px;
-
-    border-radius:9px;
-
-    background:
-        rgba(0,0,0,.78);
-
-    color:white;
-
-    opacity:0;
-
-    transition:
-        opacity .2s;
-
-    pointer-events:none;
-
-    z-index:80;
-}
-
-.subtitle.show{
-
-    opacity:1;
 }
 
 
@@ -1178,20 +988,23 @@ body{
     display:none;
 
     align-items:center;
+
     justify-content:center;
 
     background:
-        rgba(0,10,25,.72);
+        rgba(0,10,25,.75);
 
     backdrop-filter:
         blur(6px);
 
-    z-index:200;
+    z-index:500;
+
 }
 
 .modal.show{
 
     display:flex;
+
 }
 
 .modal-box{
@@ -1216,41 +1029,22 @@ body{
         0 0 40px
         rgba(0,200,255,.22);
 
-    animation:
-        modalIn .22s ease;
 }
 
-@keyframes modalIn{
-
-    from{
-
-        opacity:0;
-
-        transform:
-            translateY(20px)
-            scale(.97);
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:
-            translateY(0)
-            scale(1);
-    }
-}
-
-.modal h2{
+.modal h1{
 
     margin-bottom:20px;
+
 }
 
 .modal p{
 
-    margin:10px 0;
-
     color:#b7c9d9;
+
+    line-height:1.7;
+
+    margin-bottom:20px;
+
 }
 
 .modal-btn{
@@ -1259,7 +1053,7 @@ body{
 
     margin-top:10px;
 
-    padding:13px;
+    padding:14px;
 
     border:
         1px solid #176484;
@@ -1273,47 +1067,24 @@ body{
     font-weight:bold;
 
     cursor:pointer;
+
 }
 
 .modal-btn:hover{
 
     background:#10476b;
-}
 
-
-/* =====================================================
-   TUTORIAL
-===================================================== */
-
-.tutorial{
-
-    text-align:center;
-}
-
-.tutorial h1{
-
-    font-size:34px;
-
-    margin-bottom:18px;
-}
-
-.tutorial p{
-
-    color:#b8cada;
-
-    line-height:1.7;
-
-    margin-bottom:25px;
 }
 
 .start{
 
-    padding:
-        14px 35px;
+    width:100%;
+
+    padding:15px;
 
     border:none;
 
-    border-radius:12px;
+    border-radius:13px;
 
     background:
         linear-gradient(
@@ -1322,11 +1093,48 @@ body{
             #2bc9f2
         );
 
-    color:#00121e;
-
     font-weight:bold;
 
     cursor:pointer;
+
+}
+
+
+/* =====================================================
+   SUBTITLE
+===================================================== */
+
+.subtitle{
+
+    position:absolute;
+
+    left:50%;
+    bottom:120px;
+
+    transform:
+        translateX(-50%);
+
+    padding:
+        10px 18px;
+
+    border-radius:10px;
+
+    background:
+        rgba(0,0,0,.8);
+
+    opacity:0;
+
+    z-index:300;
+
+    transition:
+        opacity .2s;
+
+}
+
+.subtitle.show{
+
+    opacity:1;
+
 }
 
 
@@ -1334,65 +1142,25 @@ body{
    GAME OVER
 ===================================================== */
 
-.game-over{
-
-    text-align:center;
-}
-
 .game-over h1{
-
-    font-size:42px;
 
     color:#ff4d71;
 
-    text-shadow:
-        0 0 15px #ff315b;
+    font-size:42px;
 
-    margin-bottom:15px;
+    text-align:center;
+
 }
 
 .final-score{
 
+    text-align:center;
+
     font-size:24px;
 
-    margin:20px 0;
-
     color:#ffd438;
-}
 
-
-/* =====================================================
-   RESPONSIVE
-===================================================== */
-
-@media(max-width:1250px){
-
-    .top-menu{
-
-        left:420px;
-
-        transform:
-            scale(.82);
-
-        transform-origin:
-            left top;
-    }
-
-}
-
-@media(max-width:950px){
-
-    .top-menu{
-
-        left:25px;
-        top:205px;
-
-        transform:
-            scale(.8);
-
-        transform-origin:
-            left top;
-    }
+    margin:20px 0;
 
 }
 
@@ -1402,24 +1170,21 @@ body{
 
 <body>
 
+
 <div id="game">
 
 
 <!-- =====================================================
-     BACKGROUND
+     STARS
 ===================================================== -->
 
-<div class="bg-glow left"></div>
-<div class="bg-glow right"></div>
-
-<div class="star" style="left:23%;top:22%;"></div>
-<div class="star" style="left:33%;top:36%;"></div>
-<div class="star" style="left:43%;top:15%;"></div>
-<div class="star" style="left:52%;top:30%;"></div>
-<div class="star" style="left:65%;top:17%;"></div>
-<div class="star" style="left:75%;top:47%;"></div>
-<div class="star" style="left:43%;top:73%;"></div>
-<div class="star" style="left:20%;top:65%;"></div>
+<div class="star" style="left:20%;top:20%"></div>
+<div class="star" style="left:33%;top:8%"></div>
+<div class="star" style="left:48%;top:28%"></div>
+<div class="star" style="left:63%;top:18%"></div>
+<div class="star" style="left:76%;top:42%"></div>
+<div class="star" style="left:42%;top:72%"></div>
+<div class="star" style="left:22%;top:65%"></div>
 
 
 <!-- =====================================================
@@ -1434,7 +1199,7 @@ body{
 
             <span class="heart">♥</span>
 
-            <span>HP</span>
+            HP
 
         </div>
 
@@ -1462,7 +1227,6 @@ body{
 
 <!-- =====================================================
      MENU
-     DEKAT HP
 ===================================================== -->
 
 <div class="top-menu">
@@ -1542,21 +1306,17 @@ body{
     <span class="score">
 
         SCORE:
-        <span id="score">
-            0
-        </span>
+        <span id="score">0</span>
 
     </span>
 
-    <span> • </span>
+    •
 
     💎
 
     <span class="diamond">
 
-        <span id="diamond">
-            2
-        </span>
+        <span id="diamond">2</span>
 
     </span>
 
@@ -1570,78 +1330,36 @@ body{
 <div class="minimap">
 
     <div
-        class="map-dot map-player"
+        class="map-dot"
         id="mapPlayer">
     </div>
 
     <div
-        class="map-dot map-enemy"
+        class="map-dot"
         id="mapEnemy">
     </div>
 
-    <div
-        class="map-dot map-yellow"
-        style="
-            left:45%;
-            top:60%;
-        ">
-    </div>
+</div>
 
-    <div
-        class="map-dot map-purple"
-        style="
-            right:25px;
-            bottom:25px;
-        ">
-    </div>
+
+<!-- =====================================================
+     PLAYER SNAKE
+===================================================== -->
+
+<div
+    class="snake"
+    id="playerSnake">
 
 </div>
 
 
 <!-- =====================================================
-     TRAIL
+     ENEMY SNAKE
 ===================================================== -->
 
 <div
-    class="player-trail"
-    id="playerTrail">
-</div>
-
-<div
-    class="enemy-trail"
-    id="enemyTrail">
-</div>
-
-
-<!-- =====================================================
-     PLAYER
-===================================================== -->
-
-<div
-    class="player"
-    id="player">
-
-    <div class="player-bar"></div>
-
-</div>
-
-
-<!-- =====================================================
-     ENEMY
-===================================================== -->
-
-<div
-    class="enemy"
-    id="enemy">
-
-    <div class="enemy-hp">
-
-        <div
-            class="enemy-hp-fill"
-            id="enemyHp">
-        </div>
-
-    </div>
+    class="snake"
+    id="enemySnake">
 
 </div>
 
@@ -1651,18 +1369,8 @@ body{
 ===================================================== -->
 
 <div
-    class="attack-effect"
-    id="attackEffect">
-</div>
-
-
-<!-- =====================================================
-     DAMAGE FLASH
-===================================================== -->
-
-<div
-    class="damage-flash"
-    id="damageFlash">
+    class="attack-ring"
+    id="attackRing">
 </div>
 
 
@@ -1713,7 +1421,7 @@ body{
 
 <button
     class="attack"
-    id="attackButton">
+    onclick="attack()">
 
     ⚔ SERANG [ SPACE ]
 
@@ -1749,18 +1457,21 @@ body{
 <div
     class="subtitle"
     id="subtitle">
+
 </div>
 
 
 <!-- =====================================================
-     TUTORIAL
+     START
 ===================================================== -->
 
 <div
     class="modal show"
-    id="tutorial">
+    id="startModal">
 
-    <div class="modal-box tutorial">
+    <div
+        class="modal-box"
+        style="text-align:center">
 
         <h1>
             ⚔ CUBESADY KNIGHT
@@ -1768,23 +1479,17 @@ body{
 
         <p>
 
-            Selamat datang, Knight!
+            Jadilah ular neon terkuat!
 
             <br><br>
 
-            Gunakan
-            <strong>WASD / ARROW</strong>
-            untuk bergerak.
+            Gerakkan ular menggunakan
+            <b>WASD / ARROW</b>.
 
             <br>
 
-            Tekan
-            <strong>SPACE</strong>
-            untuk menyerang.
-
-            <br>
-
-            Kalahkan musuh sebelum HP kamu habis.
+            Serang musuh menggunakan
+            <b>SPACE</b>.
 
         </p>
 
@@ -1811,9 +1516,9 @@ body{
 
     <div class="modal-box">
 
-        <h2 id="menuTitle">
-            Menu
-        </h2>
+        <h1 id="menuTitle">
+            Lobby
+        </h1>
 
         <div id="menuContent"></div>
 
@@ -1840,12 +1545,12 @@ body{
 
     <div class="modal-box">
 
-        <h2>
-            ⏸ GAME PAUSED
-        </h2>
+        <h1>
+            ⏸ PAUSED
+        </h1>
 
         <p>
-            Permainan dihentikan sementara.
+            Game sedang dijeda.
         </p>
 
         <button
@@ -1853,14 +1558,6 @@ body{
             onclick="resumeGame()">
 
             ▶ LANJUTKAN
-
-        </button>
-
-        <button
-            class="modal-btn"
-            onclick="exitGame()">
-
-            🚪 EXIT KE LOBBY
 
         </button>
 
@@ -1877,15 +1574,17 @@ body{
     class="modal"
     id="gameOver">
 
-    <div class="modal-box game-over">
+    <div class="modal-box">
 
-        <h1>
+        <h1
+            style="
+            color:#ff4d71;
+            text-align:center;
+            ">
+
             GAME OVER
-        </h1>
 
-        <p>
-            Knight telah kalah.
-        </p>
+        </h1>
 
         <div class="final-score">
 
@@ -1904,14 +1603,6 @@ body{
 
         </button>
 
-        <button
-            class="modal-btn"
-            onclick="backToLobby()">
-
-            🏠 KEMBALI KE LOBBY
-
-        </button>
-
     </div>
 
 </div>
@@ -1923,23 +1614,17 @@ body{
 <script>
 
 /* =====================================================
-   ELEMENTS
+   ELEMENT
 ===================================================== */
 
 const game =
     document.getElementById("game");
 
-const player =
-    document.getElementById("player");
+const playerSnake =
+    document.getElementById("playerSnake");
 
-const enemy =
-    document.getElementById("enemy");
-
-const playerTrail =
-    document.getElementById("playerTrail");
-
-const enemyTrail =
-    document.getElementById("enemyTrail");
+const enemySnake =
+    document.getElementById("enemySnake");
 
 const hpText =
     document.getElementById("hp");
@@ -1953,52 +1638,68 @@ const scoreText =
 const diamondText =
     document.getElementById("diamond");
 
-const enemyHp =
-    document.getElementById("enemyHp");
-
-const attackEffect =
-    document.getElementById("attackEffect");
-
-const damageFlash =
-    document.getElementById("damageFlash");
-
-const mapPlayer =
-    document.getElementById("mapPlayer");
-
-const mapEnemy =
-    document.getElementById("mapEnemy");
+const attackRing =
+    document.getElementById("attackRing");
 
 const subtitle =
     document.getElementById("subtitle");
 
 
 /* =====================================================
-   VARIABLES
+   SNAKE DATA
+===================================================== */
+
+const SEGMENTS = 9;
+
+
+/*
+    Riwayat posisi kepala.
+    Inilah yang membuat badan ular
+    mengikuti jalur kepala.
+*/
+
+let playerHistory = [];
+
+let enemyHistory = [];
+
+
+/* =====================================================
+   PLAYER
 ===================================================== */
 
 let playerX =
-    window.innerWidth * .50;
+    window.innerWidth * .52;
 
 let playerY =
-    window.innerHeight * .52;
+    window.innerHeight * .55;
+
+let playerAngle = 0;
+
+
+/* =====================================================
+   ENEMY
+===================================================== */
 
 let enemyX =
     window.innerWidth * .70;
 
 let enemyY =
-    window.innerHeight * .58;
+    window.innerHeight * .52;
+
+let enemyAngle = 0;
+
+
+/* =====================================================
+   GAME
+===================================================== */
 
 let hp = 100;
+
+let enemyHP = 100;
 
 let score = 0;
 
 let diamonds = 2;
-
-let enemyHealth = 100;
-
-let speed = 5;
-
-let enemySpeed = 1.25;
 
 let playing = false;
 
@@ -2006,141 +1707,329 @@ let paused = false;
 
 let attacking = false;
 
-let damageCooldown = false;
+let hitCooldown = false;
+
+
+/* =====================================================
+   KEY
+===================================================== */
 
 const keys = {};
 
 
 /* =====================================================
-   UPDATE PLAYER
+   CREATE SNAKE
 ===================================================== */
 
-function updatePlayer(){
+function createSnake(
+    container,
+    type,
+    isPlayer
+){
 
-    player.style.left =
-        playerX + "px";
-
-    player.style.top =
-        playerY + "px";
-
-
-    playerTrail.style.left =
-        (playerX - 72) + "px";
-
-    playerTrail.style.top =
-        (playerY + 18) + "px";
+    container.innerHTML = "";
 
 
-    const moving =
-        keys["w"] ||
-        keys["s"] ||
-        keys["a"] ||
-        keys["d"] ||
-        keys["arrowup"] ||
-        keys["arrowdown"] ||
-        keys["arrowleft"] ||
-        keys["arrowright"];
+    /*
+       BODY
+    */
+
+    for(
+        let i = 0;
+        i < SEGMENTS;
+        i++
+    ){
+
+        const segment =
+            document.createElement(
+                "div"
+            );
+
+        segment.className =
+            "segment " +
+            type +
+            "-segment";
 
 
-    if(moving){
+        segment.dataset.index =
+            i;
 
-        playerTrail.classList.add(
-            "active"
+
+        container.appendChild(
+            segment
         );
 
     }
-    else{
 
-        playerTrail.classList.remove(
-            "active"
+
+    /*
+       HEAD
+    */
+
+    const head =
+        document.createElement(
+            "div"
         );
 
-    }
+    head.className =
+        "snake-head " +
+        type +
+        "-head";
+
+
+    head.innerHTML = `
+
+        <div class="eye left"></div>
+
+        <div class="eye right"></div>
+
+        <div class="snake-health">
+
+            <div
+                class="snake-health-fill"
+                id="${isPlayer
+                    ? "playerHealth"
+                    : "enemyHealth"}">
+
+            </div>
+
+        </div>
+
+    `;
+
+
+    container.appendChild(
+        head
+    );
 
 }
 
 
 /* =====================================================
-   UPDATE ENEMY
+   CREATE
 ===================================================== */
 
-function updateEnemy(){
+createSnake(
+    playerSnake,
+    "player",
+    true
+);
 
-    enemy.style.left =
-        enemyX + "px";
+createSnake(
+    enemySnake,
+    "enemy",
+    false
+);
 
-    enemy.style.top =
-        enemyY + "px";
+
+/* =====================================================
+   INITIAL HISTORY
+===================================================== */
+
+function initializeHistory(){
+
+    playerHistory = [];
+
+    enemyHistory = [];
 
 
-    enemyTrail.style.left =
-        (enemyX - 60) + "px";
+    for(
+        let i = 0;
+        i < 100;
+        i++
+    ){
 
-    enemyTrail.style.top =
-        (enemyY + 14) + "px";
+        playerHistory.push({
+
+            x:playerX -
+                i * 20,
+
+            y:playerY
+
+        });
+
+
+        enemyHistory.push({
+
+            x:enemyX +
+                i * 20,
+
+            y:enemyY
+
+        });
+
+    }
+
+}
+
+initializeHistory();
+
+
+/* =====================================================
+   DRAW SNAKE
+===================================================== */
+
+function drawSnake(
+    container,
+    history,
+    angle
+){
+
+    const segments =
+        container.querySelectorAll(
+            ".segment"
+        );
+
+    const head =
+        container.querySelector(
+            ".snake-head"
+        );
+
+
+    /*
+       Jarak antar badan
+    */
+
+    const spacing = 5;
+
+
+    segments.forEach(
+        (
+            segment,
+            index
+        ) => {
+
+            const historyIndex =
+                Math.min(
+                    index * spacing,
+                    history.length - 1
+                );
+
+
+            const point =
+                history[
+                    historyIndex
+                ];
+
+
+            if(!point)
+                return;
+
+
+            segment.style.left =
+                point.x + "px";
+
+            segment.style.top =
+                point.y + "px";
+
+
+            /*
+               badan makin kecil
+            */
+
+            const scale =
+                1 -
+                index * .035;
+
+
+            segment.style.transform =
+                `
+                translate(-50%,-50%)
+                scale(${scale})
+                rotate(${angle}rad)
+                `;
+
+        }
+    );
+
+
+    /*
+       HEAD
+    */
+
+    const headPoint =
+        history[0];
+
+
+    head.style.left =
+        headPoint.x + "px";
+
+    head.style.top =
+        headPoint.y + "px";
+
+
+    head.style.transform =
+        `
+        translate(-50%,-50%)
+        rotate(${angle}rad)
+        `;
 
 }
 
 
 /* =====================================================
-   MINIMAP
+   PARTICLE
 ===================================================== */
 
-function updateMinimap(){
+function createParticle(
+    x,
+    y,
+    color
+){
 
-    const px =
-        (playerX /
-        window.innerWidth) * 100;
+    const p =
+        document.createElement(
+            "div"
+        );
 
-    const py =
-        (playerY /
-        window.innerHeight) * 100;
-
-    const ex =
-        (enemyX /
-        window.innerWidth) * 100;
-
-    const ey =
-        (enemyY /
-        window.innerHeight) * 100;
+    p.className =
+        "particle";
 
 
-    mapPlayer.style.left =
-        Math.max(
-            3,
-            Math.min(
-                94,
-                px
-            )
-        ) + "%";
+    p.style.left =
+        x + "px";
 
-    mapPlayer.style.top =
-        Math.max(
-            5,
-            Math.min(
-                90,
-                py
-            )
-        ) + "%";
+    p.style.top =
+        y + "px";
 
 
-    mapEnemy.style.left =
-        Math.max(
-            3,
-            Math.min(
-                94,
-                ex
-            )
-        ) + "%";
+    p.style.background =
+        color;
 
-    mapEnemy.style.top =
-        Math.max(
-            5,
-            Math.min(
-                90,
-                ey
-            )
-        ) + "%";
+
+    p.style.boxShadow =
+        `0 0 8px ${color}`;
+
+
+    p.style.setProperty(
+        "--dx",
+        (
+            Math.random() * 50 - 25
+        ) + "px"
+    );
+
+
+    p.style.setProperty(
+        "--dy",
+        (
+            Math.random() * 50 - 25
+        ) + "px"
+    );
+
+
+    game.appendChild(
+        p
+    );
+
+
+    setTimeout(
+        () => {
+
+            p.remove();
+
+        },
+        700
+    );
 
 }
 
@@ -2151,7 +2040,7 @@ function updateMinimap(){
 
 document.addEventListener(
     "keydown",
-    function(e){
+    e => {
 
         if(
             e.code === "Space"
@@ -2170,11 +2059,7 @@ document.addEventListener(
             e.code === "Escape"
         ){
 
-            if(playing){
-
-                pauseGame();
-
-            }
+            pauseGame();
 
             return;
 
@@ -2191,7 +2076,7 @@ document.addEventListener(
 
 document.addEventListener(
     "keyup",
-    function(e){
+    e => {
 
         keys[
             e.key.toLowerCase()
@@ -2207,66 +2092,383 @@ document.addEventListener(
 
 document
 .querySelectorAll(".direction")
-.forEach(button => {
+.forEach(
+    button => {
 
-    const key =
-        button.dataset.key;
+        const key =
+            button.dataset.key;
 
 
-    button.addEventListener(
-        "mousedown",
-        () => {
+        button.addEventListener(
+            "mousedown",
+            () => {
 
-            keys[key] = true;
+                keys[key] = true;
+
+            }
+        );
+
+
+        button.addEventListener(
+            "mouseup",
+            () => {
+
+                keys[key] = false;
+
+            }
+        );
+
+
+        button.addEventListener(
+            "mouseleave",
+            () => {
+
+                keys[key] = false;
+
+            }
+        );
+
+
+        button.addEventListener(
+            "touchstart",
+            e => {
+
+                e.preventDefault();
+
+                keys[key] = true;
+
+            }
+        );
+
+
+        button.addEventListener(
+            "touchend",
+            e => {
+
+                e.preventDefault();
+
+                keys[key] = false;
+
+            }
+        );
+
+    }
+);
+
+
+/* =====================================================
+   PLAYER MOVEMENT
+===================================================== */
+
+function movePlayer(){
+
+    let moving = false;
+
+
+    if(
+        keys["w"] ||
+        keys["arrowup"]
+    ){
+
+        playerY -= 4.5;
+
+        playerAngle = -Math.PI / 2;
+
+        moving = true;
+
+    }
+
+
+    if(
+        keys["s"] ||
+        keys["arrowdown"]
+    ){
+
+        playerY += 4.5;
+
+        playerAngle = Math.PI / 2;
+
+        moving = true;
+
+    }
+
+
+    if(
+        keys["a"] ||
+        keys["arrowleft"]
+    ){
+
+        playerX -= 4.5;
+
+        playerAngle = Math.PI;
+
+        moving = true;
+
+    }
+
+
+    if(
+        keys["d"] ||
+        keys["arrowright"]
+    ){
+
+        playerX += 4.5;
+
+        playerAngle = 0;
+
+        moving = true;
+
+    }
+
+
+    /*
+       diagonal
+    */
+
+    if(
+        (
+            keys["w"] ||
+            keys["arrowup"]
+        )
+        &&
+        (
+            keys["d"] ||
+            keys["arrowright"]
+        )
+    ){
+
+        playerAngle =
+            -Math.PI / 4;
+
+    }
+
+
+    if(
+        (
+            keys["w"] ||
+            keys["arrowup"]
+        )
+        &&
+        (
+            keys["a"] ||
+            keys["arrowleft"]
+        )
+    ){
+
+        playerAngle =
+            -3 * Math.PI / 4;
+
+    }
+
+
+    if(
+        (
+            keys["s"] ||
+            keys["arrowdown"]
+        )
+        &&
+        (
+            keys["d"] ||
+            keys["arrowright"]
+        )
+    ){
+
+        playerAngle =
+            Math.PI / 4;
+
+    }
+
+
+    if(
+        (
+            keys["s"] ||
+            keys["arrowdown"]
+        )
+        &&
+        (
+            keys["a"] ||
+            keys["arrowleft"]
+        )
+    ){
+
+        playerAngle =
+            3 * Math.PI / 4;
+
+    }
+
+
+    /*
+       batas arena
+    */
+
+    playerX =
+        Math.max(
+            80,
+            Math.min(
+                window.innerWidth - 100,
+                playerX
+            )
+        );
+
+
+    playerY =
+        Math.max(
+            180,
+            Math.min(
+                window.innerHeight - 120,
+                playerY
+            )
+        );
+
+
+    /*
+       masukkan posisi
+       kepala ke history
+    */
+
+    playerHistory.unshift({
+
+        x:playerX,
+
+        y:playerY
+
+    });
+
+
+    playerHistory =
+        playerHistory.slice(
+            0,
+            100
+        );
+
+
+    /*
+       particle trail
+    */
+
+    if(moving){
+
+        const tail =
+            playerHistory[
+                SEGMENTS * 5
+            ];
+
+        if(
+            tail &&
+            Math.random() < .35
+        ){
+
+            createParticle(
+                tail.x,
+                tail.y,
+                "#ff3f68"
+            );
 
         }
-    );
+
+    }
+
+}
 
 
-    button.addEventListener(
-        "mouseup",
-        () => {
+/* =====================================================
+   ENEMY AI
+===================================================== */
 
-            keys[key] = false;
+function moveEnemy(){
 
-        }
-    );
+    const dx =
+        playerX -
+        enemyX;
 
-
-    button.addEventListener(
-        "mouseleave",
-        () => {
-
-            keys[key] = false;
-
-        }
-    );
+    const dy =
+        playerY -
+        enemyY;
 
 
-    button.addEventListener(
-        "touchstart",
-        e => {
-
-            e.preventDefault();
-
-            keys[key] = true;
-
-        }
-    );
+    const dist =
+        Math.sqrt(
+            dx * dx +
+            dy * dy
+        );
 
 
-    button.addEventListener(
-        "touchend",
-        e => {
+    if(dist > 100){
 
-            e.preventDefault();
+        enemyX +=
+            (dx / dist) *
+            1.6;
 
-            keys[key] = false;
+        enemyY +=
+            (dy / dist) *
+            1.6;
 
-        }
-    );
 
-});
+        enemyAngle =
+            Math.atan2(
+                dy,
+                dx
+            );
+
+    }
+
+
+    enemyX =
+        Math.max(
+            100,
+            Math.min(
+                window.innerWidth - 100,
+                enemyX
+            )
+        );
+
+
+    enemyY =
+        Math.max(
+            190,
+            Math.min(
+                window.innerHeight - 120,
+                enemyY
+            )
+        );
+
+
+    enemyHistory.unshift({
+
+        x:enemyX,
+
+        y:enemyY
+
+    });
+
+
+    enemyHistory =
+        enemyHistory.slice(
+            0,
+            100
+        );
+
+
+    const tail =
+        enemyHistory[
+            SEGMENTS * 5
+        ];
+
+
+    if(
+        tail &&
+        Math.random() < .3
+    ){
+
+        createParticle(
+            tail.x,
+            tail.y,
+            "#a94cff"
+        );
+
+    }
+
+}
 
 
 /* =====================================================
@@ -2280,145 +2482,21 @@ function distance(
     y2
 ){
 
-    const dx =
-        x1 - x2;
-
-    const dy =
-        y1 - y2;
-
     return Math.sqrt(
-        dx * dx +
-        dy * dy
+
+        Math.pow(
+            x1 - x2,
+            2
+        )
+
+        +
+
+        Math.pow(
+            y1 - y2,
+            2
+        )
+
     );
-
-}
-
-
-/* =====================================================
-   GAME LOOP
-===================================================== */
-
-function gameLoop(){
-
-    if(
-        playing &&
-        !paused
-    ){
-
-        if(
-            keys["w"] ||
-            keys["arrowup"]
-        ){
-
-            playerY -= speed;
-
-        }
-
-
-        if(
-            keys["s"] ||
-            keys["arrowdown"]
-        ){
-
-            playerY += speed;
-
-        }
-
-
-        if(
-            keys["a"] ||
-            keys["arrowleft"]
-        ){
-
-            playerX -= speed;
-
-        }
-
-
-        if(
-            keys["d"] ||
-            keys["arrowright"]
-        ){
-
-            playerX += speed;
-
-        }
-
-
-        playerX =
-            Math.max(
-                10,
-                Math.min(
-                    window.innerWidth - 70,
-                    playerX
-                )
-            );
-
-
-        playerY =
-            Math.max(
-                150,
-                Math.min(
-                    window.innerHeight - 90,
-                    playerY
-                )
-            );
-
-
-        moveEnemy();
-
-        checkCollision();
-
-        updatePlayer();
-
-        updateEnemy();
-
-        updateMinimap();
-
-    }
-
-
-    requestAnimationFrame(
-        gameLoop
-    );
-
-}
-
-gameLoop();
-
-
-/* =====================================================
-   ENEMY AI
-===================================================== */
-
-function moveEnemy(){
-
-    const dx =
-        playerX - enemyX;
-
-    const dy =
-        playerY - enemyY;
-
-    const dist =
-        Math.sqrt(
-            dx * dx +
-            dy * dy
-        );
-
-
-    if(
-        dist > 60
-    ){
-
-        enemyX +=
-            (dx / dist)
-            * enemySpeed;
-
-        enemyY +=
-            (dy / dist)
-            * enemySpeed;
-
-    }
 
 }
 
@@ -2429,7 +2507,7 @@ function moveEnemy(){
 
 function checkCollision(){
 
-    const dist =
+    const d =
         distance(
             playerX,
             playerY,
@@ -2439,93 +2517,69 @@ function checkCollision(){
 
 
     if(
-        dist < 65 &&
-        !damageCooldown
+        d < 75 &&
+        !hitCooldown
     ){
 
-        takeDamage(10);
+        hitCooldown = true;
 
-    }
-
-}
+        hp -= 10;
 
 
-/* =====================================================
-   DAMAGE
-===================================================== */
+        hp =
+            Math.max(
+                0,
+                hp
+            );
 
-function takeDamage(amount){
 
-    damageCooldown = true;
+        hpText.textContent =
+            hp;
 
-    hp -= amount;
 
-    hp =
-        Math.max(
-            0,
-            hp
+        hpFill.style.width =
+            hp + "%";
+
+
+        showDamage(
+            playerX,
+            playerY,
+            "-10"
         );
 
 
-    hpText.textContent =
-        hp;
-
-    hpFill.style.width =
-        hp + "%";
+        showSubtitle(
+            "💔 Kamu terkena serangan!"
+        );
 
 
-    damageFlash.classList.remove(
-        "active"
-    );
+        if(hp <= 30){
 
-    void damageFlash.offsetWidth;
+            hpFill.style.background =
+                "linear-gradient(90deg,#ff3e68,#ff7755)";
 
-    damageFlash.classList.add(
-        "active"
-    );
+        }
 
 
-    showFloatingText(
-        "-" + amount,
-        playerX,
-        playerY
-    );
+        if(hp <= 0){
+
+            gameOver();
+
+            return;
+
+        }
 
 
-    showSubtitle(
-        "💔 Kamu terkena serangan!"
-    );
+        setTimeout(
+            () => {
 
+                hitCooldown = false;
 
-    if(
-        hp <= 30
-    ){
-
-        hpFill.style.background =
-            "linear-gradient(90deg,#ff3f68,#ff7755)";
+            },
+            700
+        );
 
     }
-
-
-    if(
-        hp <= 0
-    ){
-
-        playerDeath();
-
-        return;
-
-    }
-
-
-    setTimeout(
-        () => {
-
-            damageCooldown = false;
-
-        },
-        600
-    );
 
 }
 
@@ -2540,35 +2594,34 @@ function attack(){
         !playing ||
         paused ||
         attacking
-    ){
-
+    )
         return;
-
-    }
 
 
     attacking = true;
 
 
-    attackEffect.style.left =
-        (playerX + 30) + "px";
+    attackRing.style.left =
+        playerX + "px";
 
-    attackEffect.style.top =
-        (playerY + 30) + "px";
+    attackRing.style.top =
+        playerY + "px";
 
 
-    attackEffect.classList.remove(
-        "active"
-    );
-
-    void attackEffect.offsetWidth;
-
-    attackEffect.classList.add(
+    attackRing.classList.remove(
         "active"
     );
 
 
-    const dist =
+    void attackRing.offsetWidth;
+
+
+    attackRing.classList.add(
+        "active"
+    );
+
+
+    const d =
         distance(
             playerX,
             playerY,
@@ -2577,46 +2630,39 @@ function attack(){
         );
 
 
-    if(
-        dist < 150
-    ){
+    if(d < 170){
 
-        enemyHealth -= 50;
-
-        enemyHp.style.width =
-            enemyHealth + "%";
+        enemyHP -= 25;
 
 
-        showFloatingText(
-            "-50",
+        enemyHP =
+            Math.max(
+                0,
+                enemyHP
+            );
+
+
+        document
+        .getElementById(
+            "enemyHealth"
+        )
+        .style.width =
+            enemyHP + "%";
+
+
+        showDamage(
             enemyX,
-            enemyY
+            enemyY,
+            "-25"
         );
-
-
-        enemy.style.transform =
-            "scale(.75)";
 
 
         showSubtitle(
-            "💥 MUSUH TERKENA!"
+            "⚔ MUSUH TERKENA!"
         );
 
 
-        setTimeout(
-            () => {
-
-                enemy.style.transform =
-                    "scale(1)";
-
-            },
-            130
-        );
-
-
-        if(
-            enemyHealth <= 0
-        ){
+        if(enemyHP <= 0){
 
             killEnemy();
 
@@ -2638,7 +2684,7 @@ function attack(){
             attacking = false;
 
         },
-        250
+        300
     );
 
 }
@@ -2656,38 +2702,78 @@ function killEnemy(){
         score;
 
 
-    if(
-        Math.random() > .45
-    ){
+    diamonds++;
 
-        diamonds++;
-
-        diamondText.textContent =
-            diamonds;
-
-        showSubtitle(
-            "💎 +1 DIAMOND!"
-        );
-
-    }
-    else{
-
-        showSubtitle(
-            "⭐ +10 SCORE!"
-        );
-
-    }
+    diamondText.textContent =
+        diamonds;
 
 
-    enemy.style.opacity =
-        "0";
+    showSubtitle(
+        "💥 MUSUH KALAH! +10 SCORE"
+    );
 
-    enemyTrail.style.opacity =
+
+    enemySnake.style.opacity =
         "0";
 
 
     setTimeout(
-        respawnEnemy,
+        () => {
+
+            enemyX =
+                500 +
+                Math.random() *
+                (
+                    window.innerWidth - 700
+                );
+
+
+            enemyY =
+                250 +
+                Math.random() *
+                (
+                    window.innerHeight - 450
+                );
+
+
+            enemyHP = 100;
+
+
+            enemyHistory = [];
+
+
+            for(
+                let i=0;
+                i<100;
+                i++
+            ){
+
+                enemyHistory.push({
+
+                    x:
+                        enemyX +
+                        i * 20,
+
+                    y:
+                        enemyY
+
+                });
+
+            }
+
+
+            document
+            .getElementById(
+                "enemyHealth"
+            )
+            .style.width =
+                "100%";
+
+
+            enemySnake.style.opacity =
+                "1";
+
+        },
         1200
     );
 
@@ -2695,413 +2781,13 @@ function killEnemy(){
 
 
 /* =====================================================
-   RESPAWN
+   DAMAGE NUMBER
 ===================================================== */
 
-function respawnEnemy(){
-
-    enemyX =
-        250 +
-        Math.random() *
-        (
-            window.innerWidth - 500
-        );
-
-    enemyY =
-        250 +
-        Math.random() *
-        (
-            window.innerHeight - 400
-        );
-
-
-    enemyHealth = 100;
-
-    enemyHp.style.width =
-        "100%";
-
-
-    enemy.style.opacity =
-        "1";
-
-    enemy.style.transform =
-        "scale(1)";
-
-    enemyTrail.style.opacity =
-        ".7";
-
-
-    updateEnemy();
-
-}
-
-
-/* =====================================================
-   PLAYER DEATH
-===================================================== */
-
-function playerDeath(){
-
-    playing = false;
-
-    paused = false;
-
-
-    player.style.opacity =
-        "0";
-
-    playerTrail.classList.remove(
-        "active"
-    );
-
-
-    setTimeout(
-        () => {
-
-            document
-            .getElementById(
-                "finalScore"
-            )
-            .textContent =
-                score;
-
-
-            document
-            .getElementById(
-                "gameOver"
-            )
-            .classList.add(
-                "show"
-            );
-
-        },
-        600
-    );
-
-}
-
-
-/* =====================================================
-   START
-===================================================== */
-
-function startGame(){
-
-    document
-    .getElementById(
-        "tutorial"
-    )
-    .classList.remove(
-        "show"
-    );
-
-
-    playing = true;
-
-    paused = false;
-
-
-    showSubtitle(
-        "🎮 SELAMAT DATANG, KNIGHT!"
-    );
-
-}
-
-
-/* =====================================================
-   RESTART
-===================================================== */
-
-function restartGame(){
-
-    document
-    .getElementById(
-        "gameOver"
-    )
-    .classList.remove(
-        "show"
-    );
-
-
-    hp = 100;
-
-    score = 0;
-
-    diamonds = 2;
-
-    enemyHealth = 100;
-
-
-    hpText.textContent =
-        hp;
-
-    hpFill.style.width =
-        "100%";
-
-    hpFill.style.background =
-        "linear-gradient(90deg,#20d9bd,#2cc8ed)";
-
-
-    scoreText.textContent =
-        score;
-
-    diamondText.textContent =
-        diamonds;
-
-
-    playerX =
-        window.innerWidth * .50;
-
-    playerY =
-        window.innerHeight * .52;
-
-
-    player.style.opacity =
-        "1";
-
-
-    respawnEnemy();
-
-
-    playing = true;
-
-    paused = false;
-
-
-    updatePlayer();
-
-    updateEnemy();
-
-    updateMinimap();
-
-
-    showSubtitle(
-        "🔄 PERTEMPURAN DIMULAI!"
-    );
-
-}
-
-
-/* =====================================================
-   BACK TO LOBBY
-===================================================== */
-
-function backToLobby(){
-
-    document
-    .getElementById(
-        "gameOver"
-    )
-    .classList.remove(
-        "show"
-    );
-
-
-    document
-    .getElementById(
-        "tutorial"
-    )
-    .classList.add(
-        "show"
-    );
-
-
-    player.style.opacity =
-        "1";
-
-}
-
-
-/* =====================================================
-   PAUSE
-===================================================== */
-
-function pauseGame(){
-
-    if(
-        !playing
-    )
-        return;
-
-
-    paused = true;
-
-
-    document
-    .getElementById(
-        "pauseModal"
-    )
-    .classList.add(
-        "show"
-    );
-
-}
-
-
-function resumeGame(){
-
-    paused = false;
-
-
-    document
-    .getElementById(
-        "pauseModal"
-    )
-    .classList.remove(
-        "show"
-    );
-
-
-    showSubtitle(
-        "▶ GAME DILANJUTKAN"
-    );
-
-}
-
-
-/* =====================================================
-   EXIT
-===================================================== */
-
-function exitGame(){
-
-    playing = false;
-
-    paused = false;
-
-
-    document
-    .getElementById(
-        "pauseModal"
-    )
-    .classList.remove(
-        "show"
-    );
-
-
-    document
-    .getElementById(
-        "tutorial"
-    )
-    .classList.add(
-        "show"
-    );
-
-}
-
-
-/* =====================================================
-   MENU
-===================================================== */
-
-function openMenu(name){
-
-    const modal =
-        document.getElementById(
-            "menuModal"
-        );
-
-    const title =
-        document.getElementById(
-            "menuTitle"
-        );
-
-    const content =
-        document.getElementById(
-            "menuContent"
-        );
-
-
-    title.textContent =
-        name;
-
-
-    if(
-        name === "Lobby"
-    ){
-
-        content.innerHTML =
-            "<p>🏠 Selamat datang di Lobby.</p>" +
-            "<p>Pilih Match untuk mulai bermain.</p>";
-
-    }
-
-
-    if(
-        name === "Players"
-    ){
-
-        content.innerHTML =
-            "<p>🟢 Knight Player</p>" +
-            "<p>🟢 Shadow Knight</p>" +
-            "<p>🟢 Red Cube</p>" +
-            "<p>🟢 Blue Cube</p>";
-
-    }
-
-
-    if(
-        name === "Chat"
-    ){
-
-        content.innerHTML =
-            "<p>💬 Welcome, Knight!</p>" +
-            "<p>💬 Good luck!</p>";
-
-    }
-
-
-    if(
-        name === "Rank"
-    ){
-
-        content.innerHTML =
-            "<p>🥇 Knight — 1200</p>" +
-            "<p>🥈 Shadow — 980</p>" +
-            "<p>🥉 Cube — 850</p>";
-
-    }
-
-
-    if(
-        name === "Match"
-    ){
-
-        content.innerHTML =
-            "<p>🎯 Match sedang berlangsung.</p>" +
-            "<p>Kalahkan musuh dan kumpulkan score!</p>";
-
-    }
-
-
-    modal.classList.add(
-        "show"
-    );
-
-}
-
-
-function closeMenu(){
-
-    document
-    .getElementById(
-        "menuModal"
-    )
-    .classList.remove(
-        "show"
-    );
-
-}
-
-
-/* =====================================================
-   FLOAT TEXT
-===================================================== */
-
-function showFloatingText(
-    text,
+function showDamage(
     x,
-    y
+    y,
+    text
 ){
 
     const element =
@@ -3111,7 +2797,7 @@ function showFloatingText(
 
 
     element.className =
-        "float-text";
+        "damage-number";
 
 
     element.textContent =
@@ -3120,6 +2806,7 @@ function showFloatingText(
 
     element.style.left =
         x + "px";
+
 
     element.style.top =
         y + "px";
@@ -3165,67 +2852,341 @@ function showSubtitle(text){
             );
 
         },
-        1600
+        1400
     );
 
 }
 
 
 /* =====================================================
-   ATTACK BUTTON
+   GAME LOOP
 ===================================================== */
 
-document
-.getElementById(
-    "attackButton"
-)
-.addEventListener(
-    "click",
-    attack
-);
+function loop(){
+
+    if(
+        playing &&
+        !paused
+    ){
+
+        movePlayer();
+
+        moveEnemy();
+
+        checkCollision();
 
 
-/* =====================================================
-   RESIZE
-===================================================== */
-
-window.addEventListener(
-    "resize",
-    () => {
-
-        playerX =
-            Math.min(
-                playerX,
-                window.innerWidth - 70
-            );
+        drawSnake(
+            playerSnake,
+            playerHistory,
+            playerAngle
+        );
 
 
-        playerY =
-            Math.min(
-                playerY,
-                window.innerHeight - 90
-            );
-
-
-        updatePlayer();
-
-        updateEnemy();
-
-        updateMinimap();
+        drawSnake(
+            enemySnake,
+            enemyHistory,
+            enemyAngle
+        );
 
     }
-);
+
+
+    requestAnimationFrame(
+        loop
+    );
+
+}
+
+loop();
 
 
 /* =====================================================
-   INITIAL
+   START
 ===================================================== */
 
-updatePlayer();
+function startGame(){
 
-updateEnemy();
+    document
+    .getElementById(
+        "startModal"
+    )
+    .classList.remove(
+        "show"
+    );
 
-updateMinimap();
+
+    playing = true;
+
+    paused = false;
+
+
+    showSubtitle(
+        "🐍 PERTEMPURAN DIMULAI!"
+    );
+
+}
+
+
+/* =====================================================
+   GAME OVER
+===================================================== */
+
+function gameOver(){
+
+    playing = false;
+
+
+    document
+    .getElementById(
+        "finalScore"
+    )
+    .textContent =
+        score;
+
+
+    document
+    .getElementById(
+        "gameOver"
+    )
+    .classList.add(
+        "show"
+    );
+
+}
+
+
+/* =====================================================
+   RESTART
+===================================================== */
+
+function restartGame(){
+
+    document
+    .getElementById(
+        "gameOver"
+    )
+    .classList.remove(
+        "show"
+    );
+
+
+    hp = 100;
+
+    enemyHP = 100;
+
+    score = 0;
+
+    diamonds = 2;
+
+
+    hpText.textContent =
+        hp;
+
+
+    hpFill.style.width =
+        "100%";
+
+
+    hpFill.style.background =
+        "linear-gradient(90deg,#20d9bd,#2cc8ed)";
+
+
+    scoreText.textContent =
+        score;
+
+
+    diamondText.textContent =
+        diamonds;
+
+
+    playerX =
+        window.innerWidth * .52;
+
+    playerY =
+        window.innerHeight * .55;
+
+
+    enemyX =
+        window.innerWidth * .70;
+
+    enemyY =
+        window.innerHeight * .52;
+
+
+    initializeHistory();
+
+
+    enemySnake.style.opacity =
+        "1";
+
+
+    document
+    .getElementById(
+        "enemyHealth"
+    )
+    .style.width =
+        "100%";
+
+
+    playing = true;
+
+}
+
+
+/* =====================================================
+   PAUSE
+===================================================== */
+
+function pauseGame(){
+
+    if(!playing)
+        return;
+
+
+    paused = true;
+
+
+    document
+    .getElementById(
+        "pauseModal"
+    )
+    .classList.add(
+        "show"
+    );
+
+}
+
+
+function resumeGame(){
+
+    paused = false;
+
+
+    document
+    .getElementById(
+        "pauseModal"
+    )
+    .classList.remove(
+        "show"
+    );
+
+}
+
+
+/* =====================================================
+   MENU
+===================================================== */
+
+function openMenu(name){
+
+    document
+    .getElementById(
+        "menuTitle"
+    )
+    .textContent =
+        name;
+
+
+    const content =
+        document.getElementById(
+            "menuContent"
+        );
+
+
+    if(name === "Lobby"){
+
+        content.innerHTML = `
+            <p>🏠 Selamat datang di Lobby.</p>
+            <p>Siapkan ularmu untuk bertarung!</p>
+        `;
+
+    }
+
+
+    if(name === "Players"){
+
+        content.innerHTML = `
+            <p>🟢 Neon Knight</p>
+            <p>🟢 Shadow Snake</p>
+            <p>🟢 Purple Cube</p>
+            <p>🟢 Red Snake</p>
+        `;
+
+    }
+
+
+    if(name === "Chat"){
+
+        content.innerHTML = `
+            <p>💬 Welcome Knight!</p>
+            <p>💬 Good luck!</p>
+        `;
+
+    }
+
+
+    if(name === "Rank"){
+
+        content.innerHTML = `
+            <p>🥇 Neon Knight — 1200</p>
+            <p>🥈 Purple Snake — 980</p>
+            <p>🥉 Red Snake — 850</p>
+        `;
+
+    }
+
+
+    if(name === "Match"){
+
+        content.innerHTML = `
+            <p>🎯 MATCH ACTIVE</p>
+            <p>Kalahkan ular lawan!</p>
+        `;
+
+    }
+
+
+    document
+    .getElementById(
+        "menuModal"
+    )
+    .classList.add(
+        "show"
+    );
+
+}
+
+
+function closeMenu(){
+
+    document
+    .getElementById(
+        "menuModal"
+    )
+    .classList.remove(
+        "show"
+    );
+
+}
+
+
+/* =====================================================
+   INITIAL DRAW
+===================================================== */
+
+drawSnake(
+    playerSnake,
+    playerHistory,
+    playerAngle
+);
+
+
+drawSnake(
+    enemySnake,
+    enemyHistory,
+    enemyAngle
+);
 
 </script>
 
